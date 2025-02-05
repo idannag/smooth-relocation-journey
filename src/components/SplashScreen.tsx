@@ -33,7 +33,7 @@ const SplashScreen = () => {
               ease: "easeIn"
             }
           }}
-          className="fixed inset-0 z-50 flex items-center justify-center overflow-hidden"
+          className="fixed inset-0 z-[9999] flex items-center justify-center overflow-hidden"
         >
           <motion.div 
             className="absolute inset-0"
