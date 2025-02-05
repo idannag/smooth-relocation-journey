@@ -1,5 +1,6 @@
 import Header from '../components/Header';
 import VideoHero from '../components/VideoHero';
+import IntroSection from '../components/IntroSection';
 import Statistics from '../components/Statistics';
 import LifecycleCircle from '../components/LifecycleCircle';
 import Testimonials from '../components/Testimonials';
@@ -13,6 +14,7 @@ const Index = () => {
     <div className="min-h-screen font-inter">
       <Header />
       <VideoHero />
+      <IntroSection />
       <Statistics />
       <LifecycleCircle />
       <Testimonials />
