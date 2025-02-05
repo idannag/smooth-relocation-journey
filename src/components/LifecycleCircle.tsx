@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Home, ChairFront, School, Truck, Wallet, Briefcase, FileText, UserSquare2 } from 'lucide-react';
+import { Home, Sofa, School, Truck, Wallet, Briefcase, FileText, UserSquare2 } from 'lucide-react';
 
 const stages = [
   { id: 1, name: 'Real Estate', description: 'Find your perfect home', icon: Home },
-  { id: 2, name: 'Furniture Rental', description: 'Temporary furniture solutions', icon: ChairFront },
+  { id: 2, name: 'Furniture Rental', description: 'Temporary furniture solutions', icon: Sofa },
   { id: 3, name: 'International education', description: 'Educational support services', icon: School },
   { id: 4, name: 'Shipping household goods', description: 'Safe and secure shipping', icon: Truck },
   { id: 5, name: 'International tax', description: 'Tax consultation and planning', icon: Wallet },
