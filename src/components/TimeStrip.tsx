@@ -13,7 +13,8 @@ const TimeStrip = () => {
         const time = new Date().toLocaleTimeString('en-US', {
           timeZone: getTimeZone(city),
           hour: '2-digit',
-          minute: '2-digit'
+          minute: '2-digit',
+          second: '2-digit'
         });
         newTimes[city] = time;
       });
@@ -23,10 +24,10 @@ const TimeStrip = () => {
     updateTimes();
     const timeInterval = setInterval(updateTimes, 1000);
     
-    // Cycle through cities every 2 seconds
+    // Cycle through cities every 3 seconds
     const cycleInterval = setInterval(() => {
       setCurrentCityIndex((prev) => (prev + 1) % cities.length);
-    }, 2000);
+    }, 3000);
 
     return () => {
       clearInterval(timeInterval);
@@ -49,7 +50,7 @@ const TimeStrip = () => {
     <div className="flex items-center space-x-2 text-[10px] text-gray-600">
       <div className="flex items-center space-x-1 whitespace-nowrap animate-fade-in">
         <Clock className="w-2.5 h-2.5" />
-        <span className="hidden sm:inline font-medium">{currentCity}</span>
+        <span className="font-medium">Now in {currentCity}:</span>
         <span>{times[currentCity]}</span>
       </div>
     </div>
