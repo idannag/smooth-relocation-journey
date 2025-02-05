@@ -19,8 +19,9 @@ const Header = () => {
             </a>
           </div>
 
+          <TimeStrip />
+
           <div className="hidden md:flex items-center space-x-8">
-            <TimeStrip />
             <nav className="flex items-center space-x-8">
               <a href="#services" className="text-gray-600 hover:text-primary transition-colors">
                 Services
@@ -47,7 +48,6 @@ const Header = () => {
       {/* Mobile menu */}
       {isOpen && (
         <div className="md:hidden bg-white border-t shadow-lg">
-          <TimeStrip />
           <nav className="px-4 pt-2 pb-4 space-y-2">
             <a
               href="#services"

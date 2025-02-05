@@ -34,11 +34,11 @@ const TimeStrip = () => {
   };
 
   return (
-    <div className="flex items-center space-x-6 text-sm text-gray-600 border-r pr-8 mr-8">
+    <div className="flex items-center space-x-3 text-xs text-gray-600">
       {cities.map((city) => (
-        <div key={city} className="flex items-center space-x-1.5 whitespace-nowrap">
+        <div key={city} className="flex items-center space-x-1 whitespace-nowrap">
           <Clock className="w-3 h-3" />
-          <span className="font-medium">{city}</span>
+          <span className="hidden sm:inline font-medium">{city}</span>
           <span>{times[city]}</span>
         </div>
       ))}
