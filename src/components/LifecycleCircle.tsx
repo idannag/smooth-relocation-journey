@@ -43,7 +43,12 @@ const LifecycleCircle = () => {
             >
               <div className="flex justify-center mb-4">
                 {stages[activeStage - 1].icon && (
-                  <stages[activeStage - 1].icon className="w-12 h-12 text-[#2C5AAE]" />
+                  <div className="w-12 h-12 text-[#2C5AAE]">
+                    {React.createElement(stages[activeStage - 1].icon, {
+                      size: 48,
+                      className: "text-[#2C5AAE]"
+                    })}
+                  </div>
                 )}
               </div>
               <h3 className="text-2xl font-bold text-[#2C5AAE] mb-4">
@@ -76,7 +81,10 @@ const LifecycleCircle = () => {
                   top: `${y}%`,
                 }}
               >
-                {stage.icon && <stage.icon className="w-6 h-6" />}
+                {React.createElement(stage.icon, {
+                  size: 24,
+                  className: activeStage === stage.id ? "text-white" : "text-[#2C5AAE]"
+                })}
               </button>
             );
           })}
