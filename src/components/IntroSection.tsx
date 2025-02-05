@@ -20,7 +20,7 @@ const IntroSection = () => {
               className="w-full aspect-video object-cover"
               poster="https://www.app.ocean-il.co.il/wp-content/uploads/2022/04/cropped-logo.jpg"
             >
-              <source src="https://www.app.ocean-il.co.il/wp-content/uploads/2022/10/Brooklyn.m4v" type="video/mp4" />
+              <source src="https://www.app.ocean-il.co.il/wp-content/uploads/2023/04/relocation-explainer-new-1.mp4" type="video/mp4" />
             </video>
           </div>
         </div>
