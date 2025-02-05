@@ -18,7 +18,7 @@ const VideoHero = () => {
         </h1>
         <div className="space-y-4 mt-4">
           <p className="text-lg md:text-xl lg:text-2xl animate-slide-up max-w-3xl">
-            Your personalized relocation journey starts here – expertly guided from start to finish.
+            from start to finish - Your personalized relocation journey starts here, expertly guided
           </p>
         </div>
       </div>
