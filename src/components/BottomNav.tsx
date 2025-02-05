@@ -1,4 +1,4 @@
-import { Home, Calculator, BookOpen, Building2, GraduationCap, Contact, Lock, Route, Headset } from 'lucide-react';
+import { Home, Calculator, BookOpen, Building2, GraduationCap, UserRound, Lock, Route, Headset } from 'lucide-react';
 import { useState, useEffect, useRef } from 'react';
 
 const BottomNav = () => {
@@ -40,7 +40,7 @@ const BottomNav = () => {
       ]
     },
     { 
-      icon: <Contact className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, 
+      icon: <UserRound className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, 
       label: 'Client Area',
       subItems: [
         { icon: <Route className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, label: 'My Relocation' },
