@@ -36,17 +36,15 @@ const TimeStrip = () => {
   };
 
   return (
-    <div className="overflow-hidden">
-      <div className="animate-[slide_20s_linear_infinite]">
-        <div className="flex items-center space-x-6 text-gray-600">
-          {cities.map((city) => (
-            <div key={city} className="flex items-center space-x-1 whitespace-nowrap">
-              <Clock className="w-3 h-3" />
-              <span className="text-xs font-medium">{city}</span>
-              <span className="text-xs">{times[city]}</span>
-            </div>
-          ))}
-        </div>
+    <div className="overflow-x-auto">
+      <div className="flex items-center justify-center space-x-8 text-sm text-gray-600">
+        {cities.map((city) => (
+          <div key={city} className="flex items-center space-x-2 whitespace-nowrap">
+            <Clock className="w-3 h-3" />
+            <span className="font-medium">{city}</span>
+            <span>{times[city]}</span>
+          </div>
+        ))}
       </div>
     </div>
   );
