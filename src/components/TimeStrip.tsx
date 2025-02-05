@@ -3,7 +3,7 @@ import { Clock } from 'lucide-react';
 
 const TimeStrip = () => {
   const [times, setTimes] = useState<{ [key: string]: string }>({});
-  const cities = ['New York', 'London', 'Tokyo', 'Sydney', 'Berlin'];
+  const cities = ['New York', 'London', 'Tokyo'];
   
   useEffect(() => {
     const updateTimes = () => {
@@ -28,24 +28,20 @@ const TimeStrip = () => {
     const timeZones: { [key: string]: string } = {
       'New York': 'America/New_York',
       'London': 'Europe/London',
-      'Tokyo': 'Asia/Tokyo',
-      'Sydney': 'Australia/Sydney',
-      'Berlin': 'Europe/Berlin'
+      'Tokyo': 'Asia/Tokyo'
     };
     return timeZones[city] || 'UTC';
   };
 
   return (
-    <div className="overflow-x-auto">
-      <div className="flex items-center justify-center space-x-8 text-sm text-gray-600">
-        {cities.map((city) => (
-          <div key={city} className="flex items-center space-x-2 whitespace-nowrap">
-            <Clock className="w-3 h-3" />
-            <span className="font-medium">{city}</span>
-            <span>{times[city]}</span>
-          </div>
-        ))}
-      </div>
+    <div className="flex items-center space-x-6 text-sm text-gray-600 border-r pr-8 mr-8">
+      {cities.map((city) => (
+        <div key={city} className="flex items-center space-x-1.5 whitespace-nowrap">
+          <Clock className="w-3 h-3" />
+          <span className="font-medium">{city}</span>
+          <span>{times[city]}</span>
+        </div>
+      ))}
     </div>
   );
 };

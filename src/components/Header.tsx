@@ -15,17 +15,20 @@ const Header = () => {
             </a>
           </div>
 
-          <nav className="hidden md:flex items-center space-x-8">
-            <a href="#services" className="text-gray-600 hover:text-primary transition-colors">
-              Services
-            </a>
-            <a href="#about" className="text-gray-600 hover:text-primary transition-colors">
-              About
-            </a>
-            <a href="#contact" className="text-gray-600 hover:text-primary transition-colors">
-              Contact
-            </a>
-          </nav>
+          <div className="hidden md:flex items-center space-x-8">
+            <TimeStrip />
+            <nav className="flex items-center space-x-8">
+              <a href="#services" className="text-gray-600 hover:text-primary transition-colors">
+                Services
+              </a>
+              <a href="#about" className="text-gray-600 hover:text-primary transition-colors">
+                About
+              </a>
+              <a href="#contact" className="text-gray-600 hover:text-primary transition-colors">
+                Contact
+              </a>
+            </nav>
+          </div>
 
           <button
             className="md:hidden p-2"
@@ -35,16 +38,12 @@ const Header = () => {
             <Menu className="w-6 h-6" />
           </button>
         </div>
-        
-        {/* TimeStrip added below the main header content */}
-        <div className="py-2 border-t border-gray-100">
-          <TimeStrip />
-        </div>
       </div>
 
       {/* Mobile menu */}
       {isOpen && (
         <div className="md:hidden">
+          <TimeStrip />
           <nav className="px-4 pt-2 pb-4 space-y-2">
             <a
               href="#services"
