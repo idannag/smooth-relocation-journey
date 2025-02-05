@@ -52,15 +52,15 @@ const BottomNav = () => {
               </button>
               
               {item.subItems.length > 0 && activeSection === item.label && (
-                <div className="absolute bottom-full right-0 mb-2 w-40 bg-white rounded-lg shadow-lg border animate-fade-in">
+                <div className="absolute bottom-full right-0 mb-2 w-48 bg-white rounded-lg shadow-lg border animate-fade-in">
                   {item.subItems.map((subItem, subIndex) => (
                     <a
                       key={subIndex}
                       href="#"
-                      className="flex items-center gap-2 px-4 py-2 hover:bg-gray-50 transition-colors duration-200"
+                      className="flex items-center gap-3 px-5 py-3 hover:bg-gray-50 transition-colors duration-200"
                     >
                       {subItem.icon}
-                      <span className="text-[9px] font-medium text-gray-600">{subItem.label}</span>
+                      <span className="text-sm font-medium text-gray-600">{subItem.label}</span>
                     </a>
                   ))}
                 </div>
