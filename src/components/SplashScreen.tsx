@@ -16,36 +16,12 @@ const SplashScreen = () => {
     <AnimatePresence>
       {isVisible && (
         <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ 
-            opacity: 1, 
-            scale: 1,
-            transition: {
-              duration: 0.8,
-              ease: "easeOut"
-            }
-          }}
-          exit={{ 
-            opacity: 0,
-            scale: 1.2,
-            transition: {
-              duration: 0.5,
-              ease: "easeIn"
-            }
-          }}
-          className="fixed inset-0 z-[9999] flex items-center justify-center overflow-hidden"
+          initial={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.5 }}
+          className="fixed inset-0 z-50 flex items-center justify-center overflow-hidden"
         >
-          <motion.div 
-            className="absolute inset-0"
-            initial={{ opacity: 0 }}
-            animate={{ 
-              opacity: 1,
-              transition: {
-                duration: 0.5,
-                delay: 0.3
-              }
-            }}
-          >
+          <div className="absolute inset-0">
             <video
               autoPlay
               muted
@@ -54,7 +30,7 @@ const SplashScreen = () => {
             >
               <source src="https://www.app.ocean-il.co.il/wp-content/uploads/2022/11/fSplash.m4v" type="video/mp4" />
             </video>
-          </motion.div>
+          </div>
         </motion.div>
       )}
     </AnimatePresence>

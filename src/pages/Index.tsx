@@ -13,22 +13,20 @@ import SplashScreen from '../components/SplashScreen';
 
 const Index = () => {
   return (
-    <>
+    <div className="min-h-screen font-poppins">
       <SplashScreen />
-      <div className="min-h-screen font-poppins opacity-0 animate-fade-in delay-[5000ms]">
-        <Header />
-        <VideoHero />
-        <IntroSection />
-        <LifecycleCircle />
-        <Statistics />
-        <Testimonials />
-        <Associates />
-        <PopularDestinations />
-        <LatestArticles />
-        <FooterVideo />
-        <BottomNav />
-      </div>
-    </>
+      <Header />
+      <VideoHero />
+      <IntroSection />
+      <LifecycleCircle />
+      <Statistics />
+      <Testimonials />
+      <Associates />
+      <PopularDestinations />
+      <LatestArticles />
+      <FooterVideo />
+      <BottomNav />
+    </div>
   );
 };
 
