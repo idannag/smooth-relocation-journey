@@ -48,7 +48,7 @@ const BottomNav = () => {
                 className="flex flex-col items-center text-gray-600 hover:text-[#2C5AAE] transition-colors duration-200"
               >
                 {item.icon}
-                <span className="text-[10px] mt-1 font-medium">{item.label}</span>
+                <span className="text-[12px] mt-1 font-bold">{item.label}</span>
               </button>
               
               {item.subItems.length > 0 && activeSection === item.label && (
