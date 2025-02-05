@@ -14,7 +14,7 @@ const VideoHero = () => {
       <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-secondary/20" />
       <div className="relative h-full flex flex-col items-center justify-center text-white text-center px-2 max-w-4xl mx-auto">
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 animate-fade-in font-poppins text-white">
-          We simplify the relocation process.
+          We simplify your relocation process.
         </h1>
         <div className="space-y-4 mt-4">
           <p className="text-lg md:text-xl lg:text-2xl animate-slide-up max-w-3xl">
