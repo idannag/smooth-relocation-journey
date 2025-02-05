@@ -28,7 +28,7 @@ const LifecycleCircle = () => {
         <div className="relative w-full aspect-square max-w-3xl mx-auto">
           {/* Center content */}
           <div className="absolute inset-[20%] rounded-full bg-[#1e3a8a] bg-opacity-90 flex items-center justify-center text-white p-8 text-center">
-            <p className="text-xs md:text-sm">
+            <p className="text-[10px] md:text-xs">
               Having trouble deciding what personal items to send abroad? Knowing all of your options in advance will help you build the shipping package that suits your needs.
             </p>
           </div>
