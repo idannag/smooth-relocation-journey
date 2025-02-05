@@ -8,11 +8,11 @@ const VideoHero = () => {
         playsInline
         className="absolute inset-0 w-full h-full object-cover"
       >
-        <source src="https://assets.mixkit.co/videos/preview/mixkit-set-of-plateaus-seen-from-the-heights-in-a-sunset-26070-large.mp4" type="video/mp4" />
+        <source src="https://www.app.ocean-il.co.il/wp-content/uploads/2022/04/ocean-video.mp4" type="video/mp4" />
       </video>
       <div className="absolute inset-0 bg-gradient-to-r from-primary/50 to-secondary/50" />
       <div className="relative h-full flex flex-col items-center justify-center text-white text-center px-4">
-        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 animate-fade-in font-poppins">
+        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 animate-fade-in font-inter">
           Relocation is a complex journey
         </h1>
         <p className="text-xl md:text-2xl mb-6 animate-slide-up">
