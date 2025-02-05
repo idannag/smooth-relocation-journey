@@ -40,7 +40,7 @@ const TimeStrip = () => {
         setCurrentCityIndex((prev) => (prev + 1) % cities.length);
         setIsVisible(true);
       }, 300);
-    }, 3000);
+    }, 4000);
 
     return () => {
       clearInterval(timeInterval);
@@ -65,15 +65,15 @@ const TimeStrip = () => {
   const currentCity = cities[currentCityIndex];
 
   return (
-    <div className="flex items-center space-x-2 text-[10px] text-gray-600">
+    <div className="flex items-center space-x-2 text-xs text-gray-600">
       <div 
         className={`flex items-center space-x-1 whitespace-nowrap transition-opacity duration-300 ${
           isVisible ? 'opacity-100' : 'opacity-0'
         }`}
       >
-        <Clock className="w-2.5 h-2.5" />
-        <span className="font-medium">Now in {currentCity}:</span>
-        <span>{times[currentCity]}</span>
+        <Clock className="w-3 h-3" />
+        <span className="font-semibold">Now in {currentCity}:</span>
+        <span className="font-bold">{times[currentCity]}</span>
       </div>
     </div>
   );
