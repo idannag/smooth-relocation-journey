@@ -12,7 +12,7 @@ const VideoHero = () => {
       </video>
       <div className="absolute inset-0 bg-black/20" />
       <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-secondary/20" />
-      <div className="relative h-full flex flex-col items-center justify-center text-white text-center px-4 max-w-4xl mx-auto">
+      <div className="relative h-full flex flex-col items-center justify-center text-white text-center px-2 max-w-4xl mx-auto">
         <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-4 animate-fade-in font-poppins text-white">
           We simplify the relocation process.
         </h1>
