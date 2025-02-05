@@ -9,10 +9,12 @@ import PopularDestinations from '../components/PopularDestinations';
 import LatestArticles from '../components/LatestArticles';
 import FooterVideo from '../components/FooterVideo';
 import BottomNav from '../components/BottomNav';
+import SplashScreen from '../components/SplashScreen';
 
 const Index = () => {
   return (
     <div className="min-h-screen font-inter">
+      <SplashScreen />
       <Header />
       <VideoHero />
       <IntroSection />

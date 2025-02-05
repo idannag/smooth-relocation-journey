@@ -5,7 +5,16 @@ const TimeStrip = () => {
   const [times, setTimes] = useState<{ [key: string]: string }>({});
   const [currentCityIndex, setCurrentCityIndex] = useState(0);
   const [isVisible, setIsVisible] = useState(true);
-  const cities = ['New York', 'London', 'Tokyo'];
+  const cities = [
+    'New York',
+    'London',
+    'Tokyo',
+    'Paris',
+    'Dubai',
+    'Singapore',
+    'Sydney',
+    'Tel Aviv'
+  ];
   
   useEffect(() => {
     const updateTimes = () => {
@@ -25,13 +34,12 @@ const TimeStrip = () => {
     updateTimes();
     const timeInterval = setInterval(updateTimes, 1000);
     
-    // Cycle through cities every 3 seconds with fade effect
     const cycleInterval = setInterval(() => {
-      setIsVisible(false); // Trigger fade out
+      setIsVisible(false);
       setTimeout(() => {
         setCurrentCityIndex((prev) => (prev + 1) % cities.length);
-        setIsVisible(true); // Trigger fade in
-      }, 300); // Wait for fade out to complete
+        setIsVisible(true);
+      }, 300);
     }, 3000);
 
     return () => {
@@ -44,7 +52,12 @@ const TimeStrip = () => {
     const timeZones: { [key: string]: string } = {
       'New York': 'America/New_York',
       'London': 'Europe/London',
-      'Tokyo': 'Asia/Tokyo'
+      'Tokyo': 'Asia/Tokyo',
+      'Paris': 'Europe/Paris',
+      'Dubai': 'Asia/Dubai',
+      'Singapore': 'Asia/Singapore',
+      'Sydney': 'Australia/Sydney',
+      'Tel Aviv': 'Asia/Tel_Aviv'
     };
     return timeZones[city] || 'UTC';
   };
