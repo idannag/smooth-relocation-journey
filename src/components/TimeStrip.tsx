@@ -3,6 +3,7 @@ import { Clock } from 'lucide-react';
 
 const TimeStrip = () => {
   const [times, setTimes] = useState<{ [key: string]: string }>({});
+  const [currentCityIndex, setCurrentCityIndex] = useState(0);
   const cities = ['New York', 'London', 'Tokyo'];
   
   useEffect(() => {
@@ -20,8 +21,17 @@ const TimeStrip = () => {
     };
 
     updateTimes();
-    const interval = setInterval(updateTimes, 1000);
-    return () => clearInterval(interval);
+    const timeInterval = setInterval(updateTimes, 1000);
+    
+    // Cycle through cities every 2 seconds
+    const cycleInterval = setInterval(() => {
+      setCurrentCityIndex((prev) => (prev + 1) % cities.length);
+    }, 2000);
+
+    return () => {
+      clearInterval(timeInterval);
+      clearInterval(cycleInterval);
+    };
   }, []);
 
   const getTimeZone = (city: string): string => {
@@ -33,15 +43,15 @@ const TimeStrip = () => {
     return timeZones[city] || 'UTC';
   };
 
+  const currentCity = cities[currentCityIndex];
+
   return (
-    <div className="flex items-center space-x-3 text-xs text-gray-600">
-      {cities.map((city) => (
-        <div key={city} className="flex items-center space-x-1 whitespace-nowrap">
-          <Clock className="w-3 h-3" />
-          <span className="hidden sm:inline font-medium">{city}</span>
-          <span>{times[city]}</span>
-        </div>
-      ))}
+    <div className="flex items-center space-x-2 text-[10px] text-gray-600">
+      <div className="flex items-center space-x-1 whitespace-nowrap animate-fade-in">
+        <Clock className="w-2.5 h-2.5" />
+        <span className="hidden sm:inline font-medium">{currentCity}</span>
+        <span>{times[currentCity]}</span>
+      </div>
     </div>
   );
 };
