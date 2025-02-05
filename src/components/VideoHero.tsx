@@ -17,7 +17,7 @@ const VideoHero = () => {
           We simplify your relocation process.
         </h1>
         <div className="space-y-4 mt-4">
-          <p className="text-lg md:text-xl lg:text-2xl animate-slide-up max-w-3xl">
+          <p className="text-lg md:text-xl lg:text-2xl animate-slide-up max-w-3xl px-4 md:px-6">
             From start to finish - your personalized relocation journey starts here, expertly guided
           </p>
         </div>
