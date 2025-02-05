@@ -57,10 +57,10 @@ const BottomNav = () => {
                     <a
                       key={subIndex}
                       href="#"
-                      className="flex items-center gap-2 px-4 py-3 hover:bg-gray-50 transition-colors duration-200"
+                      className="flex items-center gap-2 px-4 py-2 hover:bg-gray-50 transition-colors duration-200"
                     >
                       {subItem.icon}
-                      <span className="text-xs font-medium">{subItem.label}</span>
+                      <span className="text-[9px] font-medium text-gray-600">{subItem.label}</span>
                     </a>
                   ))}
                 </div>

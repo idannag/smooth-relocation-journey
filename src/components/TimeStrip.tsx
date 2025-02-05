@@ -36,14 +36,14 @@ const TimeStrip = () => {
   };
 
   return (
-    <div className="bg-gradient-to-r from-[#8B5CF6] via-[#D946EF] to-[#F97316] text-white py-2 animate-slide-down">
-      <div className="container mx-auto px-4">
-        <div className="flex items-center justify-center space-x-8 overflow-x-auto whitespace-nowrap">
+    <div className="overflow-hidden">
+      <div className="animate-[slide_20s_linear_infinite]">
+        <div className="flex items-center space-x-6 text-gray-600">
           {cities.map((city) => (
-            <div key={city} className="flex items-center space-x-2 animate-fade-in">
-              <Clock className="w-4 h-4" />
-              <span className="text-sm font-medium">{city}</span>
-              <span className="text-sm">{times[city]}</span>
+            <div key={city} className="flex items-center space-x-1 whitespace-nowrap">
+              <Clock className="w-3 h-3" />
+              <span className="text-xs font-medium">{city}</span>
+              <span className="text-xs">{times[city]}</span>
             </div>
           ))}
         </div>
