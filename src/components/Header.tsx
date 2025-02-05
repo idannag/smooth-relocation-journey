@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Menu } from "lucide-react";
+import { Menu, AppWindow } from "lucide-react";
 import TimeStrip from "./TimeStrip";
 
 const Header = () => {
@@ -9,7 +9,8 @@ const Header = () => {
     <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
-          <div className="flex items-center">
+          <div className="flex items-center gap-2">
+            <AppWindow className="w-6 h-6 text-primary" />
             <a href="/" className="text-xl font-bold text-primary">
               ReloGuide
             </a>
