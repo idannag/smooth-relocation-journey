@@ -15,11 +15,14 @@ const VideoHero = () => {
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 animate-fade-in font-inter">
           We simplify the relocation process.
         </h1>
-        <p className="text-lg md:text-xl lg:text-2xl animate-slide-up max-w-3xl">
-          Every relocatee is unique and requires a set of solutions.
-          
-          We provide a tailor-made journey, specifically for your needs and requirements – throughout the entire process.
-        </p>
+        <div className="space-y-4">
+          <p className="text-lg md:text-xl lg:text-2xl animate-slide-up max-w-3xl">
+            Every relocatee is unique and requires a set of solutions.
+          </p>
+          <p className="text-lg md:text-xl lg:text-2xl animate-slide-up max-w-3xl">
+            We provide a tailor-made journey, specifically for your needs and requirements – throughout the entire process.
+          </p>
+        </div>
       </div>
     </div>
   );
