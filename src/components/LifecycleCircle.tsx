@@ -19,9 +19,12 @@ const LifecycleCircle = () => {
   return (
     <section className="py-16 bg-gradient-to-r from-blue-50 to-blue-100">
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-bold text-center mb-12 font-inter bg-gradient-to-r from-[#4776E6] to-[#8E54E9] bg-clip-text text-transparent">
-          We focus on the life cycle of mobility customer
-        </h2>
+        <div className="text-center mb-12">
+          <h2 className="text-3xl font-bold font-inter bg-gradient-to-r from-[#4776E6] to-[#8E54E9] bg-clip-text text-transparent">
+            We focus on the life cycle of mobility customer
+          </h2>
+          <p className="mt-4 text-lg text-gray-600">Every relocatee is unique and requires a set of solutions.</p>
+        </div>
         <div className="relative w-full aspect-square max-w-3xl mx-auto">
           {/* Center content */}
           <div className="absolute inset-[20%] rounded-full bg-[#1e3a8a] bg-opacity-90 flex items-center justify-center text-white p-8 text-center">
