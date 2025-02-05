@@ -18,7 +18,7 @@ const IntroSection = () => {
             <video
               controls
               className="w-full aspect-video object-cover"
-              poster="https://www.app.ocean-il.co.il/wp-content/uploads/2023/04/relocation-explainer-new-1.jpg"
+              poster="www.app.ocean-il.co.il/wp-content/uploads/2025/01/test.png"
             >
               <source src="https://www.app.ocean-il.co.il/wp-content/uploads/2023/04/relocation-explainer-new-1.mp4" type="video/mp4" />
             </video>
