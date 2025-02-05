@@ -3,15 +3,24 @@ const IntroSection = () => {
     <section className="py-16 bg-white">
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto text-center space-y-6">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 animate-fade-in font-inter bg-gradient-to-r from-[#2C5AAE] to-[#517cc7] bg-clip-text text-transparent">
+          <h2 className="text-4xl md:text-5xl font-bold mb-4 animate-fade-in font-inter bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] bg-clip-text text-transparent">
             Relocation is a complex journey
           </h2>
           <p className="text-xl md:text-2xl mb-6 animate-slide-up text-gray-700">
             Therefore, it needs 360° support
           </p>
-          <p className="text-lg animate-slide-up delay-150 text-gray-600">
+          <p className="text-lg animate-slide-up delay-150 text-gray-600 mb-8">
             Watch our unique way
           </p>
+          <div className="relative w-full max-w-2xl mx-auto rounded-xl overflow-hidden shadow-2xl">
+            <video
+              controls
+              className="w-full aspect-video object-cover"
+              poster="https://www.app.ocean-il.co.il/wp-content/uploads/2022/04/cropped-logo.jpg"
+            >
+              <source src="https://www.app.ocean-il.co.il/wp-content/uploads/2022/10/Brooklyn.m4v" type="video/mp4" />
+            </video>
+          </div>
         </div>
       </div>
     </section>

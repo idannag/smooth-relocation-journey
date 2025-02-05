@@ -1,9 +1,11 @@
 import { Menu } from 'lucide-react';
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import TimeStrip from './TimeStrip';
 
 const Header = () => {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-white shadow-md">
+      <TimeStrip />
       <div className="container mx-auto px-4 py-3 flex items-center justify-between">
         <img 
           src="https://www.app.ocean-il.co.il/wp-content/uploads/2022/04/cropped-logo.jpg" 

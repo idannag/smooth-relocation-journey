@@ -42,17 +42,17 @@ const BottomNav = () => {
       <div className="container mx-auto px-4">
         <div className="flex justify-around items-center h-16">
           {mainNavItems.map((item, index) => (
-            <div key={index} className="relative">
+            <div key={index} className="relative group">
               <button
                 onClick={() => setActiveSection(activeSection === item.label ? null : item.label)}
                 className="flex flex-col items-center text-gray-600 hover:text-[#2C5AAE] transition-colors duration-200"
               >
                 {item.icon}
-                <span className="text-[11px] mt-1 font-medium">{item.label}</span>
+                <span className="text-[10px] mt-1 font-medium">{item.label}</span>
               </button>
               
               {item.subItems.length > 0 && activeSection === item.label && (
-                <div className="absolute bottom-full mb-2 w-40 bg-white rounded-lg shadow-lg border animate-fade-in">
+                <div className="absolute bottom-full right-0 mb-2 w-40 bg-white rounded-lg shadow-lg border animate-fade-in">
                   {item.subItems.map((subItem, subIndex) => (
                     <a
                       key={subIndex}
