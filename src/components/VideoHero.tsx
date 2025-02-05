@@ -10,7 +10,7 @@ const VideoHero = () => {
       >
         <source src="https://www.app.ocean-il.co.il/wp-content/uploads/2022/10/Brooklyn.m4v" type="video/mp4" />
       </video>
-      <div className="absolute inset-0 bg-gradient-to-r from-primary/70 to-secondary/70" />
+      <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-secondary/20" />
       <div className="relative h-full flex flex-col items-center justify-center text-white text-center px-4 max-w-4xl mx-auto">
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 animate-fade-in font-inter">
           We simplify the relocation process.
