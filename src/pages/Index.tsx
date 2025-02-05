@@ -23,9 +23,6 @@ const Index = () => {
       <PopularDestinations />
       <LatestArticles />
       <FooterVideo />
-      <div className="pb-32">
-        {/* Space for bottom navigation */}
-      </div>
       <BottomNav />
     </div>
   );
