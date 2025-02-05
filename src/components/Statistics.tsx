@@ -43,7 +43,7 @@ const Statistics = () => {
   };
 
   return (
-    <section className="py-16 bg-white">
+    <section className="py-16 bg-gradient-to-br from-white via-blue-50 to-white">
       <div className="container mx-auto px-4">
         <h2 className="text-3xl font-bold text-center mb-12 font-inter bg-gradient-to-r from-[#FC466B] to-[#3F5EFB] bg-clip-text text-transparent">
           We Are
@@ -65,11 +65,18 @@ const Statistics = () => {
             {statistics.map((stat, index) => (
               <div
                 key={index}
-                className="flex-none w-72 snap-center bg-gradient-to-br from-white to-blue-50 p-8 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 animate-fade-in"
+                className="flex-none w-72 snap-center bg-gradient-to-br from-white via-blue-50 to-white p-8 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.06)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.12)] transition-all duration-500 animate-fade-in group/stat"
               >
-                <stat.icon className="w-12 h-12 mx-auto mb-4 text-[#2C5AAE]" />
-                <h3 className="text-4xl font-bold text-[#2C5AAE] mb-2">{stat.number}</h3>
-                <p className="text-gray-600">{stat.description}</p>
+                <div className="relative">
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent rounded-full transform scale-150 opacity-0 group-hover/stat:opacity-100 transition-all duration-500" />
+                  <stat.icon className="w-12 h-12 mx-auto mb-4 text-primary transform group-hover/stat:scale-110 transition-transform duration-500" />
+                </div>
+                <h3 className="text-4xl font-bold text-primary mb-2 transform group-hover/stat:translate-y-[-2px] transition-transform duration-500">
+                  {stat.number}
+                </h3>
+                <p className="text-gray-600 group-hover/stat:text-gray-800 transition-colors duration-500">
+                  {stat.description}
+                </p>
               </div>
             ))}
           </div>
