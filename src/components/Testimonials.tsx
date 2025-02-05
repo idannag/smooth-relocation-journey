@@ -47,13 +47,13 @@ const Testimonials = () => {
         <h2 className="text-3xl font-bold text-center mb-12 font-inter bg-gradient-to-r from-[#8B5CF6] via-[#D946EF] to-[#F97316] bg-clip-text text-transparent">
           Client Stories
         </h2>
-        <div className="relative group">
+        <div className="relative group max-w-6xl mx-auto px-12">
           <Carousel
             opts={{
               align: "start",
               loop: true,
             }}
-            className="w-full max-w-6xl mx-auto"
+            className="w-full"
           >
             <CarouselContent className="-ml-2 md:-ml-4">
               {testimonials.map((testimonial, index) => (
@@ -69,8 +69,8 @@ const Testimonials = () => {
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <CarouselPrevious className="absolute -left-12 top-1/2 transform -translate-y-1/2 bg-white/80 border-none hover:bg-white/90 transition-all" />
-            <CarouselNext className="absolute -right-12 top-1/2 transform -translate-y-1/2 bg-white/80 border-none hover:bg-white/90 transition-all" />
+            <CarouselPrevious className="absolute -left-4 top-1/2 transform -translate-y-1/2 bg-white/80 border-none hover:bg-white/90 transition-all" />
+            <CarouselNext className="absolute -right-4 top-1/2 transform -translate-y-1/2 bg-white/80 border-none hover:bg-white/90 transition-all" />
           </Carousel>
         </div>
       </div>
