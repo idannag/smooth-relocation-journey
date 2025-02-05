@@ -16,7 +16,9 @@ const VideoHero = () => {
           We simplify the relocation process.
         </h1>
         <p className="text-lg md:text-xl lg:text-2xl animate-slide-up max-w-3xl">
-          Every relocatee is unique and requires a set of solutions. We provide a tailor-made journey, specifically for your needs and requirements – throughout the entire process.
+          Every relocatee is unique and requires a set of solutions. 
+          
+          We provide a tailor-made journey, specifically for your needs and requirements – throughout the entire process.
         </p>
       </div>
     </div>
