@@ -40,6 +40,24 @@ const PopularDestinations = () => {
       country: "Netherlands",
       image: "https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7",
       description: "Discover relocation opportunities"
+    },
+    {
+      city: "Tel Aviv",
+      country: "Israel",
+      image: "https://images.unsplash.com/photo-1544971587-b842c27f8e14",
+      description: "Discover relocation opportunities"
+    },
+    {
+      city: "Dubai",
+      country: "UAE",
+      image: "https://images.unsplash.com/photo-1512453979798-5ea266f8880c",
+      description: "Discover relocation opportunities"
+    },
+    {
+      city: "Tokyo",
+      country: "Japan",
+      image: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf",
+      description: "Discover relocation opportunities"
     }
   ];
 
