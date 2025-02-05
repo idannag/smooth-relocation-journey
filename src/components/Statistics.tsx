@@ -71,10 +71,10 @@ const Statistics = () => {
                   <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent rounded-full transform scale-150 opacity-0 group-hover/stat:opacity-100 transition-all duration-500" />
                   <stat.icon className="w-12 h-12 mx-auto mb-4 text-primary transform group-hover/stat:scale-110 transition-transform duration-500" />
                 </div>
-                <h3 className="text-4xl font-bold text-primary mb-2 transform group-hover/stat:translate-y-[-2px] transition-transform duration-500">
+                <h3 className="text-4xl font-bold text-primary mb-2 transform group-hover/stat:translate-y-[-2px] transition-transform duration-500 text-center">
                   {stat.number}
                 </h3>
-                <p className="text-gray-600 group-hover/stat:text-gray-800 transition-colors duration-500">
+                <p className="text-gray-600 group-hover/stat:text-gray-800 transition-colors duration-500 text-center">
                   {stat.description}
                 </p>
               </div>
