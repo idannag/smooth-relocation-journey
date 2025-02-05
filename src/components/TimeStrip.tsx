@@ -40,7 +40,7 @@ const TimeStrip = () => {
         setCurrentCityIndex((prev) => (prev + 1) % cities.length);
         setIsVisible(true);
       }, 300);
-    }, 5000); // Changed to 5000ms (5 seconds)
+    }, 5000);
 
     return () => {
       clearInterval(timeInterval);
@@ -72,7 +72,7 @@ const TimeStrip = () => {
         }`}
       >
         <Clock className="w-3 h-3 animate-pulse" />
-        <span className="font-semibold animate-fade-in">{currentCity}:</span>
+        <span className="font-semibold animate-fade-in">Now in {currentCity}:</span>
         <span className="font-bold animate-fade-in">{times[currentCity]}</span>
       </div>
     </div>
