@@ -1,65 +1,69 @@
-import { Home, Info, HandshakeIcon, MapPin, BookOpen, Building } from 'lucide-react';
+import { Home, Calculator, BookOpen, Building2, GraduationCap, Home as HomeIcon } from 'lucide-react';
 import { useState } from 'react';
 
 const BottomNav = () => {
-  const [isExpanded, setIsExpanded] = useState(false);
+  const [activeSection, setActiveSection] = useState<string | null>(null);
 
   const mainNavItems = [
-    { icon: <Home className="w-5 h-5" />, label: 'Home' },
-    { icon: <Info className="w-5 h-5" />, label: 'Info' },
-    { icon: <HandshakeIcon className="w-5 h-5" />, label: 'Consult' }
-  ];
-
-  const expandedNavItems = [
-    { icon: <MapPin className="w-5 h-5" />, label: 'Destinations' },
-    { icon: <BookOpen className="w-5 h-5" />, label: 'Articles' },
-    { icon: <Building className="w-5 h-5" />, label: 'Associates' }
+    { 
+      icon: <Home className="w-5 h-5" />, 
+      label: 'Home',
+      subItems: [] 
+    },
+    { 
+      icon: <Calculator className="w-5 h-5" />, 
+      label: 'Info',
+      subItems: [
+        { icon: <Calculator className="w-5 h-5" />, label: 'Cost Calculator' },
+        { icon: <BookOpen className="w-5 h-5" />, label: 'Useful Articles' }
+      ]
+    },
+    { 
+      icon: <Building2 className="w-5 h-5" />, 
+      label: 'Consult',
+      subItems: [
+        { icon: <HomeIcon className="w-5 h-5" />, label: 'Relocation' },
+        { icon: <GraduationCap className="w-5 h-5" />, label: 'Education' },
+        { icon: <Building2 className="w-5 h-5" />, label: 'Real-Estate' }
+      ]
+    },
+    { 
+      icon: <HomeIcon className="w-5 h-5" />, 
+      label: 'Client Area',
+      subItems: [] 
+    }
   ];
 
   return (
     <nav className="fixed bottom-0 left-0 right-0 bg-white shadow-lg border-t z-50">
       <div className="container mx-auto px-4">
-        {/* Main navigation items */}
         <div className="flex justify-around items-center h-16">
           {mainNavItems.map((item, index) => (
-            <a
-              key={index}
-              href="#"
-              className="flex flex-col items-center text-gray-600 hover:text-primary transition-colors duration-200"
-            >
-              {item.icon}
-              <span className="text-xs mt-1">{item.label}</span>
-            </a>
-          ))}
-          <button
-            onClick={() => setIsExpanded(!isExpanded)}
-            className="flex flex-col items-center text-gray-600 hover:text-primary transition-colors duration-200"
-          >
-            <div className={`w-5 h-5 flex items-center justify-center transition-transform duration-200 ${isExpanded ? 'rotate-180' : ''}`}>
-              •••
-            </div>
-            <span className="text-xs mt-1">More</span>
-          </button>
-        </div>
-
-        {/* Expanded navigation items */}
-        <div
-          className={`overflow-hidden transition-all duration-300 ${
-            isExpanded ? 'h-16 opacity-100' : 'h-0 opacity-0'
-          }`}
-        >
-          <div className="flex justify-around items-center h-16 animate-fade-in">
-            {expandedNavItems.map((item, index) => (
-              <a
-                key={index}
-                href="#"
+            <div key={index} className="relative">
+              <button
+                onClick={() => setActiveSection(activeSection === item.label ? null : item.label)}
                 className="flex flex-col items-center text-gray-600 hover:text-primary transition-colors duration-200"
               >
                 {item.icon}
                 <span className="text-xs mt-1">{item.label}</span>
-              </a>
-            ))}
-          </div>
+              </button>
+              
+              {item.subItems.length > 0 && activeSection === item.label && (
+                <div className="absolute bottom-full mb-2 w-40 bg-white rounded-lg shadow-lg border animate-fade-in">
+                  {item.subItems.map((subItem, subIndex) => (
+                    <a
+                      key={subIndex}
+                      href="#"
+                      className="flex items-center gap-2 px-4 py-3 hover:bg-gray-50 transition-colors duration-200"
+                    >
+                      {subItem.icon}
+                      <span className="text-sm">{subItem.label}</span>
+                    </a>
+                  ))}
+                </div>
+              )}
+            </div>
+          ))}
         </div>
       </div>
     </nav>
