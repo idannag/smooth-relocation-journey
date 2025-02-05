@@ -6,33 +6,33 @@ const BottomNav = () => {
 
   const mainNavItems = [
     { 
-      icon: <Home className="w-5 h-5 text-primary" />, 
+      icon: <Home className="w-5 h-5 text-[#2C5AAE]" />, 
       label: 'Home',
       subItems: [] 
     },
     { 
-      icon: <Calculator className="w-5 h-5 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent" />, 
+      icon: <Calculator className="w-5 h-5 bg-gradient-to-r from-[#2C5AAE] to-[#517cc7]" />, 
       label: 'Info',
       subItems: [
-        { icon: <Calculator className="w-5 h-5 text-primary" />, label: 'Cost Calculator' },
-        { icon: <BookOpen className="w-5 h-5 text-secondary" />, label: 'Useful Articles' }
+        { icon: <Calculator className="w-5 h-5 text-[#2C5AAE]" />, label: 'Cost Calculator' },
+        { icon: <BookOpen className="w-5 h-5 text-[#517cc7]" />, label: 'Useful Articles' }
       ]
     },
     { 
-      icon: <Building2 className="w-5 h-5 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent" />, 
+      icon: <Building2 className="w-5 h-5 bg-gradient-to-r from-[#2C5AAE] to-[#517cc7]" />, 
       label: 'Consult',
       subItems: [
-        { icon: <HomeIcon className="w-5 h-5 text-primary" />, label: 'Relocation' },
-        { icon: <GraduationCap className="w-5 h-5 text-secondary" />, label: 'Education' },
-        { icon: <Building2 className="w-5 h-5 text-primary" />, label: 'Real-Estate' }
+        { icon: <HomeIcon className="w-5 h-5 text-[#2C5AAE]" />, label: 'Relocation' },
+        { icon: <GraduationCap className="w-5 h-5 text-[#517cc7]" />, label: 'Education' },
+        { icon: <Building2 className="w-5 h-5 text-[#2C5AAE]" />, label: 'Real-Estate' }
       ]
     },
     { 
-      icon: <Contact className="w-5 h-5 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent" />, 
+      icon: <Contact className="w-5 h-5 bg-gradient-to-r from-[#2C5AAE] to-[#517cc7]" />, 
       label: 'Client Area',
       subItems: [
-        { icon: <Route className="w-5 h-5 text-primary" />, label: 'My Relocation' },
-        { icon: <Lock className="w-5 h-5 text-secondary" />, label: 'Private Content' }
+        { icon: <Route className="w-5 h-5 text-[#2C5AAE]" />, label: 'My Relocation' },
+        { icon: <Lock className="w-5 h-5 text-[#517cc7]" />, label: 'Private Content' }
       ]
     }
   ];
@@ -45,7 +45,7 @@ const BottomNav = () => {
             <div key={index} className="relative">
               <button
                 onClick={() => setActiveSection(activeSection === item.label ? null : item.label)}
-                className="flex flex-col items-center text-gray-600 hover:text-primary transition-colors duration-200"
+                className="flex flex-col items-center text-gray-600 hover:text-[#2C5AAE] transition-colors duration-200"
               >
                 {item.icon}
                 <span className="text-xs mt-1 font-medium">{item.label}</span>

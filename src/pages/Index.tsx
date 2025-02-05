@@ -5,6 +5,7 @@ import LifecycleCircle from '../components/LifecycleCircle';
 import Testimonials from '../components/Testimonials';
 import PopularDestinations from '../components/PopularDestinations';
 import LatestArticles from '../components/LatestArticles';
+import FooterVideo from '../components/FooterVideo';
 import BottomNav from '../components/BottomNav';
 
 const Index = () => {
@@ -17,6 +18,7 @@ const Index = () => {
       <Testimonials />
       <PopularDestinations />
       <LatestArticles />
+      <FooterVideo />
       <div className="pb-32">
         {/* Space for bottom navigation */}
       </div>
