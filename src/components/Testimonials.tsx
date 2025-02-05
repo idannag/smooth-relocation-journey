@@ -47,7 +47,7 @@ const Testimonials = () => {
         <h2 className="text-3xl font-bold text-center mb-12 font-inter bg-gradient-to-r from-[#8B5CF6] via-[#D946EF] to-[#F97316] bg-clip-text text-transparent">
           Client Stories
         </h2>
-        <div className="relative group max-w-6xl mx-auto px-12">
+        <div className="relative group max-w-6xl mx-auto px-6">
           <Carousel
             opts={{
               align: "start",
@@ -58,10 +58,10 @@ const Testimonials = () => {
             <CarouselContent className="-ml-2 md:-ml-4">
               {testimonials.map((testimonial, index) => (
                 <CarouselItem key={index} className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3">
-                  <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 animate-fade-in h-full">
+                  <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 animate-fade-in h-full flex flex-col items-center text-center">
                     <Quote className="w-8 h-8 text-primary mb-4" />
                     <p className="text-gray-700 mb-4">{testimonial.text}</p>
-                    <div className="border-t pt-4">
+                    <div className="border-t pt-4 w-full flex flex-col items-center">
                       <p className="font-semibold">{testimonial.author}</p>
                       <p className="text-sm text-gray-500">{testimonial.route}</p>
                     </div>
