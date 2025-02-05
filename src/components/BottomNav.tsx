@@ -1,4 +1,4 @@
-import { Home, Calculator, BookOpen, Building2, GraduationCap, Home as HomeIcon } from 'lucide-react';
+import { Home, Calculator, BookOpen, Building2, GraduationCap, Home as HomeIcon, Contact, Lock, Route } from 'lucide-react';
 import { useState } from 'react';
 
 const BottomNav = () => {
@@ -6,31 +6,34 @@ const BottomNav = () => {
 
   const mainNavItems = [
     { 
-      icon: <Home className="w-5 h-5" />, 
+      icon: <Home className="w-5 h-5 text-primary" />, 
       label: 'Home',
       subItems: [] 
     },
     { 
-      icon: <Calculator className="w-5 h-5" />, 
+      icon: <Calculator className="w-5 h-5 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent" />, 
       label: 'Info',
       subItems: [
-        { icon: <Calculator className="w-5 h-5" />, label: 'Cost Calculator' },
-        { icon: <BookOpen className="w-5 h-5" />, label: 'Useful Articles' }
+        { icon: <Calculator className="w-5 h-5 text-primary" />, label: 'Cost Calculator' },
+        { icon: <BookOpen className="w-5 h-5 text-secondary" />, label: 'Useful Articles' }
       ]
     },
     { 
-      icon: <Building2 className="w-5 h-5" />, 
+      icon: <Building2 className="w-5 h-5 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent" />, 
       label: 'Consult',
       subItems: [
-        { icon: <HomeIcon className="w-5 h-5" />, label: 'Relocation' },
-        { icon: <GraduationCap className="w-5 h-5" />, label: 'Education' },
-        { icon: <Building2 className="w-5 h-5" />, label: 'Real-Estate' }
+        { icon: <HomeIcon className="w-5 h-5 text-primary" />, label: 'Relocation' },
+        { icon: <GraduationCap className="w-5 h-5 text-secondary" />, label: 'Education' },
+        { icon: <Building2 className="w-5 h-5 text-primary" />, label: 'Real-Estate' }
       ]
     },
     { 
-      icon: <HomeIcon className="w-5 h-5" />, 
+      icon: <Contact className="w-5 h-5 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent" />, 
       label: 'Client Area',
-      subItems: [] 
+      subItems: [
+        { icon: <Route className="w-5 h-5 text-primary" />, label: 'My Relocation' },
+        { icon: <Lock className="w-5 h-5 text-secondary" />, label: 'Private Content' }
+      ]
     }
   ];
 
@@ -45,7 +48,7 @@ const BottomNav = () => {
                 className="flex flex-col items-center text-gray-600 hover:text-primary transition-colors duration-200"
               >
                 {item.icon}
-                <span className="text-xs mt-1">{item.label}</span>
+                <span className="text-xs mt-1 font-medium">{item.label}</span>
               </button>
               
               {item.subItems.length > 0 && activeSection === item.label && (
@@ -57,7 +60,7 @@ const BottomNav = () => {
                       className="flex items-center gap-2 px-4 py-3 hover:bg-gray-50 transition-colors duration-200"
                     >
                       {subItem.icon}
-                      <span className="text-sm">{subItem.label}</span>
+                      <span className="text-sm font-medium">{subItem.label}</span>
                     </a>
                   ))}
                 </div>

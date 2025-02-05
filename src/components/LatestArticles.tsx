@@ -1,3 +1,4 @@
+const LatestArticles = () => {
 const articles = [
   {
     title: "Guide to International Schools",
@@ -19,16 +20,15 @@ const articles = [
   }
 ];
 
-const LatestArticles = () => {
   return (
     <section className="py-16 bg-gray-50">
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-bold text-center mb-12 font-poppins">Latest Articles</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <h2 className="text-3xl font-bold text-center mb-12 font-poppins bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Latest Articles</h2>
+        <div className="flex overflow-x-auto gap-8 pb-4 snap-x snap-mandatory">
           {articles.map((article, index) => (
             <div
               key={index}
-              className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 animate-fade-in"
+              className="flex-none w-80 snap-center bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 animate-fade-in"
             >
               <img
                 src={article.image}
