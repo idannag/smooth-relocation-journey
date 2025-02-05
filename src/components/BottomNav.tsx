@@ -1,4 +1,4 @@
-import { Home, Calculator, BookOpen, Building2, GraduationCap, Home as HomeIcon, Contact, Lock, Route } from 'lucide-react';
+import { Home, Calculator, BookOpen, Building2, GraduationCap, Contact, Lock, Route } from 'lucide-react';
 import { useState } from 'react';
 
 const BottomNav = () => {
@@ -6,33 +6,33 @@ const BottomNav = () => {
 
   const mainNavItems = [
     { 
-      icon: <Home className="w-5 h-5 text-[#2C5AAE]" />, 
+      icon: <Home className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, 
       label: 'Home',
       subItems: [] 
     },
     { 
-      icon: <Calculator className="w-5 h-5 bg-gradient-to-r from-[#2C5AAE] to-[#517cc7]" />, 
+      icon: <Calculator className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, 
       label: 'Info',
       subItems: [
-        { icon: <Calculator className="w-5 h-5 text-[#2C5AAE]" />, label: 'Cost Calculator' },
-        { icon: <BookOpen className="w-5 h-5 text-[#517cc7]" />, label: 'Useful Articles' }
+        { icon: <Calculator className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, label: 'Cost Calculator' },
+        { icon: <BookOpen className="w-5 h-5 stroke-[1.5] text-[#517cc7]" />, label: 'Useful Articles' }
       ]
     },
     { 
-      icon: <Building2 className="w-5 h-5 bg-gradient-to-r from-[#2C5AAE] to-[#517cc7]" />, 
+      icon: <Building2 className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, 
       label: 'Consult',
       subItems: [
-        { icon: <HomeIcon className="w-5 h-5 text-[#2C5AAE]" />, label: 'Relocation' },
-        { icon: <GraduationCap className="w-5 h-5 text-[#517cc7]" />, label: 'Education' },
-        { icon: <Building2 className="w-5 h-5 text-[#2C5AAE]" />, label: 'Real-Estate' }
+        { icon: <Home className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, label: 'Relocation' },
+        { icon: <GraduationCap className="w-5 h-5 stroke-[1.5] text-[#517cc7]" />, label: 'Education' },
+        { icon: <Building2 className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, label: 'Real-Estate' }
       ]
     },
     { 
-      icon: <Contact className="w-5 h-5 bg-gradient-to-r from-[#2C5AAE] to-[#517cc7]" />, 
+      icon: <Contact className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, 
       label: 'Client Area',
       subItems: [
-        { icon: <Route className="w-5 h-5 text-[#2C5AAE]" />, label: 'My Relocation' },
-        { icon: <Lock className="w-5 h-5 text-[#517cc7]" />, label: 'Private Content' }
+        { icon: <Route className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, label: 'My Relocation' },
+        { icon: <Lock className="w-5 h-5 stroke-[1.5] text-[#517cc7]" />, label: 'Private Content' }
       ]
     }
   ];
@@ -48,7 +48,7 @@ const BottomNav = () => {
                 className="flex flex-col items-center text-gray-600 hover:text-[#2C5AAE] transition-colors duration-200"
               >
                 {item.icon}
-                <span className="text-xs mt-1 font-medium">{item.label}</span>
+                <span className="text-[11px] mt-1 font-medium">{item.label}</span>
               </button>
               
               {item.subItems.length > 0 && activeSection === item.label && (
@@ -60,7 +60,7 @@ const BottomNav = () => {
                       className="flex items-center gap-2 px-4 py-3 hover:bg-gray-50 transition-colors duration-200"
                     >
                       {subItem.icon}
-                      <span className="text-sm font-medium">{subItem.label}</span>
+                      <span className="text-xs font-medium">{subItem.label}</span>
                     </a>
                   ))}
                 </div>
