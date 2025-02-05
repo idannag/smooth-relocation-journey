@@ -1,4 +1,4 @@
-import { Quote } from 'lucide-react';
+import { Quote, ChevronLeft, ChevronRight } from 'lucide-react';
 import {
   Carousel,
   CarouselContent,
@@ -69,8 +69,12 @@ const Testimonials = () => {
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <CarouselPrevious className="absolute -left-4 top-1/2 transform -translate-y-1/2 bg-white/80 border-none hover:bg-white/90 transition-all" />
-            <CarouselNext className="absolute -right-4 top-1/2 transform -translate-y-1/2 bg-white/80 border-none hover:bg-white/90 transition-all" />
+            <CarouselPrevious className="absolute -left-4 top-1/2 transform -translate-y-1/2 bg-white/80 border-none hover:bg-white/90 transition-all">
+              <ChevronLeft className="h-4 w-4" />
+            </CarouselPrevious>
+            <CarouselNext className="absolute -right-4 top-1/2 transform -translate-y-1/2 bg-white/80 border-none hover:bg-white/90 transition-all">
+              <ChevronRight className="h-4 w-4" />
+            </CarouselNext>
           </Carousel>
         </div>
       </div>
