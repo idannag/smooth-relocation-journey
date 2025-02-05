@@ -1,9 +1,11 @@
+import React from 'react';
+
 const IntroSection = () => {
   return (
     <section className="py-16 bg-white">
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto text-center space-y-6">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 animate-fade-in font-inter bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] bg-clip-text text-transparent">
+          <h2 className="text-4xl md:text-5xl font-bold mb-4 animate-fade-in font-inter bg-gradient-to-r from-[#FC466B] to-[#3F5EFB] bg-clip-text text-transparent">
             Relocation is a complex journey
           </h2>
           <p className="text-xl md:text-2xl mb-6 animate-slide-up text-gray-700">
