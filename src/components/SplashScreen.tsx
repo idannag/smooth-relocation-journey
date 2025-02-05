@@ -31,29 +31,6 @@ const SplashScreen = () => {
               <source src="https://www.app.ocean-il.co.il/wp-content/uploads/2022/11/fSplash.m4v" type="video/mp4" />
             </video>
           </div>
-          <motion.div
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.5 }}
-            className="text-center z-10"
-          >
-            <motion.h1
-              initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.3 }}
-              className="text-4xl font-bold text-white mb-4"
-            >
-              Ocean IL
-            </motion.h1>
-            <motion.p
-              initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.5 }}
-              className="text-white/80 text-xl"
-            >
-              Your Relocation Journey Begins Here
-            </motion.p>
-          </motion.div>
         </motion.div>
       )}
     </AnimatePresence>
