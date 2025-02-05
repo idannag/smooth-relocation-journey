@@ -59,7 +59,7 @@ const Statistics = () => {
           
           <div
             ref={scrollRef}
-            className="flex overflow-x-auto gap-8 pb-4 snap-x snap-mandatory scrollbar-hide"
+            className="flex overflow-x-auto gap-8 pb-4 snap-x snap-mandatory scrollbar-hide justify-center items-center mx-auto"
             style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
           >
             {statistics.map((stat, index) => (
