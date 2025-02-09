@@ -32,17 +32,23 @@ const VideoHero = () => {
   }, []);
 
   const isYouTubeVideo = currentVideo.includes('youtube.com');
-  const videoClassName = `absolute inset-0 w-[120%] h-[120%] ${isMobile ? '-top-[10%] -left-[10%]' : '-top-[10%] -left-[10%]'} pointer-events-none`;
+  const videoClassName = `absolute inset-0 w-full h-full ${
+    isMobile && isYouTubeVideo 
+      ? 'object-contain' 
+      : 'object-cover'
+  } pointer-events-none`;
 
   return (
     <div className="relative h-[90vh] w-full overflow-hidden">
       {isYouTubeVideo ? (
-        <iframe
-          src={`${currentVideo}?autoplay=1&mute=1&loop=1&playlist=${currentVideo.split('/').pop()}&controls=0&modestbranding=1&showinfo=0&rel=0&enablejsapi=1&playsinline=1`}
-          className={videoClassName}
-          allow="autoplay; encrypted-media"
-          frameBorder="0"
-        />
+        <div className={`absolute inset-0 ${isMobile ? 'aspect-[9/16]' : 'aspect-video'} mx-auto`}>
+          <iframe
+            src={`${currentVideo}?autoplay=1&mute=1&loop=1&playlist=${currentVideo.split('/').pop()}&controls=0&modestbranding=1&showinfo=0&rel=0&enablejsapi=1&playsinline=1`}
+            className="absolute inset-0 w-full h-full"
+            allow="autoplay; encrypted-media"
+            frameBorder="0"
+          />
+        </div>
       ) : (
         <video
           autoPlay
