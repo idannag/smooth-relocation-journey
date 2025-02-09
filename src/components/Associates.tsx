@@ -3,12 +3,12 @@ import { motion } from 'framer-motion';
 
 const Associates = () => {
   const logos = [
-    '/lovable-uploads/8bb6d1ab-e2ff-4a43-b1ad-dd707702f069.png#0',  // Harmony Relocation Network
-    '/lovable-uploads/8bb6d1ab-e2ff-4a43-b1ad-dd707702f069.png#1',  // IAM
-    '/lovable-uploads/8bb6d1ab-e2ff-4a43-b1ad-dd707702f069.png#2',  // MN Department of Education
-    '/lovable-uploads/8bb6d1ab-e2ff-4a43-b1ad-dd707702f069.png#3',  // ISO
-    '/lovable-uploads/8bb6d1ab-e2ff-4a43-b1ad-dd707702f069.png#4',  // Worldwide ERC
-    '/lovable-uploads/8bb6d1ab-e2ff-4a43-b1ad-dd707702f069.png#5',  // FAIN
+    '/lovable-uploads/harmony.png',  // Harmony Relocation Network
+    '/lovable-uploads/iam.png',      // IAM
+    '/lovable-uploads/mn.png',       // MN Department of Education
+    '/lovable-uploads/iso.png',      // ISO
+    '/lovable-uploads/erc.png',      // Worldwide ERC
+    '/lovable-uploads/fain.png',     // FAIN
   ];
 
   return (
