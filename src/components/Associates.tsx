@@ -19,7 +19,7 @@ const Associates = () => {
         </h2>
         <div className="overflow-hidden">
           <motion.div
-            className="flex gap-6"
+            className="flex gap-3" // Changed from gap-6 to gap-3
             initial={{ x: 0 }}
             animate={{ x: "-100%" }}
             transition={{
