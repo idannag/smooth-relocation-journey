@@ -1,4 +1,3 @@
-
 import { Home, Calculator, BookOpen, Building2, GraduationCap, UserRound, Lock, Route, Headset } from 'lucide-react';
 import { useState, useEffect, useRef } from 'react';
 
