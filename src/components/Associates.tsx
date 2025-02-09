@@ -19,14 +19,35 @@ const Associates = () => {
         </h2>
         <div className="overflow-hidden">
           <motion.div
-            className="flex gap-12 justify-center flex-wrap"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+            className="flex gap-12"
+            initial={{ x: 0 }}
+            animate={{ x: "-100%" }}
+            transition={{
+              duration: 20,
+              repeat: Infinity,
+              ease: "linear",
+              repeatType: "loop",
+            }}
           >
+            {/* First set of logos */}
             {logos.map((logo, index) => (
               <motion.div
-                key={index}
+                key={`first-${index}`}
+                className="flex-shrink-0 w-48 h-24 bg-white rounded-lg flex items-center justify-center p-4"
+                whileHover={{ scale: 1.05 }}
+                transition={{ duration: 0.2 }}
+              >
+                <img 
+                  src={logo} 
+                  alt={`Associate ${index + 1}`} 
+                  className="w-full h-full object-contain" 
+                />
+              </motion.div>
+            ))}
+            {/* Duplicate set of logos for seamless loop */}
+            {logos.map((logo, index) => (
+              <motion.div
+                key={`second-${index}`}
                 className="flex-shrink-0 w-48 h-24 bg-white rounded-lg flex items-center justify-center p-4"
                 whileHover={{ scale: 1.05 }}
                 transition={{ duration: 0.2 }}
