@@ -3,12 +3,12 @@ import { motion } from 'framer-motion';
 
 const Associates = () => {
   const logos = [
-    '/lovable-uploads/harmony.png',  // Harmony Relocation Network
-    '/lovable-uploads/iam.png',      // IAM
-    '/lovable-uploads/mn.png',       // MN Department of Education
-    '/lovable-uploads/iso.png',      // ISO
-    '/lovable-uploads/erc.png',      // Worldwide ERC
-    '/lovable-uploads/fain.png',     // FAIN
+    'https://www.app.ocean-il.co.il/wp-content/uploads/2025/01/HARMONY-removebg-preview.png',  // Harmony Relocation Network
+    'https://www.app.ocean-il.co.il/wp-content/uploads/2022/04/iam.png',                       // IAM
+    'https://www.app.ocean-il.co.il/wp-content/uploads/2022/04/client-5.png',                  // MN Department of Education
+    'https://www.app.ocean-il.co.il/wp-content/uploads/2022/04/IQC.png',                       // ISO
+    'https://www.app.ocean-il.co.il/wp-content/uploads/2022/04/worldwide.png',                 // Worldwide ERC
+    'https://www.app.ocean-il.co.il/wp-content/uploads/2022/04/faim2019.png',                 // FAIN
   ];
 
   return (
