@@ -19,12 +19,12 @@ const Index = () => {
       <Header />
       <VideoHero />
       <IntroSection />
+      <UsefulInfo />
+      <PopularDestinations />
       <LifecycleCircle />
       <Statistics />
       <Testimonials />
       <Associates />
-      <PopularDestinations />
-      <UsefulInfo />
       <FooterVideo />
       <BottomNav />
     </div>

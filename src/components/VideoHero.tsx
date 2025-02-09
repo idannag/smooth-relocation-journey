@@ -1,16 +1,49 @@
 
+import { useEffect, useState } from 'react';
+
 const VideoHero = () => {
+  const videos = [
+    "https://www.app.ocean-il.co.il/wp-content/uploads/2022/10/Brooklyn.m4v",
+    "https://www.youtube.com/embed/Oxh_NsBqR1M",
+    "https://www.youtube.com/embed/kK3uDGtR45A",
+    "https://www.youtube.com/embed/E_S4iZ7TCXo",
+    "https://www.youtube.com/embed/TP_hHMnyknk",
+    "https://www.youtube.com/embed/AKXMkeib1zE",
+    "https://www.youtube.com/embed/YUdDGKnVZN4",
+    "https://www.youtube.com/embed/9pb7paEMbmo",
+    "https://www.youtube.com/embed/kpoGrDy_ss8",
+    "https://www.youtube.com/embed/8m3g3SlYs3k"
+  ];
+
+  const [currentVideo, setCurrentVideo] = useState(videos[0]);
+
+  useEffect(() => {
+    const randomIndex = Math.floor(Math.random() * videos.length);
+    setCurrentVideo(videos[randomIndex]);
+  }, []);
+
+  const isYouTubeVideo = currentVideo.includes('youtube.com');
+
   return (
     <div className="relative h-[90vh] w-full overflow-hidden">
-      <video
-        autoPlay
-        muted
-        loop
-        playsInline
-        className="absolute inset-0 w-full h-full object-cover"
-      >
-        <source src="https://www.app.ocean-il.co.il/wp-content/uploads/2022/10/Brooklyn.m4v" type="video/mp4" />
-      </video>
+      {isYouTubeVideo ? (
+        <iframe
+          src={`${currentVideo}?autoplay=1&mute=1&loop=1&playlist=${currentVideo.split('/').pop()}&controls=0`}
+          className="absolute inset-0 w-full h-full object-cover"
+          allow="autoplay; encrypted-media"
+          allowFullScreen
+        />
+      ) : (
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover"
+        >
+          <source src={currentVideo} type="video/mp4" />
+        </video>
+      )}
       <div className="absolute inset-0 bg-black/20" />
       <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-secondary/20" />
       <div className="relative h-full flex flex-col items-center justify-between text-white text-center px-2 max-w-4xl mx-auto pb-20">
