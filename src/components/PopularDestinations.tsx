@@ -105,7 +105,7 @@ const PopularDestinations = () => {
               >
                 {destination.video.includes('youtube.com') ? (
                   <iframe
-                    src={`${destination.video}?autoplay=1&mute=1&loop=1&playlist=${destination.video.split('/').pop()}&controls=0&modestbranding=1&showinfo=0&rel=0&enablejsapi=1&playsinline=1&version=3&loop=1`}
+                    src={`${destination.video}?autoplay=1&mute=1&loop=1&playlist=${destination.video.split('/').pop()}&controls=0&modestbranding=1&showinfo=0&rel=0&enablejsapi=1&playsinline=1`}
                     className="w-[120%] h-[120%] absolute -top-[10%] -left-[10%] pointer-events-none"
                     allow="autoplay; encrypted-media"
                     frameBorder="0"
@@ -121,8 +121,7 @@ const PopularDestinations = () => {
                     <source src={destination.video} type="video/mp4" />
                   </video>
                 )}
-                <div className="absolute inset-0 backdrop-blur-[1px] bg-black/10" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent backdrop-blur-[1px]">
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent">
                   <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
                     <h3 className="text-2xl font-bold mb-1">{destination.city}</h3>
                     <p className="text-sm mb-2">{destination.country}</p>

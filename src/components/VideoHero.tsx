@@ -32,7 +32,7 @@ const VideoHero = () => {
   }, []);
 
   const isYouTubeVideo = currentVideo.includes('youtube.com');
-  const videoClassName = `absolute inset-0 w-[160%] h-[160%] ${isMobile ? '-top-[30%] -left-[30%]' : '-top-[10%] -left-[10%]'} pointer-events-none`;
+  const videoClassName = `absolute inset-0 w-[120%] h-[120%] ${isMobile ? '-top-[10%] -left-[10%]' : '-top-[10%] -left-[10%]'} pointer-events-none`;
 
   return (
     <div className="relative h-[90vh] w-full overflow-hidden">
@@ -54,8 +54,8 @@ const VideoHero = () => {
           <source src={currentVideo} type="video/mp4" />
         </video>
       )}
-      <div className="absolute inset-0 backdrop-blur-[1px] bg-black/10" />
-      <div className="absolute inset-0 bg-gradient-to-r from-primary/10 to-secondary/10 backdrop-blur-[1px]" />
+      <div className="absolute inset-0 bg-black/5" />
+      <div className="absolute inset-0 bg-gradient-to-r from-primary/10 to-secondary/10" />
       <div className="relative h-full flex flex-col items-center justify-between text-white text-center px-2 max-w-4xl mx-auto pb-20">
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mt-32 animate-fade-in font-poppins text-white leading-normal">
           We simplify your relocation journey.
