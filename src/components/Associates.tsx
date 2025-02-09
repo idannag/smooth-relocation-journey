@@ -19,11 +19,11 @@ const Associates = () => {
         </h2>
         <div className="overflow-hidden">
           <motion.div
-            className="flex gap-1" // Changed from gap-3 to gap-1 for minimal spacing
+            className="flex gap-1"
             initial={{ x: 0 }}
             animate={{ x: "-100%" }}
             transition={{
-              duration: 15,
+              duration: 10, // Changed from 15 to 10 seconds for faster animation
               repeat: Infinity,
               ease: "linear",
               repeatType: "loop",
