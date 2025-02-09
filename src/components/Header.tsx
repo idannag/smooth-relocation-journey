@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { Menu, Home, Calculator, Newspaper, Building2, GraduationCap, UserRound, ShoppingCart, Route, Bot, BookText, Headphones } from "lucide-react";
+import { Menu, Home, Calculator, Newspaper, Building2, GraduationCap, UserRound, ShoppingCart, Route, Bot, BookText, Headphones, ChevronDown, ChevronUp } from "lucide-react";
 import TimeStrip from "./TimeStrip";
 
 const Header = () => {
