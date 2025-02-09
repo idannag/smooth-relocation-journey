@@ -1,3 +1,4 @@
+
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useRef } from 'react';
 
@@ -53,7 +54,7 @@ const LatestArticles = () => {
     }
   };
 
-return (
+  return (
     <section className="py-16 bg-gradient-to-r from-blue-50 to-blue-100">
       <div className="container mx-auto px-4">
         <h2 className="text-3xl font-bold text-center mb-12 font-inter bg-gradient-to-r from-[#8E2DE2] to-[#4A00E0] bg-clip-text text-transparent">
@@ -70,25 +71,25 @@ return (
           
           <div
             ref={scrollRef}
-            className="flex overflow-x-auto gap-8 pb-4 snap-x snap-mandatory scrollbar-hide"
+            className="flex overflow-x-auto gap-6 pb-4 snap-x snap-mandatory scrollbar-hide"
             style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
           >
             {articles.map((article, index) => (
               <div
                 key={index}
-                className="flex-none w-80 snap-center bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 animate-fade-in group"
+                className="flex-none w-72 snap-center bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 animate-fade-in group"
               >
                 <img
                   src={article.image}
                   alt={article.title}
-                  className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105"
+                  className="w-full h-40 object-cover transition-transform duration-300 group-hover:scale-105"
                 />
-                <div className="p-6">
-                  <h3 className="text-xl font-semibold mb-2">{article.title}</h3>
-                  <p className="text-gray-600 mb-4 line-clamp-2">{article.excerpt}</p>
+                <div className="p-4">
+                  <h3 className="text-lg font-semibold mb-2 line-clamp-1">{article.title}</h3>
+                  <p className="text-gray-600 text-sm mb-3 line-clamp-2">{article.excerpt}</p>
                   <a
                     href={article.link}
-                    className="text-primary font-medium hover:text-secondary transition-colors"
+                    className="text-primary text-sm font-medium hover:text-secondary transition-colors"
                   >
                     Read more →
                   </a>
@@ -110,3 +111,4 @@ return (
 };
 
 export default LatestArticles;
+
