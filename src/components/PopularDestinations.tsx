@@ -1,3 +1,4 @@
+
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useRef } from 'react';
 
@@ -74,7 +75,7 @@ const PopularDestinations = () => {
   return (
     <section className="py-16 bg-white relative">
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-bold text-center mb-12 font-inter bg-gradient-to-r from-[#FF512F] to-[#DD2476] bg-clip-text text-transparent">
+        <h2 className="text-3xl font-bold text-center mb-12 font-inter bg-gradient-to-r from-[#FC466B] to-[#3F5EFB] bg-clip-text text-transparent">
           Popular Destinations
         </h2>
         
