@@ -1,3 +1,4 @@
+
 import Header from '../components/Header';
 import VideoHero from '../components/VideoHero';
 import IntroSection from '../components/IntroSection';
@@ -6,7 +7,7 @@ import LifecycleCircle from '../components/LifecycleCircle';
 import Testimonials from '../components/Testimonials';
 import Associates from '../components/Associates';
 import PopularDestinations from '../components/PopularDestinations';
-import LatestArticles from '../components/LatestArticles';
+import UsefulInfo from '../components/LatestArticles';
 import FooterVideo from '../components/FooterVideo';
 import BottomNav from '../components/BottomNav';
 import SplashScreen from '../components/SplashScreen';
@@ -23,7 +24,7 @@ const Index = () => {
       <Testimonials />
       <Associates />
       <PopularDestinations />
-      <LatestArticles />
+      <UsefulInfo />
       <FooterVideo />
       <BottomNav />
     </div>

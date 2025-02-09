@@ -1,11 +1,22 @@
-
-import { useState } from "react";
-import { Menu, Home, Calculator, Newspaper, Building2, GraduationCap, UserRound, ShoppingCart, Route, Bot, Wrench, BookText, Headphones, ChevronDown, ChevronUp } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
+import { Menu, Home, Calculator, Newspaper, Building2, GraduationCap, UserRound, ShoppingCart, Route, Bot, BookText, Headphones } from "lucide-react";
 import TimeStrip from "./TimeStrip";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [expandedItems, setExpandedItems] = useState<string[]>([]);
+  const menuRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   const toggleItem = (label: string) => {
     setExpandedItems(prev => 
@@ -27,8 +38,7 @@ const Header = () => {
       subItems: [
         { icon: <Newspaper className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, label: 'Relocation News' },
         { icon: <BookText className="w-5 h-5 stroke-[1.5] text-[#517cc7]" />, label: 'Relocation Guides' },
-        { icon: <Calculator className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, label: 'Calculators' },
-        { icon: <Wrench className="w-5 h-5 stroke-[1.5] text-[#517cc7]" />, label: 'Tools' }
+        { icon: <Calculator className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, label: 'Calculators & Tools' }
       ]
     },
     { 
@@ -109,45 +119,46 @@ const Header = () => {
         </div>
       </div>
 
-      {/* Mobile menu */}
-      {isOpen && (
-        <div className="md:hidden bg-white border-t shadow-lg">
-          <nav className="px-2 py-1">
-            {mainNavItems.map((item, index) => (
-              <div key={index} className="py-1 border-b border-gray-100 last:border-0">
-                <button
-                  onClick={() => toggleItem(item.label)}
-                  className="flex items-center justify-between w-full px-2 py-1.5 text-gray-600 hover:text-primary transition-colors"
-                >
-                  <div className="flex items-center gap-2">
-                    {item.icon}
-                    <span className="text-sm">{item.label}</span>
-                  </div>
-                  {item.subItems.length > 0 && (
-                    expandedItems.includes(item.label) ? 
-                      <ChevronUp className="w-4 h-4" /> : 
-                      <ChevronDown className="w-4 h-4" />
+      <div ref={menuRef}>
+        {isOpen && (
+          <div className="md:hidden bg-white border-t shadow-lg">
+            <nav className="px-2 py-1">
+              {mainNavItems.map((item, index) => (
+                <div key={index} className="py-1 border-b border-gray-100 last:border-0">
+                  <button
+                    onClick={() => toggleItem(item.label)}
+                    className="flex items-center justify-between w-full px-2 py-1.5 text-gray-600 hover:text-primary transition-colors"
+                  >
+                    <div className="flex items-center gap-2">
+                      {item.icon}
+                      <span className="text-sm">{item.label}</span>
+                    </div>
+                    {item.subItems.length > 0 && (
+                      expandedItems.includes(item.label) ? 
+                        <ChevronUp className="w-4 h-4" /> : 
+                        <ChevronDown className="w-4 h-4" />
+                    )}
+                  </button>
+                  {item.subItems.length > 0 && expandedItems.includes(item.label) && (
+                    <div className="pl-6 mt-1 space-y-1 animate-accordion-down">
+                      {item.subItems.map((subItem, subIndex) => (
+                        <a
+                          key={subIndex}
+                          href="#"
+                          className="flex items-center gap-2 px-2 py-1 text-xs text-gray-600 hover:text-primary transition-colors"
+                        >
+                          {subItem.icon}
+                          <span>{subItem.label}</span>
+                        </a>
+                      ))}
+                    </div>
                   )}
-                </button>
-                {item.subItems.length > 0 && expandedItems.includes(item.label) && (
-                  <div className="pl-6 mt-1 space-y-1 animate-accordion-down">
-                    {item.subItems.map((subItem, subIndex) => (
-                      <a
-                        key={subIndex}
-                        href="#"
-                        className="flex items-center gap-2 px-2 py-1 text-xs text-gray-600 hover:text-primary transition-colors"
-                      >
-                        {subItem.icon}
-                        <span>{subItem.label}</span>
-                      </a>
-                    ))}
-                  </div>
-                )}
-              </div>
-            ))}
-          </nav>
-        </div>
-      )}
+                </div>
+              ))}
+            </nav>
+          </div>
+        )}
+      </div>
     </header>
   );
 };
