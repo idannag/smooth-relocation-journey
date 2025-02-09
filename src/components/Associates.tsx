@@ -23,7 +23,7 @@ const Associates = () => {
             initial={{ x: 0 }}
             animate={{ x: "-100%" }}
             transition={{
-              duration: 20,
+              duration: 15, // Reduced from 20 to 15 seconds
               repeat: Infinity,
               ease: "linear",
               repeatType: "loop",
