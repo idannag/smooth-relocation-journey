@@ -72,7 +72,7 @@ const BottomNav = () => {
               </button>
               
               {item.subItems.length > 0 && activeSection === item.label && (
-                <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-44 bg-white rounded-lg shadow-lg border animate-slide-down">
+                <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-44 bg-white rounded-lg shadow-lg border">
                   {item.subItems.map((subItem, subIndex) => (
                     <a
                       key={subIndex}
