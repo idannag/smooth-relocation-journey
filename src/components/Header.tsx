@@ -14,10 +14,12 @@ const Header = () => {
     },
     { 
       icon: <Calculator className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, 
-      label: 'Info',
+      label: 'Useful Info',
       subItems: [
-        { icon: <Calculator className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, label: 'Cost Calculator' },
-        { icon: <BookOpen className="w-5 h-5 stroke-[1.5] text-[#517cc7]" />, label: 'Useful Articles' }
+        { icon: <BookOpen className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, label: 'Relocation News' },
+        { icon: <BookOpen className="w-5 h-5 stroke-[1.5] text-[#517cc7]" />, label: 'Relocation Guides' },
+        { icon: <Calculator className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, label: 'Calculators' },
+        { icon: <Route className="w-5 h-5 stroke-[1.5] text-[#517cc7]" />, label: 'Tools' }
       ]
     },
     { 
@@ -34,7 +36,10 @@ const Header = () => {
       label: 'Client Area',
       subItems: [
         { icon: <Route className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, label: 'My Relocation' },
-        { icon: <Lock className="w-5 h-5 stroke-[1.5] text-[#517cc7]" />, label: 'Private Content' }
+        { icon: <Lock className="w-5 h-5 stroke-[1.5] text-[#517cc7]" />, label: 'My Orders' },
+        { icon: <Building2 className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, label: 'Jobs' },
+        { icon: <UserRound className="w-5 h-5 stroke-[1.5] text-[#517cc7]" />, label: 'Connections' },
+        { icon: <Headset className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, label: 'My AI Assistant' }
       ]
     }
   ];
@@ -58,14 +63,29 @@ const Header = () => {
           <div className="hidden md:flex items-center space-x-8">
             <nav className="flex items-center space-x-8">
               {mainNavItems.map((item, index) => (
-                <a 
-                  key={index}
-                  href="#" 
-                  className="text-gray-600 hover:text-primary transition-colors flex items-center gap-2"
-                >
-                  {item.icon}
-                  <span>{item.label}</span>
-                </a>
+                <div key={index} className="relative group">
+                  <a 
+                    href="#" 
+                    className="text-gray-600 hover:text-primary transition-colors flex items-center gap-2"
+                  >
+                    {item.icon}
+                    <span>{item.label}</span>
+                  </a>
+                  {item.subItems.length > 0 && (
+                    <div className="absolute left-0 mt-2 w-48 bg-white rounded-lg shadow-lg border hidden group-hover:block">
+                      {item.subItems.map((subItem, subIndex) => (
+                        <a
+                          key={subIndex}
+                          href="#"
+                          className="flex items-center gap-2 px-4 py-2 text-sm text-gray-600 hover:bg-gray-50 transition-colors"
+                        >
+                          {subItem.icon}
+                          <span>{subItem.label}</span>
+                        </a>
+                      ))}
+                    </div>
+                  )}
+                </div>
               ))}
             </nav>
           </div>
@@ -83,18 +103,20 @@ const Header = () => {
       {/* Mobile menu */}
       {isOpen && (
         <div className="md:hidden bg-white border-t shadow-lg">
-          <nav className="px-4 pt-2 pb-4 space-y-2">
+          <nav className="px-4 pt-2 pb-4">
             {mainNavItems.map((item, index) => (
-              <div key={index}>
-                <a
-                  href="#"
-                  className="flex items-center gap-2 px-3 py-2 text-gray-600 hover:text-primary transition-colors"
-                >
-                  {item.icon}
-                  <span>{item.label}</span>
-                </a>
+              <div key={index} className="py-2">
+                <div className="flex items-center justify-between px-3 py-2 text-gray-600 hover:text-primary transition-colors">
+                  <div className="flex items-center gap-2">
+                    {item.icon}
+                    <span>{item.label}</span>
+                  </div>
+                  {item.subItems.length > 0 && (
+                    <Menu className="w-5 h-5" />
+                  )}
+                </div>
                 {item.subItems.length > 0 && (
-                  <div className="pl-8 space-y-2">
+                  <div className="pl-8 mt-2 space-y-2">
                     {item.subItems.map((subItem, subIndex) => (
                       <a
                         key={subIndex}
