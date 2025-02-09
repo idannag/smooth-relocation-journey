@@ -18,11 +18,11 @@ const VideoHero = () => {
           We simplify your relocation journey.
         </h1>
         <div className="space-y-4 mb-12">
-          <ul className="list-none space-y-6">
-            <li className="text-lg md:text-xl lg:text-2xl animate-slide-up max-w-3xl px-6 py-3 flex items-center justify-center bg-gradient-to-r from-[#8B5CF6]/20 to-[#D946EF]/20 backdrop-blur-sm rounded-lg border border-white/10 shadow-lg hover:scale-105 transition-transform duration-300">
+          <ul className="list-none space-y-8">
+            <li className="text-lg md:text-xl lg:text-2xl animate-slide-up max-w-3xl px-6 flex items-center justify-center text-white/90 border-l-4 border-white/30 bg-gradient-to-r from-white/5 to-transparent backdrop-blur-[2px]">
               Expert guidance every step of the way
             </li>
-            <li className="text-lg md:text-xl lg:text-2xl animate-slide-up max-w-3xl px-6 py-3 flex items-center justify-center bg-gradient-to-r from-[#8B5CF6]/20 to-[#D946EF]/20 backdrop-blur-sm rounded-lg border border-white/10 shadow-lg hover:scale-105 transition-transform duration-300">
+            <li className="text-lg md:text-xl lg:text-2xl animate-slide-up max-w-3xl px-6 flex items-center justify-center text-white/90 border-l-4 border-white/30 bg-gradient-to-r from-white/5 to-transparent backdrop-blur-[2px]">
               Your tailored relocation starts here
             </li>
           </ul>
