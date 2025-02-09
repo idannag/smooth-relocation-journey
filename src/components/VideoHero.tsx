@@ -34,7 +34,7 @@ const VideoHero = () => {
 
   const isYouTubeVideo = currentVideo.includes('youtube.com');
 
-  const videoClassName = `absolute inset-0 w-full h-full object-cover ${isMobile ? 'h-screen' : ''}`;
+  const videoClassName = `absolute inset-0 w-full h-full ${isMobile ? 'object-cover' : 'object-cover'}`;
 
   return (
     <div className="relative h-[90vh] w-full overflow-hidden">
@@ -56,8 +56,8 @@ const VideoHero = () => {
           <source src={currentVideo} type="video/mp4" />
         </video>
       )}
-      <div className="absolute inset-0 bg-black/20" />
-      <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-secondary/20" />
+      <div className="absolute inset-0 backdrop-blur-[2px] bg-black/20" />
+      <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-secondary/20 backdrop-blur-[2px]" />
       <div className="relative h-full flex flex-col items-center justify-between text-white text-center px-2 max-w-4xl mx-auto pb-20">
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mt-32 animate-fade-in font-poppins text-white leading-normal">
           We simplify your relocation journey.
