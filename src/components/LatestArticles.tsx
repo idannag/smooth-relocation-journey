@@ -1,6 +1,6 @@
 
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const UsefulInfo = () => {
@@ -90,7 +90,7 @@ const UsefulInfo = () => {
               <p className="text-gray-600 text-sm mb-3 line-clamp-2">{article.excerpt}</p>
               <a
                 href={article.link}
-                className="text-primary text-sm font-medium hover:text-secondary transition-colors"
+                className="inline-flex items-center text-primary text-sm font-medium hover:text-secondary transition-colors"
               >
                 Read more →
               </a>
@@ -116,21 +116,36 @@ const UsefulInfo = () => {
         </h2>
         
         <Tabs defaultValue="news" className="w-full">
-          <TabsList className="flex justify-center mb-8">
-            <TabsTrigger value="news" className="px-4">Relocation News</TabsTrigger>
-            <TabsTrigger value="guides" className="px-4">Relocation Guides</TabsTrigger>
-            <TabsTrigger value="tools" className="px-4">Calculators & Tools</TabsTrigger>
+          <TabsList className="flex justify-center mb-8 bg-white/50 backdrop-blur-sm p-1 rounded-full mx-auto max-w-md">
+            <TabsTrigger 
+              value="news" 
+              className="px-6 py-2 rounded-full data-[state=active]:bg-primary data-[state=active]:text-white transition-all"
+            >
+              News
+            </TabsTrigger>
+            <TabsTrigger 
+              value="guides" 
+              className="px-6 py-2 rounded-full data-[state=active]:bg-primary data-[state=active]:text-white transition-all"
+            >
+              Guides
+            </TabsTrigger>
+            <TabsTrigger 
+              value="tools" 
+              className="px-6 py-2 rounded-full data-[state=active]:bg-primary data-[state=active]:text-white transition-all"
+            >
+              Tools
+            </TabsTrigger>
           </TabsList>
           
-          <TabsContent value="news">
+          <TabsContent value="news" className="animate-fade-in">
             {renderArticles(newsArticles)}
           </TabsContent>
           
-          <TabsContent value="guides">
+          <TabsContent value="guides" className="animate-fade-in">
             {renderArticles(guides)}
           </TabsContent>
           
-          <TabsContent value="tools">
+          <TabsContent value="tools" className="animate-fade-in">
             {renderArticles(tools)}
           </TabsContent>
         </Tabs>
