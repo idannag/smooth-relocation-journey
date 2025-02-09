@@ -11,7 +11,7 @@ const VideoHero = () => {
     "https://www.youtube.com/embed/E_S4iZ7TCXo",
     "https://www.youtube.com/embed/TP_hHMnyknk",
     "https://www.youtube.com/embed/AKXMkeib1zE",
-    "https://www.youtube.com/embed/YUdDGKnVZN4",
+    "https://www.youtube.com/embed/YUdDkKnVZN4",
     "https://www.youtube.com/embed/9pb7paEMbmo",
     "https://www.youtube.com/embed/kpoGrDy_ss8",
     "https://www.youtube.com/embed/8m3g3SlYs3k"
@@ -20,14 +20,14 @@ const VideoHero = () => {
   const [currentVideo, setCurrentVideo] = useState(videos[0]);
 
   useEffect(() => {
-    // Change video every 30 seconds
+    // Change video every 5 seconds to match video duration
     const interval = setInterval(() => {
       setCurrentVideo(prevVideo => {
         const currentIndex = videos.indexOf(prevVideo);
         const nextIndex = (currentIndex + 1) % videos.length;
         return videos[nextIndex];
       });
-    }, 30000);
+    }, 5000);
 
     return () => clearInterval(interval);
   }, []);
@@ -59,7 +59,7 @@ const VideoHero = () => {
       <div className="absolute inset-0 bg-black/20" />
       <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-secondary/20" />
       <div className="relative h-full flex flex-col items-center justify-between text-white text-center px-2 max-w-4xl mx-auto pb-20">
-        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mt-32 animate-fade-in font-poppins text-white leading-relaxed">
+        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mt-32 animate-fade-in font-poppins text-white leading-normal">
           We simplify your relocation journey.
         </h1>
         <div className="space-y-4 mb-12">
