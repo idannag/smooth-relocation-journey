@@ -1,13 +1,14 @@
+
 import { motion } from 'framer-motion';
 
 const Associates = () => {
   const logos = [
-    'https://images.unsplash.com/photo-1485827404703-89b55fcc595e',
-    'https://images.unsplash.com/photo-1581092795360-fd1ca04f0952',
-    'https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7',
-    'https://images.unsplash.com/photo-1605810230434-7631ac76ec81',
-    'https://images.unsplash.com/photo-1483058712412-4245e9b90334',
-    'https://images.unsplash.com/photo-1485827404703-89b55fcc595e',
+    '/lovable-uploads/8bb6d1ab-e2ff-4a43-b1ad-dd707702f069.png#0',  // Harmony Relocation Network
+    '/lovable-uploads/8bb6d1ab-e2ff-4a43-b1ad-dd707702f069.png#1',  // IAM
+    '/lovable-uploads/8bb6d1ab-e2ff-4a43-b1ad-dd707702f069.png#2',  // MN Department of Education
+    '/lovable-uploads/8bb6d1ab-e2ff-4a43-b1ad-dd707702f069.png#3',  // ISO
+    '/lovable-uploads/8bb6d1ab-e2ff-4a43-b1ad-dd707702f069.png#4',  // Worldwide ERC
+    '/lovable-uploads/8bb6d1ab-e2ff-4a43-b1ad-dd707702f069.png#5',  // FAIN
   ];
 
   return (
@@ -18,29 +19,22 @@ const Associates = () => {
         </h2>
         <div className="overflow-hidden">
           <motion.div
-            className="flex gap-8"
-            animate={{
-              x: [0, -1000],
-            }}
-            transition={{
-              x: {
-                repeat: Infinity,
-                repeatType: "loop",
-                duration: 20,
-                ease: "linear",
-              },
-            }}
+            className="flex gap-12 justify-center flex-wrap"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
           >
-            {[...logos, ...logos].map((logo, index) => (
+            {logos.map((logo, index) => (
               <motion.div
                 key={index}
-                className="flex-shrink-0 w-32 h-32 bg-gray-100 rounded-lg flex items-center justify-center overflow-hidden"
-                whileHover={{ scale: 1.1 }}
+                className="flex-shrink-0 w-48 h-24 bg-white rounded-lg flex items-center justify-center p-4"
+                whileHover={{ scale: 1.05 }}
+                transition={{ duration: 0.2 }}
               >
                 <img 
                   src={logo} 
                   alt={`Associate ${index + 1}`} 
-                  className="w-full h-full object-cover" 
+                  className="w-full h-full object-contain" 
                 />
               </motion.div>
             ))}
