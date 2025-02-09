@@ -13,58 +13,58 @@ const PopularDestinations = () => {
       description: "Discover relocation opportunities"
     },
     {
-      city: "Miami",
-      country: "USA",
+      city: "Berlin",
+      country: "Germany",
       video: "https://www.youtube.com/embed/Oxh_NsBqR1M",
-      description: "Discover relocation opportunities"
+      description: "Experience German culture"
     },
     {
-      city: "Los Angeles",
-      country: "USA",
+      city: "Barcelona",
+      country: "Spain",
       video: "https://www.youtube.com/embed/kK3uDGtR45A",
-      description: "Discover relocation opportunities"
+      description: "Live the Mediterranean lifestyle"
     },
     {
-      city: "New York",
-      country: "USA",
+      city: "Dubai",
+      country: "UAE",
       video: "https://www.youtube.com/embed/E_S4iZ7TCXo",
-      description: "Discover relocation opportunities"
+      description: "Embrace luxury living"
     },
     {
-      city: "San Francisco",
-      country: "USA",
+      city: "Toronto",
+      country: "Canada",
       video: "https://www.youtube.com/embed/TP_hHMnyknk",
-      description: "Discover relocation opportunities"
+      description: "Experience multicultural living"
     },
     {
-      city: "Chicago",
-      country: "USA",
+      city: "Greece",
+      country: "Greece",
       video: "https://www.youtube.com/embed/AKXMkeib1zE",
-      description: "Discover relocation opportunities"
+      description: "Discover ancient history"
     },
     {
-      city: "Washington DC",
-      country: "USA",
+      city: "London",
+      country: "UK",
       video: "https://www.youtube.com/embed/YUdDkKnVZN4",
-      description: "Discover relocation opportunities"
+      description: "Global opportunities await"
     },
     {
-      city: "Boston",
-      country: "USA",
+      city: "Tel Aviv",
+      country: "Israel",
       video: "https://www.youtube.com/embed/9pb7paEMbmo",
-      description: "Discover relocation opportunities"
+      description: "Innovation meets tradition"
     },
     {
-      city: "Seattle",
-      country: "USA",
+      city: "Paris",
+      country: "France",
       video: "https://www.youtube.com/embed/kpoGrDy_ss8",
-      description: "Discover relocation opportunities"
+      description: "Live the French lifestyle"
     },
     {
-      city: "Dallas",
-      country: "USA",
+      city: "Larnaca",
+      country: "Cyprus",
       video: "https://www.youtube.com/embed/8m3g3SlYs3k",
-      description: "Discover relocation opportunities"
+      description: "Mediterranean paradise"
     }
   ];
 
@@ -145,4 +145,3 @@ const PopularDestinations = () => {
 };
 
 export default PopularDestinations;
-

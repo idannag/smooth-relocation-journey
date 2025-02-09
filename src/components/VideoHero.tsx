@@ -32,17 +32,16 @@ const VideoHero = () => {
   }, []);
 
   const isYouTubeVideo = currentVideo.includes('youtube.com');
-
-  const videoClassName = `absolute inset-0 w-full ${isMobile ? 'h-screen' : 'h-full'} object-cover`;
+  const videoClassName = `absolute inset-0 w-[120%] h-[120%] ${isMobile ? '-top-[10%] -left-[10%]' : '-top-[10%] -left-[10%]'} pointer-events-none`;
 
   return (
     <div className="relative h-[90vh] w-full overflow-hidden">
       {isYouTubeVideo ? (
         <iframe
-          src={`${currentVideo}?autoplay=1&mute=1&loop=1&playlist=${currentVideo.split('/').pop()}&controls=0&modestbranding=1&showinfo=0&rel=0&enablejsapi=1`}
+          src={`${currentVideo}?autoplay=1&mute=1&loop=1&playlist=${currentVideo.split('/').pop()}&controls=0&modestbranding=1&showinfo=0&rel=0&enablejsapi=1&playsinline=1`}
           className={videoClassName}
           allow="autoplay; encrypted-media"
-          allowFullScreen
+          frameBorder="0"
         />
       ) : (
         <video
@@ -55,18 +54,18 @@ const VideoHero = () => {
           <source src={currentVideo} type="video/mp4" />
         </video>
       )}
-      <div className="absolute inset-0 backdrop-blur-[1px] bg-black/10" />
-      <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-secondary/20 backdrop-blur-[1px]" />
+      <div className="absolute inset-0 bg-black/5" />
+      <div className="absolute inset-0 bg-gradient-to-r from-primary/10 to-secondary/10" />
       <div className="relative h-full flex flex-col items-center justify-between text-white text-center px-2 max-w-4xl mx-auto pb-20">
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mt-32 animate-fade-in font-poppins text-white leading-normal">
           We simplify your relocation journey.
         </h1>
         <div className="space-y-4 mb-12">
           <ul className="list-none space-y-8">
-            <li className="text-lg md:text-xl lg:text-2xl animate-slide-up max-w-3xl px-6 flex items-center justify-center text-white/90 border-l-4 border-white/30">
+            <li className="text-lg md:text-xl lg:text-2xl animate-slide-up max-w-3xl px-6 flex items-center justify-center text-white/90">
               Expert guidance every step of the way
             </li>
-            <li className="text-lg md:text-xl lg:text-2xl animate-slide-up max-w-3xl px-6 flex items-center justify-center text-white/90 border-l-4 border-white/30">
+            <li className="text-lg md:text-xl lg:text-2xl animate-slide-up max-w-3xl px-6 flex items-center justify-center text-white/90">
               Your tailored relocation starts here
             </li>
           </ul>
