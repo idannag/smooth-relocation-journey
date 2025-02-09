@@ -1,3 +1,4 @@
+
 const VideoHero = () => {
   return (
     <div className="relative h-[90vh] w-full overflow-hidden">
@@ -17,9 +18,16 @@ const VideoHero = () => {
           We simplify your relocation journey.
         </h1>
         <div className="space-y-4 mt-4">
-          <p className="text-lg md:text-xl lg:text-2xl animate-slide-up max-w-3xl px-4 md:px-6">
-            With expert guidance every step of the way, your tailored relocation starts here.
-          </p>
+          <ul className="list-none space-y-4">
+            <li className="text-lg md:text-xl lg:text-2xl animate-slide-up max-w-3xl px-4 md:px-6 flex items-center justify-center">
+              <span className="inline-block w-2 h-2 bg-white rounded-full mr-3"></span>
+              Expert guidance every step of the way
+            </li>
+            <li className="text-lg md:text-xl lg:text-2xl animate-slide-up max-w-3xl px-4 md:px-6 flex items-center justify-center">
+              <span className="inline-block w-2 h-2 bg-white rounded-full mr-3"></span>
+              Your tailored relocation starts here
+            </li>
+          </ul>
         </div>
       </div>
     </div>

@@ -1,10 +1,18 @@
-
 import { useState } from "react";
-import { Menu, Home, Calculator, BookOpen, Building2, GraduationCap, UserRound, Lock, Route, Headset } from "lucide-react";
+import { Menu, Home, Calculator, Newspaper, Building2, GraduationCap, UserRound, ShoppingCart, Route, Robot, Wrench, ChevronDown, ChevronUp } from "lucide-react";
 import TimeStrip from "./TimeStrip";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [expandedItems, setExpandedItems] = useState<string[]>([]);
+
+  const toggleItem = (label: string) => {
+    setExpandedItems(prev => 
+      prev.includes(label) 
+        ? prev.filter(item => item !== label)
+        : [...prev, label]
+    );
+  };
 
   const mainNavItems = [
     { 
@@ -16,10 +24,10 @@ const Header = () => {
       icon: <Calculator className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, 
       label: 'Useful Info',
       subItems: [
-        { icon: <BookOpen className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, label: 'Relocation News' },
+        { icon: <Newspaper className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, label: 'Relocation News' },
         { icon: <BookOpen className="w-5 h-5 stroke-[1.5] text-[#517cc7]" />, label: 'Relocation Guides' },
         { icon: <Calculator className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, label: 'Calculators' },
-        { icon: <Route className="w-5 h-5 stroke-[1.5] text-[#517cc7]" />, label: 'Tools' }
+        { icon: <Wrench className="w-5 h-5 stroke-[1.5] text-[#517cc7]" />, label: 'Tools' }
       ]
     },
     { 
@@ -36,10 +44,10 @@ const Header = () => {
       label: 'Client Area',
       subItems: [
         { icon: <Route className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, label: 'My Relocation' },
-        { icon: <Lock className="w-5 h-5 stroke-[1.5] text-[#517cc7]" />, label: 'My Orders' },
+        { icon: <ShoppingCart className="w-5 h-5 stroke-[1.5] text-[#517cc7]" />, label: 'My Orders' },
         { icon: <Building2 className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, label: 'Jobs' },
         { icon: <UserRound className="w-5 h-5 stroke-[1.5] text-[#517cc7]" />, label: 'Connections' },
-        { icon: <Headset className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, label: 'My AI Assistant' }
+        { icon: <Robot className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, label: 'My AI Assistant' }
       ]
     }
   ];
@@ -105,18 +113,23 @@ const Header = () => {
         <div className="md:hidden bg-white border-t shadow-lg">
           <nav className="px-2 py-1">
             {mainNavItems.map((item, index) => (
-              <div key={index} className="py-1">
-                <div className="flex items-center justify-between px-2 py-1.5 text-gray-600 hover:text-primary transition-colors">
+              <div key={index} className="py-1 border-b border-gray-100 last:border-0">
+                <button
+                  onClick={() => toggleItem(item.label)}
+                  className="flex items-center justify-between w-full px-2 py-1.5 text-gray-600 hover:text-primary transition-colors"
+                >
                   <div className="flex items-center gap-2">
                     {item.icon}
                     <span className="text-sm">{item.label}</span>
                   </div>
                   {item.subItems.length > 0 && (
-                    <Menu className="w-4 h-4" />
+                    expandedItems.includes(item.label) ? 
+                      <ChevronUp className="w-4 h-4" /> : 
+                      <ChevronDown className="w-4 h-4" />
                   )}
-                </div>
-                {item.subItems.length > 0 && (
-                  <div className="pl-6 mt-1 space-y-1">
+                </button>
+                {item.subItems.length > 0 && expandedItems.includes(item.label) && (
+                  <div className="pl-6 mt-1 space-y-1 animate-accordion-down">
                     {item.subItems.map((subItem, subIndex) => (
                       <a
                         key={subIndex}
@@ -139,4 +152,3 @@ const Header = () => {
 };
 
 export default Header;
-
