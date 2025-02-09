@@ -111,7 +111,7 @@ const UsefulInfo = () => {
   return (
     <section className="py-16 bg-gradient-to-r from-blue-50 to-blue-100">
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-bold text-center mb-8 font-inter bg-gradient-to-r from-[#8E2DE2] to-[#4A00E0] bg-clip-text text-transparent">
+        <h2 className="text-3xl font-bold text-center mb-8 font-inter bg-gradient-to-r from-[#FC466B] to-[#3F5EFB] bg-clip-text text-transparent">
           Useful Info
         </h2>
         
@@ -155,3 +155,4 @@ const UsefulInfo = () => {
 };
 
 export default UsefulInfo;
+
