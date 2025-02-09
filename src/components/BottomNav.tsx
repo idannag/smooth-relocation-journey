@@ -1,3 +1,4 @@
+
 import { Home, Calculator, BookOpen, Building2, GraduationCap, UserRound, Lock, Route, Headset } from 'lucide-react';
 import { useState, useEffect, useRef } from 'react';
 
@@ -24,7 +25,7 @@ const BottomNav = () => {
     },
     { 
       icon: <Calculator className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, 
-      label: 'Info',
+      label: 'Useful Info',
       subItems: [
         { icon: <Calculator className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, label: 'Cost Calculator' },
         { icon: <BookOpen className="w-5 h-5 stroke-[1.5] text-[#517cc7]" />, label: 'Useful Articles' }
