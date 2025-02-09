@@ -7,57 +7,63 @@ const PopularDestinations = () => {
   
   const destinations = [
     {
-      city: "Berlin",
-      country: "Germany",
-      image: "https://images.unsplash.com/photo-1501854140801-50d01698950b",
+      city: "Brooklyn",
+      country: "USA",
+      video: "https://www.app.ocean-il.co.il/wp-content/uploads/2022/10/Brooklyn.m4v",
       description: "Discover relocation opportunities"
     },
     {
-      city: "Toronto",
-      country: "Canada",
-      image: "https://images.unsplash.com/photo-1426604966848-d7adac402bff",
+      city: "Miami",
+      country: "USA",
+      video: "https://www.youtube.com/embed/Oxh_NsBqR1M",
       description: "Discover relocation opportunities"
     },
     {
-      city: "Sydney",
-      country: "Australia",
-      image: "https://images.unsplash.com/photo-1433086966358-54859d0ed716",
+      city: "Los Angeles",
+      country: "USA",
+      video: "https://www.youtube.com/embed/kK3uDGtR45A",
       description: "Discover relocation opportunities"
     },
     {
-      city: "London",
-      country: "UK",
-      image: "https://images.unsplash.com/photo-1472396961693-142e6e269027",
+      city: "New York",
+      country: "USA",
+      video: "https://www.youtube.com/embed/E_S4iZ7TCXo",
       description: "Discover relocation opportunities"
     },
     {
-      city: "Singapore",
-      country: "Singapore",
-      image: "https://images.unsplash.com/photo-1615729947596-a598e5de0ab3",
+      city: "San Francisco",
+      country: "USA",
+      video: "https://www.youtube.com/embed/TP_hHMnyknk",
       description: "Discover relocation opportunities"
     },
     {
-      city: "Amsterdam",
-      country: "Netherlands",
-      image: "https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7",
+      city: "Chicago",
+      country: "USA",
+      video: "https://www.youtube.com/embed/AKXMkeib1zE",
       description: "Discover relocation opportunities"
     },
     {
-      city: "Tel Aviv",
-      country: "Israel",
-      image: "https://images.unsplash.com/photo-1544971587-b842c27f8e14",
+      city: "Washington DC",
+      country: "USA",
+      video: "https://www.youtube.com/embed/YUdDkKnVZN4",
       description: "Discover relocation opportunities"
     },
     {
-      city: "Dubai",
-      country: "UAE",
-      image: "https://images.unsplash.com/photo-1512453979798-5ea266f8880c",
+      city: "Boston",
+      country: "USA",
+      video: "https://www.youtube.com/embed/9pb7paEMbmo",
       description: "Discover relocation opportunities"
     },
     {
-      city: "Tokyo",
-      country: "Japan",
-      image: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf",
+      city: "Seattle",
+      country: "USA",
+      video: "https://www.youtube.com/embed/kpoGrDy_ss8",
+      description: "Discover relocation opportunities"
+    },
+    {
+      city: "Dallas",
+      country: "USA",
+      video: "https://www.youtube.com/embed/8m3g3SlYs3k",
       description: "Discover relocation opportunities"
     }
   ];
@@ -95,13 +101,26 @@ const PopularDestinations = () => {
             {destinations.map((destination, index) => (
               <div
                 key={index}
-                className="flex-none w-80 snap-center relative overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-all duration-300 animate-fade-in group/card"
+                className="flex-none w-80 h-64 snap-center relative overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-all duration-300 animate-fade-in group/card"
               >
-                <img
-                  src={destination.image}
-                  alt={destination.city}
-                  className="w-full h-64 object-cover transition-transform duration-300 group-hover/card:scale-110"
-                />
+                {destination.video.includes('youtube.com') ? (
+                  <iframe
+                    src={`${destination.video}?autoplay=1&mute=1&loop=1&playlist=${destination.video.split('/').pop()}&controls=0&modestbranding=1&showinfo=0&rel=0&enablejsapi=1`}
+                    className="w-full h-full object-cover"
+                    allow="autoplay; encrypted-media"
+                    allowFullScreen
+                  />
+                ) : (
+                  <video
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    className="w-full h-full object-cover"
+                  >
+                    <source src={destination.video} type="video/mp4" />
+                  </video>
+                )}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent">
                   <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
                     <h3 className="text-2xl font-bold mb-1">{destination.city}</h3>
