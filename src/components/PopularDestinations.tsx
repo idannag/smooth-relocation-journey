@@ -101,14 +101,14 @@ const PopularDestinations = () => {
             {destinations.map((destination, index) => (
               <div
                 key={index}
-                className="flex-none w-80 h-64 snap-center relative overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-all duration-300 animate-fade-in group/card"
+                className="flex-none w-80 h-48 snap-center relative overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-all duration-300 animate-fade-in group/card"
               >
                 {destination.video.includes('youtube.com') ? (
                   <iframe
-                    src={`${destination.video}?autoplay=1&mute=1&loop=1&playlist=${destination.video.split('/').pop()}&controls=0&modestbranding=1&showinfo=0&rel=0&enablejsapi=1`}
-                    className="w-full h-full object-cover"
+                    src={`${destination.video}?autoplay=1&mute=1&loop=1&playlist=${destination.video.split('/').pop()}&controls=0&modestbranding=1&showinfo=0&rel=0&enablejsapi=1&playsinline=1`}
+                    className="w-[120%] h-[120%] absolute -top-[10%] -left-[10%] pointer-events-none"
                     allow="autoplay; encrypted-media"
-                    allowFullScreen
+                    frameBorder="0"
                   />
                 ) : (
                   <video
@@ -145,3 +145,4 @@ const PopularDestinations = () => {
 };
 
 export default PopularDestinations;
+
