@@ -44,13 +44,6 @@ const Statistics = () => {
         </h2>
         
         <div className="relative group max-w-4xl mx-auto">
-          <button
-            onClick={() => scroll('left')}
-            className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white/80 rounded-full p-2 shadow-lg opacity-0 group-hover:opacity-100 transition-opacity"
-          >
-            <ChevronLeft className="w-6 h-6 text-primary" />
-          </button>
-          
           <div
             ref={scrollRef}
             className="flex overflow-x-auto gap-4 pb-4 snap-x snap-mandatory scrollbar-hide justify-center"
@@ -77,13 +70,6 @@ const Statistics = () => {
               </div>
             ))}
           </div>
-          
-          <button
-            onClick={() => scroll('right')}
-            className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white/80 rounded-full p-2 shadow-lg opacity-0 group-hover:opacity-100 transition-opacity"
-          >
-            <ChevronRight className="w-6 h-6 text-primary" />
-          </button>
         </div>
       </div>
     </section>
@@ -91,4 +77,3 @@ const Statistics = () => {
 };
 
 export default Statistics;
-
