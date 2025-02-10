@@ -149,10 +149,27 @@ const UsefulInfo = () => {
             {renderArticles(tools)}
           </TabsContent>
         </Tabs>
+
+        <div className="mt-12 text-center">
+          <button
+            onClick={() => {
+              if ('Notification' in window) {
+                Notification.requestPermission().then(function(permission) {
+                  if (permission === "granted") {
+                    // Here you would typically register the device with your push notification service
+                    console.log("Push notification permission granted");
+                  }
+                });
+              }
+            }}
+            className="inline-flex items-center px-6 py-3 bg-primary text-white rounded-full hover:bg-primary/90 transition-colors duration-200 shadow-lg hover:shadow-xl"
+          >
+            <span>Subscribe for New Content Alerts</span>
+          </button>
+        </div>
       </div>
     </section>
   );
 };
 
 export default UsefulInfo;
-

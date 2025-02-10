@@ -1,81 +1,119 @@
-import { Quote, ChevronLeft, ChevronRight } from 'lucide-react';
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
 
-const testimonials = [
-  {
-    text: "The relocation process was seamless thanks to the amazing support.",
-    author: "Sarah Johnson",
-    route: "USA to Germany"
-  },
-  {
-    text: "Professional guidance made our transition incredibly smooth.",
-    author: "Michael Chen",
-    route: "China to Canada"
-  },
-  {
-    text: "Couldn't have managed this big move without their expertise.",
-    author: "Emma Williams",
-    route: "UK to Australia"
-  },
-  {
-    text: "Their local knowledge was invaluable for our family's transition.",
-    author: "David Martinez",
-    route: "Spain to France"
-  },
-  {
-    text: "Outstanding support throughout the entire relocation journey.",
-    author: "Sophie Anderson",
-    route: "Sweden to Japan"
-  },
-  {
-    text: "They made a complex process feel simple and manageable.",
-    author: "James Wilson",
-    route: "Canada to Singapore"
-  }
-];
+import { useEffect, useState } from 'react';
 
 const Testimonials = () => {
+  const [reviews, setReviews] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchGoogleReviews = async () => {
+      try {
+        // Note: This is a placeholder - in reality, you would need to use Google Places API
+        // through a backend service since we can't expose API keys in frontend
+        const dummyReviews = [
+          {
+            author_name: "Sarah L.",
+            rating: 5,
+            relative_time_description: "2 months ago",
+            text: "Ocean International - Israel made our relocation smooth and stress-free. Their team was professional and attentive throughout the entire process.",
+            profile_photo_url: "https://images.unsplash.com/photo-1494790108377-be9c29b29330"
+          },
+          {
+            author_name: "David K.",
+            rating: 5,
+            relative_time_description: "a month ago",
+            text: "Excellent service! The team at Ocean helped us navigate all the complexities of international relocation with expertise and care.",
+            profile_photo_url: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d"
+          },
+          {
+            author_name: "Rachel M.",
+            rating: 5,
+            relative_time_description: "3 months ago",
+            text: "Outstanding support from start to finish. They really understand the challenges of relocating and provide comprehensive solutions.",
+            profile_photo_url: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80"
+          }
+        ];
+        setReviews(dummyReviews);
+        setLoading(false);
+      } catch (err) {
+        setError('Failed to load reviews');
+        setLoading(false);
+      }
+    };
+
+    fetchGoogleReviews();
+  }, []);
+
+  if (loading) {
+    return (
+      <section className="py-16 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <div className="animate-pulse flex flex-col items-center">
+            <div className="h-8 bg-gray-200 rounded w-64 mb-8"></div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-6xl">
+              {[1, 2, 3].map((i) => (
+                <div key={i} className="bg-white p-6 rounded-lg shadow h-48"></div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  if (error) {
+    return (
+      <section className="py-16 bg-gray-50">
+        <div className="container mx-auto px-4 text-center text-red-500">
+          {error}
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section className="py-16 bg-gray-50">
       <div className="container mx-auto px-4">
         <h2 className="text-3xl font-bold text-center mb-12 font-inter bg-gradient-to-r from-[#8B5CF6] via-[#D946EF] to-[#F97316] bg-clip-text text-transparent">
-          Client Stories
+          What Our Clients Say
         </h2>
-        <div className="relative group max-w-6xl mx-auto px-6">
-          <Carousel
-            opts={{
-              align: "start",
-              loop: true,
-            }}
-            className="w-full"
-          >
-            <CarouselContent className="-ml-2 md:-ml-4">
-              {testimonials.map((testimonial, index) => (
-                <CarouselItem key={index} className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3">
-                  <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 animate-fade-in h-full flex flex-col items-center text-center">
-                    <Quote className="w-8 h-8 text-primary mb-4" />
-                    <p className="text-gray-700 mb-4">{testimonial.text}</p>
-                    <div className="border-t pt-4 w-full flex flex-col items-center">
-                      <p className="font-semibold">{testimonial.author}</p>
-                      <p className="text-sm text-gray-500">{testimonial.route}</p>
-                    </div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+          {reviews.map((review, index) => (
+            <div key={index} className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+              <div className="flex items-center mb-4">
+                <img
+                  src={review.profile_photo_url}
+                  alt={review.author_name}
+                  className="w-12 h-12 rounded-full object-cover"
+                />
+                <div className="ml-4">
+                  <h3 className="font-semibold">{review.author_name}</h3>
+                  <div className="flex items-center">
+                    {Array.from({ length: review.rating }).map((_, i) => (
+                      <svg key={i} className="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                      </svg>
+                    ))}
                   </div>
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-            <CarouselPrevious className="absolute -left-4 top-1/2 transform -translate-y-1/2 bg-white/80 border-none hover:bg-white/90 transition-all">
-              <ChevronLeft className="h-4 w-4" />
-            </CarouselPrevious>
-            <CarouselNext className="absolute -right-4 top-1/2 transform -translate-y-1/2 bg-white/80 border-none hover:bg-white/90 transition-all">
-              <ChevronRight className="h-4 w-4" />
-            </CarouselNext>
-          </Carousel>
+                </div>
+              </div>
+              <p className="text-gray-700 mb-2">{review.text}</p>
+              <p className="text-sm text-gray-500">{review.relative_time_description}</p>
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-8 text-center">
+          <a 
+            href="https://maps.app.goo.gl/3DkAx4B6kb8Q1B9J7" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="inline-flex items-center text-primary hover:text-primary/80 transition-colors"
+          >
+            View all reviews on Google Maps →
+          </a>
         </div>
       </div>
     </section>
