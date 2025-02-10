@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Home, Sofa, School, Truck, Wallet, Briefcase, FileText, UserSquare2 } from 'lucide-react';
@@ -26,8 +27,8 @@ const LifecycleCircle = () => {
           <p className="mt-4 text-lg text-gray-600">Every relocatee is unique and requires a set of solutions.</p>
         </div>
         <div className="relative w-full aspect-square max-w-3xl mx-auto">
-          {/* Center content */}
-          <div className="absolute inset-[20%] rounded-full bg-[#1e3a8a] bg-opacity-90 flex items-center justify-center text-white p-8 text-center">
+          {/* Center content - reduced size using inset-[30%] for desktop and inset-[25%] for mobile */}
+          <div className="absolute inset-[25%] md:inset-[30%] rounded-full bg-[#1e3a8a] bg-opacity-90 flex items-center justify-center text-white p-4 md:p-6 text-center">
             <p className="text-[10px] md:text-xs">
               Having trouble deciding what personal items to send abroad? Knowing all of your options in advance will help you build the shipping package that suits your needs.
             </p>
