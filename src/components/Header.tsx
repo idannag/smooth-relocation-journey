@@ -97,7 +97,7 @@ const Header = () => {
                     <span>{item.label}</span>
                   </a>
                   {item.subItems.length > 0 && (
-                    <div className="absolute left-0 mt-2 w-56 bg-white rounded-lg shadow-lg border hidden group-hover:block">
+                    <div className="absolute left-0 mt-2 w-64 bg-white rounded-lg shadow-lg border hidden group-hover:block">
                       {item.subItems.map((subItem, subIndex) => (
                         <a
                           key={subIndex}
@@ -171,3 +171,4 @@ const Header = () => {
 };
 
 export default Header;
+

@@ -25,8 +25,7 @@ const TimeStrip = () => {
         const time = new Date().toLocaleTimeString('en-US', {
           timeZone: getTimeZone(city.name),
           hour: '2-digit',
-          minute: '2-digit',
-          second: '2-digit'
+          minute: '2-digit'
         });
         newTimes[city.name] = time;
       });
@@ -74,7 +73,7 @@ const TimeStrip = () => {
         }`}
       >
         <Clock className="w-3 h-3" />
-        <span className="text-lg mr-1" style={{ fontFamily: 'apple color emoji,segoe ui emoji,noto color emoji,android emoji,emojisymbols,emojione mozilla,twemoji mozilla,segoe ui symbol' }}>
+        <span className="text-lg mr-1" style={{ fontFamily: '"Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji", "Apple Color Emoji", "EmojiSymbols"' }}>
           {currentCity.flag}
         </span>
         <span className="font-bold">{currentCity.name}:</span>
@@ -85,3 +84,4 @@ const TimeStrip = () => {
 };
 
 export default TimeStrip;
+

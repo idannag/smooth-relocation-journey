@@ -1,3 +1,4 @@
+
 import { useEffect, useState, useRef } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
@@ -29,8 +30,22 @@ const Testimonials = () => {
             author_name: "Rachel M.",
             rating: 5,
             relative_time_description: "3 months ago",
-            text: "Outstanding support from start to finish. They really understand the challenges of relocating and provide comprehensive solutions.",
+            text: "Outstanding support from start to finish. They really understand the challenges of relocating.",
             profile_photo_url: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80"
+          },
+          {
+            author_name: "Michael P.",
+            rating: 5,
+            relative_time_description: "1 month ago",
+            text: "Professional team that goes above and beyond. Made our transition to Israel seamless.",
+            profile_photo_url: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e"
+          },
+          {
+            author_name: "Emma W.",
+            rating: 5,
+            relative_time_description: "2 weeks ago",
+            text: "Incredible service and support throughout our entire relocation journey.",
+            profile_photo_url: "https://images.unsplash.com/photo-1544005313-94ddf0286df2"
           }
         ];
         setReviews(dummyReviews);
@@ -84,14 +99,15 @@ const Testimonials = () => {
   return (
     <section className="py-16 bg-gray-50">
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-center mb-8">
-          <h2 className="text-3xl font-bold text-center font-inter bg-gradient-to-r from-[#8B5CF6] via-[#D946EF] to-[#F97316] bg-clip-text text-transparent">
-            What Our Clients Say
-          </h2>
+        <h2 className="text-3xl font-bold text-center mb-4 font-inter bg-gradient-to-r from-[#8B5CF6] via-[#D946EF] to-[#F97316] bg-clip-text text-transparent">
+          What Our Clients Say
+        </h2>
+        
+        <div className="flex justify-center mb-8">
           <img 
             src="https://i0.wp.com/www.skitsolutionbd.com/wp-content/uploads/2019/05/verified-customer-Google-reviews.png" 
             alt="Google Reviews" 
-            className="h-12 w-auto ml-4"
+            className="h-12 w-auto"
           />
         </div>
         
@@ -105,28 +121,28 @@ const Testimonials = () => {
           
           <div
             ref={scrollRef}
-            className="flex overflow-x-auto gap-6 pb-4 snap-x snap-mandatory scrollbar-hide"
+            className="flex overflow-x-auto gap-4 pb-4 snap-x snap-mandatory scrollbar-hide"
             style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
           >
             {reviews.map((review, index) => (
               <div 
                 key={index} 
-                className="flex-none w-80 snap-center bg-white p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 animate-fade-in"
+                className="flex-none w-72 snap-center bg-white p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 animate-fade-in"
                 style={{
                   animation: `slide-up 0.5s ease-out ${index * 0.1}s both`
                 }}
               >
-                <div className="flex items-center mb-3">
+                <div className="flex items-center mb-2">
                   <img
                     src={review.profile_photo_url}
                     alt={review.author_name}
-                    className="w-10 h-10 rounded-full object-cover"
+                    className="w-8 h-8 rounded-full object-cover"
                   />
-                  <div className="ml-3">
+                  <div className="ml-2">
                     <h3 className="font-semibold text-sm">{review.author_name}</h3>
                     <div className="flex items-center">
                       {Array.from({ length: review.rating }).map((_, i) => (
-                        <svg key={i} className="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                        <svg key={i} className="w-3 h-3 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
                           <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                         </svg>
                       ))}
@@ -163,3 +179,4 @@ const Testimonials = () => {
 };
 
 export default Testimonials;
+

@@ -61,3 +61,4 @@ const CurrencyStrip = () => {
 };
 
 export default CurrencyStrip;
+
