@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { Menu, Home, Calculator, Newspaper, Building2, GraduationCap, UserRound, ShoppingCart, Route, Bot, BookText, Headphones, ChevronDown, ChevronUp } from "lucide-react";
 import TimeStrip from "./TimeStrip";
+import CurrencyStrip from "./CurrencyStrip";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -77,7 +78,10 @@ const Header = () => {
             </a>
           </div>
 
-          <TimeStrip />
+          <div className="flex items-center space-x-4">
+            <TimeStrip />
+            <CurrencyStrip />
+          </div>
 
           <div className="hidden md:flex items-center space-x-8">
             <nav className="flex items-center space-x-8">

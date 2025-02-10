@@ -1,5 +1,4 @@
-
-import { Home, Calculator, Newspaper, Building2, GraduationCap, UserRound, ShoppingCart, Route, Bot, Wrench, BookText, Headphones } from 'lucide-react';
+import { Home, Calculator, Newspaper, Building2, GraduationCap, UserRound, ShoppingCart, Route, Bot, Wrench, BookText, Headphones, Video, Briefcase, MessageSquare } from 'lucide-react';
 import { useState, useEffect, useRef } from 'react';
 
 const BottomNav = () => {
@@ -29,8 +28,7 @@ const BottomNav = () => {
       subItems: [
         { icon: <Newspaper className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, label: 'Relocation News' },
         { icon: <BookText className="w-5 h-5 stroke-[1.5] text-[#517cc7]" />, label: 'Relocation Guides' },
-        { icon: <Calculator className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, label: 'Calculators' },
-        { icon: <Wrench className="w-5 h-5 stroke-[1.5] text-[#517cc7]" />, label: 'Tools' }
+        { icon: <Calculator className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, label: 'Calculators & Tools' }
       ]
     },
     { 
@@ -47,9 +45,9 @@ const BottomNav = () => {
       label: 'Client Area',
       subItems: [
         { icon: <Route className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, label: 'My Relocation' },
-        { icon: <ShoppingCart className="w-5 h-5 stroke-[1.5] text-[#517cc7]" />, label: 'My Orders' },
-        { icon: <Building2 className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, label: 'Jobs' },
-        { icon: <UserRound className="w-5 h-5 stroke-[1.5] text-[#517cc7]" />, label: 'Connections' },
+        { icon: <Video className="w-5 h-5 stroke-[1.5] text-[#517cc7]" />, label: 'Relocation VOD' },
+        { icon: <Briefcase className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, label: 'Jobs' },
+        { icon: <MessageSquare className="w-5 h-5 stroke-[1.5] text-[#517cc7]" />, label: 'Community' },
         { icon: <Bot className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, label: 'My AI Assistant' }
       ]
     }
