@@ -47,14 +47,13 @@ const CurrencyStrip = () => {
   const currentCurrency = currencies[currentIndex];
 
   return (
-    <div className="flex items-center space-x-2 text-xs text-gray-600">
+    <div className="flex items-center ml-4 pl-4 border-l border-gray-300">
       <div 
         className={`flex items-center space-x-1 whitespace-nowrap transition-all duration-500 transform ${
           isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-2'
         }`}
       >
         <DollarSign className="w-3 h-3" />
-        <span className="font-semibold">1 = </span>
         <span className="font-bold">{currentCurrency.symbol}{rates[currentCurrency.code]?.toFixed(2)}</span>
       </div>
     </div>

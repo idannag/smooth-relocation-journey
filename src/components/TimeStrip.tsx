@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { Clock } from 'lucide-react';
 
@@ -72,12 +73,12 @@ const TimeStrip = () => {
           isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-2'
         }`}
       >
-        <Clock className="w-3 h-3 animate-pulse" />
+        <Clock className="w-3 h-3" />
         <span className="text-lg mr-1" style={{ fontFamily: 'apple color emoji,segoe ui emoji,noto color emoji,android emoji,emojisymbols,emojione mozilla,twemoji mozilla,segoe ui symbol' }}>
           {currentCity.flag}
         </span>
-        <span className="font-semibold animate-fade-in">Now in {currentCity.name}:</span>
-        <span className="font-bold animate-fade-in">{times[currentCity.name]}</span>
+        <span className="font-bold">{currentCity.name}:</span>
+        <span className="font-bold">{times[currentCity.name]}</span>
       </div>
     </div>
   );

@@ -80,7 +80,7 @@ const Header = () => {
             </a>
           </div>
 
-          <div className="flex flex-col items-end">
+          <div className="flex items-center space-x-1">
             <TimeStrip />
             <CurrencyStrip />
           </div>
@@ -97,12 +97,12 @@ const Header = () => {
                     <span>{item.label}</span>
                   </a>
                   {item.subItems.length > 0 && (
-                    <div className="absolute left-0 mt-2 w-48 bg-white rounded-lg shadow-lg border hidden group-hover:block">
+                    <div className="absolute left-0 mt-2 w-56 bg-white rounded-lg shadow-lg border hidden group-hover:block">
                       {item.subItems.map((subItem, subIndex) => (
                         <a
                           key={subIndex}
                           href="#"
-                          className="flex items-center gap-2 px-3 py-1.5 text-sm text-gray-600 hover:bg-gray-50 transition-colors"
+                          className="flex items-center gap-2 px-4 py-2 text-sm text-gray-600 hover:bg-gray-50 transition-colors whitespace-nowrap"
                         >
                           {subItem.icon}
                           <span>{subItem.label}</span>

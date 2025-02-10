@@ -20,6 +20,24 @@ const statistics = [
     topText: "Guiding over",
     number: "2,500",
     bottomText: "Relocations a year"
+  },
+  {
+    icon: Globe,
+    topText: "Supporting",
+    number: "50+",
+    bottomText: "New Destinations"
+  },
+  {
+    icon: Users,
+    topText: "Providing",
+    number: "100+",
+    bottomText: "Relocation Guides"
+  },
+  {
+    icon: Clock,
+    topText: "Offering",
+    number: "25+",
+    bottomText: "Useful Tools"
   }
 ];
 
@@ -43,7 +61,7 @@ const Statistics = () => {
           We Are
         </h2>
         
-        <div className="relative group">
+        <div className="relative group max-w-6xl mx-auto">
           <button
             onClick={() => scroll('left')}
             className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white/80 rounded-full p-2 shadow-lg opacity-0 group-hover:opacity-100 transition-opacity"
@@ -53,7 +71,7 @@ const Statistics = () => {
           
           <div
             ref={scrollRef}
-            className="flex overflow-x-auto gap-6 pb-4 snap-x snap-mandatory scrollbar-hide"
+            className="flex overflow-x-auto gap-6 pb-4 snap-x snap-mandatory scrollbar-hide justify-center"
             style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
           >
             {statistics.map((stat, index) => (
@@ -62,8 +80,8 @@ const Statistics = () => {
                 className="flex-none w-72 snap-center bg-gradient-to-br from-white via-blue-50 to-white p-6 rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.06)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.12)] transition-all duration-500 animate-fade-in group/stat"
               >
                 <div className="relative mb-4">
-                  <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent rounded-full transform scale-150 opacity-0 group-hover/stat:opacity-100 transition-all duration-500" />
-                  <stat.icon className="w-10 h-10 mx-auto text-primary transform group-hover/stat:scale-110 transition-transform duration-500" />
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent rounded-full transform scale-110 opacity-0 group-hover/stat:opacity-100 transition-all duration-500" />
+                  <stat.icon className="w-8 h-8 mx-auto text-primary transform group-hover/stat:scale-110 transition-transform duration-500" />
                 </div>
                 <div className="text-center space-y-1">
                   <p className="text-gray-600 text-sm">{stat.topText}</p>
@@ -91,4 +109,3 @@ const Statistics = () => {
 };
 
 export default Statistics;
-
