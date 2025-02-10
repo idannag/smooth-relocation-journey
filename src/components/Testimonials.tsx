@@ -8,8 +8,6 @@ const Testimonials = () => {
   useEffect(() => {
     const fetchGoogleReviews = async () => {
       try {
-        // Note: This is a placeholder - in reality, you would need to use Google Places API
-        // through a backend service since we can't expose API keys in frontend
         const dummyReviews = [
           {
             author_name: "Sarah L.",
@@ -79,9 +77,9 @@ const Testimonials = () => {
             What Our Clients Say
           </h2>
           <img 
-            src="https://www.gstatic.com/images/branding/product/2x/google_maps_96dp.png" 
-            alt="Google Maps" 
-            className="h-8 w-auto"
+            src="https://i0.wp.com/www.skitsolutionbd.com/wp-content/uploads/2019/05/verified-customer-Google-reviews.png" 
+            alt="Google Reviews" 
+            className="h-12 w-auto"
           />
           <div className="flex items-center">
             <div className="flex items-center">

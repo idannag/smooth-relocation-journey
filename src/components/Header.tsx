@@ -1,6 +1,8 @@
+
 import { useState, useEffect, useRef } from "react";
-import { Menu, Home, Calculator, Newspaper, Building2, GraduationCap, UserRound, ShoppingCart, Route, Bot, BookText, Headphones, ChevronDown, ChevronUp, Globe, Play } from "lucide-react";
+import { Menu, Home, Calculator, Newspaper, Building2, GraduationCap, UserRound, ShoppingCart, Route, Bot, BookText, Headphones, Globe, Play, ChevronDown, ChevronUp } from "lucide-react";
 import TimeStrip from "./TimeStrip";
+import CurrencyStrip from "./CurrencyStrip";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -56,9 +58,9 @@ const Header = () => {
       subItems: [
         { icon: <Route className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, label: 'My Relocation' },
         { icon: <ShoppingCart className="w-5 h-5 stroke-[1.5] text-[#517cc7]" />, label: 'My Orders' },
-        { icon: <Globe className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, label: 'Online Jobs 24/7' },
+        { icon: <Globe className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, label: 'Online Jobs' },
         { icon: <UserRound className="w-5 h-5 stroke-[1.5] text-[#517cc7]" />, label: 'Connections' },
-        { icon: <Bot className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, label: 'My AI Assistant' },
+        { icon: <Bot className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, label: 'My AI Assistant 24/7' },
         { icon: <Play className="w-5 h-5 stroke-[1.5] text-[#517cc7]" />, label: 'Relocation VOD' }
       ]
     }
@@ -78,7 +80,10 @@ const Header = () => {
             </a>
           </div>
 
-          <TimeStrip />
+          <div className="flex flex-col items-end">
+            <TimeStrip />
+            <CurrencyStrip />
+          </div>
 
           <div className="hidden md:flex items-center space-x-8">
             <nav className="flex items-center space-x-8">
@@ -120,6 +125,7 @@ const Header = () => {
         </div>
       </div>
 
+      {/* Mobile menu */}
       <div ref={menuRef}>
         {isOpen && (
           <div className="md:hidden bg-white border-t shadow-lg">

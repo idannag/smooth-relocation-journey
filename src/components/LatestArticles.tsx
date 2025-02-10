@@ -160,9 +160,9 @@ const UsefulInfo = () => {
                 });
               }
             }}
-            className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] text-white rounded-full hover:from-[#7C3AED] hover:to-[#C026D3] transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 animate-pulse"
+            className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] text-white rounded-full hover:from-[#7C3AED] hover:to-[#C026D3] transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 hover:animate-pulse"
           >
-            <Bell className="w-5 h-5 mr-2 animate-bounce" />
+            <Bell className="w-5 h-5 mr-2" />
             <span className="font-semibold">Get Instant Updates on New Content!</span>
           </button>
         </div>

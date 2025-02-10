@@ -17,7 +17,6 @@ const CurrencyStrip = () => {
 
   useEffect(() => {
     const fetchRates = async () => {
-      // In production, this should use a real API with your backend
       const mockRates = {
         EUR: 0.92,
         GBP: 0.79,
@@ -29,7 +28,7 @@ const CurrencyStrip = () => {
     };
 
     fetchRates();
-    const rateInterval = setInterval(fetchRates, 60000); // Update every minute
+    const rateInterval = setInterval(fetchRates, 60000);
 
     const cycleInterval = setInterval(() => {
       setIsVisible(false);
@@ -48,15 +47,15 @@ const CurrencyStrip = () => {
   const currentCurrency = currencies[currentIndex];
 
   return (
-    <div className="flex items-center space-x-2 text-xs text-gray-600 mt-1">
+    <div className="flex items-center space-x-2 text-xs text-gray-600">
       <div 
         className={`flex items-center space-x-1 whitespace-nowrap transition-all duration-500 transform ${
           isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-2'
         }`}
       >
-        <DollarSign className="w-3 h-3 animate-pulse" />
-        <span className="font-semibold">1 USD = </span>
-        <span className="font-bold">{currentCurrency.symbol}{rates[currentCurrency.code]?.toFixed(2)} {currentCurrency.code}</span>
+        <DollarSign className="w-3 h-3" />
+        <span className="font-semibold">1 = </span>
+        <span className="font-bold">{currentCurrency.symbol}{rates[currentCurrency.code]?.toFixed(2)}</span>
       </div>
     </div>
   );
