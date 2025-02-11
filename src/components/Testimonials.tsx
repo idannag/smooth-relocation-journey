@@ -1,4 +1,3 @@
-
 import { useEffect, useState, useRef } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
@@ -105,7 +104,7 @@ const Testimonials = () => {
         
         <div className="flex justify-center mb-8">
           <img 
-            src="https://i0.wp.com/www.skitsolutionbd.com/wp-content/uploads/2019/05/verified-customer-Google-reviews.png" 
+            src="/lovable-uploads/7fc61af8-ea7f-4585-8f82-c8a61f99c608.png" 
             alt="Google Reviews" 
             className="h-12 w-auto"
           />
@@ -179,4 +178,3 @@ const Testimonials = () => {
 };
 
 export default Testimonials;
-
