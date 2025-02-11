@@ -59,6 +59,21 @@ const SplashScreen = () => {
               />
             </video>
           </motion.div>
+          <div className="absolute inset-0 flex flex-col items-center justify-center">
+            <img 
+              src="https://www.app.ocean-il.co.il/wp-content/uploads/2022/04/cropped-logo.jpg"
+              alt="Ocean IL Logo"
+              className="w-32 h-32 object-contain mb-4"
+            />
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="text-white text-xl font-semibold"
+              style={{ textShadow: '2px 2px 4px rgba(0, 0, 0, 0.9)' }}
+            >
+              Loading...
+            </motion.p>
+          </div>
         </motion.div>
       )}
     </AnimatePresence>

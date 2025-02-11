@@ -6,6 +6,7 @@ import CurrencyStrip from "./CurrencyStrip";
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [expandedItems, setExpandedItems] = useState<string[]>([]);
+  const [showLightbox, setShowLightbox] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -25,6 +26,11 @@ const Header = () => {
         ? prev.filter(item => item !== label)
         : [...prev, label]
     );
+  };
+
+  const handleMyRelocationClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setShowLightbox(true);
   };
 
   const mainNavItems = [
@@ -55,7 +61,11 @@ const Header = () => {
       icon: <UserRound className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, 
       label: 'Client Area',
       subItems: [
-        { icon: <Route className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, label: 'My Relocation' },
+        { 
+          icon: <Route className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, 
+          label: 'My Relocation',
+          onClick: handleMyRelocationClick 
+        },
         { icon: <ShoppingCart className="w-5 h-5 stroke-[1.5] text-[#517cc7]" />, label: 'My Orders' },
         { icon: <Globe className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, label: 'Online Jobs' },
         { icon: <UserRound className="w-5 h-5 stroke-[1.5] text-[#517cc7]" />, label: 'Connections' },
@@ -66,106 +76,141 @@ const Header = () => {
   ];
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-white shadow-lg">
-      <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-16">
-          <div className="flex items-center gap-2">
-            <a href="/" className="flex items-center">
-              <img 
-                src="https://www.app.ocean-il.co.il/wp-content/uploads/2022/04/cropped-logo.jpg" 
-                alt="Ocean IL Logo" 
-                className="h-8 w-auto"
-              />
-            </a>
-          </div>
+    <>
+      <header className="fixed top-0 left-0 right-0 z-50 bg-white shadow-lg">
+        <div className="container mx-auto px-4">
+          <div className="flex items-center justify-between h-16">
+            <div className="flex items-center gap-2">
+              <a href="/" className="flex items-center">
+                <img 
+                  src="https://www.app.ocean-il.co.il/wp-content/uploads/2022/04/cropped-logo.jpg" 
+                  alt="Ocean IL Logo" 
+                  className="h-8 w-auto"
+                />
+              </a>
+            </div>
 
-          <div className="flex items-center space-x-1">
-            <TimeStrip />
-            <CurrencyStrip />
-          </div>
+            <div className="flex items-center space-x-1">
+              <TimeStrip />
+              <CurrencyStrip />
+            </div>
 
-          <div className="hidden md:flex items-center space-x-8">
-            <nav className="flex items-center space-x-8">
-              {mainNavItems.map((item, index) => (
-                <div key={index} className="relative group">
-                  <a 
-                    href="#" 
-                    className="text-gray-600 hover:text-primary transition-colors flex items-center gap-2"
-                  >
-                    {item.icon}
-                    <span>{item.label}</span>
-                  </a>
-                  {item.subItems.length > 0 && (
-                    <div className="absolute left-0 mt-2 w-72 bg-white rounded-lg shadow-lg border hidden group-hover:block">
-                      {item.subItems.map((subItem, subIndex) => (
-                        <a
-                          key={subIndex}
-                          href="#"
-                          className="flex items-center gap-2 px-4 py-2 text-sm text-gray-600 hover:bg-gray-50 transition-colors"
-                        >
-                          {subItem.icon}
-                          <span>{subItem.label}</span>
-                        </a>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              ))}
-            </nav>
-          </div>
-
-          <button
-            className="md:hidden p-2"
-            onClick={() => setIsOpen(!isOpen)}
-            aria-label="Toggle menu"
-          >
-            <Menu className="w-6 h-6" />
-          </button>
-        </div>
-      </div>
-
-      {/* Mobile menu */}
-      <div ref={menuRef}>
-        {isOpen && (
-          <div className="md:hidden bg-white border-t shadow-lg">
-            <nav className="px-2 py-1">
-              {mainNavItems.map((item, index) => (
-                <div key={index} className="py-1 border-b border-gray-100 last:border-0">
-                  <button
-                    onClick={() => toggleItem(item.label)}
-                    className="flex items-center justify-between w-full px-2 py-1.5 text-gray-600 hover:text-primary transition-colors"
-                  >
-                    <div className="flex items-center gap-2">
+            <div className="hidden md:flex items-center space-x-8">
+              <nav className="flex items-center space-x-8">
+                {mainNavItems.map((item, index) => (
+                  <div key={index} className="relative group">
+                    <a 
+                      href="#" 
+                      className="text-gray-600 hover:text-primary transition-colors flex items-center gap-2"
+                    >
                       {item.icon}
-                      <span className="text-sm">{item.label}</span>
-                    </div>
+                      <span>{item.label}</span>
+                    </a>
                     {item.subItems.length > 0 && (
-                      expandedItems.includes(item.label) ? 
-                        <ChevronUp className="w-4 h-4" /> : 
-                        <ChevronDown className="w-4 h-4" />
+                      <div className="absolute left-0 mt-2 w-72 bg-white rounded-lg shadow-lg border hidden group-hover:block">
+                        {item.subItems.map((subItem, subIndex) => (
+                          <a
+                            key={subIndex}
+                            href="#"
+                            className="flex items-center gap-2 px-4 py-2 text-sm text-gray-600 hover:bg-gray-50 transition-colors"
+                          >
+                            {subItem.icon}
+                            <span>{subItem.label}</span>
+                          </a>
+                        ))}
+                      </div>
                     )}
-                  </button>
-                  {item.subItems.length > 0 && expandedItems.includes(item.label) && (
-                    <div className="pl-6 mt-1 space-y-1 animate-accordion-down">
-                      {item.subItems.map((subItem, subIndex) => (
-                        <a
-                          key={subIndex}
-                          href="#"
-                          className="flex items-center gap-2 px-2 py-1 text-xs text-gray-600 hover:text-primary transition-colors"
-                        >
-                          {subItem.icon}
-                          <span>{subItem.label}</span>
-                        </a>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              ))}
-            </nav>
+                  </div>
+                ))}
+              </nav>
+            </div>
+
+            <button
+              className="md:hidden p-2"
+              onClick={() => setIsOpen(!isOpen)}
+              aria-label="Toggle menu"
+            >
+              <Menu className="w-6 h-6" />
+            </button>
           </div>
-        )}
-      </div>
-    </header>
+        </div>
+
+        {/* Mobile menu */}
+        <div ref={menuRef}>
+          {isOpen && (
+            <div className="md:hidden bg-white border-t shadow-lg">
+              <nav className="px-2 py-1">
+                {mainNavItems.map((item, index) => (
+                  <div key={index} className="py-1 border-b border-gray-100 last:border-0">
+                    <button
+                      onClick={() => toggleItem(item.label)}
+                      className="flex items-center justify-between w-full px-2 py-1.5 text-gray-600 hover:text-primary transition-colors"
+                    >
+                      <div className="flex items-center gap-2">
+                        {item.icon}
+                        <span className="text-sm">{item.label}</span>
+                      </div>
+                      {item.subItems.length > 0 && (
+                        expandedItems.includes(item.label) ? 
+                          <ChevronUp className="w-4 h-4" /> : 
+                          <ChevronDown className="w-4 h-4" />
+                      )}
+                    </button>
+                    {item.subItems.length > 0 && expandedItems.includes(item.label) && (
+                      <div className="pl-6 mt-1 space-y-1 animate-accordion-down">
+                        {item.subItems.map((subItem, subIndex) => (
+                          <a
+                            key={subIndex}
+                            href="#"
+                            onClick={subItem.onClick}
+                            className="flex items-center gap-2 px-2 py-1 text-xs text-gray-600 hover:text-primary transition-colors"
+                          >
+                            {subItem.icon}
+                            <span>{subItem.label}</span>
+                          </a>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </nav>
+            </div>
+          )}
+        </div>
+      </header>
+
+      {/* Lightbox */}
+      {showLightbox && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/50">
+          <div className="relative w-full h-full">
+            <button
+              onClick={() => setShowLightbox(false)}
+              className="absolute top-4 right-4 z-10 p-2 bg-white rounded-full shadow-lg"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            </button>
+            <iframe
+              src="https://preview--ocean-journey.lovable.app/"
+              className="w-full h-full"
+              frameBorder="0"
+            />
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 

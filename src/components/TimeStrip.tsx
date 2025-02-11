@@ -8,14 +8,14 @@ const TimeStrip = () => {
   const [isVisible, setIsVisible] = useState(true);
 
   const cities = [
-    { name: 'New York', flag: '🇺🇸' },
-    { name: 'London', flag: '🇬🇧' },
-    { name: 'Tokyo', flag: '🇯🇵' },
-    { name: 'Paris', flag: '🇫🇷' },
-    { name: 'Dubai', flag: '🇦🇪' },
-    { name: 'Singapore', flag: '🇸🇬' },
-    { name: 'Sydney', flag: '🇦🇺' },
-    { name: 'Tel Aviv', flag: '🇮🇱' }
+    { name: 'New York' },
+    { name: 'London' },
+    { name: 'Tokyo' },
+    { name: 'Paris' },
+    { name: 'Dubai' },
+    { name: 'Singapore' },
+    { name: 'Sydney' },
+    { name: 'Tel Aviv' }
   ];
   
   useEffect(() => {
@@ -73,9 +73,6 @@ const TimeStrip = () => {
         }`}
       >
         <Clock className="w-3 h-3" />
-        <span className="text-lg leading-none font-emoji">
-          {currentCity.flag}
-        </span>
         <span className="font-bold">{currentCity.name}:</span>
         <span className="font-bold">{times[currentCity.name]}</span>
       </div>
