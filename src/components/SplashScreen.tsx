@@ -1,11 +1,9 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useIsMobile } from '../hooks/use-mobile';
 
 const SplashScreen = () => {
   const [isVisible, setIsVisible] = useState(true);
-  const isMobile = useIsMobile();
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -56,9 +54,7 @@ const SplashScreen = () => {
               className="w-full h-full object-cover"
             >
               <source 
-                src={isMobile 
-                  ? "https://www.app.ocean-il.co.il/wp-content/uploads/2024/02/fSplashMobile.m4v" 
-                  : "https://www.app.ocean-il.co.il/wp-content/uploads/2022/11/fSplash.m4v"} 
+                src="https://ocean.autodigital.agency/splash.mp4" 
                 type="video/mp4" 
               />
             </video>

@@ -4,62 +4,19 @@ import { useIsMobile } from '../hooks/use-mobile';
 
 const VideoHero = () => {
   const isMobile = useIsMobile();
-  const videos = [
-    "https://www.app.ocean-il.co.il/wp-content/uploads/2022/10/Brooklyn.m4v",
-    "https://www.youtube.com/embed/Oxh_NsBqR1M",
-    "https://www.youtube.com/embed/kK3uDGtR45A",
-    "https://www.youtube.com/embed/E_S4iZ7TCXo",
-    "https://www.youtube.com/embed/TP_hHMnyknk",
-    "https://www.youtube.com/embed/AKXMkeib1zE",
-    "https://www.youtube.com/embed/YUdDkKnVZN4",
-    "https://www.youtube.com/embed/9pb7paEMbmo",
-    "https://www.youtube.com/embed/kpoGrDy_ss8",
-    "https://www.youtube.com/embed/8m3g3SlYs3k"
-  ];
-
-  const [currentVideo, setCurrentVideo] = useState(videos[0]);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentVideo(prevVideo => {
-        const currentIndex = videos.indexOf(prevVideo);
-        const nextIndex = (currentIndex + 1) % videos.length;
-        return videos[nextIndex];
-      });
-    }, 5000);
-
-    return () => clearInterval(interval);
-  }, []);
-
-  const isYouTubeVideo = currentVideo.includes('youtube.com');
-  const videoClassName = `absolute inset-0 w-full h-full ${
-    isMobile && isYouTubeVideo 
-      ? 'object-contain' 
-      : 'object-cover'
-  } pointer-events-none`;
+  const videoUrl = "https://ocean.autodigital.agency/splash.mp4";
 
   return (
     <div className="relative h-[90vh] w-full overflow-hidden">
-      {isYouTubeVideo ? (
-        <div className={`absolute inset-0 ${isMobile ? 'h-full w-auto mx-auto' : 'aspect-video'}`}>
-          <iframe
-            src={`${currentVideo}?autoplay=1&mute=1&loop=1&playlist=${currentVideo.split('/').pop()}&controls=0&modestbranding=1&showinfo=0&rel=0&enablejsapi=1&playsinline=1`}
-            className="absolute inset-0 w-full h-full"
-            allow="autoplay; encrypted-media"
-            frameBorder="0"
-          />
-        </div>
-      ) : (
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          className={videoClassName}
-        >
-          <source src={currentVideo} type="video/mp4" />
-        </video>
-      )}
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
+        className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+      >
+        <source src={videoUrl} type="video/mp4" />
+      </video>
       <div className="absolute inset-0 bg-black/5" />
       <div className="absolute inset-0 bg-gradient-to-r from-primary/10 to-secondary/10" />
       <div className="relative h-full flex flex-col items-center justify-between text-white text-center px-2 max-w-4xl mx-auto pb-20">
