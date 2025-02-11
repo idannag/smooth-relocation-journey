@@ -26,7 +26,7 @@ const LifecycleCircle = () => {
           </h2>
           <p className="mt-1 text-lg text-gray-600">Every relocatee is unique and requires a set of solutions.</p>
         </div>
-        <div className="relative w-full aspect-square max-w-2xl mx-auto">
+        <div className="relative w-full aspect-square max-w-2xl mx-auto my-8 p-8">
           <div className="absolute inset-[20%] md:inset-[25%] rounded-full bg-[#1e3a8a] bg-opacity-90 flex items-center justify-center text-white p-4 md:p-6 text-center">
             <p className="text-sm md:text-base">
               Let us help you plan your shipping options for a smooth relocation abroad.
