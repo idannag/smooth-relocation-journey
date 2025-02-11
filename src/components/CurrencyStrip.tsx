@@ -53,7 +53,7 @@ const CurrencyStrip = () => {
           isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-2'
         }`}
       >
-        <span className="text-lg leading-none" style={{ fontFamily: '"Segoe UI Emoji", "Segoe UI Symbol", "Apple Color Emoji", "EmojiSymbols"' }}>
+        <span className="text-lg leading-none font-emoji">
           {currentCurrency.flag}
         </span>
         <span className="font-bold">{currentCurrency.symbol}{rates[currentCurrency.code]?.toFixed(2)}</span>

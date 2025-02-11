@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { Clock } from 'lucide-react';
 
@@ -72,7 +73,7 @@ const TimeStrip = () => {
         }`}
       >
         <Clock className="w-3 h-3" />
-        <span className="text-lg leading-none" style={{ fontFamily: '"Segoe UI Emoji", "Segoe UI Symbol", "Apple Color Emoji", "EmojiSymbols"' }}>
+        <span className="text-lg leading-none font-emoji">
           {currentCity.flag}
         </span>
         <span className="font-bold">{currentCity.name}:</span>

@@ -1,13 +1,16 @@
+
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useIsMobile } from '../hooks/use-mobile';
 
 const SplashScreen = () => {
   const [isVisible, setIsVisible] = useState(true);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsVisible(false);
-    }, 5000); // Extended to 5 seconds
+    }, 5000);
 
     return () => clearTimeout(timer);
   }, []);
@@ -52,7 +55,12 @@ const SplashScreen = () => {
               playsInline
               className="w-full h-full object-cover"
             >
-              <source src="https://www.app.ocean-il.co.il/wp-content/uploads/2022/11/fSplash.m4v" type="video/mp4" />
+              <source 
+                src={isMobile 
+                  ? "https://www.app.ocean-il.co.il/wp-content/uploads/2024/02/fSplashMobile.m4v" 
+                  : "https://www.app.ocean-il.co.il/wp-content/uploads/2022/11/fSplash.m4v"} 
+                type="video/mp4" 
+              />
             </video>
           </motion.div>
         </motion.div>
