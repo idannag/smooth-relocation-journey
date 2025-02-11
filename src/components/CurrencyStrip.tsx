@@ -53,7 +53,7 @@ const CurrencyStrip = () => {
           isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-2'
         }`}
       >
-        <span className="text-xs font-bold">{currentCurrency.symbol}{rates[currentCurrency.code]?.toFixed(2)}</span>
+        <span className="text-xs font-bold">1$ = {currentCurrency.symbol}{rates[currentCurrency.code]?.toFixed(2)}</span>
       </div>
     </div>
   );

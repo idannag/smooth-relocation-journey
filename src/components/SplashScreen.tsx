@@ -63,7 +63,7 @@ const SplashScreen = () => {
             <img 
               src="https://www.app.ocean-il.co.il/wp-content/uploads/2022/04/cropped-logo.jpg"
               alt="Ocean IL Logo"
-              className="w-32 h-32 object-contain mb-4"
+              className="w-32 h-32 object-contain mb-4 rounded-2xl"
             />
             <motion.p
               initial={{ opacity: 0 }}
