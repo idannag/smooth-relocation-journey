@@ -1,4 +1,3 @@
-
 import { useState, useEffect, useRef } from "react";
 import { Menu, Home, Calculator, Newspaper, Building2, GraduationCap, UserRound, ShoppingCart, Route, Bot, BookText, Headphones, Globe, Play, ChevronDown, ChevronUp } from "lucide-react";
 import TimeStrip from "./TimeStrip";
@@ -97,12 +96,12 @@ const Header = () => {
                     <span>{item.label}</span>
                   </a>
                   {item.subItems.length > 0 && (
-                    <div className="absolute left-0 mt-2 w-64 bg-white rounded-lg shadow-lg border hidden group-hover:block">
+                    <div className="absolute left-0 mt-2 w-72 bg-white rounded-lg shadow-lg border hidden group-hover:block">
                       {item.subItems.map((subItem, subIndex) => (
                         <a
                           key={subIndex}
                           href="#"
-                          className="flex items-center gap-2 px-4 py-2 text-sm text-gray-600 hover:bg-gray-50 transition-colors whitespace-nowrap"
+                          className="flex items-center gap-2 px-4 py-2 text-sm text-gray-600 hover:bg-gray-50 transition-colors"
                         >
                           {subItem.icon}
                           <span>{subItem.label}</span>
@@ -171,4 +170,3 @@ const Header = () => {
 };
 
 export default Header;
-

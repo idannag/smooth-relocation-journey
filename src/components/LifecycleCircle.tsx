@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Home, Sofa, School, Truck, Wallet, Briefcase, FileText, UserSquare2 } from 'lucide-react';
@@ -18,13 +17,13 @@ const LifecycleCircle = () => {
   const [activeStage, setActiveStage] = useState(1);
 
   return (
-    <section className="py-8 bg-gradient-to-r from-blue-50 to-blue-100">
+    <section className="py-6 bg-gradient-to-r from-blue-50 to-blue-100">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-6">
+        <div className="text-center mb-4">
           <h2 className="text-3xl font-bold font-inter bg-gradient-to-r from-[#4776E6] to-[#8E54E9] bg-clip-text text-transparent">
             We focus on the life cycle of mobility customer
           </h2>
-          <p className="mt-4 text-lg text-gray-600">Every relocatee is unique and requires a set of solutions.</p>
+          <p className="mt-2 text-lg text-gray-600">Every relocatee is unique and requires a set of solutions.</p>
         </div>
         <div className="relative w-full aspect-square max-w-2xl mx-auto">
           <div className="absolute inset-[20%] md:inset-[25%] rounded-full bg-[#1e3a8a] bg-opacity-90 flex items-center justify-center text-white p-4 md:p-6 text-center">

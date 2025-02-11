@@ -8,11 +8,11 @@ const CurrencyStrip = () => {
   const [isVisible, setIsVisible] = useState(true);
 
   const currencies = [
-    { code: 'EUR', symbol: '€', name: 'Euro' },
-    { code: 'GBP', symbol: '£', name: 'British Pound' },
-    { code: 'ILS', symbol: '₪', name: 'Israeli Shekel' },
-    { code: 'JPY', symbol: '¥', name: 'Japanese Yen' },
-    { code: 'AUD', symbol: 'A$', name: 'Australian Dollar' }
+    { code: 'EUR', symbol: '€', flag: '🇪🇺', name: 'Euro' },
+    { code: 'GBP', symbol: '£', flag: '🇬🇧', name: 'British Pound' },
+    { code: 'ILS', symbol: '₪', flag: '🇮🇱', name: 'Israeli Shekel' },
+    { code: 'JPY', symbol: '¥', flag: '🇯🇵', name: 'Japanese Yen' },
+    { code: 'AUD', symbol: 'A$', flag: '🇦🇺', name: 'Australian Dollar' }
   ];
 
   useEffect(() => {
@@ -53,7 +53,9 @@ const CurrencyStrip = () => {
           isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-2'
         }`}
       >
-        <DollarSign className="w-3 h-3" />
+        <span className="text-lg leading-none" style={{ fontFamily: '"Segoe UI Emoji", "Segoe UI Symbol", "Apple Color Emoji", "EmojiSymbols"' }}>
+          {currentCurrency.flag}
+        </span>
         <span className="font-bold">{currentCurrency.symbol}{rates[currentCurrency.code]?.toFixed(2)}</span>
       </div>
     </div>
@@ -61,4 +63,3 @@ const CurrencyStrip = () => {
 };
 
 export default CurrencyStrip;
-

@@ -17,6 +17,18 @@ const UsefulInfo = () => {
       excerpt: "Important changes and updates in the relocation industry...",
       image: "https://images.unsplash.com/photo-1519389950473-47ba0277781c",
       link: "#"
+    },
+    {
+      title: "Global Mobility News",
+      excerpt: "Latest insights into international mobility and expatriate trends...",
+      image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40",
+      link: "#"
+    },
+    {
+      title: "Policy Changes",
+      excerpt: "Recent updates in immigration and relocation policies worldwide...",
+      image: "https://images.unsplash.com/photo-1507537297725-24a1c029d3ca",
+      link: "#"
     }
   ];
 
@@ -71,22 +83,22 @@ const UsefulInfo = () => {
       
       <div
         ref={scrollRef}
-        className="flex overflow-x-auto gap-6 pb-4 snap-x snap-mandatory scrollbar-hide"
+        className="flex overflow-x-auto gap-4 pb-4 snap-x snap-mandatory scrollbar-hide"
         style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
       >
         {articles.map((article, index) => (
           <div
             key={index}
-            className="flex-none w-72 snap-center bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 animate-fade-in group"
+            className="flex-none w-64 snap-center bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 animate-fade-in group"
           >
             <img
               src={article.image}
               alt={article.title}
-              className="w-full h-40 object-cover transition-transform duration-300 group-hover:scale-105"
+              className="w-full h-32 object-cover transition-transform duration-300 group-hover:scale-105"
             />
-            <div className="p-4">
-              <h3 className="text-lg font-semibold mb-2 line-clamp-1">{article.title}</h3>
-              <p className="text-gray-600 text-sm mb-3 line-clamp-2">{article.excerpt}</p>
+            <div className="p-3">
+              <h3 className="text-base font-semibold mb-1 line-clamp-1">{article.title}</h3>
+              <p className="text-gray-600 text-sm mb-2 line-clamp-2">{article.excerpt}</p>
               <a
                 href={article.link}
                 className="inline-flex items-center text-primary text-sm font-medium hover:text-secondary transition-colors"
