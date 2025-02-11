@@ -27,7 +27,7 @@ const LifecycleCircle = () => {
           <p className="mt-1 text-lg text-gray-600">Every relocatee is unique and requires a set of solutions.</p>
         </div>
         <div className="relative w-full aspect-square max-w-2xl mx-auto">
-          <div className="absolute inset-[20%] md:inset-[25%] rounded-full bg-[#1e3a8a] bg-opacity-90 flex items-center justify-center text-white p-4 md:p-6 text-center">
+          <div className="absolute inset-[15%] sm:inset-[20%] md:inset-[25%] rounded-full bg-[#1e3a8a] bg-opacity-90 flex items-center justify-center text-white p-4 md:p-6 text-center">
             <p className="text-sm md:text-base">
               Let us help you plan your shipping options for a smooth relocation abroad.
             </p>
@@ -35,15 +35,16 @@ const LifecycleCircle = () => {
 
           {stages.map((stage, index) => {
             const angle = (index * 360) / stages.length;
-            const radius = 32;
-            const x = 50 + radius * Math.cos((angle - 90) * (Math.PI / 180));
-            const y = 50 + radius * Math.sin((angle - 90) * (Math.PI / 180));
+            const radius = 28; // Reduced from 32 for mobile
+            const mobileRadius = window.innerWidth < 640 ? 24 : radius; // Even smaller radius for mobile
+            const x = 50 + mobileRadius * Math.cos((angle - 90) * (Math.PI / 180));
+            const y = 50 + mobileRadius * Math.sin((angle - 90) * (Math.PI / 180));
 
             return (
               <motion.button
                 key={stage.id}
                 onClick={() => setActiveStage(stage.id)}
-                className={`absolute w-24 h-24 -ml-12 -mt-12 rounded-full flex flex-col items-center justify-center transition-all duration-300 ${
+                className={`absolute w-20 h-20 sm:w-24 sm:h-24 -ml-10 sm:-ml-12 -mt-10 sm:-mt-12 rounded-full flex flex-col items-center justify-center transition-all duration-300 ${
                   activeStage === stage.id
                     ? 'bg-white text-[#1e3a8a] scale-110 shadow-lg'
                     : 'bg-white text-[#1e3a8a] hover:bg-opacity-90'
@@ -56,10 +57,10 @@ const LifecycleCircle = () => {
                 transition={{ type: "spring", stiffness: 300 }}
               >
                 {React.createElement(stage.icon, {
-                  size: 24,
-                  className: "mb-1 stroke-[1.5]"
+                  size: 20,
+                  className: "mb-1 stroke-[1.5] sm:size-24"
                 })}
-                <span className="text-xs text-center px-1 leading-tight">{stage.name}</span>
+                <span className="text-[10px] sm:text-xs text-center px-1 leading-tight">{stage.name}</span>
               </motion.button>
             );
           })}
