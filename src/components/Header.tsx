@@ -179,7 +179,7 @@ const Header = () => {
         </div>
       </header>
 
-      {/* Lightbox */}
+      {/* Lightbox with higher z-index */}
       {showLightbox && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/50">
           <div className="relative w-full h-full">
