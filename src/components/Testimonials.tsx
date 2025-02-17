@@ -1,6 +1,6 @@
-
 import { useEffect, useState, useRef } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { supabase } from "@/integrations/supabase/client";
 
 const Testimonials = () => {
   const [reviews, setReviews] = useState<any[]>([]);
@@ -11,23 +11,10 @@ const Testimonials = () => {
   useEffect(() => {
     const fetchGoogleReviews = async () => {
       try {
-        const apiKey = "AIzaSyCZG4L3-tCp-hLhMYJpspqCe_hWrWObMLs";
-        const placeId = "ChIJc0HHe0tHHRUR4G4V7hGPL08";
-        const response = await fetch(
-          `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&fields=reviews&key=${apiKey}`,
-          {
-            headers: {
-              'Content-Type': 'application/json',
-              'Access-Control-Allow-Origin': '*'
-            }
-          }
-        );
-
-        if (!response.ok) {
-          throw new Error('Failed to fetch reviews');
-        }
-
-        const data = await response.json();
+        const { data, error } = await supabase.functions.invoke('getGoogleReviews');
+        
+        if (error) throw error;
+        
         if (data.result && data.result.reviews) {
           setReviews(data.result.reviews);
         }

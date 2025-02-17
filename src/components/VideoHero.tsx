@@ -29,13 +29,13 @@ const VideoHero = () => {
         <div className="space-y-4 mb-12">
           <ul className="list-none space-y-8">
             <li 
-              className="text-lg md:text-xl lg:text-2xl animate-slide-up max-w-3xl px-6 flex items-center justify-center text-white/90"
+              className="text-lg md:text-xl lg:text-2xl animate-slide-up max-w-3xl px-6 flex items-center justify-center text-white/90 font-bold"
               style={{ textShadow: '2px 2px 4px rgba(0, 0, 0, 0.9)' }}
             >
               Expert guidance every step of the way
             </li>
             <li 
-              className="text-lg md:text-xl lg:text-2xl animate-slide-up max-w-3xl px-6 flex items-center justify-center text-white/90"
+              className="text-lg md:text-xl lg:text-2xl animate-slide-up max-w-3xl px-6 flex items-center justify-center text-white/90 font-bold"
               style={{ textShadow: '2px 2px 4px rgba(0, 0, 0, 0.9)' }}
             >
               Your tailored relocation starts here

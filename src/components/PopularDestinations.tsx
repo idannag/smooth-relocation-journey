@@ -7,7 +7,7 @@ const PopularDestinations = () => {
   
   const destinations = [
     {
-      city: "Brooklyn",
+      city: "New York",
       country: "USA",
       video: "https://www.app.ocean-il.co.il/wp-content/uploads/2022/10/Brooklyn.m4v",
       description: "Discover relocation opportunities"
