@@ -1,3 +1,4 @@
+
 import { useEffect, useState, useRef } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
@@ -10,6 +11,30 @@ const Testimonials = () => {
   useEffect(() => {
     const fetchGoogleReviews = async () => {
       try {
+        const apiKey = "AIzaSyCZG4L3-tCp-hLhMYJpspqCe_hWrWObMLs";
+        const placeId = "ChIJc0HHe0tHHRUR4G4V7hGPL08";
+        const response = await fetch(
+          `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&fields=reviews&key=${apiKey}`,
+          {
+            headers: {
+              'Content-Type': 'application/json',
+              'Access-Control-Allow-Origin': '*'
+            }
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error('Failed to fetch reviews');
+        }
+
+        const data = await response.json();
+        if (data.result && data.result.reviews) {
+          setReviews(data.result.reviews);
+        }
+        setLoading(false);
+      } catch (err) {
+        console.error('Error fetching reviews:', err);
+        // Fallback to dummy reviews if API fails
         const dummyReviews = [
           {
             author_name: "Sarah L.",
@@ -48,9 +73,6 @@ const Testimonials = () => {
           }
         ];
         setReviews(dummyReviews);
-        setLoading(false);
-      } catch (err) {
-        setError('Failed to load reviews');
         setLoading(false);
       }
     };
