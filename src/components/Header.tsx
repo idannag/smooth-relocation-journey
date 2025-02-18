@@ -15,6 +15,7 @@ const Header = () => {
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+        setExpandedItems([]);
         setIsOpen(false);
       }
     };
@@ -207,11 +208,11 @@ const Header = () => {
       </header>
 
       {showLightbox && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/50">
-          <div className={`relative w-full ${lightboxContent.size === 'full' ? 'h-full' : 'h-[80vh] max-w-4xl mx-auto'}`}>
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/50 animate-fade-in">
+          <div className={`relative w-full ${lightboxContent.size === 'full' ? 'h-full' : 'h-[80vh] max-w-4xl mx-auto'} bg-white rounded-2xl overflow-hidden shadow-2xl`}>
             <button
               onClick={() => setShowLightbox(false)}
-              className="absolute top-4 right-4 z-10 p-2 bg-white rounded-full shadow-lg"
+              className="absolute top-4 right-4 z-10 p-2 bg-white rounded-full shadow-lg hover:bg-gray-100 transition-colors"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
