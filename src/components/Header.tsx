@@ -2,12 +2,15 @@ import { useState, useEffect, useRef } from "react";
 import { Menu, Home, Calculator, Newspaper, Building2, GraduationCap, UserRound, ShoppingCart, Route, Bot, BookText, Headphones, Globe, Play, ChevronDown, ChevronUp } from "lucide-react";
 import TimeStrip from "./TimeStrip";
 import CurrencyStrip from "./CurrencyStrip";
+import { useIsMobile } from '../hooks/use-mobile';
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [expandedItems, setExpandedItems] = useState<string[]>([]);
   const [showLightbox, setShowLightbox] = useState(false);
+  const [lightboxContent, setLightboxContent] = useState<{ url: string; size: 'full' | 'medium' }>({ url: '', size: 'full' });
   const menuRef = useRef<HTMLDivElement>(null);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -28,8 +31,8 @@ const Header = () => {
     );
   };
 
-  const handleMyRelocationClick = (e: React.MouseEvent) => {
-    e.preventDefault();
+  const handleSubmenuItemClick = (url: string, size: 'full' | 'medium' = 'medium') => {
+    setLightboxContent({ url, size });
     setShowLightbox(true);
   };
 
@@ -43,18 +46,42 @@ const Header = () => {
       icon: <Calculator className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, 
       label: 'Useful Info',
       subItems: [
-        { icon: <Newspaper className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, label: 'Relocation News' },
-        { icon: <BookText className="w-5 h-5 stroke-[1.5] text-[#517cc7]" />, label: 'Relocation Guides' },
-        { icon: <Calculator className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, label: 'Calculators & Tools' }
+        { 
+          icon: <Newspaper className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, 
+          label: 'Relocation News',
+          onClick: () => handleSubmenuItemClick('/relocation-news', 'medium')
+        },
+        { 
+          icon: <BookText className="w-5 h-5 stroke-[1.5] text-[#517cc7]" />, 
+          label: 'Relocation Guides',
+          onClick: () => handleSubmenuItemClick('/relocation-guides', 'medium')
+        },
+        { 
+          icon: <Calculator className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, 
+          label: 'Calculators & Tools',
+          onClick: () => handleSubmenuItemClick('https://www.app.ocean-il.co.il/cost-of-living-comparison-calculator-copy/', 'medium')
+        }
       ]
     },
     { 
       icon: <Headphones className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, 
       label: 'Consult',
       subItems: [
-        { icon: <Home className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, label: 'Relocation' },
-        { icon: <GraduationCap className="w-5 h-5 stroke-[1.5] text-[#517cc7]" />, label: 'Education' },
-        { icon: <Building2 className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, label: 'Real-Estate' }
+        { 
+          icon: <Home className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, 
+          label: 'Relocation',
+          onClick: () => handleSubmenuItemClick('https://www.app.ocean-il.co.il/form/relocation-journey/9/', isMobile ? 'full' : 'medium')
+        },
+        { 
+          icon: <GraduationCap className="w-5 h-5 stroke-[1.5] text-[#517cc7]" />, 
+          label: 'Education',
+          onClick: () => handleSubmenuItemClick('https://www.app.ocean-il.co.il/education-copy/', isMobile ? 'full' : 'medium')
+        },
+        { 
+          icon: <Building2 className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, 
+          label: 'Real-Estate',
+          onClick: () => handleSubmenuItemClick('https://www.app.ocean-il.co.il/real-estate-copy/', isMobile ? 'full' : 'medium')
+        }
       ]
     },
     { 
@@ -64,7 +91,7 @@ const Header = () => {
         { 
           icon: <Route className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, 
           label: 'My Relocation',
-          onClick: handleMyRelocationClick 
+          onClick: () => handleSubmenuItemClick('https://preview--ocean-journey.lovable.app/', 'medium')
         },
         { icon: <ShoppingCart className="w-5 h-5 stroke-[1.5] text-[#517cc7]" />, label: 'My Orders' },
         { icon: <Globe className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, label: 'Online Jobs' },
@@ -98,25 +125,25 @@ const Header = () => {
             <div className="hidden md:flex items-center space-x-8">
               <nav className="flex items-center space-x-8">
                 {mainNavItems.map((item, index) => (
-                  <div key={index} className="relative group">
-                    <a 
-                      href="#" 
+                  <div key={index} className="relative">
+                    <button 
+                      onClick={() => toggleItem(item.label)}
                       className="text-gray-600 hover:text-primary transition-colors flex items-center gap-2"
                     >
                       {item.icon}
                       <span>{item.label}</span>
-                    </a>
-                    {item.subItems.length > 0 && (
-                      <div className="absolute left-0 mt-2 w-72 bg-white rounded-lg shadow-lg border hidden group-hover:block">
+                    </button>
+                    {item.subItems.length > 0 && expandedItems.includes(item.label) && (
+                      <div className="absolute left-0 mt-2 w-72 bg-white rounded-lg shadow-lg border">
                         {item.subItems.map((subItem, subIndex) => (
-                          <a
+                          <button
                             key={subIndex}
-                            href="#"
-                            className="flex items-center gap-2 px-4 py-2 text-sm text-gray-600 hover:bg-gray-50 transition-colors"
+                            onClick={subItem.onClick}
+                            className="flex items-center gap-2 px-4 py-2 text-sm text-gray-600 hover:bg-gray-50 transition-colors w-full text-left"
                           >
                             {subItem.icon}
                             <span>{subItem.label}</span>
-                          </a>
+                          </button>
                         ))}
                       </div>
                     )}
@@ -179,10 +206,9 @@ const Header = () => {
         </div>
       </header>
 
-      {/* Lightbox with higher z-index */}
       {showLightbox && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/50">
-          <div className="relative w-full h-full">
+          <div className={`relative w-full ${lightboxContent.size === 'full' ? 'h-full' : 'h-[80vh] max-w-4xl mx-auto'}`}>
             <button
               onClick={() => setShowLightbox(false)}
               className="absolute top-4 right-4 z-10 p-2 bg-white rounded-full shadow-lg"
@@ -203,7 +229,7 @@ const Header = () => {
               </svg>
             </button>
             <iframe
-              src="https://preview--ocean-journey.lovable.app/"
+              src={lightboxContent.url}
               className="w-full h-full"
               frameBorder="0"
             />

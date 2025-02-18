@@ -171,15 +171,27 @@ const Testimonials = () => {
           </button>
         </div>
 
-        <div className="mt-8 text-center">
-          <a 
-            href="https://maps.app.goo.gl/3DkAx4B6kb8Q1B9J7" 
-            target="_blank" 
-            rel="noopener noreferrer"
+        <div className="mt-8 text-center space-y-4">
+          <button 
+            onClick={() => {
+              const url = "https://maps.app.goo.gl/3DkAx4B6kb8Q1B9J7";
+              window.open(url, 'GoogleReviews', 'width=800,height=600');
+            }}
             className="inline-flex items-center text-primary hover:text-primary/80 transition-colors"
           >
-            View all reviews on Google Maps →
-          </a>
+            View all reviews on Google Maps
+          </button>
+          <div>
+            <button
+              onClick={() => {
+                const url = "https://search.google.com/local/writereview?placeid=ChIJc0HHe0tHHRUR4G4V7hGPL08";
+                window.open(url, 'WriteReview', 'width=800,height=600');
+              }}
+              className="inline-flex items-center text-primary hover:text-primary/80 transition-colors"
+            >
+              Write a review
+            </button>
+          </div>
         </div>
       </div>
     </section>
