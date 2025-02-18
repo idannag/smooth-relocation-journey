@@ -33,7 +33,6 @@ const Header = () => {
   };
 
   const handleSubmenuItemClick = (url: string) => {
-    // Remove size parameter as all lightboxes will be full screen
     setLightboxContent({ 
       url: url.startsWith('http') ? url : window.location.origin + url,
       size: 'full'
@@ -96,7 +95,7 @@ const Header = () => {
         { 
           icon: <Route className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, 
           label: 'My Relocation',
-          onClick: () => handleSubmenuItemClick('https://preview--ocean-journey.lovable.app/', 'medium')
+          onClick: () => handleSubmenuItemClick('https://preview--ocean-journey.lovable.app/')
         },
         { icon: <ShoppingCart className="w-5 h-5 stroke-[1.5] text-[#517cc7]" />, label: 'My Orders' },
         { icon: <Globe className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, label: 'Online Jobs' },
