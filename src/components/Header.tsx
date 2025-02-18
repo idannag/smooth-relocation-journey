@@ -32,8 +32,12 @@ const Header = () => {
     );
   };
 
-  const handleSubmenuItemClick = (url: string, size: 'full' | 'medium' = 'medium') => {
-    setLightboxContent({ url, size });
+  const handleSubmenuItemClick = (url: string) => {
+    // Remove size parameter as all lightboxes will be full screen
+    setLightboxContent({ 
+      url: url.startsWith('http') ? url : window.location.origin + url,
+      size: 'full'
+    });
     setShowLightbox(true);
   };
 
@@ -50,17 +54,17 @@ const Header = () => {
         { 
           icon: <Newspaper className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, 
           label: 'Relocation News',
-          onClick: () => handleSubmenuItemClick('/relocation-news', 'medium')
+          onClick: () => handleSubmenuItemClick('/news')
         },
         { 
           icon: <BookText className="w-5 h-5 stroke-[1.5] text-[#517cc7]" />, 
           label: 'Relocation Guides',
-          onClick: () => handleSubmenuItemClick('/relocation-guides', 'medium')
+          onClick: () => handleSubmenuItemClick('/guides')
         },
         { 
           icon: <Calculator className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, 
           label: 'Calculators & Tools',
-          onClick: () => handleSubmenuItemClick('https://www.app.ocean-il.co.il/cost-of-living-comparison-calculator-copy/', 'medium')
+          onClick: () => handleSubmenuItemClick('https://www.app.ocean-il.co.il/cost-of-living-comparison-calculator-copy/')
         }
       ]
     },
@@ -71,17 +75,17 @@ const Header = () => {
         { 
           icon: <Home className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, 
           label: 'Relocation',
-          onClick: () => handleSubmenuItemClick('https://www.app.ocean-il.co.il/form/relocation-journey/9/', isMobile ? 'full' : 'medium')
+          onClick: () => handleSubmenuItemClick('https://www.app.ocean-il.co.il/form/relocation-journey/9/')
         },
         { 
           icon: <GraduationCap className="w-5 h-5 stroke-[1.5] text-[#517cc7]" />, 
           label: 'Education',
-          onClick: () => handleSubmenuItemClick('https://www.app.ocean-il.co.il/education-copy/', isMobile ? 'full' : 'medium')
+          onClick: () => handleSubmenuItemClick('https://www.app.ocean-il.co.il/education-copy/')
         },
         { 
           icon: <Building2 className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, 
           label: 'Real-Estate',
-          onClick: () => handleSubmenuItemClick('https://www.app.ocean-il.co.il/real-estate-copy/', isMobile ? 'full' : 'medium')
+          onClick: () => handleSubmenuItemClick('https://www.app.ocean-il.co.il/real-estate-copy/')
         }
       ]
     },
@@ -208,11 +212,12 @@ const Header = () => {
       </header>
 
       {showLightbox && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/50 animate-fade-in">
-          <div className={`relative w-full ${lightboxContent.size === 'full' ? 'h-full' : 'h-[80vh] max-w-4xl mx-auto'} bg-white rounded-2xl overflow-hidden shadow-2xl`}>
+        <div className="fixed inset-0 z-[100] animate-fade-in">
+          <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={() => setShowLightbox(false)} />
+          <div className="relative w-full h-full">
             <button
               onClick={() => setShowLightbox(false)}
-              className="absolute top-4 right-4 z-10 p-2 bg-white rounded-full shadow-lg hover:bg-gray-100 transition-colors"
+              className="absolute top-4 right-4 z-10 p-2 bg-white rounded-full shadow-lg hover:bg-gray-100 transition-colors hover:scale-110"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"

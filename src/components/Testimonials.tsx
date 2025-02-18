@@ -23,7 +23,9 @@ const Testimonials = () => {
         const { data, error } = await supabase.functions.invoke('getGoogleReviews');
         if (error) throw error;
         if (data.result && data.result.reviews) {
-          setReviews(data.result.reviews);
+          // Filter reviews with rating 4 or 5
+          const highRatedReviews = data.result.reviews.filter(review => review.rating >= 4);
+          setReviews(highRatedReviews);
         }
         setLoading(false);
       } catch (err) {
@@ -106,23 +108,23 @@ const Testimonials = () => {
 
   return (
     <section className="py-16 bg-gray-50">
-      <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-bold text-center mb-8 font-inter bg-gradient-to-r from-[#8B5CF6] via-[#D946EF] to-[#F97316] bg-clip-text text-transparent animate-fade-in">
+      <div className="container mx-auto px-4 animate-fade-in">
+        <h2 className="text-3xl font-bold text-center mb-8 font-inter bg-gradient-to-r from-[#8B5CF6] via-[#D946EF] to-[#F97316] bg-clip-text text-transparent animate-fade-in hover:scale-105 transition-transform duration-300">
           What Our Clients Say
         </h2>
 
-        <div className="flex justify-center mb-8">
+        <div className="flex justify-center mb-8 animate-slide-up">
           <img 
             src="/lovable-uploads/7fc61af8-ea7f-4585-8f82-c8a61f99c608.png" 
             alt="Google Reviews" 
-            className="h-12 w-auto" 
+            className="h-12 w-auto hover:scale-105 transition-transform duration-300" 
           />
         </div>
 
         <div className="relative group max-w-6xl mx-auto">
           <button 
             onClick={() => scroll('left')}
-            className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white/80 rounded-full p-2 shadow-lg opacity-0 group-hover:opacity-100 transition-opacity"
+            className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white/80 rounded-full p-2 shadow-lg opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-white hover:scale-110"
           >
             <ChevronLeft className="w-6 h-6 text-primary" />
           </button>
@@ -135,10 +137,10 @@ const Testimonials = () => {
             {reviews.map((review, index) => (
               <div 
                 key={index}
-                className="flex-none w-72 snap-center bg-white p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 animate-fade-in"
+                className="flex-none w-72 h-80 snap-center bg-white p-4 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 animate-fade-in hover:scale-[1.02]"
                 style={{ animation: `slide-up 0.5s ease-out ${index * 0.1}s both` }}
               >
-                <div className="flex items-center mb-2">
+                <div className="flex items-center mb-3">
                   <img 
                     src={review.profile_photo_url} 
                     alt={review.author_name}
@@ -155,7 +157,7 @@ const Testimonials = () => {
                     </div>
                   </div>
                 </div>
-                <p className="text-gray-700 text-sm mb-2 line-clamp-3">{review.text}</p>
+                <p className="text-gray-700 text-xs mb-2 line-clamp-none overflow-y-auto max-h-48">{review.text}</p>
                 <p className="text-xs text-gray-500">{review.relative_time_description}</p>
               </div>
             ))}
@@ -163,22 +165,22 @@ const Testimonials = () => {
 
           <button 
             onClick={() => scroll('right')}
-            className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white/80 rounded-full p-2 shadow-lg opacity-0 group-hover:opacity-100 transition-opacity"
+            className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white/80 rounded-full p-2 shadow-lg opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-white hover:scale-110"
           >
             <ChevronRight className="w-6 h-6 text-primary" />
           </button>
         </div>
 
-        <div className="mt-8 text-center space-y-4">
+        <div className="mt-8 text-center flex justify-center gap-4">
           <button
             onClick={() => handleOpenReviewLink("https://maps.app.goo.gl/3DkAx4B6kb8Q1B9J7")}
-            className="px-6 py-2 bg-primary text-white rounded-full hover:bg-primary/90 transition-all duration-300 shadow-md hover:shadow-lg mx-2 animate-fade-in"
+            className="px-6 py-2 bg-primary text-white rounded-full hover:bg-primary/90 transition-all duration-300 shadow-md hover:shadow-lg hover:scale-105 animate-fade-in"
           >
-            Read Reviews
+            All Reviews
           </button>
           <button
             onClick={() => handleOpenReviewLink("https://search.google.com/local/writereview?placeid=ChIJc0HHe0tHHRUR4G4V7hGPL08")}
-            className="px-6 py-2 bg-secondary text-white rounded-full hover:bg-secondary/90 transition-all duration-300 shadow-md hover:shadow-lg mx-2 animate-fade-in"
+            className="px-6 py-2 bg-secondary text-white rounded-full hover:bg-secondary/90 transition-all duration-300 shadow-md hover:shadow-lg hover:scale-105 animate-fade-in"
           >
             Write Review
           </button>
@@ -186,11 +188,12 @@ const Testimonials = () => {
       </div>
 
       {showLightbox && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/50 animate-fade-in">
-          <div className="relative w-full max-w-4xl mx-auto h-[80vh] bg-white rounded-2xl overflow-hidden shadow-2xl">
+        <div className="fixed inset-0 z-[100] animate-fade-in">
+          <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={() => setShowLightbox(false)} />
+          <div className="relative w-full h-full">
             <button
               onClick={() => setShowLightbox(false)}
-              className="absolute top-4 right-4 z-10 p-2 bg-white rounded-full shadow-lg hover:bg-gray-100 transition-colors"
+              className="absolute top-4 right-4 z-10 p-2 bg-white rounded-full shadow-lg hover:bg-gray-100 transition-all duration-300 hover:scale-110"
             >
               <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
