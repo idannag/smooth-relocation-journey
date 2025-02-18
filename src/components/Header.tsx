@@ -1,3 +1,4 @@
+
 import { useState, useEffect, useRef } from "react";
 import { Menu, Home, Calculator, Newspaper, Building2, GraduationCap, UserRound, ShoppingCart, Route, Bot, BookText, Headphones, Globe, Play, ChevronDown, ChevronUp } from "lucide-react";
 import TimeStrip from "./TimeStrip";
@@ -190,15 +191,14 @@ const Header = () => {
                     {item.subItems.length > 0 && expandedItems.includes(item.label) && (
                       <div className="pl-6 mt-1 space-y-1 animate-accordion-down">
                         {item.subItems.map((subItem, subIndex) => (
-                          <a
+                          <button
                             key={subIndex}
-                            href="#"
                             onClick={subItem.onClick}
-                            className="flex items-center gap-2 px-2 py-1 text-xs text-gray-600 hover:text-primary transition-colors"
+                            className="flex items-center gap-2 px-2 py-1 text-xs text-gray-600 hover:text-primary transition-colors w-full text-left"
                           >
                             {subItem.icon}
                             <span>{subItem.label}</span>
-                          </a>
+                          </button>
                         ))}
                       </div>
                     )}
