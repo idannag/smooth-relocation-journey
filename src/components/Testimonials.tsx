@@ -1,4 +1,3 @@
-
 import { useEffect, useState, useRef } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { supabase } from "@/integrations/supabase/client";
@@ -8,14 +7,6 @@ const Testimonials = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
-  const [showLightbox, setShowLightbox] = useState(false);
-  const [lightboxContent, setLightboxContent] = useState<{
-    url: string;
-    size: 'full' | 'medium'
-  }>({
-    url: '',
-    size: 'full'
-  });
 
   useEffect(() => {
     const fetchGoogleReviews = async () => {
@@ -72,11 +63,8 @@ const Testimonials = () => {
   };
 
   const handleOpenReviewLink = (url: string) => {
-    setLightboxContent({
-      url,
-      size: 'medium'
-    });
-    setShowLightbox(true);
+    // Instead of using iframe, open in new tab
+    window.open(url, '_blank', 'noopener,noreferrer');
   };
 
   if (loading) {
@@ -131,13 +119,13 @@ const Testimonials = () => {
 
           <div 
             ref={scrollRef}
-            className="flex overflow-x-auto gap-4 pb-4 snap-x snap-mandatory scrollbar-hide"
+            className="flex overflow-x-auto gap-6 px-4 pb-4 snap-x snap-mandatory scrollbar-hide"
             style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
           >
             {reviews.map((review, index) => (
               <div 
                 key={index}
-                className="flex-none w-72 h-80 snap-center bg-white p-4 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 animate-fade-in hover:scale-[1.02]"
+                className="flex-none w-80 h-64 snap-center bg-white p-4 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 animate-fade-in hover:scale-[1.02]"
                 style={{ animation: `slide-up 0.5s ease-out ${index * 0.1}s both` }}
               >
                 <div className="flex items-center mb-3">
@@ -157,7 +145,7 @@ const Testimonials = () => {
                     </div>
                   </div>
                 </div>
-                <p className="text-gray-700 text-xs mb-2 line-clamp-none overflow-y-auto max-h-48">{review.text}</p>
+                <p className="text-gray-700 text-sm mb-2 line-clamp-4">{review.text}</p>
                 <p className="text-xs text-gray-500">{review.relative_time_description}</p>
               </div>
             ))}
@@ -172,41 +160,24 @@ const Testimonials = () => {
         </div>
 
         <div className="mt-8 text-center flex justify-center gap-4">
-          <button
-            onClick={() => handleOpenReviewLink("https://maps.app.goo.gl/3DkAx4B6kb8Q1B9J7")}
+          <a
+            href="https://maps.app.goo.gl/3DkAx4B6kb8Q1B9J7"
+            target="_blank"
+            rel="noopener noreferrer"
             className="px-6 py-2 bg-primary text-white rounded-full hover:bg-primary/90 transition-all duration-300 shadow-md hover:shadow-lg hover:scale-105 animate-fade-in"
           >
             All Reviews
-          </button>
-          <button
-            onClick={() => handleOpenReviewLink("https://search.google.com/local/writereview?placeid=ChIJc0HHe0tHHRUR4G4V7hGPL08")}
+          </a>
+          <a
+            href="https://search.google.com/local/writereview?placeid=ChIJc0HHe0tHHRUR4G4V7hGPL08"
+            target="_blank"
+            rel="noopener noreferrer"
             className="px-6 py-2 bg-secondary text-white rounded-full hover:bg-secondary/90 transition-all duration-300 shadow-md hover:shadow-lg hover:scale-105 animate-fade-in"
           >
             Write Review
-          </button>
+          </a>
         </div>
       </div>
-
-      {showLightbox && (
-        <div className="fixed inset-0 z-[100] animate-fade-in">
-          <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={() => setShowLightbox(false)} />
-          <div className="relative w-full h-full">
-            <button
-              onClick={() => setShowLightbox(false)}
-              className="absolute top-4 right-4 z-10 p-2 bg-white rounded-full shadow-lg hover:bg-gray-100 transition-all duration-300 hover:scale-110"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            </button>
-            <iframe
-              src={lightboxContent.url}
-              className="w-full h-full"
-              frameBorder="0"
-            />
-          </div>
-        </div>
-      )}
     </section>
   );
 };

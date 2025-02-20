@@ -95,7 +95,7 @@ const PopularDestinations = () => {
           
           <div
             ref={scrollRef}
-            className="flex overflow-x-auto gap-8 pb-4 snap-x snap-mandatory scrollbar-hide"
+            className="flex overflow-x-auto gap-6 px-4 pb-4 snap-x snap-mandatory scrollbar-hide"
             style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
           >
             {destinations.map((destination, index) => (

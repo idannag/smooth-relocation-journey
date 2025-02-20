@@ -60,15 +60,15 @@ const UsefulInfo = () => {
         <ChevronLeft className="w-6 h-6 text-primary" />
       </button>
       
-      <div ref={scrollRef} className="flex overflow-x-auto gap-4 pb-4 snap-x snap-mandatory scrollbar-hide" style={{
+      <div ref={scrollRef} className="flex overflow-x-auto gap-6 pb-4 px-4 snap-x snap-mandatory scrollbar-hide" style={{
       scrollbarWidth: 'none',
       msOverflowStyle: 'none'
     }}>
-        {articles.map((article, index) => <div key={index} className="flex-none w-64 snap-center bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 animate-fade-in group">
-            <img src={article.image} alt={article.title} className="w-full h-32 object-cover transition-transform duration-300 group-hover:scale-105" />
-            <div className="p-3">
-              <h3 className="text-base font-semibold mb-1 line-clamp-1">{article.title}</h3>
-              <p className="text-gray-600 text-sm mb-2 line-clamp-2">{article.excerpt}</p>
+        {articles.map((article, index) => <div key={index} className="flex-none w-80 snap-center bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 animate-fade-in group">
+            <img src={article.image} alt={article.title} className="w-full h-40 object-cover transition-transform duration-300 group-hover:scale-105" />
+            <div className="p-4">
+              <h3 className="text-base font-semibold mb-2 line-clamp-1">{article.title}</h3>
+              <p className="text-gray-600 text-sm mb-3 line-clamp-2">{article.excerpt}</p>
               <a href={article.link} className="inline-flex items-center text-primary text-sm font-medium hover:text-secondary transition-colors">
                 Read more →
               </a>
