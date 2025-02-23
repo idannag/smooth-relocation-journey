@@ -30,11 +30,17 @@ const Header = () => {
   }, []);
 
   const toggleItem = (label: string) => {
-    setExpandedItems(prev => 
-      prev.includes(label) 
-        ? prev.filter(item => item !== label)
-        : [...prev, label]
-    );
+    if (isMobile) {
+      setExpandedItems(prev => 
+        prev.includes(label) ? [] : [label]
+      );
+    } else {
+      setExpandedItems(prev => 
+        prev.includes(label) 
+          ? prev.filter(item => item !== label)
+          : [...prev, label]
+      );
+    }
   };
 
   const handleSubmenuItemClick = (url: string) => {
@@ -43,6 +49,8 @@ const Header = () => {
       size: 'full'
     });
     setShowLightbox(true);
+    setIsOpen(false);
+    setExpandedItems([]);
   };
 
   const mainNavItems = getMainNavItems(handleSubmenuItemClick);
@@ -81,6 +89,7 @@ const Header = () => {
               className="md:hidden p-2"
               onClick={() => setIsOpen(!isOpen)}
               aria-label="Toggle menu"
+              type="button"
             >
               <Menu className="w-6 h-6" />
             </button>
