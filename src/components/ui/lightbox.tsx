@@ -36,7 +36,6 @@ const Lightbox = ({ url, onClose }: LightboxProps) => {
           src={url}
           className="w-full h-full"
           loading="eager"
-          importance="high"
           style={{ animationDuration: '100ms' }}
         />
       </div>
