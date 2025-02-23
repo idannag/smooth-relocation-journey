@@ -1,3 +1,4 @@
+
 import { useState, useEffect, useRef } from "react";
 import { Menu } from "lucide-react";
 import TimeStrip from "./TimeStrip";
@@ -7,13 +8,12 @@ import DesktopNav from "./navigation/DesktopNav";
 import MobileNav from "./navigation/MobileNav";
 import Lightbox from "./ui/lightbox";
 import { getMainNavItems } from "./navigation/navItems";
-import UsefulInfoContent from './UsefulInfoContent';
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [expandedItems, setExpandedItems] = useState<string[]>([]);
   const [showLightbox, setShowLightbox] = useState(false);
-  const [lightboxContent, setLightboxContent] = useState<{ type: 'news' | 'guides' | 'tools' | null }>({ type: null });
+  const [lightboxContent, setLightboxContent] = useState<{ url: string; size: 'full' | 'medium' }>({ url: '', size: 'full' });
   const menuRef = useRef<HTMLDivElement>(null);
   const isMobile = useIsMobile();
 
@@ -30,13 +30,24 @@ const Header = () => {
   }, []);
 
   const toggleItem = (label: string) => {
-    setExpandedItems(prev => 
-      prev.includes(label) ? prev.filter(item => item !== label) : [...prev, label]
-    );
+    if (isMobile) {
+      setExpandedItems(prev => 
+        prev.includes(label) ? [] : [label]
+      );
+    } else {
+      setExpandedItems(prev => 
+        prev.includes(label) 
+          ? prev.filter(item => item !== label)
+          : [...prev, label]
+      );
+    }
   };
 
-  const handleSubmenuItemClick = (_url: string, type: 'news' | 'guides' | 'tools') => {
-    setLightboxContent({ type });
+  const handleSubmenuItemClick = (url: string) => {
+    setLightboxContent({ 
+      url: url.startsWith('http') ? url : window.location.origin + url,
+      size: 'full'
+    });
     setShowLightbox(true);
     setIsOpen(false);
     setExpandedItems([]);
@@ -94,40 +105,11 @@ const Header = () => {
         />
       </header>
 
-      {showLightbox && lightboxContent.type && (
-        <div 
-          className="fixed inset-0 z-[100] animate-fade-in" 
-          onClick={(e) => {
-            if (e.target === e.currentTarget) {
-              setShowLightbox(false);
-            }
-          }}
-        >
-          <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" />
-          <div className="relative w-full h-full overflow-auto">
-            <button
-              onClick={() => setShowLightbox(false)}
-              className="fixed top-4 right-4 z-10 p-2 bg-white rounded-full shadow-lg hover:bg-gray-100 transition-colors hover:scale-110"
-              type="button"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              </svg>
-            </button>
-            <UsefulInfoContent type={lightboxContent.type} />
-          </div>
-        </div>
+      {showLightbox && (
+        <Lightbox 
+          url={lightboxContent.url}
+          onClose={() => setShowLightbox(false)}
+        />
       )}
     </>
   );
