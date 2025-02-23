@@ -1,3 +1,4 @@
+
 import { Home, Calculator, Newspaper, Building2, GraduationCap, UserRound, ShoppingCart, Route, Bot, BookText, Headphones, Globe, Play } from "lucide-react";
 import { NavItem } from "@/types/navigation";
 
@@ -14,17 +15,17 @@ export const getMainNavItems = (handleSubmenuItemClick: (url: string) => void): 
       { 
         icon: <Newspaper className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, 
         label: 'Relocation News',
-        onClick: () => handleSubmenuItemClick('https://lovable-eng.com/dummy/news.html')
+        onClick: () => handleSubmenuItemClick('news')
       },
       { 
         icon: <BookText className="w-5 h-5 stroke-[1.5] text-[#517cc7]" />, 
         label: 'Relocation Guides',
-        onClick: () => handleSubmenuItemClick('https://lovable-eng.com/dummy/guides.html')
+        onClick: () => handleSubmenuItemClick('guides')
       },
       { 
         icon: <Calculator className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, 
-        label: 'Calculators & Tools',
-        onClick: () => handleSubmenuItemClick('https://lovable-eng.com/dummy/calculator.html')
+        label: 'Cost of Living Calculator',
+        onClick: () => handleSubmenuItemClick('https://www.app.ocean-il.co.il/cost-of-living-comparison-calculator-copy/')
       }
     ]
   },

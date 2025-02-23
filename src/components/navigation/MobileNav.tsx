@@ -21,6 +21,7 @@ const MobileNav = ({ items, expandedItems, onToggleItem, isOpen, menuRef }: Mobi
             <button
               onClick={() => onToggleItem(item.label)}
               className="flex items-center justify-between w-full px-2 py-1.5 text-gray-600 hover:text-primary transition-colors"
+              type="button"
             >
               <div className="flex items-center gap-2">
                 {item.icon}
@@ -39,6 +40,7 @@ const MobileNav = ({ items, expandedItems, onToggleItem, isOpen, menuRef }: Mobi
                     key={subIndex}
                     onClick={subItem.onClick}
                     className="flex items-center gap-2 px-2 py-1 text-xs text-gray-600 hover:text-primary transition-colors w-full text-left"
+                    type="button"
                   >
                     {subItem.icon}
                     <span>{subItem.label}</span>

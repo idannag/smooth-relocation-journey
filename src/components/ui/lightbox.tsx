@@ -4,6 +4,36 @@ interface LightboxProps {
   onClose: () => void;
 }
 
+const getLightboxContent = (url: string) => {
+  if (url === 'news') {
+    return (
+      <div className="bg-gradient-to-r from-blue-50 to-blue-100 p-8">
+        <h2 className="text-3xl font-bold text-center mb-8 font-inter bg-gradient-to-r from-[#2C5AAE] to-[#517cc7] bg-clip-text text-transparent">
+          Latest Relocation News
+        </h2>
+        <LatestArticles />
+      </div>
+    );
+  }
+  if (url === 'guides') {
+    return (
+      <div className="bg-gradient-to-r from-blue-50 to-blue-100 p-8">
+        <h2 className="text-3xl font-bold text-center mb-8 font-inter bg-gradient-to-r from-[#2C5AAE] to-[#517cc7] bg-clip-text text-transparent">
+          Relocation Guides
+        </h2>
+        <LatestArticles />
+      </div>
+    );
+  }
+  return (
+    <iframe
+      src={url}
+      className="w-full h-full"
+      loading="eager"
+    />
+  );
+};
+
 const Lightbox = ({ url, onClose }: LightboxProps) => {
   return (
     <div 
@@ -17,13 +47,11 @@ const Lightbox = ({ url, onClose }: LightboxProps) => {
     >
       <div 
         className="absolute inset-0 bg-black/50 backdrop-blur-sm" 
-        onClick={onClose}
-        style={{ animationDuration: '100ms' }}
       />
-      <div className="relative w-full h-full">
+      <div className="relative w-full h-full overflow-auto">
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 z-10 p-2 bg-white rounded-full shadow-lg hover:bg-gray-100 transition-colors hover:scale-110"
+          className="fixed top-4 right-4 z-10 p-2 bg-white rounded-full shadow-lg hover:bg-gray-100 transition-colors hover:scale-110"
           type="button"
         >
           <svg
@@ -41,12 +69,7 @@ const Lightbox = ({ url, onClose }: LightboxProps) => {
             />
           </svg>
         </button>
-        <iframe
-          src={url}
-          className="w-full h-full"
-          loading="eager"
-          style={{ animationDuration: '100ms' }}
-        />
+        {getLightboxContent(url)}
       </div>
     </div>
   );
