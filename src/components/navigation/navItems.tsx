@@ -1,7 +1,7 @@
 import { Home, Calculator, Newspaper, Building2, GraduationCap, UserRound, ShoppingCart, Route, Bot, BookText, Headphones, Globe, Play } from "lucide-react";
 import { NavItem } from "@/types/navigation";
 
-export const getMainNavItems = (handleSubmenuItemClick: (url: string) => void): NavItem[] => [
+export const getMainNavItems = (handleSubmenuItemClick: (url: string, type: 'news' | 'guides' | 'tools') => void): NavItem[] => [
   { 
     icon: <Home className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, 
     label: 'Home',
@@ -14,17 +14,17 @@ export const getMainNavItems = (handleSubmenuItemClick: (url: string) => void): 
       { 
         icon: <Newspaper className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, 
         label: 'Relocation News',
-        onClick: () => handleSubmenuItemClick('https://lovable-eng.com/dummy/news.html')
+        onClick: () => handleSubmenuItemClick('/useful-info/news', 'news')
       },
       { 
         icon: <BookText className="w-5 h-5 stroke-[1.5] text-[#517cc7]" />, 
         label: 'Relocation Guides',
-        onClick: () => handleSubmenuItemClick('https://lovable-eng.com/dummy/guides.html')
+        onClick: () => handleSubmenuItemClick('/useful-info/guides', 'guides')
       },
       { 
         icon: <Calculator className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, 
         label: 'Calculators & Tools',
-        onClick: () => handleSubmenuItemClick('https://lovable-eng.com/dummy/calculator.html')
+        onClick: () => handleSubmenuItemClick('/useful-info/tools', 'tools')
       }
     ]
   },
@@ -35,17 +35,17 @@ export const getMainNavItems = (handleSubmenuItemClick: (url: string) => void): 
       { 
         icon: <Home className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, 
         label: 'Relocation',
-        onClick: () => handleSubmenuItemClick('https://www.app.ocean-il.co.il/form/relocation-journey/9/')
+        onClick: () => handleSubmenuItemClick('https://www.app.ocean-il.co.il/form/relocation-journey/9/', 'news')
       },
       { 
         icon: <GraduationCap className="w-5 h-5 stroke-[1.5] text-[#517cc7]" />, 
         label: 'Education',
-        onClick: () => handleSubmenuItemClick('https://www.app.ocean-il.co.il/education-copy/')
+        onClick: () => handleSubmenuItemClick('https://www.app.ocean-il.co.il/education-copy/', 'news')
       },
       { 
         icon: <Building2 className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, 
         label: 'Real-Estate',
-        onClick: () => handleSubmenuItemClick('https://www.app.ocean-il.co.il/real-estate-copy/')
+        onClick: () => handleSubmenuItemClick('https://www.app.ocean-il.co.il/real-estate-copy/', 'news')
       }
     ]
   },
@@ -56,13 +56,13 @@ export const getMainNavItems = (handleSubmenuItemClick: (url: string) => void): 
       { 
         icon: <Route className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, 
         label: 'My Relocation',
-        onClick: () => handleSubmenuItemClick('https://preview--ocean-journey-61.lovable.app/')
+        onClick: () => handleSubmenuItemClick('https://preview--ocean-journey-61.lovable.app/', 'news')
       },
-      { icon: <ShoppingCart className="w-5 h-5 stroke-[1.5] text-[#517cc7]" />, label: 'My Orders' },
-      { icon: <Globe className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, label: 'Online Jobs' },
-      { icon: <UserRound className="w-5 h-5 stroke-[1.5] text-[#517cc7]" />, label: 'Connections' },
-      { icon: <Bot className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, label: 'My AI Assistant 24/7' },
-      { icon: <Play className="w-5 h-5 stroke-[1.5] text-[#517cc7]" />, label: 'Relocation VOD' }
+      { icon: <ShoppingCart className="w-5 h-5 stroke-[1.5] text-[#517cc7]" />, label: 'My Orders', onClick: () => handleSubmenuItemClick('', 'news') },
+      { icon: <Globe className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, label: 'Online Jobs', onClick: () => handleSubmenuItemClick('', 'news') },
+      { icon: <UserRound className="w-5 h-5 stroke-[1.5] text-[#517cc7]" />, label: 'Connections', onClick: () => handleSubmenuItemClick('', 'news') },
+      { icon: <Bot className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, label: 'My AI Assistant 24/7', onClick: () => handleSubmenuItemClick('', 'news') },
+      { icon: <Play className="w-5 h-5 stroke-[1.5] text-[#517cc7]" />, label: 'Relocation VOD', onClick: () => handleSubmenuItemClick('', 'news') }
     ]
   }
 ];
