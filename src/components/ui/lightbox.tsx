@@ -6,8 +6,12 @@ interface LightboxProps {
 
 const Lightbox = ({ url, onClose }: LightboxProps) => {
   return (
-    <div className="fixed inset-0 z-[100] animate-fade-in">
-      <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={onClose} />
+    <div className="fixed inset-0 z-[100] animate-fade-in" style={{ animationDuration: '150ms' }}>
+      <div 
+        className="absolute inset-0 bg-black/50 backdrop-blur-sm" 
+        onClick={onClose} 
+        style={{ animationDuration: '150ms' }}
+      />
       <div className="relative w-full h-full">
         <button
           onClick={onClose}
@@ -31,7 +35,8 @@ const Lightbox = ({ url, onClose }: LightboxProps) => {
         <iframe
           src={url}
           className="w-full h-full"
-          frameBorder="0"
+          loading="eager"
+          style={{ animationDuration: '150ms' }}
         />
       </div>
     </div>

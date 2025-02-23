@@ -57,7 +57,7 @@ export const getMainNavItems = (handleSubmenuItemClick: (url: string) => void): 
       { 
         icon: <Route className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, 
         label: 'My Relocation',
-        onClick: () => handleSubmenuItemClick('https://preview--ocean-journey.lovable.app/')
+        onClick: () => handleSubmenuItemClick('https://preview--ocean-journey-61.lovable.app/')
       },
       { icon: <ShoppingCart className="w-5 h-5 stroke-[1.5] text-[#517cc7]" />, label: 'My Orders' },
       { icon: <Globe className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, label: 'Online Jobs' },

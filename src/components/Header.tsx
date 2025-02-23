@@ -52,7 +52,7 @@ const Header = () => {
       <header className="fixed top-0 left-0 right-0 z-50 bg-white shadow-lg">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between h-16">
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-4">
               <a href="/" className="flex items-center">
                 <img 
                   src="https://www.app.ocean-il.co.il/wp-content/uploads/2022/04/cropped-logo.jpg" 
@@ -60,6 +60,10 @@ const Header = () => {
                   className="h-8 w-auto"
                 />
               </a>
+              <div className="hidden md:block">
+                <h1 className="text-lg font-semibold text-primary">Ocean Relocation Platform</h1>
+                <p className="text-xs text-gray-600">all what u need in one place</p>
+              </div>
             </div>
 
             <div className="flex items-center space-x-1">
