@@ -34,11 +34,11 @@ export default {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         primary: {
-          DEFAULT: "#40E0D0",
+          DEFAULT: "#2C5AAE",
           foreground: "hsl(var(--primary-foreground))",
         },
         secondary: {
-          DEFAULT: "#89CFF0",
+          DEFAULT: "#40E0D0",
           foreground: "hsl(var(--secondary-foreground))",
         },
         accent: {
