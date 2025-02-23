@@ -1,4 +1,6 @@
 
+import LatestArticles from "@/components/LatestArticles";
+
 interface LightboxProps {
   url: string;
   onClose: () => void;
