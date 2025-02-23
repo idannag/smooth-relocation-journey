@@ -49,11 +49,11 @@ const CurrencyStrip = () => {
   return (
     <div className="flex items-center ml-4 pl-4 border-l border-gray-300">
       <div 
-        className={`flex items-center space-x-1 whitespace-nowrap transition-all duration-500 transform ${
+        className={`flex items-center space-x-1 whitespace-nowrap transition-all duration-500 transform text-xs md:text-sm ${
           isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-2'
         }`}
       >
-        <span className="text-xs font-bold">1$ = {currentCurrency.symbol}{rates[currentCurrency.code]?.toFixed(2)}</span>
+        <span className="font-bold">1$ = {currentCurrency.symbol}{rates[currentCurrency.code]?.toFixed(2)}</span>
       </div>
     </div>
   );

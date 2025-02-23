@@ -6,11 +6,11 @@ interface LightboxProps {
 
 const Lightbox = ({ url, onClose }: LightboxProps) => {
   return (
-    <div className="fixed inset-0 z-[100] animate-fade-in" style={{ animationDuration: '150ms' }}>
+    <div className="fixed inset-0 z-[100] animate-fade-in" style={{ animationDuration: '100ms' }}>
       <div 
         className="absolute inset-0 bg-black/50 backdrop-blur-sm" 
         onClick={onClose} 
-        style={{ animationDuration: '150ms' }}
+        style={{ animationDuration: '100ms' }}
       />
       <div className="relative w-full h-full">
         <button
@@ -36,7 +36,8 @@ const Lightbox = ({ url, onClose }: LightboxProps) => {
           src={url}
           className="w-full h-full"
           loading="eager"
-          style={{ animationDuration: '150ms' }}
+          importance="high"
+          style={{ animationDuration: '100ms' }}
         />
       </div>
     </div>

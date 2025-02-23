@@ -15,12 +15,12 @@ export const getMainNavItems = (handleSubmenuItemClick: (url: string) => void): 
       { 
         icon: <Newspaper className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, 
         label: 'Relocation News',
-        onClick: () => handleSubmenuItemClick('/news')
+        onClick: () => handleSubmenuItemClick('https://www.app.ocean-il.co.il/news/')
       },
       { 
         icon: <BookText className="w-5 h-5 stroke-[1.5] text-[#517cc7]" />, 
         label: 'Relocation Guides',
-        onClick: () => handleSubmenuItemClick('/guides')
+        onClick: () => handleSubmenuItemClick('https://www.app.ocean-il.co.il/guides/')
       },
       { 
         icon: <Calculator className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, 

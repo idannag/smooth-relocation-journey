@@ -1,5 +1,6 @@
 
 import { NavItem } from "@/types/navigation";
+import { useEffect, useRef } from "react";
 
 interface DesktopNavProps {
   items: NavItem[];
@@ -8,8 +9,21 @@ interface DesktopNavProps {
 }
 
 const DesktopNav = ({ items, expandedItems, onToggleItem }: DesktopNavProps) => {
+  const menuRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+        expandedItems.forEach(item => onToggleItem(item));
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [expandedItems, onToggleItem]);
+
   return (
-    <div className="hidden md:flex items-center space-x-8">
+    <div className="hidden md:flex items-center space-x-8" ref={menuRef}>
       <nav className="flex items-center space-x-8">
         {items.map((item, index) => (
           <div key={index} className="relative">

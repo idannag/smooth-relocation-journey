@@ -1,4 +1,3 @@
-
 import { useEffect, useState, useRef } from 'react';
 import { supabase } from "@/integrations/supabase/client";
 import { Review } from "@/types/testimonials";
@@ -43,6 +42,27 @@ const Testimonials = () => {
             relative_time_description: "3 months ago",
             text: "Outstanding support from start to finish. They really understand the challenges of relocating.",
             profile_photo_url: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80"
+          },
+          {
+            author_name: "Michael P.",
+            rating: 5,
+            relative_time_description: "1 month ago",
+            text: "The team at Ocean International made our move to Israel seamless. Their knowledge and support were invaluable.",
+            profile_photo_url: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e"
+          },
+          {
+            author_name: "Emma W.",
+            rating: 5,
+            relative_time_description: "2 weeks ago",
+            text: "Fantastic service from start to finish. The team was always available to answer questions and provide guidance.",
+            profile_photo_url: "https://images.unsplash.com/photo-1534528741775-53994a69daeb"
+          },
+          {
+            author_name: "Daniel R.",
+            rating: 4,
+            relative_time_description: "1 week ago",
+            text: "Very professional service. They helped us with all aspects of our relocation, making it much easier than expected.",
+            profile_photo_url: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d"
           }
         ];
         setReviews(dummyReviews);
