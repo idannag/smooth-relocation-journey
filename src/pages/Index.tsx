@@ -3,7 +3,6 @@ import Header from '../components/Header';
 import VideoHero from '../components/VideoHero';
 import IntroSection from '../components/IntroSection';
 import Statistics from '../components/Statistics';
-import LifecycleCircle from '../components/LifecycleCircle';
 import Testimonials from '../components/Testimonials';
 import Associates from '../components/Associates';
 import PopularDestinations from '../components/PopularDestinations';
@@ -21,7 +20,6 @@ const Index = () => {
       <IntroSection />
       <UsefulInfo />
       <PopularDestinations />
-      <LifecycleCircle />
       <Statistics />
       <Testimonials />
       <Associates />

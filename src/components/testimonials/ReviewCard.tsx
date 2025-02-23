@@ -10,7 +10,7 @@ interface ReviewCardProps {
 const ReviewCard = ({ review, index }: ReviewCardProps) => {
   return (
     <div 
-      className="flex-none w-80 h-64 snap-center bg-white p-4 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 animate-fade-in hover:scale-[1.02]"
+      className="flex-none w-80 h-56 snap-center bg-white p-4 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 animate-fade-in hover:scale-[1.02]"
       style={{ animation: `slide-up 0.5s ease-out ${index * 0.1}s both` }}
     >
       <div className="flex items-center mb-3">
