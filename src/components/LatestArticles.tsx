@@ -1,6 +1,8 @@
+
 import { ChevronLeft, ChevronRight, Bell } from 'lucide-react';
 import { useRef } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+
 const UsefulInfo = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
   const newsArticles = [{
@@ -55,46 +57,51 @@ const UsefulInfo = () => {
       });
     }
   };
-  const renderArticles = (articles: typeof newsArticles) => <div className="relative group">
-      <button onClick={() => scroll('left')} className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white/80 rounded-full p-2 shadow-lg opacity-0 group-hover:opacity-100 transition-opacity">
-        <ChevronLeft className="w-6 h-6 text-primary" />
+  const renderArticles = (articles: typeof newsArticles) => (
+    <div className="relative group">
+      <button onClick={() => scroll('left')} className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white/80 rounded-full p-2 shadow-lg">
+        <ChevronLeft className="w-6 h-6 text-[#2C5AAE]" />
       </button>
       
       <div ref={scrollRef} className="flex overflow-x-auto gap-6 pb-4 px-4 snap-x snap-mandatory scrollbar-hide" style={{
-      scrollbarWidth: 'none',
-      msOverflowStyle: 'none'
-    }}>
-        {articles.map((article, index) => <div key={index} className="flex-none w-80 snap-center bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 animate-fade-in group">
+        scrollbarWidth: 'none',
+        msOverflowStyle: 'none'
+      }}>
+        {articles.map((article, index) => (
+          <div key={index} className="flex-none w-80 snap-center bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 animate-fade-in group">
             <img src={article.image} alt={article.title} className="w-full h-40 object-cover transition-transform duration-300 group-hover:scale-105" />
             <div className="p-4">
               <h3 className="text-base font-semibold mb-2 line-clamp-1">{article.title}</h3>
               <p className="text-gray-600 text-sm mb-3 line-clamp-2">{article.excerpt}</p>
-              <a href={article.link} className="inline-flex items-center text-primary text-sm font-medium hover:text-secondary transition-colors">
+              <a href={article.link} className="inline-flex items-center text-[#2C5AAE] text-sm font-medium hover:text-[#40E0D0] transition-colors">
                 Read more →
               </a>
             </div>
-          </div>)}
+          </div>
+        ))}
       </div>
       
-      <button onClick={() => scroll('right')} className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white/80 rounded-full p-2 shadow-lg opacity-0 group-hover:opacity-100 transition-opacity">
-        <ChevronRight className="w-6 h-6 text-primary" />
+      <button onClick={() => scroll('right')} className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white/80 rounded-full p-2 shadow-lg">
+        <ChevronRight className="w-6 h-6 text-[#2C5AAE]" />
       </button>
-    </div>;
-  return <section className="py-16 bg-gradient-to-r from-blue-50 to-blue-100">
+    </div>
+  );
+  return (
+    <section className="py-16 bg-gradient-to-r from-blue-50 to-blue-100">
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-bold text-center mb-8 font-inter bg-gradient-to-r from-[#FC466B] to-[#3F5EFB] bg-clip-text text-transparent">
-          Useful Info
+        <h2 className="text-3xl font-bold text-center mb-8 font-inter bg-gradient-to-r from-[#2C5AAE] to-[#40E0D0] bg-clip-text text-transparent">
+          Useful Information
         </h2>
         
         <Tabs defaultValue="news" className="w-full">
           <TabsList className="flex justify-center mb-8 bg-white/50 backdrop-blur-sm p-1 rounded-full mx-auto max-w-md">
-            <TabsTrigger value="news" className="px-6 py-2 rounded-full data-[state=active]:bg-primary data-[state=active]:text-white transition-all">
+            <TabsTrigger value="news" className="px-6 py-2 rounded-full data-[state=active]:bg-[#2C5AAE] data-[state=active]:text-white transition-all">
               News
             </TabsTrigger>
-            <TabsTrigger value="guides" className="px-6 py-2 rounded-full data-[state=active]:bg-primary data-[state=active]:text-white transition-all">
+            <TabsTrigger value="guides" className="px-6 py-2 rounded-full data-[state=active]:bg-[#2C5AAE] data-[state=active]:text-white transition-all">
               Guides
             </TabsTrigger>
-            <TabsTrigger value="tools" className="px-6 py-2 rounded-full data-[state=active]:bg-primary data-[state=active]:text-white transition-all">
+            <TabsTrigger value="tools" className="px-6 py-2 rounded-full data-[state=active]:bg-[#2C5AAE] data-[state=active]:text-white transition-all">
               Tools
             </TabsTrigger>
           </TabsList>
@@ -114,19 +121,21 @@ const UsefulInfo = () => {
 
         <div className="mt-12 text-center">
           <button onClick={() => {
-          if ('Notification' in window) {
-            Notification.requestPermission().then(function (permission) {
-              if (permission === "granted") {
-                console.log("Push notification permission granted");
-              }
-            });
-          }
-        }} className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] text-white rounded-full hover:from-[#7C3AED] hover:to-[#C026D3] transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 hover:animate-pulse">
+            if ('Notification' in window) {
+              Notification.requestPermission().then(function (permission) {
+                if (permission === "granted") {
+                  console.log("Push notification permission granted");
+                }
+              });
+            }
+          }} className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-[#2C5AAE] to-[#40E0D0] text-white rounded-full hover:from-[#2C5AAE] hover:to-[#40E0D0] hover:opacity-90 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105">
             <Bell className="w-5 h-5 mr-2" />
             <span className="font-semibold">Get Updates on New Content!</span>
           </button>
         </div>
       </div>
-    </section>;
+    </section>
+  );
 };
+
 export default UsefulInfo;

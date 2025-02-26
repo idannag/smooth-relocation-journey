@@ -21,26 +21,18 @@ const VideoHero = () => {
       <div className="absolute inset-0 bg-gradient-to-r from-[#2C5AAE]/10 to-[#40E0D0]/10" />
       <div className="relative h-full flex flex-col items-center justify-between text-white text-center px-2 max-w-4xl mx-auto pb-20">
         <h1 
-          className="text-4xl md:text-5xl lg:text-6xl font-bold mt-32 mb-12 animate-fade-in font-poppins text-white md:leading-[1.35]"
+          className="text-5xl md:text-6xl lg:text-7xl font-bold mt-32 mb-12 animate-fade-in font-poppins text-white md:leading-[1.35]"
           style={{ textShadow: '2px 2px 4px rgba(0, 0, 0, 0.9)' }}
         >
           We simplify your relocation journey.
         </h1>
         <div className="space-y-4 mb-12">
-          <ul className="list-none space-y-8">
-            <li 
-              className="text-lg md:text-xl lg:text-2xl animate-slide-up max-w-3xl px-4 md:px-6 flex items-center justify-center text-white font-bold leading-[1.5rem] md:leading-normal"
-              style={{ textShadow: '2px 2px 4px rgba(0, 0, 0, 0.9)' }}
-            >
-              Expert guidance every step of the way
-            </li>
-            <li 
-              className="text-lg md:text-xl lg:text-2xl animate-slide-up max-w-3xl px-4 md:px-6 flex items-center justify-center text-white font-bold leading-[1.5rem] md:leading-normal"
-              style={{ textShadow: '2px 2px 4px rgba(0, 0, 0, 0.9)' }}
-            >
-              Your tailored relocation starts here
-            </li>
-          </ul>
+          <p 
+            className="text-xl md:text-2xl lg:text-3xl animate-slide-up max-w-3xl px-4 md:px-6 flex items-center justify-center text-white font-bold leading-[1.5rem] md:leading-normal"
+            style={{ textShadow: '2px 2px 4px rgba(0, 0, 0, 0.9)' }}
+          >
+            Expert guidance at every step for your tailored relocation experience
+          </p>
         </div>
       </div>
     </div>
