@@ -144,4 +144,8 @@ const PopularDestinations = () => {
           </button>
         </div>
       </div>
-    
+    </section>
+  );
+};
+
+export default PopularDestinations;
