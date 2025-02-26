@@ -114,7 +114,7 @@ const Header = () => {
                   alt="Ocean IL Logo" 
                   className="h-8 w-auto"
                   loading="eager"
-                  fetchpriority="high"
+                  fetchPriority="high"
                 />
               </a>
               <div className="hidden md:block">

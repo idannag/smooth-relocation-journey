@@ -15,7 +15,7 @@ const VideoHero = () => {
         playsInline
         preload="auto"
         className="absolute inset-0 w-full h-full object-cover pointer-events-none"
-        fetchpriority="high"
+        fetchPriority="high"
       >
         <source src={videoUrl} type="video/mp4" />
       </video>
