@@ -1,3 +1,4 @@
+
 import { useState, useEffect, useRef } from "react";
 import { Menu } from "lucide-react";
 import TimeStrip from "./TimeStrip";
@@ -13,7 +14,7 @@ const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [expandedItems, setExpandedItems] = useState<string[]>([]);
   const [showLightbox, setShowLightbox] = useState(false);
-  const [lightboxContent, setLightboxContent] = useState<{ url: string; size: 'full' | 'medium' }>({ url: '', size: 'full' });
+  const [lightboxContent, setLightboxContent] = useState<string>('');
   const [showChatbot, setShowChatbot] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const isMobile = useIsMobile();
@@ -63,9 +64,6 @@ const Header = () => {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  // Debug logging
-  console.log("showChatbot:", showChatbot);
-
   const toggleItem = (label: string) => {
     console.log("Toggle item clicked:", label);
     setExpandedItems(prev => 
@@ -78,11 +76,7 @@ const Header = () => {
     
     if (url === 'chatbot') {
       console.log("Opening chatbot");
-      // Show the chatbot in lightbox
-      setLightboxContent({ 
-        url: 'chatbot',
-        size: 'full'
-      });
+      setLightboxContent('chatbot');
       setShowLightbox(true);
       setIsOpen(false);
       return;
@@ -90,29 +84,25 @@ const Header = () => {
     
     if (url === 'orders') {
       console.log("Opening orders");
-      // Show the orders in lightbox
-      setLightboxContent({ 
-        url: 'orders',
-        size: 'full'
-      });
+      setLightboxContent('orders');
       setShowLightbox(true);
       setIsOpen(false);
       return;
     }
+
+    if (url === 'My Ocean Community') {
+      window.open('https://chat.whatsapp.com/LODS9mJleJU9e1Y27ml2TB', '_blank');
+      return;
+    }
     
-    setLightboxContent({ 
-      url: url.startsWith('http') ? url : window.location.origin + url,
-      size: 'full'
-    });
+    setLightboxContent(url.startsWith('http') ? url : window.location.origin + url);
     setShowLightbox(true);
     setIsOpen(false);
   };
 
   const handleTimeOrCurrencyClick = () => {
-    setLightboxContent({
-      url: 'time-currency',
-      size: 'medium'
-    });
+    console.log("Opening time-currency lightbox");
+    setLightboxContent('time-currency');
     setShowLightbox(true);
   };
 
@@ -133,7 +123,6 @@ const Header = () => {
                   alt="Ocean IL Logo" 
                   className="h-8 w-auto"
                   loading="eager"
-                  fetchPriority="high"
                 />
               </a>
               <div className="hidden md:block">
@@ -176,7 +165,7 @@ const Header = () => {
 
       {showLightbox && (
         <Lightbox 
-          url={lightboxContent.url}
+          url={lightboxContent}
           onClose={() => setShowLightbox(false)}
         />
       )}

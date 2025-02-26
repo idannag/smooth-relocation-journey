@@ -38,14 +38,14 @@ const Statistics = () => {
             >
               <div className="relative mb-2 md:mb-3">
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent rounded-full transform scale-110 opacity-0 group-hover/stat:opacity-100 transition-all duration-500" />
-                <stat.icon className="w-4 h-4 md:w-6 md:h-6 mx-auto text-[#2C5AAE] transform group-hover/stat:scale-110 transition-transform duration-500" />
+                <stat.icon className="w-5 h-5 md:w-6 md:h-6 mx-auto text-[#2C5AAE] transform group-hover/stat:scale-110 transition-transform duration-500" />
               </div>
               <div className="text-center space-y-0.5 md:space-y-1">
-                <p className="text-gray-600 text-[10px] md:text-xs">{stat.topText}</p>
-                <h3 className="text-lg md:text-2xl font-bold text-[#2C5AAE] transform group-hover/stat:translate-y-[-2px] transition-transform duration-500">
+                <p className="text-gray-600 text-[11px] md:text-xs font-medium">{stat.topText}</p>
+                <h3 className="text-xl md:text-2xl font-bold text-[#2C5AAE] transform group-hover/stat:translate-y-[-2px] transition-transform duration-500">
                   {stat.number}
                 </h3>
-                <p className="text-gray-600 text-[10px] md:text-xs group-hover/stat:text-gray-800 transition-colors duration-500">
+                <p className="text-gray-600 text-[11px] md:text-xs font-medium group-hover/stat:text-gray-800 transition-colors duration-500">
                   {stat.bottomText}
                 </p>
               </div>
