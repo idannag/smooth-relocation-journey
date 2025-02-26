@@ -6,11 +6,12 @@ interface MobileNavProps {
   items: NavItem[];
   expandedItems: string[];
   onToggleItem: (label: string) => void;
+  onSubItemClick: (url: string) => void;
   isOpen: boolean;
   menuRef: React.RefObject<HTMLDivElement>;
 }
 
-const MobileNav = ({ items, expandedItems, onToggleItem, isOpen, menuRef }: MobileNavProps) => {
+const MobileNav = ({ items, expandedItems, onToggleItem, onSubItemClick, isOpen, menuRef }: MobileNavProps) => {
   if (!isOpen) return null;
 
   return (
@@ -20,7 +21,7 @@ const MobileNav = ({ items, expandedItems, onToggleItem, isOpen, menuRef }: Mobi
           <div key={index} className="py-1 border-b border-gray-100 last:border-0">
             <button
               onClick={() => onToggleItem(item.label)}
-              className="flex items-center justify-between w-full px-2 py-1.5 text-gray-600 hover:text-primary transition-colors"
+              className="flex items-center justify-between w-full px-2 py-1.5 text-gray-600 hover:text-[#2C5AAE] transition-colors"
               type="button"
             >
               <div className="flex items-center gap-2">
@@ -38,8 +39,14 @@ const MobileNav = ({ items, expandedItems, onToggleItem, isOpen, menuRef }: Mobi
                 {item.subItems.map((subItem, subIndex) => (
                   <button
                     key={subIndex}
-                    onClick={subItem.onClick}
-                    className="flex items-center gap-2 px-2 py-1 text-xs text-gray-600 hover:text-primary transition-colors w-full text-left"
+                    onClick={() => {
+                      if (subItem.onClick) {
+                        subItem.onClick();
+                      } else if (subItem.label === "My AI Assistant 24/7") {
+                        onSubItemClick('chatbot');
+                      }
+                    }}
+                    className="flex items-center gap-2 px-2 py-1 text-xs text-gray-600 hover:text-[#2C5AAE] transition-colors w-full text-left"
                     type="button"
                   >
                     {subItem.icon}

@@ -1,3 +1,4 @@
+
 import { useEffect, useState, useRef } from 'react';
 import { supabase } from "@/integrations/supabase/client";
 import { Review } from "@/types/testimonials";
@@ -8,6 +9,7 @@ const Testimonials = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
     const fetchGoogleReviews = async () => {
@@ -73,13 +75,41 @@ const Testimonials = () => {
     fetchGoogleReviews();
   }, []);
 
+  // Auto scroll testimonials
+  useEffect(() => {
+    if (reviews.length === 0) return;
+    
+    const interval = setInterval(() => {
+      if (scrollRef.current) {
+        const cardWidth = 320; // Card width + gap
+        const nextIndex = (currentIndex + 1) % (reviews.length - 2); // Stop 2 cards before the end
+        
+        scrollRef.current.scrollTo({
+          left: nextIndex * cardWidth,
+          behavior: 'smooth'
+        });
+        
+        setCurrentIndex(nextIndex);
+      }
+    }, 3000);
+    
+    return () => clearInterval(interval);
+  }, [currentIndex, reviews.length]);
+
   const scroll = (direction: 'left' | 'right') => {
     if (scrollRef.current) {
-      const scrollAmount = 300;
-      scrollRef.current.scrollBy({
-        left: direction === 'left' ? -scrollAmount : scrollAmount,
+      const scrollAmount = 320;
+      const newPosition = direction === 'left' 
+        ? scrollRef.current.scrollLeft - scrollAmount 
+        : scrollRef.current.scrollLeft + scrollAmount;
+        
+      scrollRef.current.scrollTo({
+        left: newPosition,
         behavior: 'smooth'
       });
+      
+      const newIndex = Math.round(newPosition / scrollAmount);
+      setCurrentIndex(Math.max(0, Math.min(newIndex, reviews.length - 3)));
     }
   };
 
@@ -113,7 +143,7 @@ const Testimonials = () => {
   return (
     <section className="py-16 bg-gray-50">
       <div className="container mx-auto px-4 animate-fade-in">
-        <h2 className="text-3xl font-bold text-center mb-8 font-inter bg-gradient-to-r from-[#8B5CF6] via-[#D946EF] to-[#F97316] bg-clip-text text-transparent animate-fade-in hover:scale-105 transition-transform duration-300">
+        <h2 className="text-3xl font-bold text-center mb-8 font-inter bg-gradient-to-r from-[#2C5AAE] to-[#40E0D0] bg-clip-text text-transparent animate-fade-in hover:scale-105 transition-transform duration-300">
           What Our Clients Say
         </h2>
 
@@ -136,7 +166,7 @@ const Testimonials = () => {
             href="https://maps.app.goo.gl/3DkAx4B6kb8Q1B9J7"
             target="_blank"
             rel="noopener noreferrer"
-            className="px-6 py-2 bg-primary text-white rounded-full hover:bg-primary/90 transition-all duration-300 shadow-md hover:shadow-lg hover:scale-105 animate-fade-in"
+            className="px-6 py-2 bg-gradient-to-r from-[#2C5AAE] to-[#40E0D0] text-white rounded-full hover:opacity-90 transition-all duration-300 shadow-md hover:shadow-lg hover:scale-105 animate-fade-in"
           >
             All Reviews
           </a>
@@ -144,7 +174,7 @@ const Testimonials = () => {
             href="https://search.google.com/local/writereview?placeid=ChIJc0HHe0tHHRUR4G4V7hGPL08"
             target="_blank"
             rel="noopener noreferrer"
-            className="px-6 py-2 bg-secondary text-white rounded-full hover:bg-secondary/90 transition-all duration-300 shadow-md hover:shadow-lg hover:scale-105 animate-fade-in"
+            className="px-6 py-2 bg-gradient-to-r from-[#2C5AAE] to-[#40E0D0] text-white rounded-full hover:opacity-90 transition-all duration-300 shadow-md hover:shadow-lg hover:scale-105 animate-fade-in"
           >
             Write Review
           </a>

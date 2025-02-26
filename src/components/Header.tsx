@@ -8,12 +8,14 @@ import DesktopNav from "./navigation/DesktopNav";
 import MobileNav from "./navigation/MobileNav";
 import Lightbox from "./ui/lightbox";
 import { getMainNavItems } from "./navigation/navItems";
+import Chatbot from "./Chatbot";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [expandedItems, setExpandedItems] = useState<string[]>([]);
   const [showLightbox, setShowLightbox] = useState(false);
   const [lightboxContent, setLightboxContent] = useState<{ url: string; size: 'full' | 'medium' }>({ url: '', size: 'full' });
+  const [showChatbot, setShowChatbot] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const isMobile = useIsMobile();
 
@@ -44,6 +46,13 @@ const Header = () => {
   };
 
   const handleSubmenuItemClick = (url: string) => {
+    if (url === 'chatbot') {
+      setShowChatbot(true);
+      setIsOpen(false);
+      setExpandedItems([]);
+      return;
+    }
+    
     setLightboxContent({ 
       url: url.startsWith('http') ? url : window.location.origin + url,
       size: 'full'
@@ -69,7 +78,7 @@ const Header = () => {
                 />
               </a>
               <div className="hidden md:block">
-                <h1 className="text-lg font-semibold text-primary">Ocean Relocation Platform</h1>
+                <h1 className="text-lg font-semibold text-[#2C5AAE]">Ocean Relocation Platform</h1>
                 <p className="text-xs text-gray-600">all what u need in one place</p>
               </div>
             </div>
@@ -100,6 +109,7 @@ const Header = () => {
           items={mainNavItems}
           expandedItems={expandedItems}
           onToggleItem={toggleItem}
+          onSubItemClick={handleSubmenuItemClick}
           isOpen={isOpen}
           menuRef={menuRef}
         />
@@ -110,6 +120,10 @@ const Header = () => {
           url={lightboxContent.url}
           onClose={() => setShowLightbox(false)}
         />
+      )}
+
+      {showChatbot && (
+        <Chatbot onClose={() => setShowChatbot(false)} />
       )}
     </>
   );

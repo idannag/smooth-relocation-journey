@@ -1,9 +1,16 @@
 
 import React, { useState } from 'react';
 import Lightbox from './ui/lightbox';
+import { CheckCircle } from 'lucide-react';
 
 const IntroSection = () => {
   const [showVideo, setShowVideo] = useState(false);
+
+  const bulletPoints = [
+    "Expert immigration & visa services",
+    "Housing search & relocation logistics",
+    "Cultural integration & local support"
+  ];
 
   return (
     <section className="py-16 bg-white">
@@ -12,9 +19,20 @@ const IntroSection = () => {
           <h2 className="text-4xl md:text-5xl font-bold mb-4 animate-fade-in font-inter bg-gradient-to-r from-[#2C5AAE] to-[#40E0D0] bg-clip-text text-transparent">
             Relocation needs 360° support
           </h2>
-          <p className="text-xl md:text-2xl mb-6 animate-slide-up text-gray-700">
-            Since it's a complex journey
-          </p>
+          
+          <div className="space-y-3 mb-6">
+            {bulletPoints.map((point, index) => (
+              <div 
+                key={index} 
+                className="flex items-center justify-center gap-2 animate-slide-up"
+                style={{ animationDelay: `${index * 150}ms` }}
+              >
+                <CheckCircle className="w-5 h-5 text-[#2C5AAE]" />
+                <p className="text-md md:text-lg text-gray-700">{point}</p>
+              </div>
+            ))}
+          </div>
+          
           <button
             onClick={() => setShowVideo(true)}
             className="px-8 py-3 rounded-full bg-gradient-to-r from-[#2C5AAE] to-[#40E0D0] text-white font-semibold 
