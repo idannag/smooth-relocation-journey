@@ -65,27 +65,17 @@ export const getMainNavItems = (handleSubmenuItemClick: (url: string) => void): 
         onClick: () => handleSubmenuItemClick('orders')
       },
       { 
-        icon: <Globe className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, 
-        label: 'Online Jobs',
-        onClick: () => handleSubmenuItemClick('jobs')
-      },
-      { 
         icon: <UserRound className="w-5 h-5 stroke-[1.5] text-[#517cc7]" />, 
-        label: 'Connections',
-        onClick: () => handleSubmenuItemClick('connections')
+        label: 'My Ocean Community',
+        onClick: () => handleSubmenuItemClick('https://chat.whatsapp.com/LODS9mJleJU9e1Y27ml2TB')
       },
       { 
         icon: <Bot className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, 
-        label: 'My AI Assistant 24/7',
+        label: 'My 24/7 Assistant',
         onClick: () => {
           console.log("AI Assistant clicked from navItems");
           handleSubmenuItemClick('chatbot');
         }
-      },
-      { 
-        icon: <Play className="w-5 h-5 stroke-[1.5] text-[#517cc7]" />, 
-        label: 'Relocation VOD',
-        onClick: () => handleSubmenuItemClick('vod')
       }
     ]
   }

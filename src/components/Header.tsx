@@ -89,12 +89,32 @@ const Header = () => {
       return;
     }
     
+    if (url === 'orders') {
+      console.log("Opening orders");
+      // Show the orders in lightbox
+      setLightboxContent({ 
+        url: 'orders',
+        size: 'full'
+      });
+      setShowLightbox(true);
+      setIsOpen(false);
+      return;
+    }
+    
     setLightboxContent({ 
       url: url.startsWith('http') ? url : window.location.origin + url,
       size: 'full'
     });
     setShowLightbox(true);
     setIsOpen(false);
+  };
+
+  const handleTimeOrCurrencyClick = () => {
+    setLightboxContent({
+      url: 'time-currency',
+      size: 'medium'
+    });
+    setShowLightbox(true);
   };
 
   const mainNavItems = getMainNavItems((url) => {
@@ -118,14 +138,14 @@ const Header = () => {
                 />
               </a>
               <div className="hidden md:block">
-                <h1 className="text-lg font-semibold text-[#2C5AAE]">Ocean Relocation Platform</h1>
-                <p className="text-xs text-gray-600">all what u need in one place</p>
+                <h1 className="text-lg font-semibold text-[#2C5AAE]">Ocean Relocation App</h1>
+                <p className="text-xs text-gray-600">all you need in one place</p>
               </div>
             </div>
 
             <div className="flex items-center space-x-1">
-              <TimeStrip />
-              <CurrencyStrip />
+              <TimeStrip onClick={handleTimeOrCurrencyClick} />
+              <CurrencyStrip onClick={handleTimeOrCurrencyClick} />
             </div>
 
             <DesktopNav 

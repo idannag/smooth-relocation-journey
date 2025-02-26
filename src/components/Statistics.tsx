@@ -30,11 +30,11 @@ const Statistics = () => {
           We Are
         </h2>
         
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+        <div className="flex flex-row overflow-x-auto pb-4 gap-4 max-w-4xl mx-auto">
           {statistics.map((stat, index) => (
             <div
               key={index}
-              className="bg-gradient-to-br from-white via-blue-50 to-white p-4 rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.06)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.12)] transition-all duration-500 animate-fade-in group/stat"
+              className="flex-shrink-0 w-[calc(100vw-2rem)] sm:w-auto sm:flex-1 bg-gradient-to-br from-white via-blue-50 to-white p-4 rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.06)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.12)] transition-all duration-500 animate-fade-in group/stat"
             >
               <div className="relative mb-3">
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent rounded-full transform scale-110 opacity-0 group-hover/stat:opacity-100 transition-all duration-500" />

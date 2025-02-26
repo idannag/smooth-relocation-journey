@@ -2,7 +2,11 @@
 import { useState, useEffect } from 'react';
 import { Clock } from 'lucide-react';
 
-const TimeStrip = () => {
+interface TimeStripProps {
+  onClick?: () => void;
+}
+
+const TimeStrip = ({ onClick }: TimeStripProps) => {
   const [times, setTimes] = useState<{ [key: string]: string }>({});
   const [currentCityIndex, setCurrentCityIndex] = useState(0);
   const [isVisible, setIsVisible] = useState(true);
@@ -66,7 +70,10 @@ const TimeStrip = () => {
   const currentCity = cities[currentCityIndex];
 
   return (
-    <div className="flex items-center space-x-2 text-xs md:text-sm text-gray-600">
+    <button 
+      onClick={onClick}
+      className="flex items-center space-x-2 text-xs md:text-sm text-[#2C5AAE] hover:text-[#40E0D0] transition-colors"
+    >
       <div 
         className={`flex items-center space-x-1 whitespace-nowrap transition-all duration-500 transform ${
           isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-2'
@@ -76,7 +83,7 @@ const TimeStrip = () => {
         <span className="font-bold">{currentCity.name}:</span>
         <span className="font-bold">{times[currentCity.name]}</span>
       </div>
-    </div>
+    </button>
   );
 };
 

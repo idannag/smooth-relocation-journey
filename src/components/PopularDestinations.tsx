@@ -1,9 +1,12 @@
 
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
+import Lightbox from './ui/lightbox';
 
 const PopularDestinations = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
+  const [showLightbox, setShowLightbox] = useState(false);
+  const [selectedDestination, setSelectedDestination] = useState("");
   
   const destinations = [
     {
@@ -78,6 +81,11 @@ const PopularDestinations = () => {
     }
   };
 
+  const handleDestinationClick = (city: string) => {
+    setSelectedDestination(city);
+    setShowLightbox(true);
+  };
+
   return (
     <section className="py-16 bg-white relative">
       <div className="container mx-auto px-4">
@@ -103,7 +111,8 @@ const PopularDestinations = () => {
             {destinations.map((destination, index) => (
               <div
                 key={index}
-                className="flex-none w-80 h-48 snap-center relative overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-all duration-300 animate-fade-in group/card"
+                className="flex-none w-80 h-48 snap-center relative overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-all duration-300 animate-fade-in group/card cursor-pointer"
+                onClick={() => handleDestinationClick(destination.city)}
               >
                 {destination.video.includes('youtube.com') ? (
                   <iframe
@@ -144,6 +153,13 @@ const PopularDestinations = () => {
           </button>
         </div>
       </div>
+
+      {showLightbox && (
+        <Lightbox 
+          url={`destination:${selectedDestination}`}
+          onClose={() => setShowLightbox(false)}
+        />
+      )}
     </section>
   );
 };
