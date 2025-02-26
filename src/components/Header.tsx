@@ -19,10 +19,14 @@ const Header = () => {
   const menuRef = useRef<HTMLDivElement>(null);
   const isMobile = useIsMobile();
 
+  // Reset expanded items when mobile state changes
+  useEffect(() => {
+    setExpandedItems([]);
+  }, [isMobile]);
+
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
-        setExpandedItems([]);
         setIsOpen(false);
       }
     };
@@ -31,17 +35,23 @@ const Header = () => {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
+  // Debug logging
+  console.log("showChatbot:", showChatbot);
+
   const toggleItem = (label: string) => {
+    console.log("Toggle item clicked:", label);
     setExpandedItems(prev => 
       prev.includes(label) ? prev.filter(item => item !== label) : [...prev, label]
     );
   };
 
   const handleSubmenuItemClick = (url: string) => {
+    console.log("Submenu item clicked:", url);
+    
     if (url === 'chatbot') {
+      console.log("Opening chatbot");
       setShowChatbot(true);
       setIsOpen(false);
-      setExpandedItems([]);
       return;
     }
     
@@ -51,10 +61,12 @@ const Header = () => {
     });
     setShowLightbox(true);
     setIsOpen(false);
-    setExpandedItems([]);
   };
 
-  const mainNavItems = getMainNavItems(handleSubmenuItemClick);
+  const mainNavItems = getMainNavItems((url) => {
+    console.log("Main nav item handler with URL:", url);
+    handleSubmenuItemClick(url);
+  });
 
   return (
     <>

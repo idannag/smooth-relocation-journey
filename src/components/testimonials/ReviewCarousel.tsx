@@ -11,10 +11,12 @@ interface ReviewCarouselProps {
 
 const ReviewCarousel = ({ reviews, scrollRef, scroll }: ReviewCarouselProps) => {
   return (
-    <div className="relative group max-w-6xl mx-auto">
+    <div className="relative max-w-6xl mx-auto">
       <button 
         onClick={() => scroll('left')}
-        className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white/80 rounded-full p-2 shadow-lg opacity-70 group-hover:opacity-100 transition-all duration-300 hover:bg-white hover:scale-110"
+        className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white/90 rounded-full p-2 shadow-lg 
+          transition-all duration-300 hover:bg-white hover:scale-110"
+        aria-label="Scroll left"
       >
         <ChevronLeft className="w-6 h-6 text-[#2C5AAE]" />
       </button>
@@ -31,7 +33,9 @@ const ReviewCarousel = ({ reviews, scrollRef, scroll }: ReviewCarouselProps) => 
 
       <button 
         onClick={() => scroll('right')}
-        className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white/80 rounded-full p-2 shadow-lg opacity-70 group-hover:opacity-100 transition-all duration-300 hover:bg-white hover:scale-110"
+        className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white/90 rounded-full p-2 shadow-lg 
+          transition-all duration-300 hover:bg-white hover:scale-110"
+        aria-label="Scroll right"
       >
         <ChevronRight className="w-6 h-6 text-[#2C5AAE]" />
       </button>

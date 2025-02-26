@@ -81,16 +81,18 @@ const PopularDestinations = () => {
   return (
     <section className="py-16 bg-white relative">
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-bold text-center mb-12 font-inter bg-gradient-to-r from-[#FC466B] to-[#3F5EFB] bg-clip-text text-transparent">
+        <h2 className="text-3xl font-bold text-center mb-12 font-inter bg-gradient-to-r from-[#2C5AAE] to-[#40E0D0] bg-clip-text text-transparent">
           Popular Destinations
         </h2>
         
-        <div className="relative group">
+        <div className="relative">
           <button
             onClick={() => scroll('left')}
-            className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white/80 rounded-full p-2 shadow-lg opacity-0 group-hover:opacity-100 transition-opacity"
+            className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white/90 rounded-full p-2 shadow-lg 
+            transition-all duration-300 hover:bg-white hover:scale-110"
+            aria-label="Scroll left"
           >
-            <ChevronLeft className="w-6 h-6 text-primary" />
+            <ChevronLeft className="w-6 h-6 text-[#2C5AAE]" />
           </button>
           
           <div
@@ -134,14 +136,12 @@ const PopularDestinations = () => {
           
           <button
             onClick={() => scroll('right')}
-            className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white/80 rounded-full p-2 shadow-lg opacity-0 group-hover:opacity-100 transition-opacity"
+            className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white/90 rounded-full p-2 shadow-lg 
+            transition-all duration-300 hover:bg-white hover:scale-110"
+            aria-label="Scroll right"
           >
-            <ChevronRight className="w-6 h-6 text-primary" />
+            <ChevronRight className="w-6 h-6 text-[#2C5AAE]" />
           </button>
         </div>
       </div>
-    </section>
-  );
-};
-
-export default PopularDestinations;
+    

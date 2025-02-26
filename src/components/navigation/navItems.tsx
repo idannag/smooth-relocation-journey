@@ -77,7 +77,10 @@ export const getMainNavItems = (handleSubmenuItemClick: (url: string) => void): 
       { 
         icon: <Bot className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, 
         label: 'My AI Assistant 24/7',
-        onClick: () => handleSubmenuItemClick('chatbot')
+        onClick: () => {
+          console.log("AI Assistant clicked from navItems");
+          handleSubmenuItemClick('chatbot');
+        }
       },
       { 
         icon: <Play className="w-5 h-5 stroke-[1.5] text-[#517cc7]" />, 

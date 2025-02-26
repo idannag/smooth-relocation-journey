@@ -16,13 +16,16 @@ const Testimonials = () => {
       try {
         const { data, error } = await supabase.functions.invoke('getGoogleReviews');
         if (error) throw error;
-        if (data.result && data.result.reviews) {
+        if (data?.result?.reviews) {
           const highRatedReviews = data.result.reviews.filter(review => review.rating >= 4);
           setReviews(highRatedReviews);
+        } else {
+          throw new Error("No reviews found");
         }
         setLoading(false);
       } catch (err) {
         console.error('Error fetching reviews:', err);
+        // Fallback to mock data if API fails
         const dummyReviews = [
           {
             author_name: "Sarah L.",
@@ -65,6 +68,20 @@ const Testimonials = () => {
             relative_time_description: "1 week ago",
             text: "Very professional service. They helped us with all aspects of our relocation, making it much easier than expected.",
             profile_photo_url: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d"
+          },
+          {
+            author_name: "Jessica T.",
+            rating: 5,
+            relative_time_description: "3 weeks ago",
+            text: "Ocean's team provided exceptional service during our relocation. They handled everything from housing to school enrollment for our children.",
+            profile_photo_url: "https://images.unsplash.com/photo-1580489944761-15a19d654956"
+          },
+          {
+            author_name: "Mark S.",
+            rating: 5,
+            relative_time_description: "1 month ago",
+            text: "Moving countries was daunting, but Ocean made it feel manageable. Their expertise in visa processes saved us countless hours.",
+            profile_photo_url: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e"
           }
         ];
         setReviews(dummyReviews);
@@ -77,7 +94,7 @@ const Testimonials = () => {
 
   // Auto scroll testimonials
   useEffect(() => {
-    if (reviews.length === 0) return;
+    if (reviews.length <= 1) return;
     
     const interval = setInterval(() => {
       if (scrollRef.current) {

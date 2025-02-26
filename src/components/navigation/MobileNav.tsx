@@ -14,13 +14,19 @@ interface MobileNavProps {
 const MobileNav = ({ items, expandedItems, onToggleItem, onSubItemClick, isOpen, menuRef }: MobileNavProps) => {
   if (!isOpen) return null;
 
+  // Debug logging
+  console.log("Mobile Nav - Expanded Items:", expandedItems);
+
   return (
     <div ref={menuRef} className="md:hidden bg-white border-t shadow-lg">
       <nav className="px-2 py-1">
         {items.map((item, index) => (
           <div key={index} className="py-1 border-b border-gray-100 last:border-0">
             <button
-              onClick={() => onToggleItem(item.label)}
+              onClick={() => {
+                console.log("Toggling item:", item.label);
+                onToggleItem(item.label);
+              }}
               className="flex items-center justify-between w-full px-2 py-1.5 text-gray-600 hover:text-[#2C5AAE] transition-colors"
               type="button"
             >
@@ -40,10 +46,14 @@ const MobileNav = ({ items, expandedItems, onToggleItem, onSubItemClick, isOpen,
                   <button
                     key={subIndex}
                     onClick={() => {
-                      if (subItem.onClick) {
-                        subItem.onClick();
-                      } else if (subItem.label === "My AI Assistant 24/7") {
+                      console.log("Submenu item clicked:", subItem.label);
+                      if (subItem.label === "My AI Assistant 24/7") {
+                        console.log("Opening chatbot from mobile menu");
                         onSubItemClick('chatbot');
+                      } else if (subItem.onClick) {
+                        subItem.onClick();
+                      } else {
+                        onSubItemClick(subItem.label.toLowerCase().replace(/\s+/g, '-'));
                       }
                     }}
                     className="flex items-center gap-2 px-2 py-1 text-xs text-gray-600 hover:text-[#2C5AAE] transition-colors w-full text-left"
