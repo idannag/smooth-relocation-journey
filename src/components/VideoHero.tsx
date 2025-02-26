@@ -18,7 +18,7 @@ const VideoHero = () => {
         <source src={videoUrl} type="video/mp4" />
       </video>
       <div className="absolute inset-0 bg-black/5" />
-      <div className="absolute inset-0 bg-gradient-to-r from-primary/10 to-secondary/10" />
+      <div className="absolute inset-0 bg-gradient-to-r from-[#2C5AAE]/10 to-[#40E0D0]/10" />
       <div className="relative h-full flex flex-col items-center justify-between text-white text-center px-2 max-w-4xl mx-auto pb-20">
         <h1 
           className="text-4xl md:text-5xl lg:text-6xl font-bold mt-32 mb-12 animate-fade-in font-poppins text-white md:leading-[1.35]"

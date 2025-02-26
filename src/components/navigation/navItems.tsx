@@ -59,11 +59,31 @@ export const getMainNavItems = (handleSubmenuItemClick: (url: string) => void): 
         label: 'My Relocation',
         onClick: () => handleSubmenuItemClick('https://preview--ocean-journey-61.lovable.app/')
       },
-      { icon: <ShoppingCart className="w-5 h-5 stroke-[1.5] text-[#517cc7]" />, label: 'My Orders' },
-      { icon: <Globe className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, label: 'Online Jobs' },
-      { icon: <UserRound className="w-5 h-5 stroke-[1.5] text-[#517cc7]" />, label: 'Connections' },
-      { icon: <Bot className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, label: 'My AI Assistant 24/7' },
-      { icon: <Play className="w-5 h-5 stroke-[1.5] text-[#517cc7]" />, label: 'Relocation VOD' }
+      { 
+        icon: <ShoppingCart className="w-5 h-5 stroke-[1.5] text-[#517cc7]" />, 
+        label: 'My Orders',
+        onClick: () => handleSubmenuItemClick('orders')
+      },
+      { 
+        icon: <Globe className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, 
+        label: 'Online Jobs',
+        onClick: () => handleSubmenuItemClick('jobs')
+      },
+      { 
+        icon: <UserRound className="w-5 h-5 stroke-[1.5] text-[#517cc7]" />, 
+        label: 'Connections',
+        onClick: () => handleSubmenuItemClick('connections')
+      },
+      { 
+        icon: <Bot className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, 
+        label: 'My AI Assistant 24/7',
+        onClick: () => handleSubmenuItemClick('chatbot')
+      },
+      { 
+        icon: <Play className="w-5 h-5 stroke-[1.5] text-[#517cc7]" />, 
+        label: 'Relocation VOD',
+        onClick: () => handleSubmenuItemClick('vod')
+      }
     ]
   }
 ];

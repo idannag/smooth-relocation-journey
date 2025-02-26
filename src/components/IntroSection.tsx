@@ -16,9 +16,13 @@ const IntroSection = () => {
     <section className="py-16 bg-white">
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto text-center space-y-6">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 animate-fade-in font-inter bg-gradient-to-r from-[#2C5AAE] to-[#40E0D0] bg-clip-text text-transparent">
+          <h2 className="text-4xl md:text-5xl font-bold mb-3 animate-fade-in font-inter bg-gradient-to-r from-[#2C5AAE] to-[#40E0D0] bg-clip-text text-transparent">
             Relocation needs 360° support
           </h2>
+          
+          <p className="text-lg md:text-xl text-gray-700 mb-5 animate-slide-up">
+            Since it affects all aspects of your life and well-being
+          </p>
           
           <div className="space-y-3 mb-6">
             {bulletPoints.map((point, index) => (

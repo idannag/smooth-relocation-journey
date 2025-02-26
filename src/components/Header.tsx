@@ -32,17 +32,9 @@ const Header = () => {
   }, []);
 
   const toggleItem = (label: string) => {
-    if (isMobile) {
-      setExpandedItems(prev => 
-        prev.includes(label) ? [] : [label]
-      );
-    } else {
-      setExpandedItems(prev => 
-        prev.includes(label) 
-          ? prev.filter(item => item !== label)
-          : [...prev, label]
-      );
-    }
+    setExpandedItems(prev => 
+      prev.includes(label) ? prev.filter(item => item !== label) : [...prev, label]
+    );
   };
 
   const handleSubmenuItemClick = (url: string) => {

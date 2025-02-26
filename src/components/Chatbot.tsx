@@ -1,5 +1,5 @@
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Send, X, Bot } from 'lucide-react';
 
 interface ChatbotProps {
