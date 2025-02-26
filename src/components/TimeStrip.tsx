@@ -72,16 +72,16 @@ const TimeStrip = ({ onClick }: TimeStripProps) => {
   return (
     <button 
       onClick={onClick}
-      className="flex items-center space-x-2 text-xs md:text-sm text-[#2C5AAE] hover:text-[#40E0D0] transition-colors"
+      className="flex items-center space-x-2 text-sm md:text-[14px] text-[#2C5AAE] hover:text-[#40E0D0] transition-colors"
     >
       <div 
         className={`flex items-center space-x-1 whitespace-nowrap transition-all duration-500 transform ${
           isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-2'
         }`}
       >
-        <Clock className="w-3 h-3 md:w-4 md:h-4" />
-        <span className="font-bold">{currentCity.name}:</span>
-        <span className="font-bold">{times[currentCity.name]}</span>
+        <Clock className="w-4 h-4" />
+        <span className="font-medium">{currentCity.name}:</span>
+        <span className="font-medium">{times[currentCity.name]}</span>
       </div>
     </button>
   );

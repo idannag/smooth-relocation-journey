@@ -30,22 +30,22 @@ const Statistics = () => {
           We Are
         </h2>
         
-        <div className="flex flex-row overflow-x-auto pb-4 gap-4 max-w-4xl mx-auto">
+        <div className="grid grid-cols-3 gap-2 md:gap-4 max-w-4xl mx-auto">
           {statistics.map((stat, index) => (
             <div
               key={index}
-              className="flex-shrink-0 w-[calc(100vw-2rem)] sm:w-auto sm:flex-1 bg-gradient-to-br from-white via-blue-50 to-white p-4 rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.06)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.12)] transition-all duration-500 animate-fade-in group/stat"
+              className="bg-gradient-to-br from-white via-blue-50 to-white p-2 md:p-4 rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.06)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.12)] transition-all duration-500 animate-fade-in group/stat"
             >
-              <div className="relative mb-3">
+              <div className="relative mb-2 md:mb-3">
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent rounded-full transform scale-110 opacity-0 group-hover/stat:opacity-100 transition-all duration-500" />
-                <stat.icon className="w-6 h-6 mx-auto text-[#2C5AAE] transform group-hover/stat:scale-110 transition-transform duration-500" />
+                <stat.icon className="w-4 h-4 md:w-6 md:h-6 mx-auto text-[#2C5AAE] transform group-hover/stat:scale-110 transition-transform duration-500" />
               </div>
-              <div className="text-center space-y-1">
-                <p className="text-gray-600 text-xs">{stat.topText}</p>
-                <h3 className="text-2xl font-bold text-[#2C5AAE] mb-1 transform group-hover/stat:translate-y-[-2px] transition-transform duration-500">
+              <div className="text-center space-y-0.5 md:space-y-1">
+                <p className="text-gray-600 text-[10px] md:text-xs">{stat.topText}</p>
+                <h3 className="text-lg md:text-2xl font-bold text-[#2C5AAE] transform group-hover/stat:translate-y-[-2px] transition-transform duration-500">
                   {stat.number}
                 </h3>
-                <p className="text-gray-600 text-xs group-hover/stat:text-gray-800 transition-colors duration-500">
+                <p className="text-gray-600 text-[10px] md:text-xs group-hover/stat:text-gray-800 transition-colors duration-500">
                   {stat.bottomText}
                 </p>
               </div>

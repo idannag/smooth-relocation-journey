@@ -22,7 +22,6 @@ const CurrencyStrip = ({ onClick }: CurrencyStripProps) => {
   useEffect(() => {
     const fetchRates = async () => {
       try {
-        // Try to use a free API to get real rates
         const response = await fetch('https://open.er-api.com/v6/latest/USD');
         const data = await response.json();
         if (data && data.rates) {
@@ -32,7 +31,6 @@ const CurrencyStrip = ({ onClick }: CurrencyStripProps) => {
         }
       } catch (error) {
         console.error('Error fetching rates, using mock data:', error);
-        // Fallback to mock rates
         const mockRates = {
           EUR: 0.92,
           GBP: 0.79,
@@ -69,11 +67,11 @@ const CurrencyStrip = ({ onClick }: CurrencyStripProps) => {
       className="flex items-center ml-4 pl-4 border-l border-gray-300 text-[#2C5AAE] hover:text-[#40E0D0] transition-colors"
     >
       <div 
-        className={`flex items-center space-x-1 whitespace-nowrap transition-all duration-500 transform text-xs md:text-sm ${
+        className={`flex items-center space-x-1 whitespace-nowrap transition-all duration-500 transform text-sm md:text-[14px] ${
           isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-2'
         }`}
       >
-        <span className="font-bold">1$ = {currentCurrency.symbol}{rates[currentCurrency.code]?.toFixed(2)}</span>
+        <span className="font-medium">1$ = {currentCurrency.symbol}{rates[currentCurrency.code]?.toFixed(2)}</span>
       </div>
     </button>
   );

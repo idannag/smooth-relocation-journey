@@ -1,4 +1,3 @@
-
 import { useState, useEffect, useRef } from "react";
 import { Menu } from "lucide-react";
 import TimeStrip from "./TimeStrip";
@@ -139,7 +138,7 @@ const Header = () => {
               </a>
               <div className="hidden md:block">
                 <h1 className="text-lg font-semibold text-[#2C5AAE]">Ocean Relocation App</h1>
-                <p className="text-xs text-gray-600">all you need in one place</p>
+                <p className="text-xs text-gray-600">Your complete relocation companion</p>
               </div>
             </div>
 

@@ -1,6 +1,7 @@
 
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { NavItem } from "@/types/navigation";
+import { useState } from "react";
 
 interface MobileNavProps {
   items: NavItem[];
@@ -11,56 +12,52 @@ interface MobileNavProps {
   menuRef: React.RefObject<HTMLDivElement>;
 }
 
-const MobileNav = ({ items, expandedItems, onToggleItem, onSubItemClick, isOpen, menuRef }: MobileNavProps) => {
+const MobileNav = ({ items, onSubItemClick, isOpen, menuRef }: MobileNavProps) => {
+  const [expandedItem, setExpandedItem] = useState<string | null>(null);
+
   if (!isOpen) return null;
 
-  // Debug logging
-  console.log("Mobile Nav - Expanded Items:", expandedItems);
-
   return (
-    <div ref={menuRef} className="md:hidden bg-white border-t shadow-lg">
-      <nav className="px-2 py-1">
+    <div 
+      ref={menuRef} 
+      className="md:hidden fixed inset-x-0 top-16 bottom-16 bg-white shadow-lg overflow-y-auto"
+    >
+      <nav className="container mx-auto px-4 py-2">
         {items.map((item, index) => (
-          <div key={index} className="py-1 border-b border-gray-100 last:border-0">
+          <div key={index} className="border-b border-gray-100 last:border-0">
             <button
-              onClick={() => {
-                console.log("Toggling item:", item.label);
-                onToggleItem(item.label);
-              }}
-              className="flex items-center justify-between w-full px-2 py-1.5 text-gray-600 hover:text-[#2C5AAE] transition-colors"
+              onClick={() => setExpandedItem(expandedItem === item.label ? null : item.label)}
+              className="flex items-center justify-between w-full py-3 text-gray-600 hover:text-[#2C5AAE] transition-colors"
               type="button"
             >
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-3">
                 {item.icon}
-                <span className="text-sm">{item.label}</span>
+                <span className="text-base font-medium">{item.label}</span>
               </div>
               {item.subItems.length > 0 && (
-                expandedItems.includes(item.label) ? 
-                  <ChevronUp className="w-4 h-4" /> : 
-                  <ChevronDown className="w-4 h-4" />
+                expandedItem === item.label ? 
+                  <ChevronUp className="w-5 h-5" /> : 
+                  <ChevronDown className="w-5 h-5" />
               )}
             </button>
-            {item.subItems.length > 0 && expandedItems.includes(item.label) && (
-              <div className="pl-6 mt-1 space-y-1 animate-accordion-down">
+            
+            {item.subItems.length > 0 && expandedItem === item.label && (
+              <div className="bg-gray-50 rounded-lg mb-2 animate-accordion-down overflow-hidden">
                 {item.subItems.map((subItem, subIndex) => (
                   <button
                     key={subIndex}
                     onClick={() => {
-                      console.log("Submenu item clicked:", subItem.label);
-                      if (subItem.label === "My AI Assistant 24/7") {
-                        console.log("Opening chatbot from mobile menu");
-                        onSubItemClick('chatbot');
-                      } else if (subItem.onClick) {
-                        subItem.onClick();
+                      if (subItem.label === "My Ocean Community") {
+                        window.open('https://chat.whatsapp.com/LODS9mJleJU9e1Y27ml2TB', '_blank');
                       } else {
                         onSubItemClick(subItem.label.toLowerCase().replace(/\s+/g, '-'));
                       }
                     }}
-                    className="flex items-center gap-2 px-2 py-1 text-xs text-gray-600 hover:text-[#2C5AAE] transition-colors w-full text-left"
+                    className="flex items-center gap-3 px-4 py-3 text-gray-600 hover:text-[#2C5AAE] hover:bg-gray-100 transition-colors w-full"
                     type="button"
                   >
                     {subItem.icon}
-                    <span>{subItem.label}</span>
+                    <span className="text-sm">{subItem.label}</span>
                   </button>
                 ))}
               </div>

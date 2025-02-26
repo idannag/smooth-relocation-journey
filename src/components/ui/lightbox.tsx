@@ -1,4 +1,3 @@
-
 import LatestArticles from "@/components/LatestArticles";
 import Chatbot from "@/components/Chatbot";
 import { Globe, Clock, Calendar } from "lucide-react";
@@ -536,7 +535,7 @@ const getLightboxContent = (url: string) => {
 const Lightbox = ({ url, onClose }: LightboxProps) => {
   return (
     <div 
-      className="fixed inset-0 z-[100] animate-fade-in" 
+      className="fixed inset-0 z-[100] animate-fade-in p-4 md:p-8" 
       style={{ animationDuration: '100ms' }}
       onClick={(e) => {
         if (e.target === e.currentTarget) {
@@ -547,10 +546,10 @@ const Lightbox = ({ url, onClose }: LightboxProps) => {
       <div 
         className="absolute inset-0 bg-black/50 backdrop-blur-sm" 
       />
-      <div className="relative w-full h-full overflow-auto">
+      <div className="relative w-full h-full overflow-auto rounded-2xl">
         <button
           onClick={onClose}
-          className="fixed top-4 right-4 z-10 p-2 bg-white rounded-full shadow-lg hover:bg-gray-100 transition-colors hover:scale-110"
+          className="fixed top-6 right-6 z-10 p-2 bg-white rounded-full shadow-lg hover:bg-gray-100 transition-colors hover:scale-110"
           type="button"
         >
           <svg
@@ -568,7 +567,9 @@ const Lightbox = ({ url, onClose }: LightboxProps) => {
             />
           </svg>
         </button>
-        {getLightboxContent(url)}
+        <div className="bg-white rounded-2xl overflow-hidden h-full">
+          {getLightboxContent(url)}
+        </div>
       </div>
     </div>
   );
