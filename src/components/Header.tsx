@@ -19,6 +19,35 @@ const Header = () => {
   const menuRef = useRef<HTMLDivElement>(null);
   const isMobile = useIsMobile();
 
+  // Add preload hints for common resources
+  useEffect(() => {
+    const preloadResources = () => {
+      // Preload hero video
+      const linkVideo = document.createElement('link');
+      linkVideo.rel = 'preload';
+      linkVideo.as = 'video';
+      linkVideo.href = 'https://ocean.autodigital.agency/splash.mp4';
+      document.head.appendChild(linkVideo);
+      
+      // Preload common images
+      const imagesToPreload = [
+        'https://www.app.ocean-il.co.il/wp-content/uploads/2022/04/cropped-logo.jpg',
+        'https://www.app.ocean-il.co.il/wp-content/uploads/2023/04/relocation-explainer-new-1.mp4',
+        '/lovable-uploads/7fc61af8-ea7f-4585-8f82-c8a61f99c608.png'
+      ];
+      
+      imagesToPreload.forEach(imgUrl => {
+        const link = document.createElement('link');
+        link.rel = 'preload';
+        link.as = 'image';
+        link.href = imgUrl;
+        document.head.appendChild(link);
+      });
+    };
+    
+    preloadResources();
+  }, []);
+
   // Reset expanded items when mobile state changes
   useEffect(() => {
     setExpandedItems([]);
@@ -50,7 +79,12 @@ const Header = () => {
     
     if (url === 'chatbot') {
       console.log("Opening chatbot");
-      setShowChatbot(true);
+      // Show the chatbot in lightbox
+      setLightboxContent({ 
+        url: 'chatbot',
+        size: 'full'
+      });
+      setShowLightbox(true);
       setIsOpen(false);
       return;
     }
@@ -79,6 +113,8 @@ const Header = () => {
                   src="https://www.app.ocean-il.co.il/wp-content/uploads/2022/04/cropped-logo.jpg" 
                   alt="Ocean IL Logo" 
                   className="h-8 w-auto"
+                  loading="eager"
+                  fetchpriority="high"
                 />
               </a>
               <div className="hidden md:block">

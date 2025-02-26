@@ -1,5 +1,6 @@
 
 import LatestArticles from "@/components/LatestArticles";
+import Chatbot from "@/components/Chatbot";
 
 interface LightboxProps {
   url: string;
@@ -24,6 +25,17 @@ const getLightboxContent = (url: string) => {
           Relocation Guides
         </h2>
         <LatestArticles />
+      </div>
+    );
+  }
+  if (url === 'chatbot') {
+    return (
+      <div className="bg-gradient-to-r from-blue-50 to-blue-100 p-8 max-w-4xl mx-auto">
+        <h2 className="text-3xl font-bold text-center mb-2 font-inter bg-gradient-to-r from-[#2C5AAE] to-[#40E0D0] bg-clip-text text-transparent">
+          Your 24/7 Relocation AI Assistant
+        </h2>
+        <p className="text-center text-gray-600 mb-8">Ask anything about your relocation journey or try one of the suggested questions below</p>
+        <Chatbot inLightbox={true} onClose={() => {}} />
       </div>
     );
   }

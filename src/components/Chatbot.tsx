@@ -4,6 +4,7 @@ import { Send, X, Bot } from 'lucide-react';
 
 interface ChatbotProps {
   onClose: () => void;
+  inLightbox?: boolean;
 }
 
 interface Message {
@@ -15,10 +16,12 @@ const presetQuestions = [
   "What documents do I need for my visa?",
   "How can I find housing in Israel?",
   "What are typical relocation expenses?",
-  "How does healthcare work in Israel?"
+  "How does healthcare work in Israel?",
+  "How to find schools for my children?",
+  "What are the best areas to live in Tel Aviv?"
 ];
 
-const Chatbot = ({ onClose }: ChatbotProps) => {
+const Chatbot = ({ onClose, inLightbox = false }: ChatbotProps) => {
   const [messages, setMessages] = useState<Message[]>([
     { type: 'bot', text: 'Hello! I\'m your Relocation Assistant. How can I help you today?' }
   ]);
@@ -41,14 +44,16 @@ const Chatbot = ({ onClose }: ChatbotProps) => {
       
       if (text.toLowerCase().includes('visa') || text.includes('documents')) {
         response = 'For your visa application, you typically need: passport valid for at least 6 months, work permit/invitation letter, proof of accommodation, and health insurance. The specific requirements may vary based on your nationality and visa type.';
-      } else if (text.toLowerCase().includes('housing') || text.toLowerCase().includes('accommodation')) {
-        response = 'Finding housing in Israel can be done through real estate agencies, online platforms like Yad2 or Facebook groups. The average rent for a 2-bedroom apartment ranges from ₪3,500-₪7,000 depending on the location. We can help connect you with trusted real estate partners.';
+      } else if (text.toLowerCase().includes('housing') || text.toLowerCase().includes('accommodation') || text.toLowerCase().includes('areas') || text.toLowerCase().includes('live')) {
+        response = 'Finding housing in Israel can be done through real estate agencies, online platforms like Yad2 or Facebook groups. The average rent for a 2-bedroom apartment ranges from ₪3,500-₪7,000 depending on the location. Popular areas in Tel Aviv include Florentin, Neve Tzedek, and North Tel Aviv. We can help connect you with trusted real estate partners.';
       } else if (text.toLowerCase().includes('expense') || text.toLowerCase().includes('cost')) {
         response = 'Typical relocation expenses include: visa fees (₪1,000-₪2,000), moving costs (₪10,000-₪30,000 for international shipping), housing deposits (typically 1-3 months rent), and initial setup costs (₪5,000-₪10,000 for basics). Our cost calculator can provide a personalized estimate.';
       } else if (text.toLowerCase().includes('healthcare') || text.toLowerCase().includes('medical')) {
         response = 'Israel has a universal healthcare system. As a resident, you\'ll need to join one of the health funds (Kupat Holim): Clalit, Maccabi, Meuhedet, or Leumit. They provide comprehensive medical coverage for a monthly fee based on your income. Private insurance options are also available.';
+      } else if (text.toLowerCase().includes('school') || text.toLowerCase().includes('education') || text.toLowerCase().includes('children')) {
+        response = 'Israel offers several schooling options including public schools (taught in Hebrew), international schools (English and other languages), and private schools. Registration typically opens in February-March for the following academic year. We can help you find suitable schools based on your location and children\'s educational needs.';
       } else {
-        response = 'Thank you for your question. Our relocation experts would be happy to provide you with detailed information on this topic. Would you like to schedule a consultation call?';
+        response = 'Thank you for your question. Our relocation experts would be happy to provide you with detailed information on this topic. Would you like to schedule a consultation call with one of our specialists?';
       }
       
       setMessages(prev => [...prev, { type: 'bot', text: response }]);
@@ -64,20 +69,22 @@ const Chatbot = ({ onClose }: ChatbotProps) => {
   };
 
   return (
-    <div className="fixed bottom-20 right-4 md:right-10 z-50 w-[90%] max-w-md h-[500px] bg-white rounded-xl shadow-2xl border border-gray-200 flex flex-col overflow-hidden animate-fade-in">
+    <div className={`${inLightbox ? '' : 'fixed bottom-20 right-4 md:right-10 z-50'} w-full max-w-3xl mx-auto h-[500px] bg-white rounded-xl shadow-2xl border border-gray-200 flex flex-col overflow-hidden ${!inLightbox && 'animate-fade-in'}`}>
       {/* Header */}
       <div className="bg-gradient-to-r from-[#2C5AAE] to-[#40E0D0] p-3 flex justify-between items-center">
         <div className="flex items-center gap-2">
           <Bot className="text-white" size={20} />
           <h3 className="text-white font-medium">Relocation Assistant</h3>
         </div>
-        <button 
-          onClick={onClose}
-          className="text-white hover:text-gray-200 transition-colors"
-          aria-label="Close chatbot"
-        >
-          <X size={20} />
-        </button>
+        {!inLightbox && (
+          <button 
+            onClick={onClose}
+            className="text-white hover:text-gray-200 transition-colors"
+            aria-label="Close chatbot"
+          >
+            <X size={20} />
+          </button>
+        )}
       </div>
       
       {/* Messages */}
