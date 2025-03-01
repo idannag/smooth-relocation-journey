@@ -129,8 +129,8 @@ const PopularDestinations = () => {
                     loop
                     playsInline
                     className="w-full h-full object-cover"
-                    loading="lazy"
-                    preload="metadata"
+                    // Remove unsupported attributes
+                    // loading and preload are not valid attributes for video elements
                   >
                     <source src={destination.video} type="video/mp4" />
                   </video>

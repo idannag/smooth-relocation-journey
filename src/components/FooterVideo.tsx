@@ -20,7 +20,7 @@ const FooterVideo = () => {
           loop
           playsInline
           className="absolute inset-0 w-full h-full object-cover"
-          fetchpriority="high"
+          // Remove fetchpriority attribute as it's not supported on video elements
         >
           <source src="https://www.app.ocean-il.co.il/wp-content/uploads/2022/10/Brooklyn.m4v" type="video/mp4" />
         </video>

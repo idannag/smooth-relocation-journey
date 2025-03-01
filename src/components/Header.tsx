@@ -51,7 +51,7 @@ const Header = () => {
         link.rel = 'preload';
         link.as = imgUrl.endsWith('.mp4') ? 'video' : 'image';
         link.href = imgUrl;
-        link.fetchPriority = 'high';
+        // Removed fetchPriority as it's not valid on link elements
         document.head.appendChild(link);
       });
     };
@@ -135,7 +135,8 @@ const Header = () => {
                   alt="Ocean IL Logo" 
                   className="h-8 w-auto"
                   loading="eager"
-                  fetchpriority="high"
+                  // Correct camelCase for fetchPriority
+                  fetchPriority="high"
                 />
               </a>
               <div className="hidden md:block">
