@@ -1,7 +1,7 @@
-
+<lov-code>
 import LatestArticles from "@/components/LatestArticles";
 import Chatbot from "@/components/Chatbot";
-import { Globe, Clock, Calendar } from "lucide-react";
+import { Globe, Clock, Calendar, ShoppingCart, Headphones } from "lucide-react";
 import { useState, useEffect } from "react";
 
 interface LightboxProps {
@@ -256,6 +256,8 @@ const TimeAndCurrencyConverter = () => {
 
 // Orders Component for the Lightbox
 const Orders = () => {
+  const [activeTab, setActiveTab] = useState<'orders' | 'services'>('services');
+  
   const orderItems = [
     {
       id: "ORD-12345",
@@ -287,74 +289,168 @@ const Orders = () => {
     }
   ];
 
+  const availableServices = [
+    {
+      id: "SRV-001",
+      service: "Visa & Immigration Support",
+      description: "Expert assistance with visa applications, work permits, and immigration procedures",
+      price: "$300",
+      duration: "2-4 weeks"
+    },
+    {
+      id: "SRV-002",
+      service: "Home Finding",
+      description: "Personalized housing search based on your preferences and budget",
+      price: "$500",
+      duration: "1-3 weeks"
+    },
+    {
+      id: "SRV-003",
+      service: "School Search",
+      description: "Finding the right schools or educational institutions for your children",
+      price: "$350",
+      duration: "1-2 weeks"
+    },
+    {
+      id: "SRV-004",
+      service: "Area Orientation",
+      description: "Guided tour of your new city with insights on neighborhoods, amenities, and local culture",
+      price: "$200",
+      duration: "1 day"
+    },
+    {
+      id: "SRV-005",
+      service: "Document Translation",
+      description: "Professional translation of important documents for local authorities",
+      price: "$25 per page",
+      duration: "3-5 days"
+    },
+    {
+      id: "SRV-006",
+      service: "Banking Setup",
+      description: "Assistance with opening bank accounts and setting up financial services",
+      price: "$150",
+      duration: "1 week"
+    }
+  ];
+
   return (
-    <div className="bg-gradient-to-r from-blue-50 to-blue-100 p-8 max-w-4xl mx-auto">
+    <div className="bg-gradient-to-r from-blue-50 to-blue-100 p-8 max-w-4xl mx-auto h-full overflow-y-auto">
       <h2 className="text-3xl font-bold text-center mb-8 font-inter bg-gradient-to-r from-[#2C5AAE] to-[#517cc7] bg-clip-text text-transparent">
-        My Orders
+        Client Services
       </h2>
+      
       <div className="bg-white rounded-xl shadow-lg overflow-hidden">
-        <div className="overflow-x-auto">
-          <table className="min-w-full divide-y divide-gray-200">
-            <thead className="bg-gradient-to-r from-[#2C5AAE]/10 to-[#40E0D0]/10">
-              <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Order ID
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Date
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Service
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Status
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Amount
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Actions
-                </th>
-              </tr>
-            </thead>
-            <tbody className="bg-white divide-y divide-gray-200">
-              {orderItems.map((order) => (
-                <tr key={order.id} className="hover:bg-gray-50">
-                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                    {order.id}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {new Date(order.date).toLocaleDateString()}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {order.service}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
-                      order.status === 'Completed' ? 'bg-green-100 text-green-800' : 
-                      order.status === 'In Progress' ? 'bg-blue-100 text-blue-800' : 
-                      order.status === 'Pending' ? 'bg-yellow-100 text-yellow-800' : 
-                      'bg-purple-100 text-purple-800'
-                    }`}>
-                      {order.status}
-                    </span>
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {order.amount}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    <button className="text-[#2C5AAE] hover:text-[#40E0D0] transition-colors">
-                      View Details
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+        <div className="flex border-b">
+          <button
+            className={`flex-1 py-3 text-center font-medium ${
+              activeTab === 'services'
+                ? 'text-[#2C5AAE] border-b-2 border-[#2C5AAE]'
+                : 'text-gray-500'
+            }`}
+            onClick={() => setActiveTab('services')}
+          >
+            <Headphones className="inline-block mr-2 h-4 w-4" />
+            Available Services
+          </button>
+          <button
+            className={`flex-1 py-3 text-center font-medium ${
+              activeTab === 'orders'
+                ? 'text-[#2C5AAE] border-b-2 border-[#2C5AAE]'
+                : 'text-gray-500'
+            }`}
+            onClick={() => setActiveTab('orders')}
+          >
+            <ShoppingCart className="inline-block mr-2 h-4 w-4" />
+            My Orders
+          </button>
         </div>
+        
+        {activeTab === 'orders' ? (
+          <div className="overflow-x-auto">
+            <table className="min-w-full divide-y divide-gray-200">
+              <thead className="bg-gradient-to-r from-[#2C5AAE]/10 to-[#40E0D0]/10">
+                <tr>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Order ID
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Date
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Service
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Status
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Amount
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Actions
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="bg-white divide-y divide-gray-200">
+                {orderItems.map((order) => (
+                  <tr key={order.id} className="hover:bg-gray-50">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                      {order.id}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      {new Date(order.date).toLocaleDateString()}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      {order.service}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
+                        order.status === 'Completed' ? 'bg-green-100 text-green-800' : 
+                        order.status === 'In Progress' ? 'bg-blue-100 text-blue-800' : 
+                        order.status === 'Pending' ? 'bg-yellow-100 text-yellow-800' : 
+                        'bg-purple-100 text-purple-800'
+                      }`}>
+                        {order.status}
+                      </span>
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      {order.amount}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      <button className="text-[#2C5AAE] hover:text-[#40E0D0] transition-colors">
+                        View Details
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        ) : (
+          <div className="p-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+            {availableServices.map((service) => (
+              <div key={service.id} className="border rounded-lg p-4 hover:shadow-md transition-shadow">
+                <h3 className="text-lg font-semibold text-[#2C5AAE]">{service.service}</h3>
+                <p className="text-sm text-gray-600 mt-2">{service.description}</p>
+                <div className="flex justify-between mt-4">
+                  <span className="text-sm">
+                    <strong>Price:</strong> {service.price}
+                  </span>
+                  <span className="text-sm">
+                    <strong>Duration:</strong> {service.duration}
+                  </span>
+                </div>
+                <button className="w-full mt-4 py-2 bg-gradient-to-r from-[#2C5AAE] to-[#40E0D0] text-white rounded-md text-sm hover:opacity-90 transition-opacity">
+                  Order Service
+                </button>
+              </div>
+            ))}
+          </div>
+        )}
+        
         <div className="px-6 py-4 bg-gray-50">
           <button className="w-full py-2 bg-gradient-to-r from-[#2C5AAE] to-[#40E0D0] text-white rounded-md font-medium hover:opacity-95 transition-opacity">
-            Request New Service
+            {activeTab === 'orders' ? 'Request Custom Service' : 'View All Services'}
           </button>
         </div>
       </div>
@@ -546,10 +642,46 @@ const ArticleDetail = ({ title }: { title: string }) => {
   );
 };
 
+// Footer for Lightbox
+const LightboxFooter = () => {
+  return (
+    <div className="w-full py-3 px-4 bg-gray-100 text-xs text-center border-t">
+      <div className="flex justify-center space-x-4 mb-1">
+        <a 
+          href="https://www.app.ocean-il.co.il/term-and-condition/" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="text-[#2C5AAE] hover:underline"
+        >
+          Terms & Conditions
+        </a>
+        <a 
+          href="https://www.app.ocean-il.co.il/privacy-policy/" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="text-[#2C5AAE] hover:underline"
+        >
+          Privacy Policy
+        </a>
+      </div>
+      <div className="text-gray-500">
+        Built with ❤️ by <a 
+          href="https://autodigital.agency" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="text-[#2C5AAE] hover:underline"
+        >
+          AutoDigital
+        </a>
+      </div>
+    </div>
+  );
+};
+
 const getLightboxContent = (url: string) => {
   if (url === 'news') {
     return (
-      <div className="bg-gradient-to-r from-blue-50 to-blue-100 p-8">
+      <div className="bg-gradient-to-r from-blue-50 to-blue-100 p-8 h-full overflow-y-auto">
         <h2 className="text-3xl font-bold text-center mb-8 font-inter bg-gradient-to-r from-[#2C5AAE] to-[#517cc7] bg-clip-text text-transparent">
           Latest Relocation News
         </h2>
@@ -559,7 +691,7 @@ const getLightboxContent = (url: string) => {
   }
   if (url === 'guides') {
     return (
-      <div className="bg-gradient-to-r from-blue-50 to-blue-100 p-8">
+      <div className="bg-gradient-to-r from-blue-50 to-blue-100 p-8 h-full overflow-y-auto">
         <h2 className="text-3xl font-bold text-center mb-8 font-inter bg-gradient-to-r from-[#2C5AAE] to-[#517cc7] bg-clip-text text-transparent">
           Relocation Guides
         </h2>
@@ -569,7 +701,7 @@ const getLightboxContent = (url: string) => {
   }
   if (url === 'chatbot') {
     return (
-      <div className="bg-gradient-to-r from-blue-50 to-blue-100 p-8 max-w-4xl mx-auto">
+      <div className="bg-gradient-to-r from-blue-50 to-blue-100 p-8 max-w-4xl mx-auto h-full overflow-y-auto">
         <h2 className="text-2xl md:text-3xl font-bold text-center mb-2 font-inter bg-gradient-to-r from-[#2C5AAE] to-[#40E0D0] bg-clip-text text-transparent">
           Your Relocation Assistant
         </h2>
@@ -615,33 +747,7 @@ const Lightbox = ({ url, onClose }: LightboxProps) => {
       <div 
         className="absolute inset-0 bg-black/50 backdrop-blur-sm" 
       />
-      <div className="relative w-full h-full overflow-auto rounded-2xl">
+      <div className="relative w-full h-full max-h-[calc(100vh-4rem)] flex flex-col rounded-2xl overflow-hidden">
         <button
           onClick={onClose}
-          className="fixed top-6 right-6 z-10 p-2 bg-white rounded-full shadow-lg hover:bg-gray-100 transition-colors hover:scale-110"
-          type="button"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M6 18L18 6M6 6l12 12"
-            />
-          </svg>
-        </button>
-        <div className="bg-white rounded-2xl overflow-hidden h-full">
-          {getLightboxContent(url)}
-        </div>
-      </div>
-    </div>
-  );
-};
-
-export default Lightbox;
+          className="absolute top-3 right-3 z-10 p-2 bg-white rounded-full shadow-lg hover:bg-gray-100 transition-colors hover:scale-11
