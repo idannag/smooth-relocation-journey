@@ -92,6 +92,7 @@ const Header = () => {
 
     if (url === 'My Ocean Community') {
       window.open('https://chat.whatsapp.com/LODS9mJleJU9e1Y27ml2TB', '_blank');
+      setIsOpen(false);
       return;
     }
     

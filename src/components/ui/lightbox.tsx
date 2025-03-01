@@ -1,4 +1,4 @@
-<lov-code>
+
 import LatestArticles from "@/components/LatestArticles";
 import Chatbot from "@/components/Chatbot";
 import { Globe, Clock, Calendar, ShoppingCart, Headphones } from "lucide-react";
@@ -167,7 +167,7 @@ const TimeAndCurrencyConverter = () => {
           <div className="bg-gray-50 p-4 rounded-lg text-center">
             <div className="text-sm text-gray-500 mb-1">Current Time</div>
             <div className="text-2xl font-bold text-[#2C5AAE]">
-              {currentTime.split(",")[1].trim()}
+              {currentTime.split(",")[1]?.trim()}
             </div>
             <div className="text-sm text-gray-500 mt-2">
               {currentTime.split(",")[0]}, {currentTime.split(",")[2]}
@@ -530,7 +530,7 @@ const DestinationInfo = ({ city }: { city: string }) => {
   };
 
   return (
-    <div className="bg-gradient-to-r from-blue-50 to-blue-100 p-8 max-w-4xl mx-auto">
+    <div className="bg-gradient-to-r from-blue-50 to-blue-100 p-8 max-w-4xl mx-auto h-full overflow-y-auto">
       <h2 className="text-3xl font-bold text-center mb-2 font-inter bg-gradient-to-r from-[#2C5AAE] to-[#517cc7] bg-clip-text text-transparent">
         {city}
       </h2>
@@ -602,7 +602,7 @@ const ArticleDetail = ({ title }: { title: string }) => {
   };
 
   return (
-    <div className="bg-gradient-to-r from-blue-50 to-blue-100 p-8 max-w-4xl mx-auto">
+    <div className="bg-gradient-to-r from-blue-50 to-blue-100 p-8 max-w-4xl mx-auto h-full overflow-y-auto">
       <h2 className="text-3xl font-bold text-center mb-2 font-inter bg-gradient-to-r from-[#2C5AAE] to-[#517cc7] bg-clip-text text-transparent">
         {articleContent.title}
       </h2>
@@ -750,4 +750,22 @@ const Lightbox = ({ url, onClose }: LightboxProps) => {
       <div className="relative w-full h-full max-h-[calc(100vh-4rem)] flex flex-col rounded-2xl overflow-hidden">
         <button
           onClick={onClose}
-          className="absolute top-3 right-3 z-10 p-2 bg-white rounded-full shadow-lg hover:bg-gray-100 transition-colors hover:scale-11
+          className="absolute top-3 right-3 z-10 p-2 bg-white rounded-full shadow-lg hover:bg-gray-100 transition-colors"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+        <div className="flex-1 bg-white flex flex-col overflow-hidden rounded-2xl">
+          <div className="flex-1 overflow-y-auto">
+            {getLightboxContent(url)}
+          </div>
+          <LightboxFooter />
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Lightbox;
