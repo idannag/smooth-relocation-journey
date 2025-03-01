@@ -61,13 +61,13 @@ export const getMainNavItems = (handleSubmenuItemClick: (url: string) => void): 
       },
       { 
         icon: <ShoppingCart className="w-5 h-5 stroke-[1.5] text-[#517cc7]" />, 
-        label: 'My Orders',
+        label: 'My Services & Orders',
         onClick: () => handleSubmenuItemClick('orders')
       },
       { 
         icon: <UserRound className="w-5 h-5 stroke-[1.5] text-[#517cc7]" />, 
         label: 'My Ocean Community',
-        onClick: () => handleSubmenuItemClick('https://chat.whatsapp.com/LODS9mJleJU9e1Y27ml2TB')
+        onClick: () => handleSubmenuItemClick('My Ocean Community')
       },
       { 
         icon: <Bot className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, 

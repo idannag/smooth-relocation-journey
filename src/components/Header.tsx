@@ -36,11 +36,22 @@ const Header = () => {
         '/lovable-uploads/7fc61af8-ea7f-4585-8f82-c8a61f99c608.png'
       ];
       
-      imagesToPreload.forEach(imgUrl => {
+      // Add preload for popular destinations and useful info images
+      const additionalImages = [
+        'https://www.app.ocean-il.co.il/wp-content/uploads/2022/10/Brooklyn.m4v',
+        'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40',
+        'https://images.unsplash.com/photo-1494790108377-be9c29b29330',
+        'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d',
+        'https://images.unsplash.com/photo-1438761681033-6461ffad8d80',
+        'https://images.unsplash.com/photo-1500648767791-00dcc994a43e'
+      ];
+      
+      [...imagesToPreload, ...additionalImages].forEach(imgUrl => {
         const link = document.createElement('link');
         link.rel = 'preload';
-        link.as = 'image';
+        link.as = imgUrl.endsWith('.mp4') ? 'video' : 'image';
         link.href = imgUrl;
+        link.fetchPriority = 'high';
         document.head.appendChild(link);
       });
     };
@@ -124,6 +135,7 @@ const Header = () => {
                   alt="Ocean IL Logo" 
                   className="h-8 w-auto"
                   loading="eager"
+                  fetchpriority="high"
                 />
               </a>
               <div className="hidden md:block">

@@ -1,6 +1,7 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Plane } from 'lucide-react';
 
 const SplashScreen = () => {
   const [isVisible, setIsVisible] = useState(true);
@@ -60,11 +61,26 @@ const SplashScreen = () => {
             </video>
           </motion.div>
           <div className="absolute inset-0 flex flex-col items-center justify-center">
-            <img 
-              src="https://www.app.ocean-il.co.il/wp-content/uploads/2022/04/cropped-logo.jpg"
-              alt="Ocean IL Logo"
-              className="w-32 h-32 object-contain mb-4 rounded-2xl"
-            />
+            <div className="relative">
+              <img 
+                src="https://www.app.ocean-il.co.il/wp-content/uploads/2022/04/cropped-logo.jpg"
+                alt="Ocean IL Logo"
+                className="w-32 h-32 object-contain mb-4 rounded-2xl"
+              />
+              <motion.div
+                animate={{
+                  rotate: 360,
+                }}
+                transition={{
+                  duration: 5,
+                  repeat: Infinity,
+                  ease: "linear"
+                }}
+                className="absolute -top-2 -right-2 w-full h-full pointer-events-none"
+              >
+                <Plane className="w-8 h-8 text-white drop-shadow-lg" style={{ filter: 'drop-shadow(0 0 4px rgba(0,0,0,0.5))' }} />
+              </motion.div>
+            </div>
             <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}

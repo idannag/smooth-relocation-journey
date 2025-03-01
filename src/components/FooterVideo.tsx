@@ -20,6 +20,7 @@ const FooterVideo = () => {
           loop
           playsInline
           className="absolute inset-0 w-full h-full object-cover"
+          fetchpriority="high"
         >
           <source src="https://www.app.ocean-il.co.il/wp-content/uploads/2022/10/Brooklyn.m4v" type="video/mp4" />
         </video>
@@ -34,30 +35,32 @@ const FooterVideo = () => {
       </section>
       
       <footer className="bg-gray-800 text-white py-2 text-center text-xs">
-        <div className="container mx-auto flex flex-wrap justify-center items-center">
-          <div className="flex space-x-4 mb-1">
+        <div className="container mx-auto flex flex-col justify-center items-center">
+          <div className="flex space-x-3 text-[10px] text-gray-300">
             <button 
               onClick={() => handleLegalClick('https://www.app.ocean-il.co.il/term-and-condition/')}
-              className="text-gray-300 hover:text-white transition-colors"
+              className="hover:text-white transition-colors"
             >
               Terms & Conditions
             </button>
+            <span>|</span>
             <button 
               onClick={() => handleLegalClick('https://www.app.ocean-il.co.il/privacy-policy/')}
-              className="text-gray-300 hover:text-white transition-colors"
+              className="hover:text-white transition-colors"
             >
               Privacy Policy
             </button>
-          </div>
-          <div className="w-full text-gray-400">
-            Built with ❤️ by <a 
-              href="https://autodigital.agency" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="text-gray-300 hover:text-white transition-colors"
-            >
-              AutoDigital
-            </a>
+            <span>|</span>
+            <span className="text-gray-300">
+              Built with ❤️ by <a 
+                href="https://autodigital.agency" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="hover:text-white transition-colors"
+              >
+                AutoDigital
+              </a>
+            </span>
           </div>
         </div>
       </footer>

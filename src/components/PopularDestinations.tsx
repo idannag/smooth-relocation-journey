@@ -120,6 +120,7 @@ const PopularDestinations = () => {
                     className="w-[120%] h-[120%] absolute -top-[10%] -left-[10%] pointer-events-none"
                     allow="autoplay; encrypted-media"
                     frameBorder="0"
+                    loading="lazy"
                   />
                 ) : (
                   <video
@@ -128,6 +129,8 @@ const PopularDestinations = () => {
                     loop
                     playsInline
                     className="w-full h-full object-cover"
+                    loading="lazy"
+                    preload="metadata"
                   >
                     <source src={destination.video} type="video/mp4" />
                   </video>

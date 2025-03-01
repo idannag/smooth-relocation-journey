@@ -59,7 +59,7 @@ const BottomNav = () => {
       label: 'Client Area',
       subItems: [
         { icon: <Route className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, label: 'My Relocation', url: 'https://preview--ocean-journey-61.lovable.app/' },
-        { icon: <ShoppingCart className="w-5 h-5 stroke-[1.5] text-[#517cc7]" />, label: 'My Orders', url: 'orders' },
+        { icon: <ShoppingCart className="w-5 h-5 stroke-[1.5] text-[#517cc7]" />, label: 'My Services & Orders', url: 'orders' },
         { icon: <UserRound className="w-5 h-5 stroke-[1.5] text-[#517cc7]" />, label: 'My Ocean Community', url: 'https://chat.whatsapp.com/LODS9mJleJU9e1Y27ml2TB' },
         { icon: <Bot className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, label: 'My 24/7 Assistant', url: 'chatbot' }
       ]
