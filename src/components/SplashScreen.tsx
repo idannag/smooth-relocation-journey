@@ -9,7 +9,7 @@ const SplashScreen = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsVisible(false);
-    }, 3000); // Changed from 5000 to 3000 ms
+    }, 5000); // Extended from 3000 to 5000 ms (added 2 more seconds)
 
     return () => clearTimeout(timer);
   }, []);
@@ -72,13 +72,22 @@ const SplashScreen = () => {
                   rotate: 360,
                 }}
                 transition={{
-                  duration: 5,
+                  duration: 8,
                   repeat: Infinity,
                   ease: "linear"
                 }}
-                className="absolute -top-2 -right-2 w-full h-full pointer-events-none"
+                className="absolute top-0 left-0 w-full h-full pointer-events-none"
+                style={{ zIndex: 10 }}
               >
-                <Plane className="w-8 h-8 text-white drop-shadow-lg" style={{ filter: 'drop-shadow(0 0 4px rgba(0,0,0,0.5))' }} />
+                <motion.div 
+                  className="absolute"
+                  style={{ 
+                    top: "-15px", 
+                    left: "calc(50% - 15px)" 
+                  }}
+                >
+                  <Plane className="w-8 h-8 text-[#2C5AAE] drop-shadow-lg" style={{ filter: 'drop-shadow(0 0 4px rgba(0,0,0,0.5))' }} />
+                </motion.div>
               </motion.div>
             </div>
             <motion.p

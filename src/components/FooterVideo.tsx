@@ -31,12 +31,8 @@ const FooterVideo = () => {
             Ready to Start Your Journey?
           </h2>
           <p className="text-lg md:text-xl mb-8 animate-slide-up text-white">Let us guide you through your relocation adventure</p>
-        </div>
-      </section>
-      
-      <footer className="bg-gray-800 text-white py-2 text-center text-xs">
-        <div className="container mx-auto flex flex-col justify-center items-center">
-          <div className="flex space-x-3 text-[10px] text-gray-300">
+          
+          <div className="flex space-x-3 text-[10px] text-gray-300 mt-2">
             <button 
               onClick={() => handleLegalClick('https://www.app.ocean-il.co.il/term-and-condition/')}
               className="hover:text-white transition-colors"
@@ -63,7 +59,7 @@ const FooterVideo = () => {
             </span>
           </div>
         </div>
-      </footer>
+      </section>
       
       {showLightbox && (
         <Lightbox 
