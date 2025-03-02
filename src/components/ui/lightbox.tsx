@@ -1,6 +1,7 @@
+
 import LatestArticles from "@/components/LatestArticles";
 import Chatbot from "@/components/Chatbot";
-import { Globe, Clock, Calendar, ShoppingCart, Headphones, Loader } from "lucide-react";
+import { Globe, Clock, Calendar, ShoppingCart, Headphones } from "lucide-react";
 import { useState, useEffect } from "react";
 
 interface LightboxProps {
@@ -641,87 +642,130 @@ const ArticleDetail = ({ title }: { title: string }) => {
   );
 };
 
-// News Content for Lightbox
-const NewsContent = () => {
-  const newsArticles = [
-    {
-      title: "New Visa Regulations for Digital Nomads",
-      date: "May 15, 2023",
-      content: "Several countries have introduced special visa programs for remote workers. These new 'digital nomad visas' allow professionals to legally live and work in a foreign country for extended periods...",
-      image: "https://images.unsplash.com/photo-1511376777868-611b54f68947"
-    },
-    {
-      title: "Housing Market Trends in Expatriate Hubs",
-      date: "June 3, 2023",
-      content: "Major expatriate destinations are experiencing significant shifts in their real estate markets post-pandemic. Cities like Dubai, Singapore, and Berlin have seen increasing demand from international relocators...",
-      image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa"
-    },
-    {
-      title: "International Schools Facing High Demand",
-      date: "June 20, 2023",
-      content: "Popular relocation destinations are reporting record waitlists for international schools. Families planning to relocate should begin the application process as early as possible to secure spots...",
-      image: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b"
-    }
-  ];
-
+// Footer for Lightbox
+const LightboxFooter = () => {
   return (
-    <div className="p-8 max-w-4xl mx-auto">
-      <h2 className="text-3xl font-bold text-center mb-2 font-inter bg-gradient-to-r from-[#2C5AAE] to-[#517cc7] bg-clip-text text-transparent">
-        Relocation News
-      </h2>
-      <p className="text-center text-gray-600 mb-8">Stay informed with the latest updates in global mobility</p>
-      
-      <div className="space-y-6">
-        {newsArticles.map((article, index) => (
-          <div key={index} className="bg-white rounded-xl shadow-lg overflow-hidden">
-            <div className="md:flex">
-              <div className="md:w-1/3">
-                <img 
-                  src={article.image} 
-                  alt={article.title} 
-                  className="w-full h-48 md:h-full object-cover"
-                  loading="eager"
-                />
-              </div>
-              <div className="p-6 md:w-2/3">
-                <h3 className="text-xl font-semibold text-[#2C5AAE] mb-2">{article.title}</h3>
-                <p className="text-sm text-gray-500 mb-3">{article.date}</p>
-                <p className="text-gray-700 mb-4">{article.content}</p>
-                <button className="text-[#2C5AAE] font-medium hover:text-[#40E0D0] transition-colors">
-                  Read more →
-                </button>
-              </div>
-            </div>
-          </div>
-        ))}
+    <div className="w-full py-3 px-4 bg-gray-100 text-xs text-center border-t">
+      <div className="flex justify-center space-x-4 mb-1">
+        <a 
+          href="https://www.app.ocean-il.co.il/term-and-condition/" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="text-[#2C5AAE] hover:underline"
+        >
+          Terms & Conditions
+        </a>
+        <a 
+          href="https://www.app.ocean-il.co.il/privacy-policy/" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="text-[#2C5AAE] hover:underline"
+        >
+          Privacy Policy
+        </a>
+      </div>
+      <div className="text-gray-500">
+        Built with ❤️ by <a 
+          href="https://autodigital.agency" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="text-[#2C5AAE] hover:underline"
+        >
+          AutoDigital
+        </a>
       </div>
     </div>
   );
 };
 
-// Guides Content for Lightbox
-const GuidesContent = () => {
-  const guides = [
-    {
-      title: "Complete Relocation Checklist",
-      category: "Planning",
-      excerpt: "A comprehensive guide to planning your international move, from six months before departure to your first week in your new home.",
-      image: "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b"
-    },
-    {
-      title: "Navigating International Schools",
-      category: "Education",
-      excerpt: "How to research, apply for, and select the right international school for your children when relocating abroad.",
-      image: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b"
-    },
-    {
-      title: "Managing Finances Across Borders",
-      category: "Finance",
-      excerpt: "Essential tips for managing bank accounts, taxes, investments, and daily expenses when living as an expatriate.",
-      image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f"
-    },
-    {
-      title: "Cultural Adaptation Strategies",
-      category: "Lifestyle",
-      excerpt: "Proven techniques to overcome culture shock and integrate more quickly into your new environment.",
-      image: "https://images.unsplash.com/photo-1526560244967-61
+const getLightboxContent = (url: string) => {
+  if (url === 'news') {
+    return (
+      <div className="bg-gradient-to-r from-blue-50 to-blue-100 p-8 h-full overflow-y-auto">
+        <h2 className="text-3xl font-bold text-center mb-8 font-inter bg-gradient-to-r from-[#2C5AAE] to-[#517cc7] bg-clip-text text-transparent">
+          Latest Relocation News
+        </h2>
+        <LatestArticles />
+      </div>
+    );
+  }
+  if (url === 'guides') {
+    return (
+      <div className="bg-gradient-to-r from-blue-50 to-blue-100 p-8 h-full overflow-y-auto">
+        <h2 className="text-3xl font-bold text-center mb-8 font-inter bg-gradient-to-r from-[#2C5AAE] to-[#517cc7] bg-clip-text text-transparent">
+          Relocation Guides
+        </h2>
+        <LatestArticles />
+      </div>
+    );
+  }
+  if (url === 'chatbot') {
+    return (
+      <div className="bg-gradient-to-r from-blue-50 to-blue-100 p-8 max-w-4xl mx-auto h-full overflow-y-auto">
+        <h2 className="text-2xl md:text-3xl font-bold text-center mb-2 font-inter bg-gradient-to-r from-[#2C5AAE] to-[#40E0D0] bg-clip-text text-transparent">
+          Your Relocation Assistant
+        </h2>
+        <p className="text-center text-gray-600 mb-8">Ask me anything about your move</p>
+        <Chatbot inLightbox={true} onClose={() => {}} />
+      </div>
+    );
+  }
+  if (url === 'orders') {
+    return <Orders />;
+  }
+  if (url === 'time-currency') {
+    return <TimeAndCurrencyConverter />;
+  }
+  if (url.startsWith('destination:')) {
+    const city = url.split(':')[1];
+    return <DestinationInfo city={city} />;
+  }
+  if (url.startsWith('article:')) {
+    const title = url.split(':')[1];
+    return <ArticleDetail title={title} />;
+  }
+  return (
+    <iframe
+      src={url}
+      className="w-full h-full"
+      loading="eager"
+    />
+  );
+};
+
+const Lightbox = ({ url, onClose }: LightboxProps) => {
+  return (
+    <div 
+      className="fixed inset-0 z-[100] animate-fade-in p-4 md:p-8" 
+      style={{ animationDuration: '100ms' }}
+      onClick={(e) => {
+        if (e.target === e.currentTarget) {
+          onClose();
+        }
+      }}
+    >
+      <div 
+        className="absolute inset-0 bg-black/50 backdrop-blur-sm" 
+      />
+      <div className="relative w-full h-full max-h-[calc(100vh-4rem)] flex flex-col rounded-2xl overflow-hidden">
+        <button
+          onClick={onClose}
+          className="absolute top-3 right-3 z-10 p-2 bg-white rounded-full shadow-lg hover:bg-gray-100 transition-colors"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+        <div className="flex-1 bg-white flex flex-col overflow-hidden rounded-2xl">
+          <div className="flex-1 overflow-y-auto">
+            {getLightboxContent(url)}
+          </div>
+          <LightboxFooter />
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Lightbox;
