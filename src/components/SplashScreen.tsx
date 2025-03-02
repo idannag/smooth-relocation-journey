@@ -72,7 +72,7 @@ const SplashScreen = () => {
                   rotate: 360,
                 }}
                 transition={{
-                  duration: 8,
+                  duration: 4, // Faster animation (was 8, now 4)
                   repeat: Infinity,
                   ease: "linear"
                 }}
@@ -81,12 +81,29 @@ const SplashScreen = () => {
               >
                 <motion.div 
                   className="absolute"
-                  style={{ 
-                    top: "-15px", 
-                    left: "calc(50% - 15px)" 
+                  initial={{ 
+                    pathLength: 0,
+                    opacity: 0
+                  }}
+                  animate={{ 
+                    pathLength: 1,
+                    opacity: 1,
+                    transition: { 
+                      duration: 2,
+                      ease: "easeInOut" 
+                    }
                   }}
                 >
-                  <Plane className="w-8 h-8 text-[#2C5AAE] drop-shadow-lg" style={{ filter: 'drop-shadow(0 0 4px rgba(0,0,0,0.5))' }} />
+                  <Plane 
+                    className="w-8 h-8 text-[#2C5AAE] drop-shadow-lg" 
+                    style={{ 
+                      filter: 'drop-shadow(0 0 4px rgba(0,0,0,0.5))',
+                      position: 'absolute',
+                      transform: 'translate(-50%, -50%) rotate(90deg)', // Orient plane to follow path
+                      left: 'calc(50% + 60px)',
+                      top: '50%'
+                    }} 
+                  />
                 </motion.div>
               </motion.div>
             </div>

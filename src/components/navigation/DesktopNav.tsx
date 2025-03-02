@@ -14,12 +14,40 @@ const DesktopNav = ({ items, expandedItems, onToggleItem }: DesktopNavProps) => 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+        // Close all expanded items when clicking outside
         expandedItems.forEach(item => onToggleItem(item));
       }
     };
 
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [expandedItems, onToggleItem]);
+
+  // Add blur event handler to close menu on focus-out
+  useEffect(() => {
+    const handleBlur = (event: FocusEvent) => {
+      // Check if the focus is moving outside the menu
+      if (
+        menuRef.current && 
+        !menuRef.current.contains(event.relatedTarget as Node) &&
+        expandedItems.length > 0
+      ) {
+        // Delay slightly to allow for new focus to be established
+        setTimeout(() => {
+          // Only close if focus is still outside
+          if (document.activeElement && 
+              menuRef.current && 
+              !menuRef.current.contains(document.activeElement)) {
+            expandedItems.forEach(item => onToggleItem(item));
+          }
+        }, 100);
+      }
+    };
+
+    menuRef.current?.addEventListener('focusout', handleBlur);
+    return () => {
+      menuRef.current?.removeEventListener('focusout', handleBlur);
+    };
   }, [expandedItems, onToggleItem]);
 
   return (
