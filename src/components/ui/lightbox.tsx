@@ -1,3 +1,4 @@
+
 import LatestArticles from "@/components/LatestArticles";
 import Chatbot from "@/components/Chatbot";
 import { Globe, Clock, Calendar, ShoppingCart, Headphones, Loader } from "lucide-react";
@@ -724,4 +725,119 @@ const GuidesContent = () => {
       title: "Cultural Adaptation Strategies",
       category: "Lifestyle",
       excerpt: "Proven techniques to overcome culture shock and integrate more quickly into your new environment.",
-      image: "https://images.unsplash.com/photo-1526560244967-61
+      image: "https://images.unsplash.com/photo-1526560244967-61cae296dfbf"
+    }
+  ];
+
+  return (
+    <div className="p-8 max-w-4xl mx-auto">
+      <h2 className="text-3xl font-bold text-center mb-2 font-inter bg-gradient-to-r from-[#2C5AAE] to-[#517cc7] bg-clip-text text-transparent">
+        Relocation Guides
+      </h2>
+      <p className="text-center text-gray-600 mb-8">Expert resources to help you navigate your relocation journey</p>
+      
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {guides.map((guide, index) => (
+          <div key={index} className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+            <img 
+              src={guide.image} 
+              alt={guide.title} 
+              className="w-full h-48 object-cover" 
+            />
+            <div className="p-6">
+              <div className="mb-2">
+                <span className="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">
+                  {guide.category}
+                </span>
+              </div>
+              <h3 className="text-xl font-semibold text-[#2C5AAE] mb-2">{guide.title}</h3>
+              <p className="text-gray-700 mb-4">{guide.excerpt}</p>
+              <button className="text-[#2C5AAE] font-medium hover:text-[#40E0D0] transition-colors">
+                Read full guide →
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+// Main Lightbox component
+const Lightbox = ({ url, onClose }: LightboxProps) => {
+  const [loading, setLoading] = useState(true);
+  
+  // Parse the URL to determine what content to show
+  const [contentType, contentId] = url.split(':');
+  
+  // Simulate content loading
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+    
+    return () => clearTimeout(timer);
+  }, []);
+
+  // Handle click outside to close
+  const handleBackgroundClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (e.target === e.currentTarget) {
+      onClose();
+    }
+  };
+
+  // Render content based on the URL
+  const renderContent = () => {
+    if (loading) {
+      return (
+        <div className="flex items-center justify-center h-full">
+          <div className="text-center">
+            <Loader className="w-12 h-12 text-[#2C5AAE] animate-spin mx-auto mb-4" />
+            <p className="text-gray-600">Loading content...</p>
+          </div>
+        </div>
+      );
+    }
+    
+    switch(contentType) {
+      case 'calculator':
+        return <TimeAndCurrencyConverter />;
+      case 'orders':
+        return <Orders />;
+      case 'destination':
+        return <DestinationInfo city={contentId} />;
+      case 'article':
+        return <ArticleDetail title={contentId} />;
+      case 'news':
+        return <NewsContent />;
+      case 'guides':
+        return <GuidesContent />;
+      default:
+        return <div className="p-8 text-center">Content not found</div>;
+    }
+  };
+
+  return (
+    <div 
+      className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 overflow-y-auto p-4"
+      onClick={handleBackgroundClick}
+    >
+      <div 
+        className="relative bg-white rounded-xl overflow-hidden w-full max-w-4xl max-h-[90vh] animate-fade-in"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <button 
+          onClick={onClose} 
+          className="absolute top-4 right-4 bg-white/80 rounded-full p-2 text-gray-800 hover:bg-white hover:text-[#2C5AAE] transition-colors z-10"
+        >
+          ✕
+        </button>
+        <div className="h-full overflow-y-auto">
+          {renderContent()}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Lightbox;
