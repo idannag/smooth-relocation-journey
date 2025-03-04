@@ -24,28 +24,28 @@ const statistics = [
 
 const Statistics = () => {
   return (
-    <section className="py-8 sm:py-12 bg-gradient-to-br from-white via-blue-50 to-white">
+    <section className="py-6 sm:py-12 bg-gradient-to-br from-white via-blue-50 to-white">
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-bold text-center mb-4 md:mb-8 font-inter bg-gradient-to-r from-[#2C5AAE] to-[#40E0D0] bg-clip-text text-transparent">
+        <h2 className="text-2xl sm:text-3xl font-bold text-center mb-3 md:mb-8 font-inter bg-gradient-to-r from-[#2C5AAE] to-[#40E0D0] bg-clip-text text-transparent">
           We Are
         </h2>
         
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-6 max-w-4xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-2 md:gap-6 max-w-4xl mx-auto">
           {statistics.map((stat, index) => (
             <div
               key={index}
-              className="bg-white p-3 md:p-6 rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.06)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.12)] transition-all duration-500 animate-fade-in group/stat"
+              className="bg-white p-2 md:p-6 rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.06)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.12)] transition-all duration-500 animate-fade-in group/stat"
             >
-              <div className="relative mb-2 md:mb-4 flex justify-center">
+              <div className="relative mb-1 md:mb-4 flex justify-center">
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent rounded-full transform scale-110 opacity-0 group-hover/stat:opacity-100 transition-all duration-500" />
-                <stat.icon className="w-6 h-6 md:w-8 md:h-8 text-[#2C5AAE] transform group-hover/stat:scale-110 transition-transform duration-500" />
+                <stat.icon className="w-5 h-5 md:w-8 md:h-8 text-[#2C5AAE] transform group-hover/stat:scale-110 transition-transform duration-500" />
               </div>
-              <div className="text-center space-y-1 md:space-y-2">
-                <p className="text-gray-600 text-xs md:text-sm font-medium">{stat.topText}</p>
-                <h3 className="text-xl md:text-2xl lg:text-3xl font-bold text-[#2C5AAE] transform group-hover/stat:translate-y-[-2px] transition-transform duration-500">
+              <div className="text-center space-y-0.5 md:space-y-2">
+                <p className="text-gray-600 text-[10px] md:text-sm font-medium">{stat.topText}</p>
+                <h3 className="text-lg md:text-2xl lg:text-3xl font-bold text-[#2C5AAE] transform group-hover/stat:translate-y-[-2px] transition-transform duration-500">
                   {stat.number}
                 </h3>
-                <p className="text-gray-600 text-xs md:text-sm font-medium group-hover/stat:text-gray-800 transition-colors duration-500">
+                <p className="text-gray-600 text-[10px] md:text-sm font-medium group-hover/stat:text-gray-800 transition-colors duration-500">
                   {stat.bottomText}
                 </p>
               </div>
