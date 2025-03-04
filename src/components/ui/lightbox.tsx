@@ -1,4 +1,4 @@
-<lov-code>
+
 import LatestArticles from "@/components/LatestArticles";
 import Chatbot from "@/components/Chatbot";
 import { Globe, Clock, Calendar, ShoppingCart, Headphones } from "lucide-react";
@@ -516,7 +516,7 @@ const DestinationInfo = ({ city }: { city: string }) => {
         "Rich historical landmarks",
         "Growing tech and startup hub"
       ]
-    },
+    }
     // Add more cities as needed
   };
 
@@ -736,4 +736,62 @@ const getLightboxContent = (url: string) => {
   // Loading spinner for iframe content
   return (
     <div className="relative w-full h-full">
-      <div className="
+      <div className="absolute inset-0 flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#2C5AAE]"></div>
+      </div>
+      <iframe 
+        src={url} 
+        className="w-full h-full border-0"
+        title="External Content"
+        loading="lazy"
+      />
+    </div>
+  );
+};
+
+const Lightbox = ({ url, onClose }: LightboxProps) => {
+  // Close on escape key
+  useEffect(() => {
+    const handleEsc = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        onClose();
+      }
+    };
+    
+    window.addEventListener('keydown', handleEsc);
+    
+    return () => {
+      window.removeEventListener('keydown', handleEsc);
+    };
+  }, [onClose]);
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-8">
+      <div 
+        className="absolute inset-0 bg-black/50 backdrop-blur-sm"
+        onClick={onClose}
+      ></div>
+      
+      <div className="relative bg-white w-full max-w-6xl h-[80vh] md:h-[85vh] rounded-xl shadow-2xl overflow-hidden flex flex-col">
+        <div className="p-2 flex justify-end">
+          <button 
+            onClick={onClose}
+            className="bg-white/90 hover:bg-white text-gray-800 p-2 rounded-full transition-colors"
+            aria-label="Close"
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+        
+        <div className="flex-1 overflow-auto">
+          {getLightboxContent(url)}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Lightbox;
