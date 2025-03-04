@@ -1,4 +1,4 @@
-
+<lov-code>
 import LatestArticles from "@/components/LatestArticles";
 import Chatbot from "@/components/Chatbot";
 import { Globe, Clock, Calendar, ShoppingCart, Headphones } from "lucide-react";
@@ -701,131 +701,30 @@ const GuidesContent = () => {
   );
 };
 
-// Main Lightbox Component
-const Lightbox = ({ url, onClose }: LightboxProps) => {
-  const isMobile = useIsMobile();
-  const [isLoading, setIsLoading] = useState(true);
-  const [contentType, setContentType] = useState<'component' | 'iframe'>('component');
-  
-  useEffect(() => {
-    // Determine if the URL is an external link or internal component
-    if (url && (url.startsWith('http') || url.startsWith('https'))) {
-      setContentType('iframe');
-    } else {
-      setContentType('component');
-    }
-    
-    // Simulate loading delay
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 800);
-    
-    return () => clearTimeout(timer);
-  }, [url]);
-
-  const renderContent = () => {
-    if (isLoading) {
-      return (
-        <div className="flex flex-col items-center justify-center h-full">
-          <div className="w-12 h-12 border-4 border-gray-200 border-t-[#2C5AAE] rounded-full animate-spin"></div>
-          <p className="mt-4 text-gray-600">Loading content...</p>
-        </div>
-      );
-    }
-    
-    if (contentType === 'iframe') {
-      return (
-        <iframe
-          src={url}
-          className="w-full h-full border-0"
-          title="Lightbox Content"
-          loading="lazy"
-          sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
-        />
-      );
-    }
-    
-    return getLightboxContent(url);
-  };
-
-  if (url.startsWith('article:')) {
-    const title = url.split(':')[1];
+// Function to determine which content to render in the lightbox
+const getLightboxContent = (url: string) => {
+  if (url === 'news') {
+    return <NewsContent />;
+  }
+  if (url === 'guides') {
+    return <GuidesContent />;
+  }
+  if (url === 'chatbot') {
     return (
-      <div 
-        className="fixed inset-0 z-[100] bg-black/50 backdrop-blur-sm flex items-center justify-center p-2 md:p-6"
-        onClick={(e) => {
-          if (e.target === e.currentTarget) {
-            onClose();
-          }
-        }}
-      >
-        <div className={`bg-white rounded-xl shadow-2xl relative ${isMobile ? 'w-full h-[90%]' : 'w-[90%] max-w-4xl h-[85%]'} overflow-hidden`}>
-          <button
-            onClick={onClose}
-            className="absolute top-3 right-3 z-10 p-2 bg-white rounded-full shadow-lg hover:bg-gray-100 transition-colors hover:scale-110"
-            type="button"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M6 18L18 6M6 6l12 12"
-              />
-            </svg>
-          </button>
-          
-          <div className="h-full overflow-y-auto">
-            <ArticleDetail title={title} />
-          </div>
-        </div>
+      <div className="bg-gradient-to-r from-blue-50 to-blue-100 p-3 sm:p-4 max-w-4xl mx-auto h-full overflow-y-auto">
+        <h2 className="text-xl sm:text-2xl font-bold text-center mb-2 font-inter bg-gradient-to-r from-[#2C5AAE] to-[#40E0D0] bg-clip-text text-transparent">
+          Your Relocation Assistant
+        </h2>
+        <p className="text-center text-gray-600 mb-3">Ask me anything about your move</p>
+        <Chatbot inLightbox={true} onClose={() => {}} />
       </div>
     );
   }
-
-  return (
-    <div 
-      className="fixed inset-0 z-[100] bg-black/50 backdrop-blur-sm flex items-center justify-center p-2 md:p-6"
-      onClick={(e) => {
-        if (e.target === e.currentTarget) {
-          onClose();
-        }
-      }}
-    >
-      <div className={`bg-white rounded-xl shadow-2xl relative ${isMobile ? 'w-full h-[90%]' : 'w-[90%] max-w-4xl h-[85%]'} overflow-hidden`}>
-        <button
-          onClick={onClose}
-          className="absolute top-3 right-3 z-10 p-2 bg-white rounded-full shadow-lg hover:bg-gray-100 transition-colors hover:scale-110"
-          type="button"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-5 w-5"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M6 18L18 6M6 6l12 12"
-            />
-          </svg>
-        </button>
-        
-        <div className="h-full overflow-y-auto">
-          {renderContent()}
-        </div>
-      </div>
-    </div>
-  );
-};
-
-export default Lightbox;
+  if (url === 'orders') {
+    return <Orders />;
+  }
+  if (url === 'time-currency') {
+    return <TimeAndCurrencyConverter />;
+  }
+  if (url.startsWith('destination:')) {
+    const city = url.split(':')[1
