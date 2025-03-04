@@ -1,4 +1,4 @@
-<lov-code>
+
 import LatestArticles from "@/components/LatestArticles";
 import Chatbot from "@/components/Chatbot";
 import { Globe, Clock, Calendar, ShoppingCart, Headphones } from "lucide-react";
@@ -727,4 +727,65 @@ const getLightboxContent = (url: string) => {
     return <TimeAndCurrencyConverter />;
   }
   if (url.startsWith('destination:')) {
-    const city = url.split(':')[1
+    const city = url.split(':')[1];
+    return <DestinationInfo city={city} />;
+  }
+  if (url.startsWith('article:')) {
+    const title = url.split(':')[1];
+    return <ArticleDetail title={title} />;
+  }
+  
+  // Default fallback
+  return (
+    <div className="bg-gradient-to-r from-blue-50 to-blue-100 p-6 flex items-center justify-center h-full">
+      <p className="text-gray-600 text-center">Content not found for: {url}</p>
+    </div>
+  );
+};
+
+// Main Lightbox Component
+const Lightbox = ({ url, onClose }: LightboxProps) => {
+  const isMobile = useIsMobile();
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // Simulate content loading
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 500);
+    return () => clearTimeout(timer);
+  }, [url]);
+
+  return (
+    <div className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-fade-in">
+      <div className="relative w-full h-full max-w-5xl max-h-[90vh] bg-white rounded-xl shadow-2xl overflow-hidden flex flex-col">
+        {/* Close button */}
+        <button 
+          onClick={onClose}
+          className="absolute top-3 right-3 z-10 bg-white/80 hover:bg-white text-gray-800 p-1.5 rounded-full shadow-lg transition-all duration-200"
+          aria-label="Close"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+        
+        {/* Loading indicator */}
+        {loading ? (
+          <div className="flex-1 flex items-center justify-center bg-gradient-to-r from-blue-50 to-blue-100">
+            <div className="flex flex-col items-center">
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#2C5AAE]"></div>
+              <p className="mt-3 text-[#2C5AAE] font-medium">Loading...</p>
+            </div>
+          </div>
+        ) : (
+          <div className="flex-1 overflow-auto">
+            {getLightboxContent(url)}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default Lightbox;
