@@ -1,6 +1,6 @@
 import LatestArticles from "@/components/LatestArticles";
 import Chatbot from "@/components/Chatbot";
-import { Globe, Clock, Calendar, Headphones } from "lucide-react";
+import { Globe, Clock, ShoppingCart, Headphones } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
 
@@ -250,6 +250,90 @@ const TimeAndCurrencyConverter = () => {
           )}
         </div>
       )}
+    </div>
+  );
+};
+
+// Services Component for the Lightbox
+const Services = () => {
+  const availableServices = [
+    {
+      id: "SRV-001",
+      service: "Visa & Immigration Support",
+      description: "Expert assistance with visa applications, work permits, and immigration procedures",
+      price: "$300",
+      duration: "2-4 weeks"
+    },
+    {
+      id: "SRV-002",
+      service: "Home Finding",
+      description: "Personalized housing search based on your preferences and budget",
+      price: "$500",
+      duration: "1-3 weeks"
+    },
+    {
+      id: "SRV-003",
+      service: "School Search",
+      description: "Finding the right schools or educational institutions for your children",
+      price: "$350",
+      duration: "1-2 weeks"
+    },
+    {
+      id: "SRV-004",
+      service: "Area Orientation",
+      description: "Guided tour of your new city with insights on neighborhoods, amenities, and local culture",
+      price: "$200",
+      duration: "1 day"
+    },
+    {
+      id: "SRV-005",
+      service: "Document Translation",
+      description: "Professional translation of important documents for local authorities",
+      price: "$25 per page",
+      duration: "3-5 days"
+    },
+    {
+      id: "SRV-006",
+      service: "Banking Setup",
+      description: "Assistance with opening bank accounts and setting up financial services",
+      price: "$150",
+      duration: "1 week"
+    }
+  ];
+
+  return (
+    <div className="bg-gradient-to-r from-blue-50 to-blue-100 p-3 sm:p-4 max-w-4xl mx-auto h-full overflow-y-auto">
+      <h2 className="text-2xl sm:text-3xl font-bold text-center mb-4 font-inter bg-gradient-to-r from-[#2C5AAE] to-[#517cc7] bg-clip-text text-transparent">
+        My Services
+      </h2>
+      
+      <div className="bg-white rounded-xl shadow-lg overflow-hidden">
+        <div className="p-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+          {availableServices.map((service) => (
+            <div key={service.id} className="border rounded-lg p-4 hover:shadow-md transition-shadow">
+              <h3 className="text-lg font-semibold text-[#2C5AAE]">{service.service}</h3>
+              <p className="text-sm text-gray-600 mt-2">{service.description}</p>
+              <div className="flex justify-between mt-4">
+                <span className="text-sm">
+                  <strong>Price:</strong> {service.price}
+                </span>
+                <span className="text-sm">
+                  <strong>Duration:</strong> {service.duration}
+                </span>
+              </div>
+              <button className="w-full mt-4 py-2 bg-gradient-to-r from-[#2C5AAE] to-[#40E0D0] text-white rounded-md text-sm hover:opacity-90 transition-opacity">
+                Order Service
+              </button>
+            </div>
+          ))}
+        </div>
+        
+        <div className="px-6 py-4 bg-gray-50">
+          <button className="w-full py-2 bg-gradient-to-r from-[#2C5AAE] to-[#40E0D0] text-white rounded-md font-medium hover:opacity-95 transition-opacity">
+            Request Custom Service
+          </button>
+        </div>
+      </div>
     </div>
   );
 };
@@ -533,6 +617,8 @@ const getLightboxContent = (url: string, onClose: () => void) => {
     return <Chatbot onClose={onClose} inLightbox={true} />;
   } else if (url === 'time-currency') {
     return <TimeAndCurrencyConverter />;
+  } else if (url === 'services') {
+    return <Services />;
   } else if (url.startsWith('destination:')) {
     const city = url.split(':')[1];
     return <DestinationInfo city={city} />;

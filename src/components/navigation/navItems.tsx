@@ -60,6 +60,11 @@ export const getMainNavItems = (handleSubmenuItemClick: (url: string) => void): 
         onClick: () => handleSubmenuItemClick('https://preview--ocean-journey-61.lovable.app/')
       },
       { 
+        icon: <ShoppingCart className="w-5 h-5 stroke-[1.5] text-[#517cc7]" />, 
+        label: 'My Services',
+        onClick: () => handleSubmenuItemClick('services')
+      },
+      { 
         icon: <UserRound className="w-5 h-5 stroke-[1.5] text-[#517cc7]" />, 
         label: 'My Ocean Community',
         onClick: () => handleSubmenuItemClick('My Ocean Community')
