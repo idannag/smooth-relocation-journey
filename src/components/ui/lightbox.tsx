@@ -1,8 +1,9 @@
-
+<lov-code>
 import LatestArticles from "@/components/LatestArticles";
 import Chatbot from "@/components/Chatbot";
 import { Globe, Clock, Calendar, ShoppingCart, Headphones } from "lucide-react";
 import { useState, useEffect } from "react";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 interface LightboxProps {
   url: string;
@@ -116,8 +117,8 @@ const TimeAndCurrencyConverter = () => {
 
   return (
     <div className="bg-white rounded-xl shadow-lg max-w-md w-full mx-auto overflow-hidden">
-      <div className="bg-gradient-to-r from-[#2C5AAE] to-[#40E0D0] p-4">
-        <h2 className="text-white text-center text-xl font-bold">Global Tools</h2>
+      <div className="bg-gradient-to-r from-[#2C5AAE] to-[#40E0D0] p-3">
+        <h2 className="text-white text-center text-lg font-bold">Global Tools</h2>
       </div>
       
       <div className="flex border-b">
@@ -335,8 +336,8 @@ const Orders = () => {
   ];
 
   return (
-    <div className="bg-gradient-to-r from-blue-50 to-blue-100 p-8 max-w-4xl mx-auto h-full overflow-y-auto">
-      <h2 className="text-3xl font-bold text-center mb-8 font-inter bg-gradient-to-r from-[#2C5AAE] to-[#517cc7] bg-clip-text text-transparent">
+    <div className="bg-gradient-to-r from-blue-50 to-blue-100 p-3 sm:p-4 max-w-4xl mx-auto h-full overflow-y-auto">
+      <h2 className="text-2xl sm:text-3xl font-bold text-center mb-4 font-inter bg-gradient-to-r from-[#2C5AAE] to-[#517cc7] bg-clip-text text-transparent">
         Client Services
       </h2>
       
@@ -530,11 +531,11 @@ const DestinationInfo = ({ city }: { city: string }) => {
   };
 
   return (
-    <div className="bg-gradient-to-r from-blue-50 to-blue-100 p-8 max-w-4xl mx-auto h-full overflow-y-auto">
-      <h2 className="text-3xl font-bold text-center mb-2 font-inter bg-gradient-to-r from-[#2C5AAE] to-[#517cc7] bg-clip-text text-transparent">
+    <div className="bg-gradient-to-r from-blue-50 to-blue-100 p-3 sm:p-6 max-w-4xl mx-auto h-full overflow-y-auto">
+      <h2 className="text-2xl sm:text-3xl font-bold text-center mb-2 font-inter bg-gradient-to-r from-[#2C5AAE] to-[#517cc7] bg-clip-text text-transparent">
         {city}
       </h2>
-      <p className="text-center text-gray-600 mb-8">{cityInfo.country}</p>
+      <p className="text-center text-gray-600 mb-4">{cityInfo.country}</p>
       
       <div className="bg-white rounded-xl shadow-lg overflow-hidden mb-6">
         <div className="p-6">
@@ -602,8 +603,8 @@ const ArticleDetail = ({ title }: { title: string }) => {
   };
 
   return (
-    <div className="bg-gradient-to-r from-blue-50 to-blue-100 p-8 max-w-4xl mx-auto h-full overflow-y-auto">
-      <h2 className="text-3xl font-bold text-center mb-2 font-inter bg-gradient-to-r from-[#2C5AAE] to-[#517cc7] bg-clip-text text-transparent">
+    <div className="bg-gradient-to-r from-blue-50 to-blue-100 p-3 sm:p-6 max-w-4xl mx-auto h-full overflow-y-auto">
+      <h2 className="text-2xl sm:text-3xl font-bold text-center mb-2 font-inter bg-gradient-to-r from-[#2C5AAE] to-[#517cc7] bg-clip-text text-transparent">
         {articleContent.title}
       </h2>
       <div className="flex justify-center items-center gap-2 text-gray-600 mb-6">
@@ -645,13 +646,13 @@ const ArticleDetail = ({ title }: { title: string }) => {
 // News Content Component for Lightbox
 const NewsContent = () => {
   return (
-    <div className="bg-gradient-to-r from-blue-50 to-blue-100 p-8 h-full overflow-y-auto">
-      <h2 className="text-3xl font-bold text-center mb-8 font-inter bg-gradient-to-r from-[#2C5AAE] to-[#517cc7] bg-clip-text text-transparent">
+    <div className="bg-gradient-to-r from-blue-50 to-blue-100 p-3 sm:p-6 h-full overflow-y-auto">
+      <h2 className="text-2xl sm:text-3xl font-bold text-center mb-4 font-inter bg-gradient-to-r from-[#2C5AAE] to-[#517cc7] bg-clip-text text-transparent">
         Latest Relocation News
       </h2>
       <LatestArticles />
-      <div className="mt-8 text-center">
-        <button className="px-6 py-3 rounded-full bg-gradient-to-r from-[#2C5AAE] to-[#40E0D0] text-white font-semibold 
+      <div className="mt-6 text-center">
+        <button className="px-6 py-2 rounded-full bg-gradient-to-r from-[#2C5AAE] to-[#40E0D0] text-white font-semibold 
           hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl">
           Subscribe to get every relocation news
         </button>
@@ -663,8 +664,8 @@ const NewsContent = () => {
 // Guides Content Component for Lightbox
 const GuidesContent = () => {
   return (
-    <div className="bg-gradient-to-r from-blue-50 to-blue-100 p-8 h-full overflow-y-auto">
-      <h2 className="text-3xl font-bold text-center mb-8 font-inter bg-gradient-to-r from-[#2C5AAE] to-[#517cc7] bg-clip-text text-transparent">
+    <div className="bg-gradient-to-r from-blue-50 to-blue-100 p-3 sm:p-6 h-full overflow-y-auto">
+      <h2 className="text-2xl sm:text-3xl font-bold text-center mb-4 font-inter bg-gradient-to-r from-[#2C5AAE] to-[#517cc7] bg-clip-text text-transparent">
         Relocation Guides
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -709,11 +710,11 @@ const getLightboxContent = (url: string) => {
   }
   if (url === 'chatbot') {
     return (
-      <div className="bg-gradient-to-r from-blue-50 to-blue-100 p-8 max-w-4xl mx-auto h-full overflow-y-auto">
-        <h2 className="text-2xl md:text-3xl font-bold text-center mb-2 font-inter bg-gradient-to-r from-[#2C5AAE] to-[#40E0D0] bg-clip-text text-transparent">
+      <div className="bg-gradient-to-r from-blue-50 to-blue-100 p-3 sm:p-4 max-w-4xl mx-auto h-full overflow-y-auto">
+        <h2 className="text-xl sm:text-2xl font-bold text-center mb-2 font-inter bg-gradient-to-r from-[#2C5AAE] to-[#40E0D0] bg-clip-text text-transparent">
           Your Relocation Assistant
         </h2>
-        <p className="text-center text-gray-600 mb-8">Ask me anything about your move</p>
+        <p className="text-center text-gray-600 mb-3">Ask me anything about your move</p>
         <Chatbot inLightbox={true} onClose={() => {}} />
       </div>
     );
@@ -727,71 +728,3 @@ const getLightboxContent = (url: string) => {
   if (url.startsWith('destination:')) {
     const city = url.split(':')[1];
     return <DestinationInfo city={city} />;
-  }
-  if (url.startsWith('article:')) {
-    const title = url.split(':')[1];
-    return <ArticleDetail title={title} />;
-  }
-  
-  // Loading spinner for iframe content
-  return (
-    <div className="relative w-full h-full">
-      <div className="absolute inset-0 flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#2C5AAE]"></div>
-      </div>
-      <iframe 
-        src={url} 
-        className="w-full h-full border-0"
-        title="External Content"
-        loading="lazy"
-      />
-    </div>
-  );
-};
-
-const Lightbox = ({ url, onClose }: LightboxProps) => {
-  // Close on escape key
-  useEffect(() => {
-    const handleEsc = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
-        onClose();
-      }
-    };
-    
-    window.addEventListener('keydown', handleEsc);
-    
-    return () => {
-      window.removeEventListener('keydown', handleEsc);
-    };
-  }, [onClose]);
-
-  return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-8">
-      <div 
-        className="absolute inset-0 bg-black/50 backdrop-blur-sm"
-        onClick={onClose}
-      ></div>
-      
-      <div className="relative bg-white w-full max-w-6xl h-[80vh] md:h-[85vh] rounded-xl shadow-2xl overflow-hidden flex flex-col">
-        <div className="p-2 flex justify-end">
-          <button 
-            onClick={onClose}
-            className="bg-white/90 hover:bg-white text-gray-800 p-2 rounded-full transition-colors"
-            aria-label="Close"
-          >
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <line x1="18" y1="6" x2="6" y2="18"></line>
-              <line x1="6" y1="6" x2="18" y2="18"></line>
-            </svg>
-          </button>
-        </div>
-        
-        <div className="flex-1 overflow-auto">
-          {getLightboxContent(url)}
-        </div>
-      </div>
-    </div>
-  );
-};
-
-export default Lightbox;
