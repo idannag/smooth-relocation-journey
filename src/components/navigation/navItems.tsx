@@ -1,5 +1,5 @@
 
-import { Home, Calculator, Newspaper, Building2, GraduationCap, UserRound, Route, Bot, BookText, Headphones, Globe, Play } from "lucide-react";
+import { Home, Calculator, Newspaper, Building2, GraduationCap, UserRound, Route, Bot, BookText, Headphones, Globe, Play, ShoppingCart } from "lucide-react";
 import { NavItem } from "@/types/navigation";
 
 export const getMainNavItems = (handleSubmenuItemClick: (url: string) => void): NavItem[] => [
