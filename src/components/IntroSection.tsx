@@ -7,7 +7,7 @@ const IntroSection = () => {
   const [showVideo, setShowVideo] = useState(false);
   const bulletPoints = [
     "has <strong>a lot of blind spots</strong>", 
-    "affect <strong>all aspects of life</strong>", 
+    "affects <strong>all aspects of life</strong>", 
     "has <strong>unique and specific needs</strong>"
   ];
 
