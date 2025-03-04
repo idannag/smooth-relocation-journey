@@ -1,4 +1,4 @@
-<lov-code>
+
 import LatestArticles from "@/components/LatestArticles";
 import Chatbot from "@/components/Chatbot";
 import { Globe, Clock, Calendar, ShoppingCart, Headphones } from "lucide-react";
@@ -732,4 +732,83 @@ const getLightboxContent = (url: string) => {
   // Handle special internal links
   if (url === 'news') {
     return <NewsContent />;
+  } else if (url === 'guides') {
+    return <GuidesContent />;
+  } else if (url === 'chatbot') {
+    return <Chatbot />;
+  } else if (url === 'orders') {
+    return <Orders />;
+  } else if (url === 'tools') {
+    return <TimeAndCurrencyConverter />;
+  } else if (url.startsWith('destination:')) {
+    const city = url.split(':')[1];
+    return <DestinationInfo city={city} />;
+  } else if (url.startsWith('article:')) {
+    const title = url.split(':')[1];
+    return <ArticleDetail title={title} />;
+  } else if (url.startsWith('http')) {
+    // External URL, show in iframe
+    return <IframeContent url={url} />;
   }
+  
+  // Default or fallback content
+  return (
+    <div className="flex flex-col items-center justify-center h-full text-center p-6 bg-gradient-to-r from-blue-50 to-blue-100">
+      <h3 className="text-xl font-bold text-gray-700 mb-2">Content Not Found</h3>
+      <p className="text-gray-600 mb-4">The requested content for: "{url}" could not be found.</p>
+      <button 
+        className="px-4 py-2 bg-gradient-to-r from-[#2C5AAE] to-[#40E0D0] text-white rounded-md"
+        onClick={() => window.history.back()}
+      >
+        Go Back
+      </button>
+    </div>
+  );
+};
+
+// Main Lightbox Component
+const Lightbox = ({ url, onClose }: LightboxProps) => {
+  const [closing, setClosing] = useState(false);
+  const isMobile = useIsMobile();
+
+  const handleClose = () => {
+    setClosing(true);
+    setTimeout(() => {
+      onClose();
+    }, 300);
+  };
+
+  return (
+    <div 
+      className={`fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 transition-opacity duration-300 ${
+        closing ? 'opacity-0' : 'opacity-100'
+      }`}
+      onClick={handleClose}
+    >
+      <div 
+        className={`relative w-full ${
+          isMobile ? 'h-full' : 'h-[90vh] max-w-5xl rounded-xl'
+        } bg-white overflow-hidden transition-transform duration-300 ${
+          closing ? 'scale-95' : 'scale-100'
+        }`}
+        onClick={(e) => e.stopPropagation()}
+      >
+        <button 
+          className="absolute top-4 right-4 z-10 bg-white/80 rounded-full p-1.5 shadow-md hover:bg-white transition-colors"
+          onClick={handleClose}
+        >
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+        
+        <div className="h-full overflow-auto">
+          {getLightboxContent(url)}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Lightbox;

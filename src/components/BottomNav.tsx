@@ -40,8 +40,8 @@ const BottomNav = () => {
       icon: <Calculator className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, 
       label: 'Useful Info',
       subItems: [
-        { icon: <Newspaper className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, label: 'Relocation News', url: '/news' },
-        { icon: <BookText className="w-5 h-5 stroke-[1.5] text-[#517cc7]" />, label: 'Relocation Guides', url: '/guides' },
+        { icon: <Newspaper className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, label: 'Relocation News', url: 'news' },
+        { icon: <BookText className="w-5 h-5 stroke-[1.5] text-[#517cc7]" />, label: 'Relocation Guides', url: 'guides' },
         { icon: <Calculator className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, label: 'Calculators & Tools', url: 'https://www.app.ocean-il.co.il/cost-of-living-comparison-calculator-copy/' }
       ]
     },

@@ -34,15 +34,15 @@ const Statistics = () => {
           {statistics.map((stat, index) => (
             <div
               key={index}
-              className="bg-white p-2 md:p-6 rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.06)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.12)] transition-all duration-500 animate-fade-in group/stat"
+              className="bg-white p-1 md:p-6 rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.06)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.12)] transition-all duration-500 animate-fade-in group/stat"
             >
               <div className="relative mb-1 md:mb-4 flex justify-center">
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent rounded-full transform scale-110 opacity-0 group-hover/stat:opacity-100 transition-all duration-500" />
-                <stat.icon className="w-5 h-5 md:w-8 md:h-8 text-[#2C5AAE] transform group-hover/stat:scale-110 transition-transform duration-500" />
+                <stat.icon className="w-4 h-4 md:w-8 md:h-8 text-[#2C5AAE] transform group-hover/stat:scale-110 transition-transform duration-500" />
               </div>
               <div className="text-center space-y-0.5 md:space-y-2">
                 <p className="text-gray-600 text-[10px] md:text-sm font-medium">{stat.topText}</p>
-                <h3 className="text-lg md:text-2xl lg:text-3xl font-bold text-[#2C5AAE] transform group-hover/stat:translate-y-[-2px] transition-transform duration-500">
+                <h3 className="text-base md:text-2xl lg:text-3xl font-bold text-[#2C5AAE] transform group-hover/stat:translate-y-[-2px] transition-transform duration-500">
                   {stat.number}
                 </h3>
                 <p className="text-gray-600 text-[10px] md:text-sm font-medium group-hover/stat:text-gray-800 transition-colors duration-500">
