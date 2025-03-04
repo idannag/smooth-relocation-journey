@@ -1,7 +1,6 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Plane } from 'lucide-react';
 
 const SplashScreen = () => {
   const [isVisible, setIsVisible] = useState(true);
@@ -9,7 +8,7 @@ const SplashScreen = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsVisible(false);
-    }, 5000); // Extended from 3000 to 5000 ms (added 2 more seconds)
+    }, 5000); // 5000 ms (5 seconds) duration
 
     return () => clearTimeout(timer);
   }, []);
@@ -62,33 +61,34 @@ const SplashScreen = () => {
           </motion.div>
           <div className="absolute inset-0 flex flex-col items-center justify-center">
             <div className="relative">
+              <motion.div
+                className="absolute inset-0 rounded-2xl"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                style={{ zIndex: 0 }}
+              >
+                <motion.div
+                  className="absolute inset-0 rounded-2xl"
+                  style={{ 
+                    background: "conic-gradient(from 0deg, #2C5AAE, #40E0D0, #33C3F0, #2C5AAE)",
+                    filter: "blur(4px)",
+                  }}
+                  animate={{
+                    background: "conic-gradient(from 360deg, #2C5AAE, #40E0D0, #33C3F0, #2C5AAE)",
+                  }}
+                  transition={{
+                    duration: 3,
+                    repeat: Infinity,
+                    ease: "linear"
+                  }}
+                />
+              </motion.div>
               <img 
                 src="https://www.app.ocean-il.co.il/wp-content/uploads/2022/04/cropped-logo.jpg"
                 alt="Ocean IL Logo"
-                className="w-32 h-32 object-contain mb-4 rounded-2xl"
+                className="w-32 h-32 object-contain mb-4 rounded-2xl relative z-10"
+                style={{ border: "2px solid transparent", padding: "2px", background: "white" }}
               />
-              <motion.div
-                animate={{
-                  rotate: 360,
-                }}
-                transition={{
-                  duration: 8,
-                  repeat: Infinity,
-                  ease: "linear"
-                }}
-                className="absolute top-0 left-0 w-full h-full pointer-events-none"
-                style={{ zIndex: 10 }}
-              >
-                <motion.div 
-                  className="absolute"
-                  style={{ 
-                    top: "-15px", 
-                    left: "calc(50% - 15px)" 
-                  }}
-                >
-                  <Plane className="w-8 h-8 text-[#2C5AAE] drop-shadow-lg" style={{ filter: 'drop-shadow(0 0 4px rgba(0,0,0,0.5))' }} />
-                </motion.div>
-              </motion.div>
             </div>
             <motion.p
               initial={{ opacity: 0 }}

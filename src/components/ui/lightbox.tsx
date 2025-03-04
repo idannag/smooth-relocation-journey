@@ -1,4 +1,4 @@
-
+<lov-code>
 import LatestArticles from "@/components/LatestArticles";
 import Chatbot from "@/components/Chatbot";
 import { Globe, Clock, Calendar, ShoppingCart, Headphones } from "lucide-react";
@@ -642,37 +642,59 @@ const ArticleDetail = ({ title }: { title: string }) => {
   );
 };
 
-// Footer for Lightbox
-const LightboxFooter = () => {
+// News Content Component for Lightbox
+const NewsContent = () => {
   return (
-    <div className="w-full py-3 px-4 bg-gray-100 text-xs text-center border-t">
-      <div className="flex justify-center space-x-4 mb-1">
-        <a 
-          href="https://www.app.ocean-il.co.il/term-and-condition/" 
-          target="_blank" 
-          rel="noopener noreferrer"
-          className="text-[#2C5AAE] hover:underline"
-        >
-          Terms & Conditions
-        </a>
-        <a 
-          href="https://www.app.ocean-il.co.il/privacy-policy/" 
-          target="_blank" 
-          rel="noopener noreferrer"
-          className="text-[#2C5AAE] hover:underline"
-        >
-          Privacy Policy
-        </a>
+    <div className="bg-gradient-to-r from-blue-50 to-blue-100 p-8 h-full overflow-y-auto">
+      <h2 className="text-3xl font-bold text-center mb-8 font-inter bg-gradient-to-r from-[#2C5AAE] to-[#517cc7] bg-clip-text text-transparent">
+        Latest Relocation News
+      </h2>
+      <LatestArticles />
+      <div className="mt-8 text-center">
+        <button className="px-6 py-3 rounded-full bg-gradient-to-r from-[#2C5AAE] to-[#40E0D0] text-white font-semibold 
+          hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl">
+          Subscribe to get every relocation news
+        </button>
       </div>
-      <div className="text-gray-500">
-        Built with ❤️ by <a 
-          href="https://autodigital.agency" 
-          target="_blank" 
-          rel="noopener noreferrer"
-          className="text-[#2C5AAE] hover:underline"
-        >
-          AutoDigital
-        </a>
+    </div>
+  );
+};
+
+// Guides Content Component for Lightbox
+const GuidesContent = () => {
+  return (
+    <div className="bg-gradient-to-r from-blue-50 to-blue-100 p-8 h-full overflow-y-auto">
+      <h2 className="text-3xl font-bold text-center mb-8 font-inter bg-gradient-to-r from-[#2C5AAE] to-[#517cc7] bg-clip-text text-transparent">
+        Relocation Guides
+      </h2>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {[1, 2, 3, 4, 5, 6].map((index) => (
+          <div key={index} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+            <div className="h-48 bg-gray-200">
+              <img 
+                src={`https://source.unsplash.com/random/300x200?relocation,travel,${index}`} 
+                alt="Guide Cover" 
+                className="w-full h-full object-cover"
+              />
+            </div>
+            <div className="p-4">
+              <h3 className="text-lg font-semibold mb-2 text-[#2C5AAE]">
+                {index === 1 ? "Complete Relocation Checklist" : 
+                 index === 2 ? "Guide to Schooling Abroad" : 
+                 index === 3 ? "Housing Search Tips" : 
+                 index === 4 ? "Visa Application Process" : 
+                 index === 5 ? "Banking & Finance Setup" : 
+                 "Healthcare Systems Explained"}
+              </h3>
+              <p className="text-sm text-gray-600 mb-4">
+                Essential information to help you navigate the complexities of international relocation.
+              </p>
+              <button className="text-sm text-[#2C5AAE] font-medium hover:underline">
+                Read Guide
+              </button>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );
@@ -680,24 +702,10 @@ const LightboxFooter = () => {
 
 const getLightboxContent = (url: string) => {
   if (url === 'news') {
-    return (
-      <div className="bg-gradient-to-r from-blue-50 to-blue-100 p-8 h-full overflow-y-auto">
-        <h2 className="text-3xl font-bold text-center mb-8 font-inter bg-gradient-to-r from-[#2C5AAE] to-[#517cc7] bg-clip-text text-transparent">
-          Latest Relocation News
-        </h2>
-        <LatestArticles />
-      </div>
-    );
+    return <NewsContent />;
   }
   if (url === 'guides') {
-    return (
-      <div className="bg-gradient-to-r from-blue-50 to-blue-100 p-8 h-full overflow-y-auto">
-        <h2 className="text-3xl font-bold text-center mb-8 font-inter bg-gradient-to-r from-[#2C5AAE] to-[#517cc7] bg-clip-text text-transparent">
-          Relocation Guides
-        </h2>
-        <LatestArticles />
-      </div>
-    );
+    return <GuidesContent />;
   }
   if (url === 'chatbot') {
     return (
@@ -724,48 +732,8 @@ const getLightboxContent = (url: string) => {
     const title = url.split(':')[1];
     return <ArticleDetail title={title} />;
   }
+  
+  // Loading spinner for iframe content
   return (
-    <iframe
-      src={url}
-      className="w-full h-full"
-      loading="eager"
-    />
-  );
-};
-
-const Lightbox = ({ url, onClose }: LightboxProps) => {
-  return (
-    <div 
-      className="fixed inset-0 z-[100] animate-fade-in p-4 md:p-8" 
-      style={{ animationDuration: '100ms' }}
-      onClick={(e) => {
-        if (e.target === e.currentTarget) {
-          onClose();
-        }
-      }}
-    >
-      <div 
-        className="absolute inset-0 bg-black/50 backdrop-blur-sm" 
-      />
-      <div className="relative w-full h-full max-h-[calc(100vh-4rem)] flex flex-col rounded-2xl overflow-hidden">
-        <button
-          onClick={onClose}
-          className="absolute top-3 right-3 z-10 p-2 bg-white rounded-full shadow-lg hover:bg-gray-100 transition-colors"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <line x1="18" y1="6" x2="6" y2="18"></line>
-            <line x1="6" y1="6" x2="18" y2="18"></line>
-          </svg>
-        </button>
-        <div className="flex-1 bg-white flex flex-col overflow-hidden rounded-2xl">
-          <div className="flex-1 overflow-y-auto">
-            {getLightboxContent(url)}
-          </div>
-          <LightboxFooter />
-        </div>
-      </div>
-    </div>
-  );
-};
-
-export default Lightbox;
+    <div className="relative w-full h-full">
+      <div className="
