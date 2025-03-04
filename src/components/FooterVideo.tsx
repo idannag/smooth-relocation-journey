@@ -20,7 +20,6 @@ const FooterVideo = () => {
           loop
           playsInline
           className="absolute inset-0 w-full h-full object-cover"
-          // Remove fetchpriority attribute as it's not supported on video elements
         >
           <source src="https://www.app.ocean-il.co.il/wp-content/uploads/2022/10/Brooklyn.m4v" type="video/mp4" />
         </video>
@@ -32,27 +31,27 @@ const FooterVideo = () => {
           </h2>
           <p className="text-lg md:text-xl mb-8 animate-slide-up text-white">Let us guide you through your relocation adventure</p>
           
-          <div className="flex space-x-3 text-[10px] text-gray-300 mt-2">
+          <div className="flex space-x-3 text-[10px] md:text-xs text-white mt-2 py-6">
             <button 
               onClick={() => handleLegalClick('https://www.app.ocean-il.co.il/term-and-condition/')}
-              className="hover:text-white transition-colors"
+              className="hover:text-white transition-colors font-medium"
             >
               Terms & Conditions
             </button>
             <span>|</span>
             <button 
               onClick={() => handleLegalClick('https://www.app.ocean-il.co.il/privacy-policy/')}
-              className="hover:text-white transition-colors"
+              className="hover:text-white transition-colors font-medium"
             >
               Privacy Policy
             </button>
             <span>|</span>
-            <span className="text-gray-300">
+            <span className="text-white">
               Built with ❤️ by <a 
                 href="https://autodigital.agency" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="hover:text-white transition-colors"
+                className="hover:text-white transition-colors font-medium"
               >
                 AutoDigital
               </a>

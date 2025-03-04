@@ -1,5 +1,5 @@
 
-import { Home, Calculator, Newspaper, Building2, GraduationCap, UserRound, ShoppingCart, Route, Bot, BookText, Headphones, Globe, Play } from "lucide-react";
+import { Home, Calculator, Newspaper, Building2, GraduationCap, UserRound, Route, Bot, BookText, Headphones, Globe, Play } from "lucide-react";
 import { NavItem } from "@/types/navigation";
 
 export const getMainNavItems = (handleSubmenuItemClick: (url: string) => void): NavItem[] => [
@@ -58,11 +58,6 @@ export const getMainNavItems = (handleSubmenuItemClick: (url: string) => void): 
         icon: <Route className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, 
         label: 'My Relocation',
         onClick: () => handleSubmenuItemClick('https://preview--ocean-journey-61.lovable.app/')
-      },
-      { 
-        icon: <ShoppingCart className="w-5 h-5 stroke-[1.5] text-[#517cc7]" />, 
-        label: 'My Services & Orders',
-        onClick: () => handleSubmenuItemClick('orders')
       },
       { 
         icon: <UserRound className="w-5 h-5 stroke-[1.5] text-[#517cc7]" />, 

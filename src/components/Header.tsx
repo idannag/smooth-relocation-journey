@@ -51,7 +51,6 @@ const Header = () => {
         link.rel = 'preload';
         link.as = imgUrl.endsWith('.mp4') ? 'video' : 'image';
         link.href = imgUrl;
-        // Removed fetchPriority as it's not valid on link elements
         document.head.appendChild(link);
       });
     };
@@ -93,21 +92,22 @@ const Header = () => {
       return;
     }
     
-    if (url === 'orders') {
-      console.log("Opening orders");
-      setLightboxContent('orders');
-      setShowLightbox(true);
-      setIsOpen(false);
-      return;
-    }
-
     if (url === 'My Ocean Community') {
       window.open('https://chat.whatsapp.com/LODS9mJleJU9e1Y27ml2TB', '_blank');
       setIsOpen(false);
       return;
     }
     
-    setLightboxContent(url.startsWith('http') ? url : window.location.origin + url);
+    // If URL starts with http, it's an external link for iframe
+    if (url.startsWith('http')) {
+      setLightboxContent(url);
+      setShowLightbox(true);
+      setIsOpen(false);
+      return;
+    }
+    
+    // For internal content like 'news', 'guides'
+    setLightboxContent(url);
     setShowLightbox(true);
     setIsOpen(false);
   };
@@ -135,7 +135,6 @@ const Header = () => {
                   alt="Ocean IL Logo" 
                   className="h-8 w-auto"
                   loading="eager"
-                  fetchPriority="high"
                 />
               </a>
               <div className="hidden md:block">

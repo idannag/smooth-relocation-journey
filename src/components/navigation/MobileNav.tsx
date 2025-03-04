@@ -47,7 +47,9 @@ const MobileNav = ({ items, onSubItemClick, isOpen, menuRef }: MobileNavProps) =
                   <button
                     key={subIndex}
                     onClick={() => {
-                      if (subItem.label === "My Ocean Community") {
+                      if (subItem.onClick) {
+                        subItem.onClick();
+                      } else if (subItem.label === "My Ocean Community") {
                         window.open('https://chat.whatsapp.com/LODS9mJleJU9e1Y27ml2TB', '_blank');
                       } else {
                         onSubItemClick(subItem.label.toLowerCase().replace(/\s+/g, '-'));
