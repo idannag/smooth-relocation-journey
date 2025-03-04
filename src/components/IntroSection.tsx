@@ -5,7 +5,11 @@ import { CheckCircle } from 'lucide-react';
 
 const IntroSection = () => {
   const [showVideo, setShowVideo] = useState(false);
-  const bulletPoints = ["has a lot of blind spots", "affect all aspects of life", "has various, unique and specific needs"];
+  const bulletPoints = [
+    "has <strong>a lot of blind spots</strong>", 
+    "affect <strong>all aspects of life</strong>", 
+    "has <strong>unique and specific needs</strong>"
+  ];
 
   return (
     <section className="py-16 bg-white">
@@ -23,7 +27,7 @@ const IntroSection = () => {
                 animationDelay: `${index * 150}ms`
               }}>
                 <CheckCircle className="w-5 h-5 text-[#2C5AAE]" />
-                <p className="text-md md:text-lg text-gray-700">{point}</p>
+                <p className="text-md md:text-lg text-gray-700" dangerouslySetInnerHTML={{ __html: point }}></p>
               </div>
             ))}
           </div>

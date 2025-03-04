@@ -1,6 +1,6 @@
 
 import { useState, useEffect, useRef } from "react";
-import { Menu } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import TimeStrip from "./TimeStrip";
 import CurrencyStrip from "./CurrencyStrip";
 import { useIsMobile } from '../hooks/use-mobile';
@@ -135,7 +135,6 @@ const Header = () => {
                   alt="Ocean IL Logo" 
                   className="h-8 w-auto"
                   loading="eager"
-                  // Correct camelCase for fetchPriority
                   fetchPriority="high"
                 />
               </a>
@@ -162,7 +161,11 @@ const Header = () => {
               aria-label="Toggle menu"
               type="button"
             >
-              <Menu className="w-6 h-6" />
+              {isOpen ? (
+                <X className="w-6 h-6" />
+              ) : (
+                <Menu className="w-6 h-6" />
+              )}
             </button>
           </div>
         </div>

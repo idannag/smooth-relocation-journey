@@ -78,7 +78,7 @@ const BottomNav = () => {
                   className="flex flex-col items-center text-gray-600 hover:text-[#2C5AAE] transition-colors duration-200 w-full"
                 >
                   {item.icon}
-                  <span className="text-[12px] mt-1 font-bold bg-gradient-to-r from-[#2C5AAE] to-[#517cc7] bg-clip-text text-transparent text-center w-full">
+                  <span className="text-[13px] md:text-[14px] mt-1 font-bold bg-gradient-to-r from-[#2C5AAE] to-[#517cc7] bg-clip-text text-transparent text-center w-full">
                     {item.label}
                   </span>
                 </button>

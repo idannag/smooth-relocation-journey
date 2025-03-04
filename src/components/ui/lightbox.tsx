@@ -1,4 +1,4 @@
-
+<lov-codelov-code>
 import LatestArticles from "@/components/LatestArticles";
 import Chatbot from "@/components/Chatbot";
 import { Globe, Clock, Calendar, ShoppingCart, Headphones } from "lucide-react";
@@ -728,60 +728,3 @@ const getLightboxContent = (url: string) => {
   if (url.startsWith('destination:')) {
     const city = url.split(':')[1];
     return <DestinationInfo city={city} />;
-  }
-  if (url.startsWith('article:')) {
-    const title = url.split(':')[1];
-    return <ArticleDetail title={title} />;
-  }
-  
-  // Loading spinner for iframe content
-  return (
-    <div className="flex items-center justify-center w-full h-full bg-white/80">
-      <div className="w-12 h-12 border-4 border-[#2C5AAE] border-t-transparent rounded-full animate-spin"></div>
-    </div>
-  );
-};
-
-// Main Lightbox Component
-const Lightbox = ({ url, onClose }: LightboxProps) => {
-  const isMobile = useIsMobile();
-  const [isClosing, setIsClosing] = useState(false);
-  
-  const handleClose = () => {
-    setIsClosing(true);
-    setTimeout(() => {
-      onClose();
-    }, 300);
-  };
-
-  return (
-    <div 
-      className={`fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/40 transition-opacity duration-300 ${
-        isClosing ? 'opacity-0' : 'opacity-100'
-      }`}
-      onClick={handleClose}
-    >
-      <div 
-        className={`relative bg-white rounded-xl shadow-2xl overflow-hidden transition-all duration-300 w-full ${
-          isMobile ? 'h-[95vh] max-w-full' : 'h-[85vh] max-w-5xl'
-        } ${isClosing ? 'scale-95 opacity-0' : 'scale-100 opacity-100'}`}
-        onClick={(e) => e.stopPropagation()}
-      >
-        <button
-          className="absolute top-2 right-2 z-10 p-1 rounded-full bg-white/80 hover:bg-white text-gray-700 hover:text-gray-900 transition-colors"
-          onClick={handleClose}
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-          </svg>
-        </button>
-        
-        <div className="w-full h-full overflow-hidden">
-          {getLightboxContent(url)}
-        </div>
-      </div>
-    </div>
-  );
-};
-
-export default Lightbox;
