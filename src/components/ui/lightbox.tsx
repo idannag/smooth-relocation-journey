@@ -259,45 +259,23 @@ const Services = () => {
   const availableServices = [
     {
       id: "SRV-001",
-      service: "Visa & Immigration Support",
-      description: "Expert assistance with visa applications, work permits, and immigration procedures",
-      price: "$300",
-      duration: "2-4 weeks"
+      service: "Taxes – Filing & Advisory",
+      description: "Filing tax reports and providing tax consultation for returning residents."
     },
     {
       id: "SRV-002",
-      service: "Home Finding",
-      description: "Personalized housing search based on your preferences and budget",
-      price: "$500",
-      duration: "1-3 weeks"
+      service: "Shipping & Logistics",
+      description: "Handling international and domestic shipping, including customs and delivery."
     },
     {
       id: "SRV-003",
-      service: "School Search",
-      description: "Finding the right schools or educational institutions for your children",
-      price: "$350",
-      duration: "1-2 weeks"
+      service: "Property Search – Temporary, Rental & Purchase",
+      description: "Finding suitable housing for short-term stays, rentals, or purchases."
     },
     {
       id: "SRV-004",
-      service: "Area Orientation",
-      description: "Guided tour of your new city with insights on neighborhoods, amenities, and local culture",
-      price: "$200",
-      duration: "1 day"
-    },
-    {
-      id: "SRV-005",
-      service: "Document Translation",
-      description: "Professional translation of important documents for local authorities",
-      price: "$25 per page",
-      duration: "3-5 days"
-    },
-    {
-      id: "SRV-006",
-      service: "Banking Setup",
-      description: "Assistance with opening bank accounts and setting up financial services",
-      price: "$150",
-      duration: "1 week"
+      service: "Tools for Coping with Change – Expert Psychologist",
+      description: "Providing practical tools and guidance from a specialist to manage transitions."
     }
   ];
 
@@ -313,14 +291,6 @@ const Services = () => {
             <div key={service.id} className="border rounded-lg p-4 hover:shadow-md transition-shadow">
               <h3 className="text-lg font-semibold text-[#2C5AAE]">{service.service}</h3>
               <p className="text-sm text-gray-600 mt-2">{service.description}</p>
-              <div className="flex justify-between mt-4">
-                <span className="text-sm">
-                  <strong>Price:</strong> {service.price}
-                </span>
-                <span className="text-sm">
-                  <strong>Duration:</strong> {service.duration}
-                </span>
-              </div>
               <button className="w-full mt-4 py-2 bg-gradient-to-r from-[#2C5AAE] to-[#40E0D0] text-white rounded-md text-sm hover:opacity-90 transition-opacity">
                 Order Service
               </button>
