@@ -70,27 +70,22 @@ const SplashScreen = () => {
                 <motion.div
                   className="absolute inset-0 rounded-2xl"
                   style={{ 
-                    background: "conic-gradient(from 0deg, #2C5AAE, #40E0D0, #33C3F0, #2C5AAE)",
-                    filter: "blur(1px)",
-                    margin: "-2px",
+                    background: "transparent",
+                    boxShadow: "0 0 0 2px rgba(64, 224, 208, 0.7)",
+                    margin: "-3px",
                   }}
                   animate={{
-                    background: "conic-gradient(from 360deg, #2C5AAE, #40E0D0, #33C3F0, #2C5AAE)",
                     boxShadow: [
-                      "0 0 5px rgba(51, 195, 240, 0.5), 0 0 10px rgba(44, 90, 174, 0.3)",
-                      "0 0 8px rgba(64, 224, 208, 0.7), 0 0 15px rgba(51, 195, 240, 0.5)",
-                      "0 0 5px rgba(51, 195, 240, 0.5), 0 0 10px rgba(44, 90, 174, 0.3)",
+                      "0 0 0 2px rgba(44, 90, 174, 0.8), 0 0 10px rgba(44, 90, 174, 0.5)",
+                      "0 0 0 2px rgba(64, 224, 208, 0.8), 0 0 10px rgba(64, 224, 208, 0.5)",
+                      "0 0 0 2px rgba(51, 195, 240, 0.8), 0 0 10px rgba(51, 195, 240, 0.5)",
+                      "0 0 0 2px rgba(44, 90, 174, 0.8), 0 0 10px rgba(44, 90, 174, 0.5)",
                     ]
                   }}
                   transition={{
-                    duration: 2,
+                    duration: 3,
                     repeat: Infinity,
                     ease: "linear",
-                    times: [0, 0.5, 1],
-                    boxShadow: {
-                      repeat: Infinity,
-                      duration: 2
-                    }
                   }}
                 />
               </motion.div>
