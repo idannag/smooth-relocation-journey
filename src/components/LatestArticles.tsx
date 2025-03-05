@@ -1,4 +1,3 @@
-
 import { ChevronLeft, ChevronRight, Bell } from 'lucide-react';
 import { useRef, useState } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -200,7 +199,7 @@ const UsefulInfo = () => {
             }
           }} className="inline-flex items-center px-5 py-2 bg-gradient-to-r from-[#2C5AAE] to-[#40E0D0] text-white rounded-full hover:opacity-90 transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-105 text-sm">
             <Bell className="w-4 h-4 mr-1" />
-            <span className="font-medium">Subscribe for Push Notifications</span>
+            <span className="font-medium">Stay Connected – Get Relocation Updates</span>
           </button>
         </div>
       </div>

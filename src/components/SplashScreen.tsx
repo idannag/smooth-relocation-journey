@@ -72,14 +72,14 @@ const SplashScreen = () => {
                   style={{ 
                     background: "transparent",
                     boxShadow: "0 0 0 2px rgba(64, 224, 208, 0.7)",
-                    margin: "-3px",
+                    margin: "0",
                   }}
                   animate={{
                     boxShadow: [
-                      "0 0 0 2px rgba(44, 90, 174, 0.8), 0 0 10px rgba(44, 90, 174, 0.5)",
-                      "0 0 0 2px rgba(64, 224, 208, 0.8), 0 0 10px rgba(64, 224, 208, 0.5)",
-                      "0 0 0 2px rgba(51, 195, 240, 0.8), 0 0 10px rgba(51, 195, 240, 0.5)",
-                      "0 0 0 2px rgba(44, 90, 174, 0.8), 0 0 10px rgba(44, 90, 174, 0.5)",
+                      "0 0 0 3px rgba(44, 90, 174, 0.9), 0 0 15px rgba(44, 90, 174, 0.7)",
+                      "0 0 0 3px rgba(64, 224, 208, 0.9), 0 0 15px rgba(64, 224, 208, 0.7)",
+                      "0 0 0 3px rgba(51, 195, 240, 0.9), 0 0 15px rgba(51, 195, 240, 0.7)",
+                      "0 0 0 3px rgba(44, 90, 174, 0.9), 0 0 15px rgba(44, 90, 174, 0.7)",
                     ]
                   }}
                   transition={{
@@ -93,7 +93,7 @@ const SplashScreen = () => {
                 src="https://www.app.ocean-il.co.il/wp-content/uploads/2022/04/cropped-logo.jpg"
                 alt="Ocean IL Logo"
                 className="w-32 h-32 object-contain mb-4 rounded-2xl relative z-10"
-                style={{ border: "2px solid transparent", padding: "2px", background: "white" }}
+                style={{ border: "2px solid transparent", background: "white" }}
               />
             </div>
             <motion.p
