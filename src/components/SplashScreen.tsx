@@ -62,7 +62,7 @@ const SplashScreen = () => {
           <div className="absolute inset-0 flex flex-col items-center justify-center">
             <div className="relative">
               <motion.div
-                className="absolute inset-0 rounded-2xl"
+                className="absolute inset-0"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 style={{ zIndex: 0 }}
@@ -71,15 +71,26 @@ const SplashScreen = () => {
                   className="absolute inset-0 rounded-2xl"
                   style={{ 
                     background: "conic-gradient(from 0deg, #2C5AAE, #40E0D0, #33C3F0, #2C5AAE)",
-                    filter: "blur(4px)",
+                    filter: "blur(1px)",
+                    margin: "-2px",
                   }}
                   animate={{
                     background: "conic-gradient(from 360deg, #2C5AAE, #40E0D0, #33C3F0, #2C5AAE)",
+                    boxShadow: [
+                      "0 0 5px rgba(51, 195, 240, 0.5), 0 0 10px rgba(44, 90, 174, 0.3)",
+                      "0 0 8px rgba(64, 224, 208, 0.7), 0 0 15px rgba(51, 195, 240, 0.5)",
+                      "0 0 5px rgba(51, 195, 240, 0.5), 0 0 10px rgba(44, 90, 174, 0.3)",
+                    ]
                   }}
                   transition={{
-                    duration: 3,
+                    duration: 2,
                     repeat: Infinity,
-                    ease: "linear"
+                    ease: "linear",
+                    times: [0, 0.5, 1],
+                    boxShadow: {
+                      repeat: Infinity,
+                      duration: 2
+                    }
                   }}
                 />
               </motion.div>
