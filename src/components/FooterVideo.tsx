@@ -25,13 +25,13 @@ const FooterVideo = () => {
         </video>
         <div className="absolute inset-0 backdrop-blur-[1px] bg-black/10" />
         <div className="absolute inset-0 bg-gradient-to-t from-[#2C5AAE]/30 to-transparent backdrop-blur-[1px]" />
-        <div className="relative h-full flex flex-col items-center justify-center text-center px-4 pt-16 md:pt-0">
+        <div className="relative h-full flex flex-col items-center justify-center text-center px-4 pt-20 md:pt-0">
           <h2 className="text-3xl md:text-4xl font-bold mb-4 animate-fade-in text-white">
             Ready to Start Your Journey?
           </h2>
           <p className="text-lg md:text-xl mb-8 animate-slide-up text-white">Let us guide you through your relocation adventure</p>
           
-          <div className="flex flex-wrap justify-center space-x-2 md:space-x-3 text-[10px] md:text-xs text-white mt-2 py-3 pb-6 md:pb-8">
+          <div className="flex flex-wrap justify-center space-x-2 md:space-x-3 text-[10px] md:text-xs text-white mt-0 py-0 pb-4 md:pb-8">
             <button 
               onClick={() => handleLegalClick('https://www.app.ocean-il.co.il/term-and-condition/')}
               className="hover:text-white transition-colors font-medium"
