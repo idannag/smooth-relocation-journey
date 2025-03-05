@@ -6,7 +6,7 @@ import Lightbox from './ui/lightbox';
 const BottomNav = () => {
   const [activeSection, setActiveSection] = useState<string | null>(null);
   const [showLightbox, setShowLightbox] = useState(false);
-  const [lightboxUrl, setLightboxUrl] = useState('');
+  const [lightboxUrl, setLightboxUrl] = useState("");
   const navRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -42,7 +42,8 @@ const BottomNav = () => {
       subItems: [
         { icon: <Newspaper className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, label: 'Relocation News', url: 'news' },
         { icon: <BookText className="w-5 h-5 stroke-[1.5] text-[#517cc7]" />, label: 'Relocation Guides', url: 'guides' },
-        { icon: <Calculator className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, label: 'Calculators & Tools', url: 'https://www.app.ocean-il.co.il/cost-of-living-comparison-calculator-copy/' }
+        { icon: <Calculator className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, label: 'Cost of Living Calculator', url: 'https://www.app.ocean-il.co.il/cost-of-living-comparison-calculator-copy/' },
+        { icon: <Calculator className="w-5 h-5 stroke-[1.5] text-[#517cc7]" />, label: 'AI Personalized Cost-of-Living Calculator', url: 'https://autodigital.agency/ai-personalized-cost-of-living-calculator/' }
       ]
     },
     { 

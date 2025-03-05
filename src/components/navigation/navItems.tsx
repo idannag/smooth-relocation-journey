@@ -26,6 +26,11 @@ export const getMainNavItems = (handleSubmenuItemClick: (url: string) => void): 
         icon: <Calculator className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, 
         label: 'Cost of Living Calculator',
         onClick: () => handleSubmenuItemClick('https://www.app.ocean-il.co.il/cost-of-living-comparison-calculator-copy/')
+      },
+      { 
+        icon: <Calculator className="w-5 h-5 stroke-[1.5] text-[#517cc7]" />, 
+        label: 'AI Personalized Cost-of-Living Calculator',
+        onClick: () => handleSubmenuItemClick('https://autodigital.agency/ai-personalized-cost-of-living-calculator/')
       }
     ]
   },

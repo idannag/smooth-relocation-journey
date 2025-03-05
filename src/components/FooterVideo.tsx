@@ -31,7 +31,7 @@ const FooterVideo = () => {
           </h2>
           <p className="text-lg md:text-xl mb-8 animate-slide-up text-white">Let us guide you through your relocation adventure</p>
           
-          <div className="flex space-x-3 text-[10px] md:text-xs text-white mt-2 py-6 pb-12">
+          <div className="flex flex-wrap justify-center space-x-2 md:space-x-3 text-[10px] md:text-xs text-white mt-2 py-6 pb-20 md:pb-12">
             <button 
               onClick={() => handleLegalClick('https://www.app.ocean-il.co.il/term-and-condition/')}
               className="hover:text-white transition-colors font-medium"
