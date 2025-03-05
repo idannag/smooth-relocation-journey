@@ -177,12 +177,12 @@ const UsefulInfo = () => {
               }
             });
           }
-        }} className="inline-flex flex-col items-center bg-gradient-to-r from-[#2C5AAE] to-[#40E0D0] text-white rounded-full hover:opacity-90 transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-105 text-sm px-[65px] py-[5px]">
+        }} className="inline-flex flex-col items-center bg-gradient-to-r from-[#2C5AAE] to-[#40E0D0] text-white rounded-full hover:opacity-90 transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-105 text-sm py-[5px] px-[50px]">
             <span className="flex items-center">
               <Bell className="w-6 h-5 mr-1" />
               <span className="font-medium text-base">Stay Connected</span>
             </span>
-            <span className="font-medium text-base">Get Relocation Updates</span>
+            <span className="font-medium text-sm">Get Relocation Updates</span>
           </button>
         </div>
       </div>
