@@ -44,10 +44,10 @@ const Statistics = () => {
                 <div className="flex items-center gap-4">
                   <div className="relative flex-shrink-0">
                     <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent rounded-full transform scale-110 opacity-0 group-hover/stat:opacity-100 transition-all duration-500" />
-                    <stat.icon className="w-10 h-10 text-[#2C5AAE] transform group-hover/stat:scale-110 transition-transform duration-500" />
+                    <stat.icon className="w-8 h-8 text-[#2C5AAE] transform group-hover/stat:scale-110 transition-transform duration-500" />
                   </div>
                   <div className="flex-1">
-                    <p className="text-gray-600 text-sm font-medium mb-0.5">{stat.topText}</p>
+                    <p className="text-gray-600 text-xs font-medium mb-0.5">{stat.topText}</p>
                     <div className="flex items-baseline gap-1">
                       <h3 className="text-xl font-bold text-[#2C5AAE] transform group-hover/stat:translate-y-[-2px] transition-transform duration-500">
                         {stat.number}

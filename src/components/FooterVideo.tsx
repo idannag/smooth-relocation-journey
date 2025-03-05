@@ -25,7 +25,7 @@ const FooterVideo = () => {
         </video>
         <div className="absolute inset-0 backdrop-blur-[1px] bg-black/10" />
         <div className="absolute inset-0 bg-gradient-to-t from-[#2C5AAE]/30 to-transparent backdrop-blur-[1px]" />
-        <div className="relative h-full flex flex-col items-center justify-center text-center px-4 pt-8 md:pt-0">
+        <div className="relative h-full flex flex-col items-center justify-center text-center px-4 pt-16 md:pt-0">
           <h2 className="text-3xl md:text-4xl font-bold mb-4 animate-fade-in text-white">
             Ready to Start Your Journey?
           </h2>
