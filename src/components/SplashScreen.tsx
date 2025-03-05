@@ -75,14 +75,14 @@ const SplashScreen = () => {
                     top: "0",
                     left: "0",
                     background: "transparent",
-                    boxShadow: "0 0 0 3px rgba(44, 90, 174, 0.95)",
+                    boxShadow: "0 0 0 6px rgba(44, 90, 174, 0.95)",
                   }}
                   animate={{
                     boxShadow: [
-                      "0 0 0 3px rgba(44, 90, 174, 1), 0 0 15px 3px rgba(44, 90, 174, 0.9)",
-                      "0 0 0 3px rgba(64, 224, 208, 1), 0 0 15px 3px rgba(64, 224, 208, 0.9)",
-                      "0 0 0 3px rgba(51, 195, 240, 1), 0 0 15px 3px rgba(51, 195, 240, 0.9)",
-                      "0 0 0 3px rgba(44, 90, 174, 1), 0 0 15px 3px rgba(44, 90, 174, 0.9)",
+                      "0 0 0 6px rgba(44, 90, 174, 1), 0 0 20px 6px rgba(44, 90, 174, 0.95)",
+                      "0 0 0 6px rgba(51, 195, 240, 1), 0 0 20px 6px rgba(51, 195, 240, 0.95)",
+                      "0 0 0 6px rgba(139, 92, 246, 1), 0 0 20px 6px rgba(139, 92, 246, 0.95)",
+                      "0 0 0 6px rgba(44, 90, 174, 1), 0 0 20px 6px rgba(44, 90, 174, 0.95)",
                     ]
                   }}
                   transition={{
