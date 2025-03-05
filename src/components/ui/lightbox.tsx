@@ -1,3 +1,4 @@
+
 import LatestArticles from "@/components/LatestArticles";
 import Chatbot from "@/components/Chatbot";
 import { Globe, Clock, ShoppingCart, Headphones } from "lucide-react";
@@ -276,6 +277,11 @@ const Services = () => {
       id: "SRV-004",
       service: "Tools for Coping with Change – Expert Psychologist",
       description: "Providing practical tools and guidance from a specialist to manage transitions."
+    },
+    {
+      id: "SRV-005",
+      service: "Storage Solutions",
+      description: "Secure short-term and long-term storage options for personal and household items."
     }
   ];
 
