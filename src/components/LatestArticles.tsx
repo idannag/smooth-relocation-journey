@@ -2,10 +2,12 @@ import { ChevronLeft, ChevronRight, Bell } from 'lucide-react';
 import { useRef, useState } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Lightbox from './ui/lightbox';
+
 const UsefulInfo = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [showLightbox, setShowLightbox] = useState(false);
   const [selectedArticle, setSelectedArticle] = useState("");
+
   const newsArticles = [{
     title: "Latest Relocation Trends",
     excerpt: "Stay updated with the most recent developments in global relocation...",
@@ -37,6 +39,7 @@ const UsefulInfo = () => {
     image: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1",
     link: "#"
   }];
+
   const guides = [{
     title: "Complete Guide to Moving Abroad",
     excerpt: "Everything you need to know about international relocation...",
@@ -68,6 +71,7 @@ const UsefulInfo = () => {
     image: "https://images.unsplash.com/photo-1546607270-2dd9c4326cd7",
     link: "#"
   }];
+
   const tools = [{
     title: "Cost of Living Calculator",
     excerpt: "Compare living costs between different cities...",
@@ -99,6 +103,7 @@ const UsefulInfo = () => {
     image: "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b",
     link: "#"
   }];
+
   const scroll = (direction: 'left' | 'right') => {
     if (scrollRef.current) {
       const scrollAmount = 300;
@@ -108,20 +113,35 @@ const UsefulInfo = () => {
       });
     }
   };
-  const renderArticles = (articles: typeof newsArticles) => <div className="relative group">
+
+  const renderArticles = (articles: typeof newsArticles) => (
+    <div className="relative group">
       <button onClick={() => scroll('left')} className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white/80 rounded-full p-2 shadow-lg">
         <ChevronLeft className="w-5 h-5 text-[#2C5AAE]" />
       </button>
       
-      <div ref={scrollRef} className="flex overflow-x-auto gap-4 pb-4 px-4 snap-x snap-mandatory scrollbar-hide" style={{
-      scrollbarWidth: 'none',
-      msOverflowStyle: 'none'
-    }}>
-        {articles.map((article, index) => <div key={index} className="flex-none w-60 snap-center bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 animate-fade-in group cursor-pointer" onClick={() => {
-        setSelectedArticle(article.title);
-        setShowLightbox(true);
-      }}>
-            <img src={article.image} alt={article.title} className="w-full h-32 object-cover transition-transform duration-300 group-hover:scale-105" />
+      <div 
+        ref={scrollRef} 
+        className="flex overflow-x-auto gap-4 pb-4 px-4 snap-x snap-mandatory scrollbar-hide" 
+        style={{
+          scrollbarWidth: 'none',
+          msOverflowStyle: 'none'
+        }}
+      >
+        {articles.map((article, index) => (
+          <div 
+            key={index} 
+            className="flex-none w-60 snap-center bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 animate-fade-in group cursor-pointer" 
+            onClick={() => {
+              setSelectedArticle(article.title);
+              setShowLightbox(true);
+            }}
+          >
+            <img 
+              src={article.image} 
+              alt={article.title} 
+              className="w-full h-32 object-cover transition-transform duration-300 group-hover:scale-105" 
+            />
             <div className="p-3">
               <h3 className="text-sm font-semibold mb-1 line-clamp-1">{article.title}</h3>
               <p className="text-gray-600 text-xs mb-2 line-clamp-2">{article.excerpt}</p>
@@ -129,14 +149,18 @@ const UsefulInfo = () => {
                 Read more →
               </span>
             </div>
-          </div>)}
+          </div>
+        ))}
       </div>
       
       <button onClick={() => scroll('right')} className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white/80 rounded-full p-2 shadow-lg">
         <ChevronRight className="w-5 h-5 text-[#2C5AAE]" />
       </button>
-    </div>;
-  return <section className="py-16 bg-gradient-to-r from-blue-50 to-blue-100">
+    </div>
+  );
+
+  return (
+    <section className="py-16 bg-gradient-to-r from-blue-50 to-blue-100">
       <div className="container mx-auto px-4">
         <h2 className="text-3xl font-bold text-center mb-8 font-inter bg-gradient-to-r from-[#2C5AAE] to-[#40E0D0] bg-clip-text text-transparent">
           Useful Information
@@ -169,25 +193,25 @@ const UsefulInfo = () => {
         </Tabs>
 
         <div className="mt-8 text-center">
+          <h3 className="font-medium text-[#2C5AAE] text-lg mb-2">Stay Connected</h3>
           <button onClick={() => {
-          if ('Notification' in window) {
-            Notification.requestPermission().then(function (permission) {
-              if (permission === "granted") {
-                console.log("Push notification permission granted");
-              }
-            });
-          }
-        }} className="inline-flex flex-col items-center bg-gradient-to-r from-[#2C5AAE] to-[#40E0D0] text-white rounded-full hover:opacity-90 transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-105 text-sm py-[5px] px-[50px]">
-            <span className="flex items-center">
-              <Bell className="w-6 h-5 mr-1" />
-              <span className="font-medium text-base">Stay Connected</span>
-            </span>
-            <span className="font-medium text-sm">Get Relocation Updates</span>
+            if ('Notification' in window) {
+              Notification.requestPermission().then(function (permission) {
+                if (permission === "granted") {
+                  console.log("Push notification permission granted");
+                }
+              });
+            }
+          }} className="inline-flex items-center bg-gradient-to-r from-[#2C5AAE] to-[#40E0D0] text-white rounded-full hover:opacity-90 transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-105 text-sm py-[5px] px-[20px]">
+            <Bell className="w-7 h-6 mr-1" />
+            <span className="font-medium text-base">Get Relocation Updates</span>
           </button>
         </div>
       </div>
 
       {showLightbox && <Lightbox url={`article:${selectedArticle}`} onClose={() => setShowLightbox(false)} />}
-    </section>;
+    </section>
+  );
 };
+
 export default UsefulInfo;

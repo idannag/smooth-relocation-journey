@@ -70,19 +70,19 @@ const SplashScreen = () => {
                 <motion.div
                   className="absolute rounded-2xl"
                   style={{ 
-                    width: "calc(100% + 4px)",
-                    height: "calc(100% + 4px)",
-                    top: "-2px",
-                    left: "-2px",
+                    width: "100%",
+                    height: "100%",
+                    top: "0",
+                    left: "0",
                     background: "transparent",
-                    boxShadow: "0 0 0 2px rgba(44, 90, 174, 0.9)",
+                    boxShadow: "0 0 0 3px rgba(44, 90, 174, 0.95)",
                   }}
                   animate={{
                     boxShadow: [
-                      "0 0 0 2px rgba(44, 90, 174, 1), 0 0 10px 2px rgba(44, 90, 174, 0.8)",
-                      "0 0 0 2px rgba(64, 224, 208, 1), 0 0 10px 2px rgba(64, 224, 208, 0.8)",
-                      "0 0 0 2px rgba(51, 195, 240, 1), 0 0 10px 2px rgba(51, 195, 240, 0.8)",
-                      "0 0 0 2px rgba(44, 90, 174, 1), 0 0 10px 2px rgba(44, 90, 174, 0.8)",
+                      "0 0 0 3px rgba(44, 90, 174, 1), 0 0 15px 3px rgba(44, 90, 174, 0.9)",
+                      "0 0 0 3px rgba(64, 224, 208, 1), 0 0 15px 3px rgba(64, 224, 208, 0.9)",
+                      "0 0 0 3px rgba(51, 195, 240, 1), 0 0 15px 3px rgba(51, 195, 240, 0.9)",
+                      "0 0 0 3px rgba(44, 90, 174, 1), 0 0 15px 3px rgba(44, 90, 174, 0.9)",
                     ]
                   }}
                   transition={{
@@ -96,7 +96,7 @@ const SplashScreen = () => {
                 src="https://www.app.ocean-il.co.il/wp-content/uploads/2022/04/cropped-logo.jpg"
                 alt="Ocean IL Logo"
                 className="w-32 h-32 object-contain rounded-2xl relative z-10"
-                style={{ border: "2px solid transparent", background: "white" }}
+                style={{ border: "none", background: "white" }}
               />
             </div>
             <motion.p
