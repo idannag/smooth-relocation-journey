@@ -751,4 +751,80 @@ const GuidesContent = () => {
               <h3 className="text-lg font-semibold mb-2 text-[#2C5AAE]">
                 {index === 1 ? "Complete Relocation Checklist" : 
                  index === 2 ? "Guide to Schooling Abroad" : 
-                 index === 3 ? "Housing Search Tips"
+                 index === 3 ? "Housing Search Tips" : 
+                 index === 4 ? "Financial Planning for Expats" : 
+                 index === 5 ? "Cultural Adaptation Strategies" : 
+                 "Healthcare Systems Comparison"}
+              </h3>
+              <p className="text-sm text-gray-600 mb-3">
+                Essential information to help make your relocation journey smoother and more successful.
+              </p>
+              <button className="text-sm font-medium text-[#2C5AAE] hover:underline">
+                Read Guide →
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+// Main Lightbox Component
+const Lightbox = ({ url, onClose }: LightboxProps) => {
+  const isMobile = useIsMobile();
+  
+  const renderContent = () => {
+    if (url === 'news') return <NewsContent />;
+    if (url === 'guides') return <GuidesContent />;
+    if (url === 'chatbot') return <CustomAIAssistant />;
+    if (url === 'services') return <Services />;
+    if (url === 'time') return <TimeAndCurrencyConverter />;
+    
+    if (url.startsWith('destination:')) {
+      const city = url.split(':')[1];
+      return <DestinationInfo city={city} />;
+    }
+    
+    if (url.startsWith('article:')) {
+      const title = url.split(':')[1];
+      return <ArticleDetail title={title} />;
+    }
+    
+    return (
+      <div className="flex items-center justify-center h-full">
+        <iframe 
+          src={url} 
+          className="w-full h-full border-0"
+          title="External Content"
+          allow="microphone; camera; fullscreen; accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-top-navigation allow-storage-access-by-user-activation"
+        />
+      </div>
+    );
+  };
+
+  return (
+    <div className="fixed inset-0 bg-black bg-opacity-75 z-50 flex items-center justify-center p-4 overflow-hidden">
+      <div className="relative bg-white rounded-xl overflow-hidden max-w-4xl w-full max-h-[90vh] h-[90vh] flex flex-col">
+        <div className="absolute right-2 top-2 z-10">
+          <button
+            onClick={onClose}
+            className="bg-white/10 backdrop-blur-sm text-gray-800 hover:bg-white/20 rounded-full p-2 transition-colors"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+        
+        <div className="flex-grow overflow-auto">
+          {renderContent()}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Lightbox;
