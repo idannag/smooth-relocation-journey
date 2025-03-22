@@ -1,9 +1,15 @@
-
 import LatestArticles from "@/components/LatestArticles";
-import Chatbot from "@/components/Chatbot";
 import { Globe, Clock, ShoppingCart, Headphones } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { useToast } from "@/hooks/use-toast";
+import { Loader } from "lucide-react";
 
 interface LightboxProps {
   url: string;
@@ -43,7 +49,6 @@ const TimeAndCurrencyConverter = () => {
     { code: "CHF", name: "Swiss Franc" }
   ];
 
-  // Update time based on selected timezone
   useEffect(() => {
     const updateTime = () => {
       const time = new Date().toLocaleString("en-US", {
@@ -65,7 +70,6 @@ const TimeAndCurrencyConverter = () => {
     return () => clearInterval(interval);
   }, [selectedTimezone]);
 
-  // Fetch exchange rates
   useEffect(() => {
     const fetchRates = async () => {
       try {
@@ -79,7 +83,6 @@ const TimeAndCurrencyConverter = () => {
         }
       } catch (error) {
         console.error('Error fetching rates, using mock data:', error);
-        // Fallback to mock rates
         const mockRates = {
           USD: 1,
           EUR: 0.92,
@@ -104,7 +107,6 @@ const TimeAndCurrencyConverter = () => {
     const amountNum = parseFloat(amount);
     if (isNaN(amountNum)) return;
     
-    // Convert to USD first (base currency), then to target
     const inUSD = from === "USD" ? amountNum : amountNum / rates[from];
     const converted = to === "USD" ? inUSD : inUSD * rates[to];
     
@@ -255,8 +257,175 @@ const TimeAndCurrencyConverter = () => {
   );
 };
 
+// Service Request Form
+const ServiceRequestForm = ({ service, onClose }: { service: string, onClose: () => void }) => {
+  const { toast } = useToast();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  
+  const formSchema = z.object({
+    name: z.string().min(2, { message: "Name must be at least 2 characters." }),
+    email: z.string().email({ message: "Please enter a valid email address." }),
+    phone: z.string().min(5, { message: "Please enter a valid phone number." }),
+    message: z.string().optional(),
+  });
+
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      name: "",
+      email: "",
+      phone: "",
+      message: "",
+    },
+  });
+
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    setIsSubmitting(true);
+    
+    try {
+      const formData = new FormData();
+      formData.append('service', service);
+      formData.append('name', values.name);
+      formData.append('email', values.email);
+      formData.append('phone', values.phone);
+      formData.append('message', values.message || '');
+      formData.append('timestamp', new Date().toISOString());
+      
+      const response = await fetch('https://script.google.com/macros/s/AKfycbwPLu4d_ZwUPU-BwueoRCMTaD792rUuwiLURnHmD0S4I13GXP_IpHyP21RoHm7-C6n7/exec', {
+        method: 'POST',
+        body: formData,
+        mode: 'no-cors'
+      });
+      
+      const subject = `Service Request: ${service}`;
+      const body = `
+Name: ${values.name}
+Email: ${values.email}
+Phone: ${values.phone}
+Service: ${service}
+Message: ${values.message || 'No additional message.'}
+      `;
+      const mailtoLink = `mailto:sales@ocean-il.co.il?cc=shlomit.drenger@ocean-il.co.il&subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      window.open(mailtoLink, '_blank');
+      
+      toast({
+        title: "Request Submitted",
+        description: "Your service request has been sent successfully!",
+        variant: "default",
+      });
+      
+      onClose();
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      toast({
+        title: "Submission Failed",
+        description: "There was an error sending your request. Please try again later.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  return (
+    <div className="bg-white p-6 rounded-lg shadow-lg max-w-md mx-auto">
+      <h3 className="text-xl font-bold text-[#2C5AAE] mb-4">Request {service}</h3>
+      
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+          <FormField
+            control={form.control}
+            name="name"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Full Name</FormLabel>
+                <FormControl>
+                  <Input placeholder="Your name" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          
+          <FormField
+            control={form.control}
+            name="email"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Email</FormLabel>
+                <FormControl>
+                  <Input type="email" placeholder="your.email@example.com" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          
+          <FormField
+            control={form.control}
+            name="phone"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Phone Number</FormLabel>
+                <FormControl>
+                  <Input type="tel" placeholder="+1 234 567 8900" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          
+          <FormField
+            control={form.control}
+            name="message"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Additional Information (Optional)</FormLabel>
+                <FormControl>
+                  <Textarea 
+                    placeholder="Please provide any additional details about your request"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          
+          <div className="flex gap-2 pt-2">
+            <button
+              type="button"
+              onClick={onClose}
+              className="flex-1 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50 transition-colors"
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className="flex-1 py-2 bg-gradient-to-r from-[#2C5AAE] to-[#40E0D0] text-white rounded-md disabled:opacity-70 flex items-center justify-center gap-2"
+            >
+              {isSubmitting ? (
+                <>
+                  <Loader className="animate-spin h-4 w-4" />
+                  Submitting...
+                </>
+              ) : (
+                "Submit Request"
+              )}
+            </button>
+          </div>
+        </form>
+      </Form>
+    </div>
+  );
+};
+
 // Services Component for the Lightbox
 const Services = () => {
+  const [showForm, setShowForm] = useState(false);
+  const [selectedService, setSelectedService] = useState("");
+  
   const availableServices = [
     {
       id: "SRV-001",
@@ -286,11 +455,18 @@ const Services = () => {
   ];
 
   const handleOrderService = (service: string) => {
-    const subject = `Service Request: ${service}`;
-    const body = `Hello Ocean Relocation Team,\n\nI'm interested in your "${service}" service. Please provide me with more information.\n\nThank you.`;
-    const mailtoLink = `mailto:sales@ocean-il.co.il?cc=shlomit.drenger@ocean-il.co.il&subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    window.location.href = mailtoLink;
+    setSelectedService(service);
+    setShowForm(true);
   };
+
+  const closeForm = () => {
+    setShowForm(false);
+    setSelectedService("");
+  };
+
+  if (showForm) {
+    return <ServiceRequestForm service={selectedService} onClose={closeForm} />;
+  }
 
   return (
     <div className="bg-gradient-to-r from-blue-50 to-blue-100 p-3 sm:p-4 max-w-4xl mx-auto h-full overflow-y-auto">
@@ -330,6 +506,23 @@ const Services = () => {
           </button>
         </div>
       </div>
+    </div>
+  );
+};
+
+// Custom AI Assistant
+const CustomAIAssistant = () => {
+  return (
+    <div className="h-full w-full bg-white flex flex-col">
+      <div className="p-4 bg-gradient-to-r from-[#2C5AAE] to-[#40E0D0] text-white">
+        <h2 className="text-xl font-bold text-center">My 24/7 AI Assistant</h2>
+      </div>
+      <iframe 
+        src="https://chatgpt.com/g/g-67b6c40963908191b77e23c6fecc2e57-relocation-ai-24-7-assistant" 
+        className="flex-grow w-full border-0"
+        title="AI Assistant"
+        sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-top-navigation"
+      />
     </div>
   );
 };
@@ -393,7 +586,6 @@ const DestinationInfo = ({ city }: { city: string }) => {
         "Growing tech and startup hub"
       ]
     }
-    // Add more cities as needed
   };
 
   const cityInfo = destinations[city as keyof typeof destinations] || {
@@ -456,7 +648,6 @@ const DestinationInfo = ({ city }: { city: string }) => {
 
 // Article Detail Component for Lightbox
 const ArticleDetail = ({ title }: { title: string }) => {
-  // Mock article data
   const articleContent = {
     title: title,
     date: "May 15, 2023",
@@ -604,13 +795,12 @@ const IframeContent = ({ url }: { url: string }) => {
 
 // Function to determine which content to render in the lightbox
 const getLightboxContent = (url: string, onClose: () => void) => {
-  // Handle special internal links
   if (url === 'news') {
     return <NewsContent />;
   } else if (url === 'guides') {
     return <GuidesContent />;
   } else if (url === 'chatbot') {
-    return <Chatbot onClose={onClose} inLightbox={true} />;
+    return <CustomAIAssistant />;
   } else if (url === 'time-currency') {
     return <TimeAndCurrencyConverter />;
   } else if (url === 'services') {
@@ -622,11 +812,9 @@ const getLightboxContent = (url: string, onClose: () => void) => {
     const title = url.split(':')[1];
     return <ArticleDetail title={title} />;
   } else if (url.startsWith('http')) {
-    // External URL, show in iframe
     return <IframeContent url={url} />;
   }
   
-  // Default or fallback content
   return (
     <div className="flex flex-col items-center justify-center h-full text-center p-6 bg-gradient-to-r from-blue-50 to-blue-100">
       <h3 className="text-xl font-bold text-gray-700 mb-2">Content Not Found</h3>

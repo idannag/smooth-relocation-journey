@@ -24,7 +24,7 @@ const ReviewCarousel = ({ reviews, scrollRef, scroll }: ReviewCarouselProps) => 
       <div 
         ref={scrollRef}
         className="flex overflow-x-auto gap-6 px-4 pb-4 snap-x snap-mandatory scrollbar-hide"
-        style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+        style={{ scrollbarWidth: 'none', msOverflowStyle: 'none', WebkitOverflowScrolling: 'touch' }}
       >
         {reviews.map((review, index) => (
           <ReviewCard key={index} review={review} index={index} />

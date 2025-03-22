@@ -14,15 +14,19 @@ const Testimonials = () => {
   useEffect(() => {
     const fetchGoogleReviews = async () => {
       try {
+        setLoading(true);
         const { data, error } = await supabase.functions.invoke('getGoogleReviews');
+        
         if (error) throw error;
+        
         if (data?.result?.reviews) {
+          console.log("Fetched reviews:", data.result.reviews);
           const highRatedReviews = data.result.reviews.filter(review => review.rating >= 4);
           setReviews(highRatedReviews);
         } else {
+          console.error("No reviews found in the response");
           throw new Error("No reviews found");
         }
-        setLoading(false);
       } catch (err) {
         console.error('Error fetching reviews:', err);
         // Fallback to mock data if API fails
@@ -85,6 +89,8 @@ const Testimonials = () => {
           }
         ];
         setReviews(dummyReviews);
+        setError("Could not load reviews. Using sample data instead.");
+      } finally {
         setLoading(false);
       }
     };
