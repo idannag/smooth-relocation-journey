@@ -55,7 +55,7 @@ const BlogPosts = () => {
   // Update all posts when new data arrives
   useEffect(() => {
     if (data?.pages) {
-      const posts = data.pages.flat();
+      const posts = data.pages.flat() as WordPressPost[];
       setAllPosts(posts);
     }
   }, [data]);
