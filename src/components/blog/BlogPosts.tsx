@@ -1,33 +1,13 @@
 
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Search, Tag, ChevronDown } from 'lucide-react';
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { 
-  Select, 
-  SelectContent, 
-  SelectItem, 
-  SelectTrigger, 
-  SelectValue 
-} from "@/components/ui/select";
-import { 
-  Card, 
-  CardContent, 
-  CardDescription, 
-  CardFooter, 
-  CardHeader, 
-  CardTitle 
-} from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+import BlogSearch from './BlogSearch';
+import BlogPostGrid from './BlogPostGrid';
 import BlogPostsSkeleton from './BlogPostsSkeleton';
 import { 
   usePosts, 
   useCategories, 
-  WordPressPost, 
-  getFeaturedImageUrl,
-  getPostCategories,
-  createMarkup
+  WordPressPost
 } from '@/services/postsService';
 
 const BlogPosts = () => {
@@ -60,11 +40,6 @@ const BlogPosts = () => {
     }
   }, [data]);
   
-  // Handle "Load More" button click
-  const handleLoadMore = () => {
-    fetchNextPage();
-  };
-  
   // Filter posts based on search term and selected category
   const filteredPosts = allPosts.filter(post => {
     const matchesSearch = searchTerm === '' || 
@@ -92,10 +67,10 @@ const BlogPosts = () => {
     navigate(`/post/${postId}`);
   };
   
-  // Function to strip HTML tags from excerpt
-  const stripHtml = (html: string) => {
-    const doc = new DOMParser().parseFromString(html, 'text/html');
-    return doc.body.textContent || '';
+  // Clear all filters
+  const handleClearFilters = () => {
+    setSearchTerm('');
+    setSelectedCategory('all');
   };
   
   // Show loading skeleton
@@ -108,18 +83,14 @@ const BlogPosts = () => {
           </h2>
           <div className="flex flex-col md:flex-row gap-4 mb-8">
             <div className="relative flex-1">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={18} />
-              <Input
-                className="pl-10"
-                placeholder="Search articles..."
-                disabled
+              <BlogSearch
+                searchTerm=""
+                selectedCategory="all"
+                categoriesLoading={true}
+                onSearchChange={() => {}}
+                onCategoryChange={() => {}}
               />
             </div>
-            <Select disabled>
-              <SelectTrigger className="w-full md:w-[200px]">
-                <SelectValue placeholder="All Categories" />
-              </SelectTrigger>
-            </Select>
           </div>
         </div>
         <BlogPostsSkeleton />
@@ -149,110 +120,24 @@ const BlogPosts = () => {
         </h2>
         
         {/* Search and Filter */}
-        <div className="flex flex-col md:flex-row gap-4 mb-8">
-          <div className="relative flex-1">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={18} />
-            <Input
-              className="pl-10"
-              placeholder="Search articles..."
-              value={searchTerm}
-              onChange={handleSearchChange}
-            />
-          </div>
-          <Select value={selectedCategory} onValueChange={handleCategoryChange}>
-            <SelectTrigger className="w-full md:w-[200px]">
-              <SelectValue placeholder="All Categories" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="all">All Categories</SelectItem>
-              {categories?.map(category => (
-                <SelectItem key={category.id} value={category.id.toString()}>
-                  {category.name} ({category.count})
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </div>
+        <BlogSearch
+          searchTerm={searchTerm}
+          selectedCategory={selectedCategory}
+          categories={categories}
+          categoriesLoading={categoriesLoading}
+          onSearchChange={handleSearchChange}
+          onCategoryChange={handleCategoryChange}
+        />
         
         {/* Posts Grid */}
-        {filteredPosts.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-            {filteredPosts.map(post => {
-              const featuredImage = getFeaturedImageUrl(post);
-              const postCategories = getPostCategories(post);
-              const excerpt = stripHtml(post.excerpt.rendered).substring(0, 120) + '...';
-              
-              return (
-                <Card key={post.id} className="flex flex-col h-full hover:shadow-lg transition-shadow duration-300">
-                  <div className="h-48 overflow-hidden">
-                    <img 
-                      src={featuredImage} 
-                      alt={post.title.rendered}
-                      className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
-                    />
-                  </div>
-                  <CardHeader className="pb-2">
-                    <CardTitle className="text-lg line-clamp-2">
-                      {post.title.rendered}
-                    </CardTitle>
-                    <div className="flex flex-wrap gap-2 mt-2">
-                      {postCategories.map(cat => (
-                        <Badge key={cat.id} variant="outline" className="bg-blue-50 text-blue-700 hover:bg-blue-100">
-                          <Tag className="w-3 h-3 mr-1" />
-                          {cat.name}
-                        </Badge>
-                      ))}
-                    </div>
-                  </CardHeader>
-                  <CardContent className="py-2 flex-grow">
-                    <CardDescription className="line-clamp-3">
-                      {excerpt}
-                    </CardDescription>
-                  </CardContent>
-                  <CardFooter>
-                    <Button 
-                      variant="outline" 
-                      className="text-[#2C5AAE] hover:text-[#40E0D0] transition-colors"
-                      onClick={() => handlePostClick(post.id)}
-                    >
-                      Read more
-                    </Button>
-                  </CardFooter>
-                </Card>
-              );
-            })}
-          </div>
-        ) : (
-          <div className="text-center py-8 bg-gray-50 rounded-lg">
-            <p className="text-gray-600">No posts found matching your criteria.</p>
-            {searchTerm || selectedCategory !== 'all' ? (
-              <Button 
-                variant="outline" 
-                className="mt-4"
-                onClick={() => {
-                  setSearchTerm('');
-                  setSelectedCategory('all');
-                }}
-              >
-                Clear filters
-              </Button>
-            ) : null}
-          </div>
-        )}
-        
-        {/* Load More Button */}
-        {filteredPosts.length > 0 && hasNextPage && (
-          <div className="flex justify-center mt-8">
-            <Button 
-              onClick={handleLoadMore}
-              disabled={isFetchingNextPage}
-              className="bg-gradient-to-r from-[#2C5AAE] to-[#40E0D0] text-white"
-            >
-              {isFetchingNextPage ? 'Loading...' : 'Load More'}
-              {isFetchingNextPage && <ChevronDown className="ml-2 animate-bounce" />}
-            </Button>
-          </div>
-        )}
+        <BlogPostGrid
+          posts={filteredPosts}
+          hasMorePosts={!!hasNextPage}
+          isLoadingMore={isFetchingNextPage}
+          onPostClick={handlePostClick}
+          onLoadMore={() => fetchNextPage()}
+          onClearFilters={searchTerm || selectedCategory !== 'all' ? handleClearFilters : undefined}
+        />
         
         {/* Loading more posts indicator */}
         {isFetchingNextPage && (
