@@ -30,23 +30,27 @@ import {
   getPostCategories,
   createMarkup
 } from '@/services/postsService';
+import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
 
 const BlogPosts = () => {
   const navigate = useNavigate();
   const [page, setPage] = useState(1);
   const [allPosts, setAllPosts] = useState<WordPressPost[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState<string>('');
+  const [selectedCategory, setSelectedCategory] = useState<string>('all');
   
-  // Fetch posts
+  // Fetch posts - modified to use useInfiniteQuery
   const { 
-    data: latestPosts, 
+    data, 
     isLoading: postsLoading, 
     isError: postsError,
     fetchNextPage,
     hasNextPage,
     isFetchingNextPage
   } = usePosts(page);
+  
+  // Extract posts from data
+  const latestPosts = data;
   
   // Fetch categories
   const { 
@@ -76,7 +80,7 @@ const BlogPosts = () => {
       post.title.rendered.toLowerCase().includes(searchTerm.toLowerCase()) ||
       post.excerpt.rendered.toLowerCase().includes(searchTerm.toLowerCase());
     
-    const matchesCategory = selectedCategory === '' || 
+    const matchesCategory = selectedCategory === 'all' || 
       (post.categories && post.categories.includes(parseInt(selectedCategory)));
     
     return matchesSearch && matchesCategory;
@@ -169,7 +173,7 @@ const BlogPosts = () => {
               <SelectValue placeholder="All Categories" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="">All Categories</SelectItem>
+              <SelectItem value="all">All Categories</SelectItem>
               {categories?.map(category => (
                 <SelectItem key={category.id} value={category.id.toString()}>
                   {category.name} ({category.count})
@@ -230,13 +234,13 @@ const BlogPosts = () => {
         ) : (
           <div className="text-center py-8 bg-gray-50 rounded-lg">
             <p className="text-gray-600">No posts found matching your criteria.</p>
-            {searchTerm || selectedCategory ? (
+            {searchTerm || selectedCategory !== 'all' ? (
               <Button 
                 variant="outline" 
                 className="mt-4"
                 onClick={() => {
                   setSearchTerm('');
-                  setSelectedCategory('');
+                  setSelectedCategory('all');
                 }}
               >
                 Clear filters
