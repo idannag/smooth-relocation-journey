@@ -60,8 +60,7 @@ const SplashScreen = () => {
             </video>
           </motion.div>
           <div className="absolute inset-0 flex flex-col items-center justify-center">
-            {/* Logo is temporarily hidden per client request */}
-            {/* <div className="relative">
+            <div className="relative">
               <motion.div
                 className="absolute inset-0 flex items-center justify-center"
                 initial={{ opacity: 0 }}
@@ -99,7 +98,7 @@ const SplashScreen = () => {
                 className="w-32 h-32 object-contain rounded-2xl relative z-10"
                 style={{ border: "none", background: "white" }}
               />
-            </div> */}
+            </div>
             <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
