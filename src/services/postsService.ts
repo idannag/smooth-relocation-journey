@@ -83,7 +83,7 @@ export const useCategories = () => {
   });
 };
 
-// Fetch single post by ID (renamed from useSinglePost to usePost for consistency)
+// Fetch single post by ID
 export const usePost = (id: string | undefined) => {
   return useQuery({
     queryKey: ['post', id],

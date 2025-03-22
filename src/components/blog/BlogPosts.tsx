@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import BlogSearch from './BlogSearch';
 import BlogPostGrid from './BlogPostGrid';
 import BlogPostsSkeleton from './BlogPostsSkeleton';
@@ -9,9 +9,20 @@ import {
   useCategories, 
   WordPressPost
 } from '@/services/postsService';
+import { Button } from "@/components/ui/button";
+import { ArrowLeft } from 'lucide-react';
 
-const BlogPosts = () => {
+interface BlogPostsProps {
+  limitPosts?: number;
+  showHeading?: boolean;
+  alternativeHeading?: string;
+}
+
+const BlogPosts = ({ limitPosts, showHeading = true, alternativeHeading }: BlogPostsProps) => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const isPostPage = location.pathname.startsWith('/post/');
+  
   const [allPosts, setAllPosts] = useState<WordPressPost[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
@@ -73,15 +84,22 @@ const BlogPosts = () => {
     setSelectedCategory('all');
   };
   
+  // Go back to all posts
+  const handleBackToArticles = () => {
+    navigate('/');
+  };
+  
   // Show loading skeleton
   if (postsLoading && !isFetchingNextPage) {
     return (
       <div className="container mx-auto px-4 py-8">
         <div className="mb-8">
-          <h2 className="text-3xl font-bold text-center font-inter bg-gradient-to-r from-[#2C5AAE] to-[#40E0D0] bg-clip-text text-transparent mb-8">
-            Ocean Blog
-          </h2>
-          <div className="flex flex-col md:flex-row gap-4 mb-8">
+          {showHeading && (
+            <h2 className="text-4xl font-bold text-center font-inter bg-gradient-to-r from-[#2C5AAE] to-[#40E0D0] bg-clip-text text-transparent mb-8">
+              {alternativeHeading || "Ocean Blog"}
+            </h2>
+          )}
+          <div className="flex flex-col gap-4 mb-8">
             <div className="relative flex-1">
               <BlogSearch
                 searchTerm=""
@@ -102,8 +120,8 @@ const BlogPosts = () => {
   if (postsError) {
     return (
       <div className="container mx-auto px-4 py-8 text-center">
-        <h2 className="text-3xl font-bold text-center font-inter bg-gradient-to-r from-[#2C5AAE] to-[#40E0D0] bg-clip-text text-transparent mb-8">
-          Ocean Blog
+        <h2 className="text-4xl font-bold text-center font-inter bg-gradient-to-r from-[#2C5AAE] to-[#40E0D0] bg-clip-text text-transparent mb-8">
+          {alternativeHeading || "Ocean Blog"}
         </h2>
         <div className="bg-red-50 text-red-700 p-4 rounded-lg">
           <p>Error loading blog posts. Please try again later.</p>
@@ -114,10 +132,27 @@ const BlogPosts = () => {
   
   return (
     <div className="container mx-auto px-4 py-8">
+      {/* Sticky back button for single post pages */}
+      {isPostPage && (
+        <div className="sticky top-0 z-10 bg-white py-2 mb-4 border-b">
+          <Button 
+            variant="outline" 
+            size="sm"
+            onClick={handleBackToArticles}
+            className="flex items-center gap-2"
+          >
+            <ArrowLeft size={16} />
+            Back to Articles
+          </Button>
+        </div>
+      )}
+      
       <div className="mb-8">
-        <h2 className="text-3xl font-bold text-center font-inter bg-gradient-to-r from-[#2C5AAE] to-[#40E0D0] bg-clip-text text-transparent mb-8">
-          Ocean Blog
-        </h2>
+        {showHeading && (
+          <h2 className="text-4xl font-bold text-center font-inter bg-gradient-to-r from-[#2C5AAE] to-[#40E0D0] bg-clip-text text-transparent mb-8">
+            {alternativeHeading || "Ocean Blog"}
+          </h2>
+        )}
         
         {/* Search and Filter */}
         <BlogSearch
@@ -127,6 +162,7 @@ const BlogPosts = () => {
           categoriesLoading={categoriesLoading}
           onSearchChange={handleSearchChange}
           onCategoryChange={handleCategoryChange}
+          resultsCount={filteredPosts.length}
         />
         
         {/* Posts Grid */}
@@ -137,6 +173,7 @@ const BlogPosts = () => {
           onPostClick={handlePostClick}
           onLoadMore={() => fetchNextPage()}
           onClearFilters={searchTerm || selectedCategory !== 'all' ? handleClearFilters : undefined}
+          limit={limitPosts}
         />
         
         {/* Loading more posts indicator */}
