@@ -285,6 +285,13 @@ const Services = () => {
     }
   ];
 
+  const handleOrderService = (service: string) => {
+    const subject = `Service Request: ${service}`;
+    const body = `Hello Ocean Relocation Team,\n\nI'm interested in your "${service}" service. Please provide me with more information.\n\nThank you.`;
+    const mailtoLink = `mailto:sales@ocean-il.co.il?cc=shlomit.drenger@ocean-il.co.il&subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    window.location.href = mailtoLink;
+  };
+
   return (
     <div className="bg-gradient-to-r from-blue-50 to-blue-100 p-3 sm:p-4 max-w-4xl mx-auto h-full overflow-y-auto">
       <h2 className="text-2xl sm:text-3xl font-bold text-center mb-4 font-inter bg-gradient-to-r from-[#2C5AAE] to-[#517cc7] bg-clip-text text-transparent">
@@ -293,19 +300,32 @@ const Services = () => {
       
       <div className="bg-white rounded-xl shadow-lg overflow-hidden">
         <div className="p-4 grid grid-cols-1 md:grid-cols-2 gap-4">
-          {availableServices.map((service) => (
+          {availableServices.map((service, index) => (
             <div key={service.id} className="border rounded-lg p-4 hover:shadow-md transition-shadow">
-              <h3 className="text-lg font-semibold text-[#2C5AAE]">{service.service}</h3>
-              <p className="text-sm text-gray-600 mt-2">{service.description}</p>
-              <button className="w-full mt-4 py-2 bg-gradient-to-r from-[#2C5AAE] to-[#40E0D0] text-white rounded-md text-sm hover:opacity-90 transition-opacity">
-                Order Service
-              </button>
+              <div className="flex items-start gap-3">
+                <div className="flex-shrink-0 w-8 h-8 bg-gradient-to-r from-[#2C5AAE] to-[#40E0D0] text-white rounded-full flex items-center justify-center font-bold">
+                  {index + 1}
+                </div>
+                <div>
+                  <h3 className="text-lg font-semibold text-[#2C5AAE]">{service.service}</h3>
+                  <p className="text-sm text-gray-600 mt-2">{service.description}</p>
+                  <button 
+                    onClick={() => handleOrderService(service.service)}
+                    className="w-full mt-4 py-2 bg-gradient-to-r from-[#2C5AAE] to-[#40E0D0] text-white rounded-md text-sm hover:opacity-90 transition-opacity"
+                  >
+                    Order Service
+                  </button>
+                </div>
+              </div>
             </div>
           ))}
         </div>
         
         <div className="px-6 py-4 bg-gray-50">
-          <button className="w-full py-2 bg-gradient-to-r from-[#2C5AAE] to-[#40E0D0] text-white rounded-md font-medium hover:opacity-95 transition-opacity">
+          <button 
+            onClick={() => handleOrderService("Custom Service")}
+            className="w-full py-2 bg-gradient-to-r from-[#2C5AAE] to-[#40E0D0] text-white rounded-md font-medium hover:opacity-95 transition-opacity"
+          >
             Request Custom Service
           </button>
         </div>
