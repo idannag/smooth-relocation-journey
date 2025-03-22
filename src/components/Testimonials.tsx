@@ -1,5 +1,5 @@
 
-import { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { supabase } from "@/integrations/supabase/client";
 import { Review } from "@/types/testimonials";
 import ReviewCarousel from "./testimonials/ReviewCarousel";
@@ -15,21 +15,29 @@ const Testimonials = () => {
     const fetchGoogleReviews = async () => {
       try {
         setLoading(true);
-        const { data, error } = await supabase.functions.invoke('getGoogleReviews');
-        
-        if (error) throw error;
-        
-        if (data?.result?.reviews) {
-          console.log("Fetched reviews:", data.result.reviews);
-          const highRatedReviews = data.result.reviews.filter(review => review.rating >= 4);
-          setReviews(highRatedReviews);
-        } else {
-          console.error("No reviews found in the response");
-          throw new Error("No reviews found");
+        // The Supabase function call is failing, so let's use fallback data
+        // but leave the code in place for when the function works
+        try {
+          const { data, error } = await supabase.functions.invoke('getGoogleReviews');
+          
+          if (error) throw error;
+          
+          if (data?.result?.reviews) {
+            console.log("Fetched reviews:", data.result.reviews);
+            const highRatedReviews = data.result.reviews.filter(review => review.rating >= 4);
+            setReviews(highRatedReviews);
+            return; // Successfully got reviews, exit early
+          } else {
+            console.error("No reviews found in the response");
+            throw new Error("No reviews found");
+          }
+        } catch (apiError) {
+          console.error('Error fetching reviews:', apiError);
+          throw apiError; // Re-throw to trigger fallback
         }
       } catch (err) {
-        console.error('Error fetching reviews:', err);
-        // Fallback to mock data if API fails
+        console.error('Using fallback reviews due to error:', err);
+        // Always use mock data for now until the API is fixed
         const dummyReviews = [
           {
             author_name: "Sarah L.",

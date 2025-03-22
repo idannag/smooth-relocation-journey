@@ -1,4 +1,5 @@
 
+import React from 'react';
 import { Review } from "@/types/testimonials";
 import StarRating from "./StarRating";
 

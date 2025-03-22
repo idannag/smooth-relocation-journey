@@ -517,12 +517,15 @@ const CustomAIAssistant = () => {
       <div className="p-4 bg-gradient-to-r from-[#2C5AAE] to-[#40E0D0] text-white">
         <h2 className="text-xl font-bold text-center">My 24/7 AI Assistant</h2>
       </div>
-      <iframe 
-        src="https://chatgpt.com/g/g-67b6c40963908191b77e23c6fecc2e57-relocation-ai-24-7-assistant" 
-        className="flex-grow w-full border-0"
-        title="AI Assistant"
-        sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-top-navigation"
-      />
+      <div className="flex-grow w-full h-[calc(100%-60px)]">
+        <iframe 
+          src="https://chatgpt.com/g/g-67b6c40963908191b77e23c6fecc2e57-relocation-ai-24-7-assistant" 
+          className="w-full h-full border-0"
+          title="AI Assistant"
+          allow="microphone; camera; fullscreen; accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-top-navigation allow-storage-access-by-user-activation"
+        />
+      </div>
     </div>
   );
 };
@@ -653,7 +656,7 @@ const ArticleDetail = ({ title }: { title: string }) => {
     date: "May 15, 2023",
     author: "Ocean Relocation Team",
     content: `
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nisl vel ultricies lacinia, nisl nisl aliquam nisl, eget aliquam nisl nisl vel nisl. Sed euismod, nisl vel ultricies lacinia, nisl nisl aliquam nisl, eget aliquam nisl nisl vel nisl.</p>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nisl vel ultricies lacinia, nisl nisl aliquam nisl, eget aliquam nisl nisl vel nisl.</p>
       <p>Proin quis tortor orci. Etiam at risus et justo dignissim congue. Donec congue lacinia dui, a porttitor lectus condimentum laoreet. Nunc eu ullamcorper orci. Quisque eget odio ac lectus vestibulum faucibus eget in metus.</p>
       <h3>Key Points</h3>
       <ul>
