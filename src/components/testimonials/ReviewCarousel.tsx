@@ -1,4 +1,5 @@
 
+import React from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Review } from "@/types/testimonials";
 import ReviewCard from "./ReviewCard";

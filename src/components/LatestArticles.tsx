@@ -1,5 +1,6 @@
+
+import React, { useRef, useState } from 'react';
 import { ChevronLeft, ChevronRight, Bell } from 'lucide-react';
-import { useRef, useState } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Lightbox from './ui/lightbox';
 
