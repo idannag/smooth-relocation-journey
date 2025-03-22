@@ -23,7 +23,7 @@ const SinglePost = () => {
   } = usePost(id);
   
   const handleBackClick = () => {
-    navigate('/');
+    navigate('/blog');
   };
   
   // Format date
@@ -39,14 +39,17 @@ const SinglePost = () => {
   if (isLoading) {
     return (
       <div className="container mx-auto px-4 py-8">
-        <Button 
-          variant="ghost" 
-          className="mb-8 text-[#2C5AAE] hover:text-[#40E0D0]"
-          onClick={handleBackClick}
-        >
-          <ArrowLeft className="mr-2 h-4 w-4" />
-          Back to Articles
-        </Button>
+        <div className="sticky top-0 z-10 bg-white py-2 mb-4 border-b">
+          <Button 
+            variant="outline" 
+            size="sm"
+            onClick={handleBackClick}
+            className="flex items-center gap-2"
+          >
+            <ArrowLeft size={16} />
+            Back to Articles
+          </Button>
+        </div>
         <SinglePostSkeleton />
       </div>
     );
@@ -55,14 +58,17 @@ const SinglePost = () => {
   if (isError || !post) {
     return (
       <div className="container mx-auto px-4 py-8">
-        <Button 
-          variant="ghost" 
-          className="mb-8 text-[#2C5AAE] hover:text-[#40E0D0]"
-          onClick={handleBackClick}
-        >
-          <ArrowLeft className="mr-2 h-4 w-4" />
-          Back to Articles
-        </Button>
+        <div className="sticky top-0 z-10 bg-white py-2 mb-4 border-b">
+          <Button 
+            variant="outline" 
+            size="sm"
+            onClick={handleBackClick}
+            className="flex items-center gap-2"
+          >
+            <ArrowLeft size={16} />
+            Back to Articles
+          </Button>
+        </div>
         <div className="bg-red-50 text-red-700 p-4 rounded-lg text-center">
           <p>Error loading blog post. The post may not exist or there was a problem fetching it.</p>
           <Button 
@@ -82,14 +88,17 @@ const SinglePost = () => {
   
   return (
     <div className="container mx-auto px-4 py-8">
-      <Button 
-        variant="ghost" 
-        className="mb-8 text-[#2C5AAE] hover:text-[#40E0D0]"
-        onClick={handleBackClick}
-      >
-        <ArrowLeft className="mr-2 h-4 w-4" />
-        Back to Articles
-      </Button>
+      <div className="sticky top-0 z-10 bg-white py-2 mb-4 border-b">
+        <Button 
+          variant="outline" 
+          size="sm"
+          onClick={handleBackClick}
+          className="flex items-center gap-2"
+        >
+          <ArrowLeft size={16} />
+          Back to Articles
+        </Button>
+      </div>
       
       <article className="max-w-4xl mx-auto bg-white rounded-lg shadow-md overflow-hidden">
         <header className="p-6 pb-0">

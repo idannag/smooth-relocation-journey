@@ -10,18 +10,29 @@ import {
   WordPressPost
 } from '@/services/postsService';
 import { Button } from "@/components/ui/button";
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, ChevronRight } from 'lucide-react';
 
 interface BlogPostsProps {
   limitPosts?: number;
   showHeading?: boolean;
   alternativeHeading?: string;
+  showSearch?: boolean;
+  showAllPostsButton?: boolean;
+  postsPerPage?: number;
 }
 
-const BlogPosts = ({ limitPosts, showHeading = true, alternativeHeading }: BlogPostsProps) => {
+const BlogPosts = ({ 
+  limitPosts, 
+  showHeading = true, 
+  alternativeHeading,
+  showSearch = true,
+  showAllPostsButton = false,
+  postsPerPage = 12
+}: BlogPostsProps) => {
   const navigate = useNavigate();
   const location = useLocation();
   const isPostPage = location.pathname.startsWith('/post/');
+  const [currentPage, setCurrentPage] = useState(1);
   
   const [allPosts, setAllPosts] = useState<WordPressPost[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
@@ -63,14 +74,24 @@ const BlogPosts = ({ limitPosts, showHeading = true, alternativeHeading }: BlogP
     return matchesSearch && matchesCategory;
   });
   
+  // Calculate total pages
+  const totalPages = Math.ceil(filteredPosts.length / postsPerPage);
+  
+  // Get current posts for pagination
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = filteredPosts.slice(indexOfFirstPost, indexOfLastPost);
+  
   // Handle search input change
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);
+    setCurrentPage(1); // Reset to first page on search
   };
   
   // Handle category selection change
   const handleCategoryChange = (value: string) => {
     setSelectedCategory(value);
+    setCurrentPage(1); // Reset to first page on category change
   };
   
   // Navigate to single post page
@@ -82,11 +103,23 @@ const BlogPosts = ({ limitPosts, showHeading = true, alternativeHeading }: BlogP
   const handleClearFilters = () => {
     setSearchTerm('');
     setSelectedCategory('all');
+    setCurrentPage(1);
   };
   
   // Go back to all posts
   const handleBackToArticles = () => {
     navigate('/');
+  };
+  
+  // Handle page change
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+    window.scrollTo(0, 0);
+  };
+  
+  // Show all posts (open blog lightbox)
+  const handleShowAllPosts = () => {
+    navigate('/blog');
   };
   
   // Show loading skeleton
@@ -99,17 +132,19 @@ const BlogPosts = ({ limitPosts, showHeading = true, alternativeHeading }: BlogP
               {alternativeHeading || "Ocean Blog"}
             </h2>
           )}
-          <div className="flex flex-col gap-4 mb-8">
-            <div className="relative flex-1">
-              <BlogSearch
-                searchTerm=""
-                selectedCategory="all"
-                categoriesLoading={true}
-                onSearchChange={() => {}}
-                onCategoryChange={() => {}}
-              />
+          {showSearch && (
+            <div className="flex flex-col gap-4 mb-8">
+              <div className="relative flex-1">
+                <BlogSearch
+                  searchTerm=""
+                  selectedCategory="all"
+                  categoriesLoading={true}
+                  onSearchChange={() => {}}
+                  onCategoryChange={() => {}}
+                />
+              </div>
             </div>
-          </div>
+          )}
         </div>
         <BlogPostsSkeleton />
       </div>
@@ -138,7 +173,7 @@ const BlogPosts = ({ limitPosts, showHeading = true, alternativeHeading }: BlogP
           <Button 
             variant="outline" 
             size="sm"
-            onClick={handleBackToArticles}
+            onClick={() => navigate('/blog')}
             className="flex items-center gap-2"
           >
             <ArrowLeft size={16} />
@@ -149,32 +184,50 @@ const BlogPosts = ({ limitPosts, showHeading = true, alternativeHeading }: BlogP
       
       <div className="mb-8">
         {showHeading && (
-          <h2 className="text-4xl font-bold text-center font-inter bg-gradient-to-r from-[#2C5AAE] to-[#40E0D0] bg-clip-text text-transparent mb-8">
+          <h2 className="text-5xl font-bold text-center font-inter bg-gradient-to-r from-[#2C5AAE] to-[#40E0D0] bg-clip-text text-transparent mb-8">
             {alternativeHeading || "Ocean Blog"}
           </h2>
         )}
         
         {/* Search and Filter */}
-        <BlogSearch
-          searchTerm={searchTerm}
-          selectedCategory={selectedCategory}
-          categories={categories}
-          categoriesLoading={categoriesLoading}
-          onSearchChange={handleSearchChange}
-          onCategoryChange={handleCategoryChange}
-          resultsCount={filteredPosts.length}
-        />
+        {showSearch && (
+          <BlogSearch
+            searchTerm={searchTerm}
+            selectedCategory={selectedCategory}
+            categories={categories}
+            categoriesLoading={categoriesLoading}
+            onSearchChange={handleSearchChange}
+            onCategoryChange={handleCategoryChange}
+            resultsCount={filteredPosts.length}
+            totalCount={allPosts.length}
+          />
+        )}
         
         {/* Posts Grid */}
         <BlogPostGrid
-          posts={filteredPosts}
+          posts={limitPosts ? filteredPosts.slice(0, limitPosts) : currentPosts}
           hasMorePosts={!!hasNextPage}
           isLoadingMore={isFetchingNextPage}
           onPostClick={handlePostClick}
           onLoadMore={() => fetchNextPage()}
           onClearFilters={searchTerm || selectedCategory !== 'all' ? handleClearFilters : undefined}
-          limit={limitPosts}
+          totalPages={totalPages}
+          currentPage={currentPage}
+          onPageChange={limitPosts ? undefined : handlePageChange}
         />
+        
+        {/* Show All Posts button (only on main page with limited posts) */}
+        {showAllPostsButton && limitPosts && filteredPosts.length > limitPosts && (
+          <div className="flex justify-center mt-8">
+            <Button 
+              onClick={handleShowAllPosts}
+              className="bg-gradient-to-r from-[#2C5AAE] to-[#40E0D0] text-white hover:opacity-90"
+            >
+              Show All
+              <ChevronRight className="ml-2" />
+            </Button>
+          </div>
+        )}
         
         {/* Loading more posts indicator */}
         {isFetchingNextPage && (

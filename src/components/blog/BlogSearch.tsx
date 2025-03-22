@@ -13,6 +13,7 @@ interface BlogSearchProps {
   onSearchChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onCategoryChange: (value: string) => void;
   resultsCount?: number;
+  totalCount?: number;
 }
 
 const BlogSearch = ({
@@ -22,7 +23,8 @@ const BlogSearch = ({
   categoriesLoading,
   onSearchChange,
   onCategoryChange,
-  resultsCount
+  resultsCount,
+  totalCount
 }: BlogSearchProps) => {
   return (
     <div className="flex flex-col gap-4 mb-8">
@@ -36,16 +38,23 @@ const BlogSearch = ({
         />
       </div>
       
-      {resultsCount !== undefined && (
+      <div className="flex items-center justify-between">
         <div className="text-sm text-gray-500">
-          {resultsCount} article{resultsCount !== 1 ? 's' : ''} found
+          {resultsCount !== undefined && (
+            <>
+              {resultsCount} article{resultsCount !== 1 ? 's' : ''} found
+              {totalCount !== undefined && selectedCategory !== 'all' && (
+                <span> (out of {totalCount} total)</span>
+              )}
+            </>
+          )}
         </div>
-      )}
+      </div>
       
       <div className="flex flex-wrap gap-2 mt-2">
         <Badge 
           variant={selectedCategory === 'all' ? "default" : "outline"}
-          className={`cursor-pointer ${selectedCategory === 'all' ? 'bg-[#2C5AAE] hover:bg-[#40E0D0]' : 'hover:bg-gray-100'}`}
+          className={`cursor-pointer transition-all duration-200 ${selectedCategory === 'all' ? 'bg-[#2C5AAE] hover:bg-[#40E0D0]' : 'hover:bg-gray-100'} px-4 py-2 rounded-full`}
           onClick={() => onCategoryChange('all')}
         >
           All Categories
@@ -54,7 +63,7 @@ const BlogSearch = ({
         {categoriesLoading ? (
           <div className="flex gap-2">
             {[1, 2, 3].map(i => (
-              <Badge key={i} variant="outline" className="bg-gray-100 animate-pulse">
+              <Badge key={i} variant="outline" className="bg-gray-100 animate-pulse px-4 py-2 rounded-full">
                 Loading...
               </Badge>
             ))}
@@ -64,7 +73,7 @@ const BlogSearch = ({
             <Badge 
               key={category.id} 
               variant={selectedCategory === category.id.toString() ? "default" : "outline"}
-              className={`cursor-pointer ${selectedCategory === category.id.toString() ? 'bg-[#2C5AAE] hover:bg-[#40E0D0]' : 'hover:bg-gray-100'}`}
+              className={`cursor-pointer transition-all duration-200 ${selectedCategory === category.id.toString() ? 'bg-[#2C5AAE] hover:bg-[#40E0D0]' : 'hover:bg-gray-100'} px-4 py-2 rounded-full flex items-center`}
               onClick={() => onCategoryChange(category.id.toString())}
             >
               {category.name} ({category.count})
