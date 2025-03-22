@@ -24,6 +24,7 @@ interface BlogPostGridProps {
   currentPage?: number;
   onPageChange?: (page: number) => void;
   limit?: number;
+  simplifiedCards?: boolean;
 }
 
 const BlogPostGrid = ({
@@ -36,7 +37,8 @@ const BlogPostGrid = ({
   totalPages = 1,
   currentPage = 1,
   onPageChange,
-  limit
+  limit,
+  simplifiedCards = false
 }: BlogPostGridProps) => {
   const displayPosts = limit ? posts.slice(0, limit) : posts;
   
@@ -65,6 +67,7 @@ const BlogPostGrid = ({
             key={post.id} 
             post={post} 
             onClick={onPostClick}
+            simplified={simplifiedCards}
           />
         ))}
       </div>

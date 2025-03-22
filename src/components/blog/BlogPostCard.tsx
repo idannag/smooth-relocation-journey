@@ -11,7 +11,6 @@ import {
   CardTitle 
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { 
   WordPressPost, 
@@ -23,19 +22,12 @@ import {
 interface BlogPostCardProps {
   post: WordPressPost;
   onClick: (postId: number) => void;
+  simplified?: boolean;
 }
 
-const BlogPostCard = ({ post, onClick }: BlogPostCardProps) => {
+const BlogPostCard = ({ post, onClick, simplified = false }: BlogPostCardProps) => {
   const featuredImage = getFeaturedImageUrl(post);
   const postCategories = getPostCategories(post);
-  
-  // Function to strip HTML tags and decode entities from excerpt
-  const stripHtml = (html: string) => {
-    const doc = new DOMParser().parseFromString(html, 'text/html');
-    return doc.body.textContent || '';
-  };
-  
-  const excerpt = stripHtml(post.excerpt.rendered).substring(0, 100) + '...';
   
   // Format the date
   const formattedDate = format(parseISO(post.date), 'MMM d, yyyy');
@@ -72,19 +64,17 @@ const BlogPostCard = ({ post, onClick }: BlogPostCardProps) => {
             )}
           </div>
         </CardHeader>
-        <CardContent className="py-2 px-4 flex-grow">
-          <CardDescription className="text-xs line-clamp-3">
-            {excerpt}
-          </CardDescription>
-        </CardContent>
-        <CardFooter className="pt-0 pb-4 px-4">
-          <Button 
-            variant="outline" 
-            size="sm"
-            className="text-[#2C5AAE] hover:text-white hover:bg-[#2C5AAE] transition-colors w-full group-hover:bg-[#2C5AAE] group-hover:text-white"
-          >
-            Read more
-          </Button>
+        
+        {/* Only show description in full card mode (not simplified) */}
+        {!simplified && (
+          <CardContent className="py-2 px-4 flex-grow">
+            {/* No excerpt in this version as requested */}
+          </CardContent>
+        )}
+        
+        {/* No Read More button as requested */}
+        <CardFooter className="pt-0 pb-4 px-4 mt-auto">
+          {/* Footer space kept for consistent card height */}
         </CardFooter>
       </Link>
     </Card>

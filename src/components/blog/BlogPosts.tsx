@@ -19,6 +19,7 @@ interface BlogPostsProps {
   showSearch?: boolean;
   showAllPostsButton?: boolean;
   postsPerPage?: number;
+  simplifiedCards?: boolean;
 }
 
 const BlogPosts = ({ 
@@ -27,11 +28,13 @@ const BlogPosts = ({
   alternativeHeading,
   showSearch = true,
   showAllPostsButton = false,
-  postsPerPage = 12
+  postsPerPage = 12,
+  simplifiedCards = false
 }: BlogPostsProps) => {
   const navigate = useNavigate();
   const location = useLocation();
   const isPostPage = location.pathname.startsWith('/post/');
+  const isLightboxView = location.pathname === '/blog' || (location.search && location.search.includes('lightbox=true'));
   const [currentPage, setCurrentPage] = useState(1);
   
   const [allPosts, setAllPosts] = useState<WordPressPost[]>([]);
@@ -108,7 +111,7 @@ const BlogPosts = ({
   
   // Go back to all posts
   const handleBackToArticles = () => {
-    navigate('/');
+    navigate('/blog');
   };
   
   // Handle page change
@@ -128,7 +131,7 @@ const BlogPosts = ({
       <div className="container mx-auto px-4 py-8">
         <div className="mb-8">
           {showHeading && (
-            <h2 className="text-4xl font-bold text-center font-inter bg-gradient-to-r from-[#2C5AAE] to-[#40E0D0] bg-clip-text text-transparent mb-8">
+            <h2 className="text-5xl font-bold text-center font-inter bg-gradient-to-r from-[#2C5AAE] to-[#40E0D0] bg-clip-text text-transparent mb-8">
               {alternativeHeading || "Ocean Blog"}
             </h2>
           )}
@@ -155,7 +158,7 @@ const BlogPosts = ({
   if (postsError) {
     return (
       <div className="container mx-auto px-4 py-8 text-center">
-        <h2 className="text-4xl font-bold text-center font-inter bg-gradient-to-r from-[#2C5AAE] to-[#40E0D0] bg-clip-text text-transparent mb-8">
+        <h2 className="text-5xl font-bold text-center font-inter bg-gradient-to-r from-[#2C5AAE] to-[#40E0D0] bg-clip-text text-transparent mb-8">
           {alternativeHeading || "Ocean Blog"}
         </h2>
         <div className="bg-red-50 text-red-700 p-4 rounded-lg">
@@ -189,7 +192,7 @@ const BlogPosts = ({
           </h2>
         )}
         
-        {/* Search and Filter */}
+        {/* Search and Filter - Only shown in blog lightbox, not on main page */}
         {showSearch && (
           <BlogSearch
             searchTerm={searchTerm}
@@ -213,7 +216,8 @@ const BlogPosts = ({
           onClearFilters={searchTerm || selectedCategory !== 'all' ? handleClearFilters : undefined}
           totalPages={totalPages}
           currentPage={currentPage}
-          onPageChange={limitPosts ? undefined : handlePageChange}
+          onPageChange={isLightboxView ? handlePageChange : undefined}
+          simplifiedCards={simplifiedCards}
         />
         
         {/* Show All Posts button (only on main page with limited posts) */}

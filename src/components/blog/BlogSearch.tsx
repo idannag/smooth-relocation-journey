@@ -54,10 +54,10 @@ const BlogSearch = ({
       <div className="flex flex-wrap gap-2 mt-2">
         <Badge 
           variant={selectedCategory === 'all' ? "default" : "outline"}
-          className={`cursor-pointer transition-all duration-200 ${selectedCategory === 'all' ? 'bg-[#2C5AAE] hover:bg-[#40E0D0]' : 'hover:bg-gray-100'} px-4 py-2 rounded-full`}
+          className={`cursor-pointer transition-all duration-200 ${selectedCategory === 'all' ? 'bg-[#2C5AAE] hover:bg-[#40E0D0]' : 'hover:bg-gray-100'} px-4 py-2 rounded-full shadow-sm hover:shadow`}
           onClick={() => onCategoryChange('all')}
         >
-          All Categories
+          All Categories ({totalCount})
         </Badge>
         
         {categoriesLoading ? (
@@ -73,7 +73,7 @@ const BlogSearch = ({
             <Badge 
               key={category.id} 
               variant={selectedCategory === category.id.toString() ? "default" : "outline"}
-              className={`cursor-pointer transition-all duration-200 ${selectedCategory === category.id.toString() ? 'bg-[#2C5AAE] hover:bg-[#40E0D0]' : 'hover:bg-gray-100'} px-4 py-2 rounded-full flex items-center`}
+              className={`cursor-pointer transition-all duration-200 ${selectedCategory === category.id.toString() ? 'bg-[#2C5AAE] hover:bg-[#40E0D0]' : 'hover:bg-gray-100'} px-4 py-2 rounded-full flex items-center shadow-sm hover:shadow`}
               onClick={() => onCategoryChange(category.id.toString())}
             >
               {category.name} ({category.count})
