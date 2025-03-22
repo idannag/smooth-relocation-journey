@@ -20,7 +20,7 @@ const SinglePost = () => {
     data: post,
     isLoading,
     isError
-  } = usePost(id || '');
+  } = usePost(id);
   
   const handleBackClick = () => {
     navigate('/');

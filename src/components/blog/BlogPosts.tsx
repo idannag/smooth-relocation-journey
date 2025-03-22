@@ -25,21 +25,18 @@ import {
   usePosts, 
   useCategories, 
   WordPressPost, 
-  WordPressCategory,
   getFeaturedImageUrl,
   getPostCategories,
   createMarkup
 } from '@/services/postsService';
-import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
 
 const BlogPosts = () => {
   const navigate = useNavigate();
-  const [page, setPage] = useState(1);
   const [allPosts, setAllPosts] = useState<WordPressPost[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   
-  // Fetch posts - modified to use useInfiniteQuery
+  // Fetch posts using infinite query
   const { 
     data, 
     isLoading: postsLoading, 
@@ -47,10 +44,7 @@ const BlogPosts = () => {
     fetchNextPage,
     hasNextPage,
     isFetchingNextPage
-  } = usePosts(page);
-  
-  // Extract posts from data
-  const latestPosts = data;
+  } = usePosts();
   
   // Fetch categories
   const { 
@@ -60,18 +54,15 @@ const BlogPosts = () => {
   
   // Update all posts when new data arrives
   useEffect(() => {
-    if (latestPosts) {
-      setAllPosts(prev => {
-        // If it's page 1, replace the array, otherwise append
-        if (page === 1) return [...latestPosts];
-        return [...prev, ...latestPosts];
-      });
+    if (data?.pages) {
+      const posts = data.pages.flat();
+      setAllPosts(posts);
     }
-  }, [latestPosts, page]);
+  }, [data]);
   
   // Handle "Load More" button click
   const handleLoadMore = () => {
-    setPage(prev => prev + 1);
+    fetchNextPage();
   };
   
   // Filter posts based on search term and selected category
@@ -108,7 +99,7 @@ const BlogPosts = () => {
   };
   
   // Show loading skeleton
-  if (postsLoading && page === 1) {
+  if (postsLoading && !isFetchingNextPage) {
     return (
       <div className="container mx-auto px-4 py-8">
         <div className="mb-8">
@@ -250,7 +241,7 @@ const BlogPosts = () => {
         )}
         
         {/* Load More Button */}
-        {filteredPosts.length > 0 && latestPosts && latestPosts.length >= 6 && (
+        {filteredPosts.length > 0 && hasNextPage && (
           <div className="flex justify-center mt-8">
             <Button 
               onClick={handleLoadMore}

@@ -1,5 +1,5 @@
 
-import { useQuery, useInfiniteQuery, UseQueryResult } from '@tanstack/react-query';
+import { useQuery, useInfiniteQuery } from '@tanstack/react-query';
 
 export interface WordPressPost {
   id: number;
@@ -34,18 +34,22 @@ export interface WordPressCategory {
   count: number;
 }
 
-// Fetch posts with pagination
-export const usePosts = (page: number) => {
-  return useQuery({
-    queryKey: ['posts', page],
-    queryFn: async () => {
-      const response = await fetch(`https://app.ocean-il.co.il/wp-json/wp/v2/posts?_embed&status=publish&page=${page}&per_page=6`);
+// Fetch posts with infinite query support
+export const usePosts = () => {
+  return useInfiniteQuery({
+    queryKey: ['posts'],
+    queryFn: async ({ pageParam = 1 }) => {
+      const response = await fetch(`https://app.ocean-il.co.il/wp-json/wp/v2/posts?_embed&status=publish&page=${pageParam}&per_page=6`);
       
       if (!response.ok) {
         throw new Error('Failed to fetch posts');
       }
       
       return response.json() as Promise<WordPressPost[]>;
+    },
+    getNextPageParam: (lastPage, allPages) => {
+      // If we got fewer results than requested, we've reached the end
+      return lastPage.length < 6 ? undefined : allPages.length + 1;
     }
   });
 };
@@ -78,8 +82,8 @@ export const useCategories = () => {
   });
 };
 
-// Fetch single post by ID
-export const useSinglePost = (id: string | undefined) => {
+// Fetch single post by ID (renamed from useSinglePost to usePost for consistency)
+export const usePost = (id: string | undefined) => {
   return useQuery({
     queryKey: ['post', id],
     queryFn: async () => {
