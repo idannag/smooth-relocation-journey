@@ -12,9 +12,16 @@ import {
   createMarkup
 } from '@/services/postsService';
 
-const SinglePost = () => {
-  const { id } = useParams<{ id: string }>();
+interface SinglePostProps {
+  postId?: number;  // Make postId optional to support both route and prop-based usage
+}
+
+const SinglePost = ({ postId: propPostId }: SinglePostProps = {}) => {
+  const { id: routeId } = useParams<{ id: string }>();
   const navigate = useNavigate();
+  
+  // Use either the prop postId or the route id (convert to number if it's from route)
+  const id = propPostId?.toString() || routeId;
   
   const {
     data: post,
