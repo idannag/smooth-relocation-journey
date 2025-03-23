@@ -1,6 +1,6 @@
 
-import React, { useEffect, useState } from 'react';
-import { Clock, Globe, ArrowRightLeft, Check } from 'lucide-react';
+import React, { useEffect, useState, useRef } from 'react';
+import { Clock, Globe, ArrowRightLeft } from 'lucide-react';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Input } from "@/components/ui/input";
 import {
@@ -12,7 +12,16 @@ import {
 } from "@/components/ui/select";
 
 const TimeAndCurrencyContent = () => {
-  // Time-related state and functions
+  // Time-related state
+  const [cityTimes, setCityTimes] = useState({
+    nyTime: '-',
+    londonTime: '-',
+    tokyoTime: '-',
+    sydneyTime: '-'
+  });
+  
+  const activeTabRef = useRef<string>("currency");
+  
   useEffect(() => {
     // Update city times on component mount
     updateCityTimes();
@@ -38,19 +47,22 @@ const TimeAndCurrencyContent = () => {
     
     // New York (UTC-5/UTC-4)
     const nyTime = new Date(now.toLocaleString('en-US', { timeZone: 'America/New_York' }));
-    document.getElementById('ny-time')!.textContent = formatTime(nyTime);
     
     // London (UTC+0/UTC+1)
     const londonTime = new Date(now.toLocaleString('en-US', { timeZone: 'Europe/London' }));
-    document.getElementById('ldn-time')!.textContent = formatTime(londonTime);
     
     // Tokyo (UTC+9)
     const tokyoTime = new Date(now.toLocaleString('en-US', { timeZone: 'Asia/Tokyo' }));
-    document.getElementById('tk-time')!.textContent = formatTime(tokyoTime);
     
     // Sydney (UTC+10/UTC+11)
     const sydneyTime = new Date(now.toLocaleString('en-US', { timeZone: 'Australia/Sydney' }));
-    document.getElementById('sy-time')!.textContent = formatTime(sydneyTime);
+    
+    setCityTimes({
+      nyTime: formatTime(nyTime),
+      londonTime: formatTime(londonTime),
+      tokyoTime: formatTime(tokyoTime),
+      sydneyTime: formatTime(sydneyTime)
+    });
   };
 
   // Currency converter state and functions
@@ -141,7 +153,16 @@ const TimeAndCurrencyContent = () => {
   return (
     <div className="p-4 md:p-6 flex flex-col items-center">
       <div className="w-full max-w-md">
-        <Tabs defaultValue="currency" className="w-full">
+        <Tabs 
+          defaultValue="currency" 
+          className="w-full"
+          onValueChange={(value) => {
+            activeTabRef.current = value;
+            if (value === "time") {
+              updateCityTimes();
+            }
+          }}
+        >
           <TabsList className="grid grid-cols-2 mb-6 w-full">
             <TabsTrigger value="time" className="flex items-center justify-center gap-2">
               <Clock className="h-4 w-4" />
@@ -170,19 +191,19 @@ const TimeAndCurrencyContent = () => {
               <div className="grid grid-cols-2 gap-4 p-6 bg-gray-50 rounded-b-lg">
                 <div className="flex flex-col">
                   <span className="font-medium text-[#2C5AAE]">New York:</span>
-                  <span id="ny-time" className="text-gray-700">-</span>
+                  <span className="text-gray-700">{cityTimes.nyTime}</span>
                 </div>
                 <div className="flex flex-col">
                   <span className="font-medium text-[#2C5AAE]">London:</span>
-                  <span id="ldn-time" className="text-gray-700">-</span>
+                  <span className="text-gray-700">{cityTimes.londonTime}</span>
                 </div>
                 <div className="flex flex-col">
                   <span className="font-medium text-[#2C5AAE]">Tokyo:</span>
-                  <span id="tk-time" className="text-gray-700">-</span>
+                  <span className="text-gray-700">{cityTimes.tokyoTime}</span>
                 </div>
                 <div className="flex flex-col">
                   <span className="font-medium text-[#2C5AAE]">Sydney:</span>
-                  <span id="sy-time" className="text-gray-700">-</span>
+                  <span className="text-gray-700">{cityTimes.sydneyTime}</span>
                 </div>
               </div>
             </div>
