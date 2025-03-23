@@ -1,3 +1,4 @@
+
 import { Home, Calculator, Newspaper, Building2, GraduationCap, UserRound, Route, Bot, Headphones, Globe, Play, ShoppingCart, MapPin } from "lucide-react";
 import { NavItem } from "@/types/navigation";
 
@@ -55,7 +56,7 @@ export const getMainNavItems = (handleSubmenuItemClick: (url: string) => void): 
     subItems: [
       { 
         icon: <Route className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, 
-        label: 'My Relocation',
+        label: 'My Relocation Planner',
         onClick: () => handleSubmenuItemClick('https://preview--ocean-journey-61.lovable.app/')
       },
       { 

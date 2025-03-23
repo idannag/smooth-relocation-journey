@@ -14,4 +14,12 @@ export interface Destination {
   averageCost?: string;
   bestTimeToVisit?: string;
   popularAttractions?: string;
+  predominantLanguages?: string;
+  visaImmigrationConditions?: string;
+  religiousCommunities?: string;
+  uniqueRelocationFacts?: string;
+  area?: string;
+  populationDensity?: string;
+  gdpPerCapita?: string;
+  flagImg?: string;
 }

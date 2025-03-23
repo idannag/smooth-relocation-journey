@@ -1,3 +1,4 @@
+
 import { Home, Calculator, Newspaper, Building2, GraduationCap, UserRound, Route, Bot, BookText, Headphones, Globe, Play, ShoppingCart, MapPin } from 'lucide-react';
 import { useState, useEffect, useRef } from 'react';
 import Lightbox from './ui/lightbox';
@@ -65,7 +66,7 @@ const BottomNav = () => {
       icon: <UserRound className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, 
       label: 'Client Area',
       subItems: [
-        { icon: <Route className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, label: 'My Relocation', url: 'https://preview--ocean-journey-61.lovable.app/' },
+        { icon: <Route className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, label: 'My Relocation Planner', url: 'https://preview--ocean-journey-61.lovable.app/' },
         { icon: <ShoppingCart className="w-5 h-5 stroke-[1.5] text-[#517cc7]" />, label: 'My Services', url: 'services' },
         { icon: <UserRound className="w-5 h-5 stroke-[1.5] text-[#517cc7]" />, label: 'My Ocean Community', url: 'https://chat.whatsapp.com/LODS9mJleJU9e1Y27ml2TB' },
         { icon: <Bot className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, label: 'My 24/7 AI Assistant', url: 'https://chatgpt.com/g/g-67b6c40963908191b77e23c6fecc2e57-the-24-7-relocation-life-ai-assistant' }
@@ -99,7 +100,7 @@ const BottomNav = () => {
                         className="flex items-center gap-2 px-4 py-2.5 hover:bg-gray-50 transition-colors duration-200 w-full text-left"
                       >
                         {subItem.icon}
-                        <span className="text-xs font-medium text-gray-600">{subItem.label}</span>
+                        <span className="text-sm md:text-base font-medium text-gray-600">{subItem.label}</span>
                       </button>
                     ))}
                   </div>

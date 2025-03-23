@@ -1,5 +1,5 @@
 
-import { ChevronLeft, ChevronRight, MapPin, Info, PlayCircle } from 'lucide-react';
+import { MapPin, PlayCircle } from 'lucide-react';
 import { Destination } from './types';
 import React, { useState } from 'react';
 
@@ -14,8 +14,6 @@ interface DestinationMediaProps {
 
 const DestinationMedia = ({
   activeDestination,
-  handlePrev,
-  handleNext,
   destinations,
   activeIndex,
   handleDotClick
@@ -97,23 +95,6 @@ const DestinationMedia = ({
           )}
         </>
       )}
-      
-      {/* Navigation buttons - always visible */}
-      <button 
-        onClick={handlePrev} 
-        aria-label="Previous destination" 
-        className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/90 rounded-full p-2 shadow-lg transition-all duration-300 hover:bg-white hover:scale-110 z-10"
-      >
-        <ChevronLeft className="w-6 h-6 text-[#2C5AAE]" />
-      </button>
-      
-      <button 
-        onClick={handleNext} 
-        aria-label="Next destination" 
-        className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/90 rounded-full p-2 shadow-lg transition-all duration-300 hover:bg-white hover:scale-110 z-10"
-      >
-        <ChevronRight className="w-6 h-6 text-[#2C5AAE]" />
-      </button>
       
       {/* Dots navigation */}
       <div className="absolute bottom-0 left-0 right-0 flex justify-center pb-2 z-10">
