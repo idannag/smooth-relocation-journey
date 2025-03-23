@@ -28,9 +28,9 @@ const DestinationInfo = ({ activeDestination }: DestinationInfoProps) => {
               <Globe className="w-5 h-5 text-[#2C5AAE] mt-0.5" />
               <div>
                 <h4 className="font-semibold">General:</h4>
-                <p className="text-sm text-gray-600">Population: {activeDestination.population}</p>
-                <p className="text-sm text-gray-600">Language: {activeDestination.language}</p>
-                <p className="text-sm text-gray-600">Time Zone: {activeDestination.timeZone}</p>
+                <p className="text-sm text-gray-600">Population: {activeDestination.population || 'Not available'}</p>
+                <p className="text-sm text-gray-600">Language: {activeDestination.language || 'Not available'}</p>
+                <p className="text-sm text-gray-600">Time Zone: {activeDestination.timeZone || 'Not available'}</p>
               </div>
             </div>
             
@@ -38,8 +38,8 @@ const DestinationInfo = ({ activeDestination }: DestinationInfoProps) => {
               <Banknote className="w-5 h-5 text-[#2C5AAE] mt-0.5" />
               <div>
                 <h4 className="font-semibold">Financial:</h4>
-                <p className="text-sm text-gray-600">Currency: {activeDestination.currency}</p>
-                <p className="text-sm text-gray-600">Average Cost: {activeDestination.averageCost}</p>
+                <p className="text-sm text-gray-600">Currency: {activeDestination.currency || 'Not available'}</p>
+                <p className="text-sm text-gray-600">Average Cost: {activeDestination.averageCost || 'Not available'}</p>
               </div>
             </div>
             
@@ -47,7 +47,7 @@ const DestinationInfo = ({ activeDestination }: DestinationInfoProps) => {
               <Calendar className="w-5 h-5 text-[#2C5AAE] mt-0.5" />
               <div>
                 <h4 className="font-semibold">Best Time to Visit:</h4>
-                <p className="text-sm text-gray-600">{activeDestination.bestTimeToVisit}</p>
+                <p className="text-sm text-gray-600">{activeDestination.bestTimeToVisit || 'Anytime is great!'}</p>
               </div>
             </div>
             
@@ -55,7 +55,7 @@ const DestinationInfo = ({ activeDestination }: DestinationInfoProps) => {
               <MapPin className="w-5 h-5 text-[#2C5AAE] mt-0.5" />
               <div>
                 <h4 className="font-semibold">Popular Attractions:</h4>
-                <p className="text-sm text-gray-600">{activeDestination.popularAttractions}</p>
+                <p className="text-sm text-gray-600">{activeDestination.popularAttractions || 'Explore and discover!'}</p>
               </div>
             </div>
           </div>
@@ -69,6 +69,7 @@ const DestinationInfo = ({ activeDestination }: DestinationInfoProps) => {
                 className="w-full h-full border-none"
                 loading="lazy"
                 allowFullScreen
+                title={`Map of ${activeDestination.city}`}
               />
             ) : (
               <div className="w-full h-full flex items-center justify-center bg-gray-100">

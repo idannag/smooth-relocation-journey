@@ -76,11 +76,21 @@ export const usePopularDestinations = () => {
   useEffect(() => {
     const fetchDestinations = async () => {
       try {
+        // Fetch data from the Google Sheets TSV
         const response = await fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vQ2JRzcSHOmFKT3Q8Fgz4i79GzmwkA5FKknRMiOIy2izJ7TAZydkU8s_hbjn9E5IiwonupQsEkHbZfj/pub?gid=136618633&single=true&output=tsv');
+        
+        if (!response.ok) {
+          throw new Error(`Failed to fetch destinations: ${response.status}`);
+        }
+        
         const text = await response.text();
         
         // Parse TSV
         const rows = text.split('\n');
+        if (rows.length <= 1) {
+          throw new Error('No destination data found');
+        }
+        
         const headers = rows[0].split('\t').map(header => header.trim());
         
         const parsedDestinations = rows.slice(1).map((row) => {
@@ -119,10 +129,13 @@ export const usePopularDestinations = () => {
         if (parsedDestinations.length > 0) {
           setDestinations(parsedDestinations);
         } else {
+          console.warn('No destinations found in spreadsheet, using fallback data');
           setDestinations(fallbackDestinations);
+          toast.warning('Could not load destination data, using fallback information');
         }
       } catch (error) {
         console.error('Error fetching destinations:', error);
+        toast.error('Failed to load destinations. Using fallback data.');
         setDestinations(fallbackDestinations);
       } finally {
         setLoading(false);

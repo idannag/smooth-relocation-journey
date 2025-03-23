@@ -12,6 +12,7 @@ const DestinationCard = ({ destination, onClick }: DestinationCardProps) => {
       className="flex-none w-80 h-48 snap-center relative overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-all duration-300 animate-fade-in group/card cursor-pointer" 
       onClick={() => onClick(destination.city)}
     >
+      {/* Video Background - Direct video file or YouTube */}
       {destination.video && destination.video.includes('youtube.com') ? (
         <iframe 
           src={`${destination.video}?autoplay=1&mute=1&loop=1&playlist=${destination.video.split('/').pop()}&controls=0&modestbranding=1&showinfo=0&rel=0&enablejsapi=1&playsinline=1`} 
@@ -39,6 +40,7 @@ const DestinationCard = ({ destination, onClick }: DestinationCardProps) => {
         </div>
       )}
       
+      {/* Gradient overlay and text content */}
       <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent">
         <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
           <h3 className="text-2xl font-bold mb-1">{destination.city}</h3>

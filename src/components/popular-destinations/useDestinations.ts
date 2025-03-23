@@ -13,11 +13,21 @@ export const useDestinations = () => {
   useEffect(() => {
     const fetchDestinations = async () => {
       try {
+        // Fetch data from the Google Sheets TSV
         const response = await fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vQ2JRzcSHOmFKT3Q8Fgz4i79GzmwkA5FKknRMiOIy2izJ7TAZydkU8s_hbjn9E5IiwonupQsEkHbZfj/pub?gid=136618633&single=true&output=tsv');
+        
+        if (!response.ok) {
+          throw new Error(`Failed to fetch destinations: ${response.status}`);
+        }
+        
         const text = await response.text();
         
         // Parse TSV
         const rows = text.split('\n');
+        if (rows.length <= 1) {
+          throw new Error('No destination data found');
+        }
+        
         const headers = rows[0].split('\t').map(header => header.trim());
         
         const parsedDestinations = rows.slice(1).map((row, index) => {
@@ -40,7 +50,17 @@ export const useDestinations = () => {
             if (key === 'city') destination.city = values[i] || '';
             else if (key === 'country') destination.country = values[i] || '';
             else if (key === 'description') destination.description = values[i] || '';
-            else if (key === 'video' || key === 'videoUrl') destination.video = values[i] || '';
+            else if (key === 'video' || key === 'videoUrl') {
+              let videoUrl = values[i] || '';
+              // If it's a YouTube URL but not in embed format, convert it
+              if (videoUrl.includes('youtube.com/watch') && !videoUrl.includes('youtube.com/embed')) {
+                const videoId = videoUrl.split('v=')[1]?.split('&')[0];
+                if (videoId) {
+                  videoUrl = `https://www.youtube.com/embed/${videoId}`;
+                }
+              }
+              destination.video = videoUrl;
+            }
             else if (key === 'image' || key === 'imageUrl') destination.image = values[i] || '';
             else if (key === 'mapUrl') {
               // Ensure map URL is valid
@@ -73,10 +93,10 @@ export const useDestinations = () => {
           return destination as Destination;
         });
         
-        console.log('Parsed destinations:', parsedDestinations);
+        console.log('Parsed destinations for lightbox:', parsedDestinations);
         setDestinations(parsedDestinations);
       } catch (error) {
-        console.error('Error fetching destinations:', error);
+        console.error('Error fetching destinations for lightbox:', error);
         toast.error('Failed to load destinations. Please try again later.');
       } finally {
         setLoading(false);
