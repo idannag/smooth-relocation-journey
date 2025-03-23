@@ -9,7 +9,7 @@ const ExternalContent = ({ url }: ExternalContentProps) => {
   return (
     <iframe 
       src={url} 
-      className="w-full h-[calc(100vh-72px)]" 
+      className="w-full h-screen" 
       frameBorder="0"
       title="External content"
     />

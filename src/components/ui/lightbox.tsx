@@ -33,17 +33,24 @@ const Lightbox = ({ url, onClose }: LightboxProps) => {
 
   // Get content information based on the URL
   const contentInfo = getLightboxContent(url, postId);
+  
+  // Determine if header should be displayed (hide for external content)
+  const shouldDisplayHeader = !url.startsWith('http');
 
   return (
     <Sheet open={true} onOpenChange={() => onClose()}>
-      <SheetContent className="w-full sm:max-w-none p-0 h-screen overflow-y-auto" side="top">
+      <SheetContent 
+        className="w-full sm:max-w-none p-0 h-screen overflow-y-auto bg-gradient-to-b from-[#D3E4FD] to-white" 
+        side="top"
+      >
         <LightboxHeader 
           title={contentInfo.title}
           subtitle={contentInfo.subtitle}
           onClose={onClose}
+          shouldDisplay={shouldDisplayHeader}
         />
         
-        <div className="p-0 overflow-auto">
+        <div className={`p-0 overflow-auto ${!shouldDisplayHeader ? 'h-screen' : ''}`}>
           {contentInfo.component}
         </div>
       </SheetContent>

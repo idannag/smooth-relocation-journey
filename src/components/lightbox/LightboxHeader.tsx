@@ -10,9 +10,12 @@ interface LightboxHeaderProps {
   title: string;
   subtitle?: string;
   onClose: () => void;
+  shouldDisplay?: boolean;
 }
 
-const LightboxHeader = ({ title, subtitle, onClose }: LightboxHeaderProps) => {
+const LightboxHeader = ({ title, subtitle, onClose, shouldDisplay = true }: LightboxHeaderProps) => {
+  if (!shouldDisplay) return null;
+
   return (
     <SheetHeader className="px-4 pt-3 pb-2 sticky top-0 bg-white z-10 border-b flex-row justify-between items-center">
       <div className="flex-1">
