@@ -1,6 +1,6 @@
 
 import React, { useEffect, useState } from 'react';
-import { X } from 'lucide-react';
+import { X, Clock, CreditCard } from 'lucide-react';
 import {
   Sheet,
   SheetContent,
@@ -34,7 +34,7 @@ const Lightbox = ({ url, onClose }: LightboxProps) => {
 
   // Dynamic title based on content
   const getTitle = () => {
-    if (url === 'news') return 'Relocation News & Guides';
+    if (url === 'news') return 'Relocation News';
     if (url === 'services') return 'My Services';
     if (url === 'chatbot') return 'My 24/7 AI Assistant';
     if (url === 'time-currency') return 'World Time & Currency';
@@ -64,7 +64,7 @@ const Lightbox = ({ url, onClose }: LightboxProps) => {
         <SheetHeader className="px-4 pt-4 pb-2 sticky top-0 bg-white z-10 border-b">
           <div className="flex justify-between items-center">
             <div>
-              <SheetTitle className="text-xl md:text-2xl font-bold bg-gradient-to-r from-[#9b87f5] to-[#7E69AB] bg-clip-text text-transparent">
+              <SheetTitle className="text-xl md:text-2xl font-bold bg-gradient-to-r from-[#2C5AAE] to-[#40E0D0] bg-clip-text text-transparent">
                 {getTitle()}
               </SheetTitle>
               {getSubtitle() && (
@@ -126,32 +126,57 @@ const Lightbox = ({ url, onClose }: LightboxProps) => {
           
           {url === 'time-currency' && (
             <div className="p-6 flex flex-col items-center">
-              <h2 className="text-2xl font-bold mb-6">World Time & Currency</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-4xl">
-                <div className="bg-white rounded-lg shadow-md p-6">
-                  <h3 className="text-xl font-semibold mb-4">World Time</h3>
-                  <iframe 
-                    src="https://free.timeanddate.com/clock/i8v1bmgo/n110/szw210/szh210/hoc000/hbw6/cf100/hgr0" 
-                    frameBorder="0" 
-                    width="210" 
-                    height="210"
-                    className="mx-auto mb-4"
-                  ></iframe>
-                  <div className="grid grid-cols-2 gap-2 text-sm">
-                    <div>New York: <span id="ny-time">-</span></div>
-                    <div>London: <span id="ldn-time">-</span></div>
-                    <div>Tokyo: <span id="tk-time">-</span></div>
-                    <div>Sydney: <span id="sy-time">-</span></div>
+                {/* World Time Section */}
+                <div className="bg-white rounded-lg shadow-md p-6 border border-gray-100">
+                  <div className="flex items-center gap-3 mb-4">
+                    <Clock className="h-6 w-6 text-[#2C5AAE]" />
+                    <h3 className="text-xl font-semibold bg-gradient-to-r from-[#2C5AAE] to-[#40E0D0] bg-clip-text text-transparent">World Time</h3>
+                  </div>
+                  
+                  <div className="flex justify-center mb-6">
+                    <iframe 
+                      src="https://free.timeanddate.com/clock/i8v1bmgo/n110/szw210/szh210/hoc000/hbw6/cf100/hgr0" 
+                      frameBorder="0" 
+                      width="210" 
+                      height="210"
+                      className="mx-auto"
+                    ></iframe>
+                  </div>
+                  
+                  <div className="grid grid-cols-2 gap-4 text-sm bg-gray-50 p-4 rounded-lg">
+                    <div className="flex flex-col">
+                      <span className="font-medium text-[#2C5AAE]">New York:</span>
+                      <span id="ny-time" className="text-gray-700">-</span>
+                    </div>
+                    <div className="flex flex-col">
+                      <span className="font-medium text-[#2C5AAE]">London:</span>
+                      <span id="ldn-time" className="text-gray-700">-</span>
+                    </div>
+                    <div className="flex flex-col">
+                      <span className="font-medium text-[#2C5AAE]">Tokyo:</span>
+                      <span id="tk-time" className="text-gray-700">-</span>
+                    </div>
+                    <div className="flex flex-col">
+                      <span className="font-medium text-[#2C5AAE]">Sydney:</span>
+                      <span id="sy-time" className="text-gray-700">-</span>
+                    </div>
                   </div>
                 </div>
-                <div className="bg-white rounded-lg shadow-md p-6">
-                  <h3 className="text-xl font-semibold mb-4">Currency Converter</h3>
+                
+                {/* Currency Converter Section */}
+                <div className="bg-white rounded-lg shadow-md p-6 border border-gray-100">
+                  <div className="flex items-center gap-3 mb-4">
+                    <CreditCard className="h-6 w-6 text-[#2C5AAE]" />
+                    <h3 className="text-xl font-semibold bg-gradient-to-r from-[#2C5AAE] to-[#40E0D0] bg-clip-text text-transparent">Currency Converter</h3>
+                  </div>
+                  
                   <iframe 
                     src="https://themoneyconverter.com/MoneyConverter?from=USD&to=EUR&amount=1" 
                     frameBorder="0"
                     width="100%"
                     height="300"
-                    className="mx-auto"
+                    className="mx-auto rounded-lg overflow-hidden border border-gray-200"
                   ></iframe>
                 </div>
               </div>
@@ -161,8 +186,8 @@ const Lightbox = ({ url, onClose }: LightboxProps) => {
           {url === 'services' && (
             <div className="p-6 max-w-5xl mx-auto">
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                  <h3 className="text-xl font-semibold mb-3 text-[#7E69AB]">Consultation Services</h3>
+                <div className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow border border-gray-100">
+                  <h3 className="text-xl font-semibold mb-3 bg-gradient-to-r from-[#2C5AAE] to-[#40E0D0] bg-clip-text text-transparent">Consultation Services</h3>
                   <p className="text-gray-600 mb-4">
                     Personalized consultation to help you understand your relocation options, requirements, and create a tailored plan.
                   </p>
@@ -174,8 +199,8 @@ const Lightbox = ({ url, onClose }: LightboxProps) => {
                   </ul>
                 </div>
                 
-                <div className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                  <h3 className="text-xl font-semibold mb-3 text-[#7E69AB]">Housing & Accommodation</h3>
+                <div className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow border border-gray-100">
+                  <h3 className="text-xl font-semibold mb-3 bg-gradient-to-r from-[#2C5AAE] to-[#40E0D0] bg-clip-text text-transparent">Housing & Accommodation</h3>
                   <p className="text-gray-600 mb-4">
                     Comprehensive support for finding and securing your new home abroad, from temporary to permanent housing.
                   </p>
@@ -187,8 +212,8 @@ const Lightbox = ({ url, onClose }: LightboxProps) => {
                   </ul>
                 </div>
                 
-                <div className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                  <h3 className="text-xl font-semibold mb-3 text-[#7E69AB]">Immigration Support</h3>
+                <div className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow border border-gray-100">
+                  <h3 className="text-xl font-semibold mb-3 bg-gradient-to-r from-[#2C5AAE] to-[#40E0D0] bg-clip-text text-transparent">Immigration Support</h3>
                   <p className="text-gray-600 mb-4">
                     Expert guidance through the visa and immigration process for your destination country.
                   </p>
@@ -200,8 +225,8 @@ const Lightbox = ({ url, onClose }: LightboxProps) => {
                   </ul>
                 </div>
                 
-                <div className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                  <h3 className="text-xl font-semibold mb-3 text-[#7E69AB]">Family Relocation</h3>
+                <div className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow border border-gray-100">
+                  <h3 className="text-xl font-semibold mb-3 bg-gradient-to-r from-[#2C5AAE] to-[#40E0D0] bg-clip-text text-transparent">Family Relocation</h3>
                   <p className="text-gray-600 mb-4">
                     Specialized services for families moving abroad, with special attention to children's needs.
                   </p>
@@ -213,8 +238,8 @@ const Lightbox = ({ url, onClose }: LightboxProps) => {
                   </ul>
                 </div>
                 
-                <div className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                  <h3 className="text-xl font-semibold mb-3 text-[#7E69AB]">Moving & Logistics</h3>
+                <div className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow border border-gray-100">
+                  <h3 className="text-xl font-semibold mb-3 bg-gradient-to-r from-[#2C5AAE] to-[#40E0D0] bg-clip-text text-transparent">Moving & Logistics</h3>
                   <p className="text-gray-600 mb-4">
                     Coordination of all aspects of your physical move, from packing to customs clearance.
                   </p>
@@ -226,8 +251,8 @@ const Lightbox = ({ url, onClose }: LightboxProps) => {
                   </ul>
                 </div>
                 
-                <div className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                  <h3 className="text-xl font-semibold mb-3 text-[#7E69AB]">Settlement Services</h3>
+                <div className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow border border-gray-100">
+                  <h3 className="text-xl font-semibold mb-3 bg-gradient-to-r from-[#2C5AAE] to-[#40E0D0] bg-clip-text text-transparent">Settlement Services</h3>
                   <p className="text-gray-600 mb-4">
                     Essential support for the first weeks and months in your new country.
                   </p>

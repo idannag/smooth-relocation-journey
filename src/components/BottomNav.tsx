@@ -40,7 +40,7 @@ const BottomNav = () => {
       icon: <Calculator className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, 
       label: 'Useful Info',
       subItems: [
-        { icon: <Newspaper className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, label: 'Relocation News & Guides', url: 'news' },
+        { icon: <Newspaper className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, label: 'Relocation News', url: 'news' },
         { icon: <MapPin className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, label: 'Popular Destinations', url: 'destinations' },
         // Hiding the cost of living calculator as requested
         // { icon: <Calculator className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, label: 'Cost-of-Living Calculator', url: 'https://www.app.ocean-il.co.il/cost-of-living-comparison-calculator-copy/' },

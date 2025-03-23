@@ -1,3 +1,4 @@
+
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useRef, useState, useEffect } from 'react';
 import Lightbox from './ui/lightbox';
@@ -82,14 +83,15 @@ const PopularDestinations = () => {
   useEffect(() => {
     const fetchDestinations = async () => {
       try {
-        const response = await fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vQ2JRzcSHOmFKT3Q8Fgz4i79GzmwkA5FKknRMiOIy2izJ7TAZydkU8s_hbjn9E5IiwonupQsEkHbZfj/pub?gid=136618633&single=true&output=csv');
+        const response = await fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vQ2JRzcSHOmFKT3Q8Fgz4i79GzmwkA5FKknRMiOIy2izJ7TAZydkU8s_hbjn9E5IiwonupQsEkHbZfj/pub?gid=136618633&single=true&output=tsv');
         const text = await response.text();
         
+        // Parse TSV
         const rows = text.split('\n');
-        const headers = rows[0].split(',').map(header => header.trim());
+        const headers = rows[0].split('\t').map(header => header.trim());
         
         const parsedDestinations = rows.slice(1).map((row) => {
-          const values = row.split(',').map(value => value.trim());
+          const values = row.split('\t').map(value => value.trim());
           
           const destination: any = {};
           

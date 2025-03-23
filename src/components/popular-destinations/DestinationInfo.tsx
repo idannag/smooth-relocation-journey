@@ -17,7 +17,7 @@ const DestinationInfo = ({ activeDestination }: DestinationInfoProps) => {
         </TabsList>
         
         <TabsContent value="info" className="space-y-4">
-          <h3 className="text-2xl font-bold text-[#2C5AAE]">
+          <h3 className="text-2xl font-bold bg-gradient-to-r from-[#2C5AAE] to-[#40E0D0] bg-clip-text text-transparent">
             {activeDestination.city}, {activeDestination.country}
           </h3>
           

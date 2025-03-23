@@ -14,7 +14,7 @@ export const getMainNavItems = (handleSubmenuItemClick: (url: string) => void): 
     subItems: [
       { 
         icon: <Newspaper className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, 
-        label: 'Relocation News & Guides',
+        label: 'Relocation News',
         onClick: () => handleSubmenuItemClick('news')
       },
       { 

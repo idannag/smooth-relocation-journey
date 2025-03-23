@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { ArrowLeft, Calendar, Tag } from 'lucide-react';
@@ -13,7 +12,7 @@ import {
 } from '@/services/postsService';
 
 interface SinglePostProps {
-  postId?: number;  // Make postId optional to support both route and prop-based usage
+  postId?: number;  // Optional prop to support both route and prop-based usage
 }
 
 const SinglePost = ({ postId: propPostId }: SinglePostProps = {}) => {
@@ -30,7 +29,10 @@ const SinglePost = ({ postId: propPostId }: SinglePostProps = {}) => {
   } = usePost(id);
   
   const handleBackClick = () => {
-    navigate('/blog');
+    // Use navigate if we're in a route, otherwise we're in a lightbox
+    if (routeId) {
+      navigate('/blog');
+    }
   };
   
   // Format date
@@ -47,15 +49,17 @@ const SinglePost = ({ postId: propPostId }: SinglePostProps = {}) => {
     return (
       <div className="container mx-auto px-4 py-8">
         <div className="sticky top-0 z-10 bg-white py-2 mb-4 border-b">
-          <Button 
-            variant="outline" 
-            size="sm"
-            onClick={handleBackClick}
-            className="flex items-center gap-2"
-          >
-            <ArrowLeft size={16} />
-            Back to Articles
-          </Button>
+          {routeId && (
+            <Button 
+              variant="outline" 
+              size="sm"
+              onClick={handleBackClick}
+              className="flex items-center gap-2"
+            >
+              <ArrowLeft size={16} />
+              Back to Articles
+            </Button>
+          )}
         </div>
         <SinglePostSkeleton />
       </div>
@@ -66,25 +70,29 @@ const SinglePost = ({ postId: propPostId }: SinglePostProps = {}) => {
     return (
       <div className="container mx-auto px-4 py-8">
         <div className="sticky top-0 z-10 bg-white py-2 mb-4 border-b">
-          <Button 
-            variant="outline" 
-            size="sm"
-            onClick={handleBackClick}
-            className="flex items-center gap-2"
-          >
-            <ArrowLeft size={16} />
-            Back to Articles
-          </Button>
+          {routeId && (
+            <Button 
+              variant="outline" 
+              size="sm"
+              onClick={handleBackClick}
+              className="flex items-center gap-2"
+            >
+              <ArrowLeft size={16} />
+              Back to Articles
+            </Button>
+          )}
         </div>
         <div className="bg-red-50 text-red-700 p-4 rounded-lg text-center">
           <p>Error loading blog post. The post may not exist or there was a problem fetching it.</p>
-          <Button 
-            variant="outline" 
-            className="mt-4"
-            onClick={handleBackClick}
-          >
-            Go back to all articles
-          </Button>
+          {routeId && (
+            <Button 
+              variant="outline" 
+              className="mt-4"
+              onClick={handleBackClick}
+            >
+              Go back to all articles
+            </Button>
+          )}
         </div>
       </div>
     );
@@ -96,15 +104,17 @@ const SinglePost = ({ postId: propPostId }: SinglePostProps = {}) => {
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="sticky top-0 z-10 bg-white py-2 mb-4 border-b">
-        <Button 
-          variant="outline" 
-          size="sm"
-          onClick={handleBackClick}
-          className="flex items-center gap-2"
-        >
-          <ArrowLeft size={16} />
-          Back to Articles
-        </Button>
+        {routeId && (
+          <Button 
+            variant="outline" 
+            size="sm"
+            onClick={handleBackClick}
+            className="flex items-center gap-2"
+          >
+            <ArrowLeft size={16} />
+            Back to Articles
+          </Button>
+        )}
       </div>
       
       <article className="max-w-4xl mx-auto bg-white rounded-lg shadow-md overflow-hidden">
