@@ -30,15 +30,15 @@ const PopularDestinationsLightbox = () => {
   useEffect(() => {
     const fetchDestinations = async () => {
       try {
-        const response = await fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vQ2JRzcSHOmFKT3Q8Fgz4i79GzmwkA5FKknRMiOIy2izJ7TAZydkU8s_hbjn9E5IiwonupQsEkHbZfj/pub?gid=136618633&single=true&output=csv');
+        const response = await fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vQ2JRzcSHOmFKT3Q8Fgz4i79GzmwkA5FKknRMiOIy2izJ7TAZydkU8s_hbjn9E5IiwonupQsEkHbZfj/pub?gid=136618633&single=true&output=tsv');
         const text = await response.text();
         
-        // Parse CSV
+        // Parse TSV
         const rows = text.split('\n');
-        const headers = rows[0].split(',').map(header => header.trim());
+        const headers = rows[0].split('\t').map(header => header.trim());
         
         const parsedDestinations = rows.slice(1).map((row, index) => {
-          const values = row.split(',').map(value => value.trim());
+          const values = row.split('\t').map(value => value.trim());
           
           const destination: any = {
             id: index
@@ -109,7 +109,7 @@ const PopularDestinationsLightbox = () => {
 
   return (
     <div className="p-4 md:p-6 max-w-6xl mx-auto">
-      <h2 className="text-3xl font-bold text-center mb-8 font-inter bg-gradient-to-r from-[#2C5AAE] to-[#40E0D0] bg-clip-text text-transparent">
+      <h2 className="text-3xl font-bold text-center mb-8 font-inter bg-gradient-to-r from-[#9b87f5] to-[#7E69AB] bg-clip-text text-transparent">
         Popular Destinations
       </h2>
 
