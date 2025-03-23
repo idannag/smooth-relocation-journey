@@ -14,6 +14,7 @@ const PopularDestinationsLightbox = () => {
     handleNext,
     handlePrev,
     handleDotClick,
+    isMobile
   } = useDestinations();
 
   // If there are no destinations and not loading, show message
@@ -31,12 +32,12 @@ const PopularDestinationsLightbox = () => {
   }
 
   return (
-    <div className="p-4 md:p-6 max-w-6xl mx-auto relative">
+    <div className={`p-2 md:p-6 max-w-6xl mx-auto relative`}>
       <h2 className="text-3xl font-bold text-center mb-8 font-inter bg-gradient-to-r from-[#2C5AAE] to-[#40E0D0] bg-clip-text text-transparent">
         Popular Destinations
       </h2>
 
-      {/* Navigation buttons moved to the sides of the entire component */}
+      {/* Navigation buttons moved outside to the whole component */}
       <button 
         onClick={handlePrev} 
         aria-label="Previous destination" 
@@ -53,7 +54,7 @@ const PopularDestinationsLightbox = () => {
         <ChevronRight className="w-6 h-6 text-[#2C5AAE]" />
       </button>
 
-      <div className="relative px-10">
+      <div className={`relative ${isMobile ? 'px-2' : 'px-10'}`}>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Left side: Map/video display */}
           <DestinationMedia

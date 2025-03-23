@@ -46,11 +46,11 @@ export const useDestinations = () => {
               .replace(/\s+/g, '')
               .replace(/&/g, 'And');
             
-            // Handle special cases for our data structure
+            // Map all fields from the dataset to our destination object
             if (key === 'city') destination.city = values[i] || '';
             else if (key === 'country') destination.country = values[i] || '';
-            else if (key === 'description') destination.description = values[i] || '';
-            else if (key === 'video' || key === 'videoUrl') {
+            else if (key === 'description' || key === 'shortdescription') destination.description = values[i] || '';
+            else if (key === 'video' || key === 'destinationvideo' || key === 'videourl') {
               let videoUrl = values[i] || '';
               // If it's a YouTube URL but not in embed format, convert it
               if (videoUrl.includes('youtube.com/watch') && !videoUrl.includes('youtube.com/embed')) {
@@ -61,8 +61,8 @@ export const useDestinations = () => {
               }
               destination.video = videoUrl;
             }
-            else if (key === 'image' || key === 'imageUrl') destination.image = values[i] || '';
-            else if (key === 'mapUrl') {
+            else if (key === 'image' || key === 'imageurl') destination.image = values[i] || '';
+            else if (key === 'mapurl') {
               // Ensure map URL is valid
               let mapUrl = values[i] || '';
               // If it's a Google Maps URL but not an embed URL, convert it
@@ -72,12 +72,20 @@ export const useDestinations = () => {
               destination.mapUrl = mapUrl;
             }
             else if (key === 'population') destination.population = values[i] || '';
-            else if (key === 'language') destination.language = values[i] || '';
-            else if (key === 'timeZone') destination.timeZone = values[i] || '';
-            else if (key === 'currency') destination.currency = values[i] || '';
-            else if (key === 'averageCost') destination.averageCost = values[i] || '';
-            else if (key === 'bestTimeToVisit') destination.bestTimeToVisit = values[i] || '';
-            else if (key === 'popularAttractions') destination.popularAttractions = values[i] || '';
+            else if (key === 'area' || key === 'areakm²') destination.area = values[i] || '';
+            else if (key === 'populationdensity' || key === 'populationdensitypeopleperkm²') destination.populationDensity = values[i] || '';
+            else if (key === 'gdppercapita' || key === 'gdppercapita$') destination.gdpPerCapita = values[i] || '';
+            else if (key === 'language' || key === 'officiallanguages') destination.language = values[i] || '';
+            else if (key === 'predominantlanguages' || key === 'predominantlanguagesofpopulation') destination.predominantLanguages = values[i] || '';
+            else if (key === 'timezone') destination.timeZone = values[i] || '';
+            else if (key === 'currency' || key === 'localcurrency') destination.currency = values[i] || '';
+            else if (key === 'averagecost') destination.averageCost = values[i] || '';
+            else if (key === 'besttimetovisit') destination.bestTimeToVisit = values[i] || '';
+            else if (key === 'uniquerelocationfacts' || key === 'uniquerelocationlivingfacts') destination.uniqueRelocationFacts = values[i] || '';
+            else if (key === 'visaimmigrationconditions' || key === 'visaAndimmigrationconditions') destination.visaImmigrationConditions = values[i] || '';
+            else if (key === 'religiouscommunities' || key === 'religiouscommunities(jewishpresence)') destination.religiousCommunities = values[i] || '';
+            else if (key === 'popularattractions') destination.popularAttractions = values[i] || '';
+            else if (key === 'flagimg') destination.flagImg = values[i] || '';
             else {
               // For any other fields, add them to the destination object
               (destination as any)[key] = values[i] || '';

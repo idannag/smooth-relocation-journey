@@ -34,6 +34,12 @@ const DestinationCard = ({ destination, onClick }: DestinationCardProps) => {
           muted
           playsInline
         />
+      ) : destination.image ? (
+        <img 
+          src={destination.image} 
+          alt={destination.city}
+          className="absolute inset-0 w-full h-full object-cover"
+        />
       ) : (
         <div className="absolute inset-0 bg-gray-600" />
       )}
