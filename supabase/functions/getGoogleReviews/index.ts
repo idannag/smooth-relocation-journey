@@ -7,7 +7,7 @@ const corsHeaders = {
 }
 
 const GOOGLE_API_KEY = Deno.env.get('GOOGLE_API_KEY')
-const PLACE_ID = "ChIJc0HHe0tHHRUR4G4V7hGPL08" // Ocean International Israel business ID
+const PLACE_ID = "ChIJc0HHe0tHHRUR4G4V7hGPL08"
 
 serve(async (req) => {
   // Handle CORS preflight requests

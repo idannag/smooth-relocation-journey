@@ -15,7 +15,7 @@ const IntroSection = () => {
     <section className="py-16 bg-white">
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto text-center space-y-6">
-          <h2 className="text-5xl font-bold mb-3 animate-fade-in font-inter bg-gradient-to-r from-[#2C5AAE] to-[#40E0D0] bg-clip-text text-transparent">
+          <h2 className="text-4xl md:text-5xl font-bold mb-3 animate-fade-in font-inter bg-gradient-to-r from-[#2C5AAE] to-[#40E0D0] bg-clip-text text-transparent">
             Relocation needs 360° support
           </h2>
           
