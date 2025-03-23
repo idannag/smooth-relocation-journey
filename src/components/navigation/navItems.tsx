@@ -1,5 +1,5 @@
 
-import { Home, Calculator, Newspaper, Building2, GraduationCap, UserRound, Route, Bot, Headphones, Globe, Play, ShoppingCart } from "lucide-react";
+import { Home, Calculator, Newspaper, Building2, GraduationCap, UserRound, Route, Bot, Headphones, Globe, Play, ShoppingCart, MapPin } from "lucide-react";
 import { NavItem } from "@/types/navigation";
 
 export const getMainNavItems = (handleSubmenuItemClick: (url: string) => void): NavItem[] => [
@@ -18,10 +18,16 @@ export const getMainNavItems = (handleSubmenuItemClick: (url: string) => void): 
         onClick: () => handleSubmenuItemClick('news')
       },
       { 
-        icon: <Calculator className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, 
-        label: 'Cost-of-Living Calculator',
-        onClick: () => handleSubmenuItemClick('https://www.app.ocean-il.co.il/cost-of-living-comparison-calculator-copy/')
+        icon: <MapPin className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, 
+        label: 'Popular Destinations',
+        onClick: () => handleSubmenuItemClick('destinations')
       },
+      // Hiding the cost of living calculator as requested
+      // { 
+      //   icon: <Calculator className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, 
+      //   label: 'Cost-of-Living Calculator',
+      //   onClick: () => handleSubmenuItemClick('https://www.app.ocean-il.co.il/cost-of-living-comparison-calculator-copy/')
+      // },
       { 
         icon: <Calculator className="w-5 h-5 stroke-[1.5] text-[#517cc7]" />, 
         label: 'Cost-of-Living AI Calculator',
