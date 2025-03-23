@@ -51,6 +51,8 @@ const MobileNav = ({ items, onSubItemClick, isOpen, menuRef }: MobileNavProps) =
                         subItem.onClick();
                       } else if (subItem.label === "My Ocean Community") {
                         window.open('https://chat.whatsapp.com/LODS9mJleJU9e1Y27ml2TB', '_blank');
+                      } else if (subItem.label === "My 24/7 AI Assistant") {
+                        window.open('https://chatgpt.com/g/g-67b6c40963908191b77e23c6fecc2e57-the-24-7-relocation-life-ai-assistant', '_blank');
                       } else {
                         onSubItemClick(subItem.label.toLowerCase().replace(/\s+/g, '-'));
                       }

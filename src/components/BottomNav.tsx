@@ -1,4 +1,3 @@
-
 import { Home, Calculator, Newspaper, Building2, GraduationCap, UserRound, Route, Bot, BookText, Headphones, Globe, Play, ShoppingCart, MapPin } from 'lucide-react';
 import { useState, useEffect, useRef } from 'react';
 import Lightbox from './ui/lightbox';
@@ -26,9 +25,9 @@ const BottomNav = () => {
       return;
     }
     
-    // Handle AI Assistant link
-    if (url === 'chatbot' || url === 'https://chat.widget.autodigital.agency/') {
-      window.open('https://chat.widget.autodigital.agency/', '_blank');
+    // Handle AI Assistant link - updated URL
+    if (url === 'chatbot' || url === 'https://chatgpt.com/g/g-67b6c40963908191b77e23c6fecc2e57-the-24-7-relocation-life-ai-assistant') {
+      window.open('https://chatgpt.com/g/g-67b6c40963908191b77e23c6fecc2e57-the-24-7-relocation-life-ai-assistant', '_blank');
       return;
     }
     
@@ -69,7 +68,7 @@ const BottomNav = () => {
         { icon: <Route className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, label: 'My Relocation', url: 'https://preview--ocean-journey-61.lovable.app/' },
         { icon: <ShoppingCart className="w-5 h-5 stroke-[1.5] text-[#517cc7]" />, label: 'My Services', url: 'services' },
         { icon: <UserRound className="w-5 h-5 stroke-[1.5] text-[#517cc7]" />, label: 'My Ocean Community', url: 'https://chat.whatsapp.com/LODS9mJleJU9e1Y27ml2TB' },
-        { icon: <Bot className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, label: 'My 24/7 AI Assistant', url: 'https://chat.widget.autodigital.agency/' }
+        { icon: <Bot className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, label: 'My 24/7 AI Assistant', url: 'https://chatgpt.com/g/g-67b6c40963908191b77e23c6fecc2e57-the-24-7-relocation-life-ai-assistant' }
       ]
     }
   ];

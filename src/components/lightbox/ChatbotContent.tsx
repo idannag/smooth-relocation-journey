@@ -15,7 +15,7 @@ const ChatbotContent = () => {
         </p>
         <div className="flex justify-center mt-8">
           <Button 
-            onClick={() => window.open('https://chat.widget.autodigital.agency/', '_blank')}
+            onClick={() => window.open('https://chatgpt.com/g/g-67b6c40963908191b77e23c6fecc2e57-the-24-7-relocation-life-ai-assistant', '_blank')}
             className="bg-gradient-to-r from-[#2C5AAE] to-[#40E0D0] hover:opacity-90"
           >
             Open AI Assistant
