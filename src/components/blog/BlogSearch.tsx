@@ -79,7 +79,6 @@ const BlogSearch = ({
         
         <ScrollArea 
           className="w-full px-8"
-          orientation="horizontal"
         >
           <div 
             ref={scrollContainerRef}
