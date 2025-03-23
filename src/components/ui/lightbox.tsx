@@ -71,8 +71,7 @@ const Lightbox = ({ url, onClose }: LightboxProps) => {
                 showSearch={true}
                 showAllPostsButton={false}
                 postsPerPage={12}
-                showPagination={true}
-                backToArticlesVisible={false}
+                simplifiedCards={false}
               />
             </div>
           )}
@@ -82,11 +81,7 @@ const Lightbox = ({ url, onClose }: LightboxProps) => {
           )}
           
           {url.startsWith('post:') && postId && (
-            <SinglePost 
-              postId={postId} 
-              showBackToArticles={true}
-              backUrl="news"
-            />
+            <SinglePost postId={postId} />
           )}
           
           {url.startsWith('http') && (
