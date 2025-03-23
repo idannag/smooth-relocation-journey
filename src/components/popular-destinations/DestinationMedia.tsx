@@ -28,6 +28,11 @@ const DestinationMedia = ({
     }
   };
 
+  // Function to generate Google Maps embed URL for a city and country
+  const getGoogleMapsUrl = (city: string, country: string) => {
+    return `https://www.google.com/maps/embed/v1/place?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&q=${encodeURIComponent(`${city}, ${country}`)}`;
+  };
+
   return (
     <div className="relative rounded-lg overflow-hidden shadow-lg h-[350px] lg:h-[450px]">
       {/* Show video when available and requested */}
@@ -70,13 +75,13 @@ const DestinationMedia = ({
                 title={`Map of ${activeDestination.city}, ${activeDestination.country}`}
               />
             ) : (
-              <div className="w-full h-full flex flex-col items-center justify-center bg-gray-100">
-                <MapPin className="w-12 h-12 text-[#2C5AAE] mb-4" />
-                <h3 className="text-xl font-bold text-[#2C5AAE]">
-                  {activeDestination.city}, {activeDestination.country}
-                </h3>
-                <p className="text-gray-500 mt-2">Interactive map not available</p>
-              </div>
+              <iframe
+                src={getGoogleMapsUrl(activeDestination.city, activeDestination.country)}
+                className="w-full h-full border-none"
+                loading="lazy"
+                allowFullScreen
+                title={`Map of ${activeDestination.city}, ${activeDestination.country}`}
+              />
             )}
           </div>
           
