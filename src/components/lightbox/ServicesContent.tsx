@@ -52,31 +52,31 @@ const ServicesContent = () => {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
-        {/* Consultation Services */}
+        {/* Relocation Consultation */}
         <div className="bg-white rounded-xl shadow-md overflow-hidden border border-gray-200 hover:shadow-lg transition-shadow group">
-          <div className="h-48 bg-gradient-to-r from-blue-500 to-cyan-400 p-6 flex flex-col justify-between">
-            <h3 className="text-xl font-semibold text-white">Consultation Services</h3>
+          <div className="h-48 bg-gradient-to-r from-[#2C5AAE] to-[#40E0D0] p-6 flex flex-col justify-between">
+            <h3 className="text-xl font-semibold text-white">Relocation Consultation</h3>
             <p className="text-white text-opacity-90 text-sm">
-              Get personalized advice on your relocation journey
+              Expert guidance for your relocation journey
             </p>
           </div>
           <div className="p-6">
             <ul className="space-y-3 mb-6">
               <li className="flex items-start">
-                <ChevronRight className="h-5 w-5 text-blue-500 shrink-0 mt-0.5" />
-                <span className="text-sm">Initial relocation assessment</span>
+                <ChevronRight className="h-5 w-5 text-[#2C5AAE] shrink-0 mt-0.5" />
+                <span className="text-sm">Personalized relocation planning</span>
               </li>
               <li className="flex items-start">
-                <ChevronRight className="h-5 w-5 text-blue-500 shrink-0 mt-0.5" />
-                <span className="text-sm">Custom relocation timeline</span>
+                <ChevronRight className="h-5 w-5 text-[#2C5AAE] shrink-0 mt-0.5" />
+                <span className="text-sm">Custom timeline creation</span>
               </li>
               <li className="flex items-start">
-                <ChevronRight className="h-5 w-5 text-blue-500 shrink-0 mt-0.5" />
-                <span className="text-sm">Budget planning assistance</span>
+                <ChevronRight className="h-5 w-5 text-[#2C5AAE] shrink-0 mt-0.5" />
+                <span className="text-sm">Budget assessment</span>
               </li>
             </ul>
             <Button 
-              onClick={() => selectService('Consultation Services')}
+              onClick={() => selectService('Relocation Consultation')}
               className="w-full bg-gradient-to-r from-[#2C5AAE] to-[#40E0D0] hover:opacity-90 transition-opacity"
             >
               Learn More
@@ -84,128 +84,128 @@ const ServicesContent = () => {
           </div>
         </div>
 
-        {/* Immigration Support */}
+        {/* Housing Solutions */}
         <div className="bg-white rounded-xl shadow-md overflow-hidden border border-gray-200 hover:shadow-lg transition-shadow group">
-          <div className="h-48 bg-gradient-to-r from-purple-500 to-pink-400 p-6 flex flex-col justify-between">
-            <h3 className="text-xl font-semibold text-white">Immigration Support</h3>
+          <div className="h-48 bg-gradient-to-r from-[#2C5AAE] to-[#517cc7] p-6 flex flex-col justify-between">
+            <h3 className="text-xl font-semibold text-white">Housing Solutions</h3>
             <p className="text-white text-opacity-90 text-sm">
-              Expert guidance through visa and immigration processes
+              Find your perfect home in a new location
             </p>
           </div>
           <div className="p-6">
             <ul className="space-y-3 mb-6">
               <li className="flex items-start">
-                <ChevronRight className="h-5 w-5 text-purple-500 shrink-0 mt-0.5" />
-                <span className="text-sm">Visa application assistance</span>
-              </li>
-              <li className="flex items-start">
-                <ChevronRight className="h-5 w-5 text-purple-500 shrink-0 mt-0.5" />
-                <span className="text-sm">Document preparation</span>
-              </li>
-              <li className="flex items-start">
-                <ChevronRight className="h-5 w-5 text-purple-500 shrink-0 mt-0.5" />
-                <span className="text-sm">Application tracking</span>
-              </li>
-            </ul>
-            <Button 
-              onClick={() => selectService('Immigration Support')}
-              className="w-full bg-gradient-to-r from-purple-500 to-pink-400 hover:opacity-90 transition-opacity"
-            >
-              Learn More
-            </Button>
-          </div>
-        </div>
-
-        {/* Housing & Accommodation */}
-        <div className="bg-white rounded-xl shadow-md overflow-hidden border border-gray-200 hover:shadow-lg transition-shadow group">
-          <div className="h-48 bg-gradient-to-r from-green-500 to-teal-400 p-6 flex flex-col justify-between">
-            <h3 className="text-xl font-semibold text-white">Housing & Accommodation</h3>
-            <p className="text-white text-opacity-90 text-sm">
-              Find and secure the perfect home in your new location
-            </p>
-          </div>
-          <div className="p-6">
-            <ul className="space-y-3 mb-6">
-              <li className="flex items-start">
-                <ChevronRight className="h-5 w-5 text-green-500 shrink-0 mt-0.5" />
+                <ChevronRight className="h-5 w-5 text-[#2C5AAE] shrink-0 mt-0.5" />
                 <span className="text-sm">Property search assistance</span>
               </li>
               <li className="flex items-start">
-                <ChevronRight className="h-5 w-5 text-green-500 shrink-0 mt-0.5" />
+                <ChevronRight className="h-5 w-5 text-[#2C5AAE] shrink-0 mt-0.5" />
                 <span className="text-sm">Neighborhood guides</span>
               </li>
               <li className="flex items-start">
-                <ChevronRight className="h-5 w-5 text-green-500 shrink-0 mt-0.5" />
-                <span className="text-sm">Lease negotiation support</span>
+                <ChevronRight className="h-5 w-5 text-[#2C5AAE] shrink-0 mt-0.5" />
+                <span className="text-sm">Rental agreement support</span>
               </li>
             </ul>
             <Button 
-              onClick={() => selectService('Housing & Accommodation')}
-              className="w-full bg-gradient-to-r from-green-500 to-teal-400 hover:opacity-90 transition-opacity"
+              onClick={() => selectService('Housing Solutions')}
+              className="w-full bg-gradient-to-r from-[#2C5AAE] to-[#517cc7] hover:opacity-90 transition-opacity"
             >
               Learn More
             </Button>
           </div>
         </div>
 
-        {/* Family Relocation */}
+        {/* Immigration Assistance */}
         <div className="bg-white rounded-xl shadow-md overflow-hidden border border-gray-200 hover:shadow-lg transition-shadow group">
-          <div className="h-48 bg-gradient-to-r from-amber-500 to-yellow-400 p-6 flex flex-col justify-between">
-            <h3 className="text-xl font-semibold text-white">Family Relocation</h3>
+          <div className="h-48 bg-gradient-to-r from-[#517cc7] to-[#33C3F0] p-6 flex flex-col justify-between">
+            <h3 className="text-xl font-semibold text-white">Immigration Assistance</h3>
             <p className="text-white text-opacity-90 text-sm">
-              Specialized services for families moving abroad
+              Navigate visa and immigration processes
             </p>
           </div>
           <div className="p-6">
             <ul className="space-y-3 mb-6">
               <li className="flex items-start">
-                <ChevronRight className="h-5 w-5 text-amber-500 shrink-0 mt-0.5" />
-                <span className="text-sm">School search and application</span>
+                <ChevronRight className="h-5 w-5 text-[#517cc7] shrink-0 mt-0.5" />
+                <span className="text-sm">Visa application guidance</span>
               </li>
               <li className="flex items-start">
-                <ChevronRight className="h-5 w-5 text-amber-500 shrink-0 mt-0.5" />
-                <span className="text-sm">Family healthcare setup</span>
+                <ChevronRight className="h-5 w-5 text-[#517cc7] shrink-0 mt-0.5" />
+                <span className="text-sm">Documentation assistance</span>
               </li>
               <li className="flex items-start">
-                <ChevronRight className="h-5 w-5 text-amber-500 shrink-0 mt-0.5" />
-                <span className="text-sm">Cultural adaptation guidance</span>
+                <ChevronRight className="h-5 w-5 text-[#517cc7] shrink-0 mt-0.5" />
+                <span className="text-sm">Immigration timeline planning</span>
               </li>
             </ul>
             <Button 
-              onClick={() => selectService('Family Relocation')}
-              className="w-full bg-gradient-to-r from-amber-500 to-yellow-400 hover:opacity-90 transition-opacity"
+              onClick={() => selectService('Immigration Assistance')}
+              className="w-full bg-gradient-to-r from-[#517cc7] to-[#33C3F0] hover:opacity-90 transition-opacity"
             >
               Learn More
             </Button>
           </div>
         </div>
 
-        {/* Moving & Logistics */}
+        {/* Family Support */}
         <div className="bg-white rounded-xl shadow-md overflow-hidden border border-gray-200 hover:shadow-lg transition-shadow group">
-          <div className="h-48 bg-gradient-to-r from-red-500 to-orange-400 p-6 flex flex-col justify-between">
-            <h3 className="text-xl font-semibold text-white">Moving & Logistics</h3>
+          <div className="h-48 bg-gradient-to-r from-[#40E0D0] to-[#2C5AAE] p-6 flex flex-col justify-between">
+            <h3 className="text-xl font-semibold text-white">Family Support</h3>
             <p className="text-white text-opacity-90 text-sm">
-              Coordination of all aspects of your physical move
+              Comprehensive solutions for families
             </p>
           </div>
           <div className="p-6">
             <ul className="space-y-3 mb-6">
               <li className="flex items-start">
-                <ChevronRight className="h-5 w-5 text-red-500 shrink-0 mt-0.5" />
-                <span className="text-sm">Moving company coordination</span>
+                <ChevronRight className="h-5 w-5 text-[#40E0D0] shrink-0 mt-0.5" />
+                <span className="text-sm">School search and enrollment</span>
               </li>
               <li className="flex items-start">
-                <ChevronRight className="h-5 w-5 text-red-500 shrink-0 mt-0.5" />
-                <span className="text-sm">Shipping and customs guidance</span>
+                <ChevronRight className="h-5 w-5 text-[#40E0D0] shrink-0 mt-0.5" />
+                <span className="text-sm">Healthcare setup assistance</span>
               </li>
               <li className="flex items-start">
-                <ChevronRight className="h-5 w-5 text-red-500 shrink-0 mt-0.5" />
-                <span className="text-sm">Pet relocation assistance</span>
+                <ChevronRight className="h-5 w-5 text-[#40E0D0] shrink-0 mt-0.5" />
+                <span className="text-sm">Spousal employment support</span>
               </li>
             </ul>
             <Button 
-              onClick={() => selectService('Moving & Logistics')}
-              className="w-full bg-gradient-to-r from-red-500 to-orange-400 hover:opacity-90 transition-opacity"
+              onClick={() => selectService('Family Support')}
+              className="w-full bg-gradient-to-r from-[#40E0D0] to-[#2C5AAE] hover:opacity-90 transition-opacity"
+            >
+              Learn More
+            </Button>
+          </div>
+        </div>
+
+        {/* Settling-In Services */}
+        <div className="bg-white rounded-xl shadow-md overflow-hidden border border-gray-200 hover:shadow-lg transition-shadow group">
+          <div className="h-48 bg-gradient-to-r from-[#33C3F0] to-[#517cc7] p-6 flex flex-col justify-between">
+            <h3 className="text-xl font-semibold text-white">Settling-In Services</h3>
+            <p className="text-white text-opacity-90 text-sm">
+              Make your new location feel like home
+            </p>
+          </div>
+          <div className="p-6">
+            <ul className="space-y-3 mb-6">
+              <li className="flex items-start">
+                <ChevronRight className="h-5 w-5 text-[#33C3F0] shrink-0 mt-0.5" />
+                <span className="text-sm">Local orientation</span>
+              </li>
+              <li className="flex items-start">
+                <ChevronRight className="h-5 w-5 text-[#33C3F0] shrink-0 mt-0.5" />
+                <span className="text-sm">Banking & utilities setup</span>
+              </li>
+              <li className="flex items-start">
+                <ChevronRight className="h-5 w-5 text-[#33C3F0] shrink-0 mt-0.5" />
+                <span className="text-sm">Cultural adaptation support</span>
+              </li>
+            </ul>
+            <Button 
+              onClick={() => selectService('Settling-In Services')}
+              className="w-full bg-gradient-to-r from-[#33C3F0] to-[#517cc7] hover:opacity-90 transition-opacity"
             >
               Learn More
             </Button>
