@@ -65,7 +65,7 @@ const BlogPostGrid = ({
         ))}
       </div>
       
-      {/* Load More / Pagination Controls */}
+      {/* Pagination Controls - only show in lightbox view */}
       {totalPages > 1 && isLightboxView && (
         <nav className="mt-8">
           <ul className="flex flex-wrap justify-center gap-2">
@@ -116,25 +116,7 @@ const BlogPostGrid = ({
         </nav>
       )}
       
-      {/* "Load More" Button - only show this in non-lightbox views if needed */}
-      {!isLightboxView && hasMorePosts && onLoadMore && (
-        <div className="flex justify-center mt-8">
-          <Button
-            onClick={onLoadMore}
-            disabled={isLoadingMore}
-            className="bg-gradient-to-r from-[#2C5AAE] to-[#40E0D0] text-white hover:opacity-90"
-          >
-            {isLoadingMore ? (
-              <>
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                Loading...
-              </>
-            ) : (
-              'Load More Articles'
-            )}
-          </Button>
-        </div>
-      )}
+      {/* "Load More" Button removed completely */}
     </div>
   );
 };

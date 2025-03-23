@@ -32,7 +32,7 @@ const DestinationMedia = ({
   };
 
   return (
-    <div className="relative rounded-lg overflow-hidden shadow-lg h-[350px] lg:h-[450px]">
+    <div className="relative rounded-lg overflow-hidden shadow-lg h-[300px] lg:h-[400px]">
       {/* Show video when available and requested */}
       {showVideo && activeDestination.video ? (
         <div className="w-full h-full">
