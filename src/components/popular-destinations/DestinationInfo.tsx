@@ -1,5 +1,5 @@
 
-import { Globe, Banknote, Calendar, MapPin, Info, Languages, Users, FileText, FileCheck } from 'lucide-react';
+import { Globe, Banknote, Calendar, MapPin, Languages, Users, FileText, FileCheck } from 'lucide-react';
 import { Destination } from './types';
 
 interface DestinationInfoProps {
@@ -16,12 +16,13 @@ const DestinationInfo = ({ activeDestination }: DestinationInfoProps) => {
       <p className="text-gray-700 mb-6">{activeDestination.description}</p>
       
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {activeDestination.population && (
+        {/* General Information */}
+        {(activeDestination.population || activeDestination.area || activeDestination.populationDensity || activeDestination.gdpPerCapita) && (
           <div className="flex items-start gap-2">
             <Globe className="w-5 h-5 text-[#2C5AAE] mt-0.5 flex-shrink-0" />
             <div>
               <h4 className="font-semibold">General:</h4>
-              <p className="text-sm text-gray-600">Population: {activeDestination.population}</p>
+              {activeDestination.population && <p className="text-sm text-gray-600">Population: {activeDestination.population}</p>}
               {activeDestination.area && <p className="text-sm text-gray-600">Area: {activeDestination.area}</p>}
               {activeDestination.populationDensity && <p className="text-sm text-gray-600">Population Density: {activeDestination.populationDensity}</p>}
               {activeDestination.gdpPerCapita && <p className="text-sm text-gray-600">GDP per Capita: {activeDestination.gdpPerCapita}</p>}
@@ -29,6 +30,7 @@ const DestinationInfo = ({ activeDestination }: DestinationInfoProps) => {
           </div>
         )}
         
+        {/* Language Information */}
         {(activeDestination.language || activeDestination.predominantLanguages) && (
           <div className="flex items-start gap-2">
             <Languages className="w-5 h-5 text-[#2C5AAE] mt-0.5 flex-shrink-0" />
@@ -40,6 +42,7 @@ const DestinationInfo = ({ activeDestination }: DestinationInfoProps) => {
           </div>
         )}
         
+        {/* Financial Information */}
         {(activeDestination.currency || activeDestination.averageCost) && (
           <div className="flex items-start gap-2">
             <Banknote className="w-5 h-5 text-[#2C5AAE] mt-0.5 flex-shrink-0" />
@@ -51,6 +54,7 @@ const DestinationInfo = ({ activeDestination }: DestinationInfoProps) => {
           </div>
         )}
         
+        {/* Time and Visit Information */}
         {(activeDestination.timeZone || activeDestination.bestTimeToVisit) && (
           <div className="flex items-start gap-2">
             <Calendar className="w-5 h-5 text-[#2C5AAE] mt-0.5 flex-shrink-0" />
@@ -62,6 +66,7 @@ const DestinationInfo = ({ activeDestination }: DestinationInfoProps) => {
           </div>
         )}
         
+        {/* Popular Attractions */}
         {activeDestination.popularAttractions && (
           <div className="flex items-start gap-2">
             <MapPin className="w-5 h-5 text-[#2C5AAE] mt-0.5 flex-shrink-0" />
@@ -72,6 +77,7 @@ const DestinationInfo = ({ activeDestination }: DestinationInfoProps) => {
           </div>
         )}
         
+        {/* Visa & Immigration */}
         {activeDestination.visaImmigrationConditions && (
           <div className="flex items-start gap-2">
             <FileCheck className="w-5 h-5 text-[#2C5AAE] mt-0.5 flex-shrink-0" />
@@ -82,6 +88,7 @@ const DestinationInfo = ({ activeDestination }: DestinationInfoProps) => {
           </div>
         )}
         
+        {/* Religious Communities */}
         {activeDestination.religiousCommunities && (
           <div className="flex items-start gap-2">
             <Users className="w-5 h-5 text-[#2C5AAE] mt-0.5 flex-shrink-0" />
@@ -92,6 +99,7 @@ const DestinationInfo = ({ activeDestination }: DestinationInfoProps) => {
           </div>
         )}
         
+        {/* Unique Relocation Facts */}
         {activeDestination.uniqueRelocationFacts && (
           <div className="flex items-start gap-2">
             <FileText className="w-5 h-5 text-[#2C5AAE] mt-0.5 flex-shrink-0" />
