@@ -6,6 +6,7 @@ import {
 } from "@/components/ui/sheet";
 import LightboxHeader from '../lightbox/LightboxHeader';
 import { getLightboxContent } from '../lightbox/getLightboxContent';
+import LoadingSpinner from '../lightbox/LoadingSpinner';
 
 interface LightboxProps {
   url: string;
@@ -15,6 +16,7 @@ interface LightboxProps {
 const Lightbox = ({ url, onClose }: LightboxProps) => {
   const [isClient, setIsClient] = useState(false);
   const [postId, setPostId] = useState<number | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
   
   useEffect(() => {
     setIsClient(true);
@@ -26,6 +28,14 @@ const Lightbox = ({ url, onClose }: LightboxProps) => {
         setPostId(id);
       }
     }
+    
+    // Simulate loading time for content
+    setIsLoading(true);
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 800);
+    
+    return () => clearTimeout(timer);
   }, [url]);
 
   // If on server-side, return null to prevent hydration mismatch
@@ -51,7 +61,11 @@ const Lightbox = ({ url, onClose }: LightboxProps) => {
         />
         
         <div className={`p-0 overflow-auto ${!shouldDisplayHeader ? 'h-screen' : ''}`}>
-          {contentInfo.component}
+          {isLoading ? (
+            <LoadingSpinner />
+          ) : (
+            contentInfo.component
+          )}
         </div>
       </SheetContent>
     </Sheet>

@@ -1,4 +1,3 @@
-
 import { useState, useEffect, useRef } from "react";
 import { Menu, X } from "lucide-react";
 import TimeStrip from "./TimeStrip";
@@ -19,24 +18,20 @@ const Header = () => {
   const menuRef = useRef<HTMLDivElement>(null);
   const isMobile = useIsMobile();
 
-  // Add preload hints for common resources
   useEffect(() => {
     const preloadResources = () => {
-      // Preload hero video
       const linkVideo = document.createElement('link');
       linkVideo.rel = 'preload';
       linkVideo.as = 'video';
       linkVideo.href = 'https://ocean.autodigital.agency/splash.mp4';
       document.head.appendChild(linkVideo);
       
-      // Preload common images
       const imagesToPreload = [
         'https://www.app.ocean-il.co.il/wp-content/uploads/2022/04/cropped-logo.jpg',
         'https://www.app.ocean-il.co.il/wp-content/uploads/2023/04/relocation-explainer-new-1.mp4',
         '/lovable-uploads/7fc61af8-ea7f-4585-8f82-c8a61f99c608.png'
       ];
       
-      // Add preload for popular destinations and useful info images
       const additionalImages = [
         'https://www.app.ocean-il.co.il/wp-content/uploads/2022/10/Brooklyn.m4v',
         'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40',
@@ -58,7 +53,6 @@ const Header = () => {
     preloadResources();
   }, []);
 
-  // Reset expanded items when mobile state changes
   useEffect(() => {
     setExpandedItems([]);
   }, [isMobile]);
@@ -85,9 +79,8 @@ const Header = () => {
     console.log("Submenu item clicked:", url);
     
     if (url === 'chatbot') {
-      console.log("Opening chatbot");
-      setLightboxContent('chatbot');
-      setShowLightbox(true);
+      console.log("Opening AI Assistant in new tab");
+      window.open('https://chat.widget.autodigital.agency/', '_blank');
       setIsOpen(false);
       return;
     }
@@ -98,7 +91,6 @@ const Header = () => {
       return;
     }
     
-    // If URL starts with http, it's an external link for iframe
     if (url.startsWith('http')) {
       setLightboxContent(url);
       setShowLightbox(true);
@@ -106,7 +98,6 @@ const Header = () => {
       return;
     }
     
-    // For internal content like 'news', 'guides'
     setLightboxContent(url);
     setShowLightbox(true);
     setIsOpen(false);

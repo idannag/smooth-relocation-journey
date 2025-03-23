@@ -26,6 +26,12 @@ const BottomNav = () => {
       return;
     }
     
+    // Handle AI Assistant link
+    if (url === 'chatbot' || url === 'https://chat.widget.autodigital.agency/') {
+      window.open('https://chat.widget.autodigital.agency/', '_blank');
+      return;
+    }
+    
     setLightboxUrl(url);
     setShowLightbox(true);
   };
@@ -63,7 +69,7 @@ const BottomNav = () => {
         { icon: <Route className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, label: 'My Relocation', url: 'https://preview--ocean-journey-61.lovable.app/' },
         { icon: <ShoppingCart className="w-5 h-5 stroke-[1.5] text-[#517cc7]" />, label: 'My Services', url: 'services' },
         { icon: <UserRound className="w-5 h-5 stroke-[1.5] text-[#517cc7]" />, label: 'My Ocean Community', url: 'https://chat.whatsapp.com/LODS9mJleJU9e1Y27ml2TB' },
-        { icon: <Bot className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, label: 'My 24/7 AI Assistant', url: 'chatbot' }
+        { icon: <Bot className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, label: 'My 24/7 AI Assistant', url: 'https://chat.widget.autodigital.agency/' }
       ]
     }
   ];

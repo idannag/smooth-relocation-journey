@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { ArrowLeft, Calendar, Tag } from 'lucide-react';
@@ -29,9 +30,11 @@ const SinglePost = ({ postId: propPostId }: SinglePostProps = {}) => {
   } = usePost(id);
   
   const handleBackClick = () => {
-    // Use navigate if we're in a route, otherwise we're in a lightbox
     if (routeId) {
       navigate('/blog');
+    } else {
+      // Use browser history to go back when in lightbox mode
+      window.history.back();
     }
   };
   
@@ -104,17 +107,15 @@ const SinglePost = ({ postId: propPostId }: SinglePostProps = {}) => {
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="sticky top-0 z-10 bg-white py-2 mb-4 border-b">
-        {routeId && (
-          <Button 
-            variant="outline" 
-            size="sm"
-            onClick={handleBackClick}
-            className="flex items-center gap-2"
-          >
-            <ArrowLeft size={16} />
-            Back to Articles
-          </Button>
-        )}
+        <Button 
+          variant="outline" 
+          size="sm"
+          onClick={handleBackClick}
+          className="flex items-center gap-2"
+        >
+          <ArrowLeft size={16} />
+          Back to Articles
+        </Button>
       </div>
       
       <article className="max-w-4xl mx-auto bg-white rounded-lg shadow-md overflow-hidden">
