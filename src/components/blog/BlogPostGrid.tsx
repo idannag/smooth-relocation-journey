@@ -1,29 +1,21 @@
 
 import React from 'react';
-import { WordPressPost } from '@/services/postsService';
 import BlogPostCard from './BlogPostCard';
 import { Button } from "@/components/ui/button";
-import { ChevronLeft, ChevronRight } from 'lucide-react';
-import {
-  Pagination,
-  PaginationContent,
-  PaginationItem,
-  PaginationLink,
-  PaginationNext,
-  PaginationPrevious,
-} from "@/components/ui/pagination";
+import { WordPressPost } from '@/services/postsService';
+import { Loader2 } from 'lucide-react';
+import { useLocation } from 'react-router-dom';
 
 interface BlogPostGridProps {
   posts: WordPressPost[];
-  hasMorePosts: boolean;
-  isLoadingMore: boolean;
+  hasMorePosts?: boolean;
+  isLoadingMore?: boolean;
   onPostClick: (postId: number) => void;
-  onLoadMore: () => void;
+  onLoadMore?: () => void;
   onClearFilters?: () => void;
-  totalPages?: number;
-  currentPage?: number;
-  onPageChange?: (page: number) => void;
-  limit?: number;
+  totalPages: number;
+  currentPage: number;
+  onPageChange: (page: number) => void;
   simplifiedCards?: boolean;
 }
 
@@ -34,104 +26,116 @@ const BlogPostGrid = ({
   onPostClick,
   onLoadMore,
   onClearFilters,
-  totalPages = 1,
-  currentPage = 1,
+  totalPages,
+  currentPage,
   onPageChange,
-  limit,
   simplifiedCards = false
 }: BlogPostGridProps) => {
-  const displayPosts = limit ? posts.slice(0, limit) : posts;
+  const location = useLocation();
+  const isLightboxView = location.pathname === '/blog' || (location.search && location.search.includes('lightbox=true'));
   
+  // If there are no posts, show a message
   if (posts.length === 0) {
     return (
-      <div className="text-center py-8 bg-gray-50 rounded-lg">
-        <p className="text-gray-600">No posts found matching your criteria.</p>
+      <div className="text-center p-8 bg-gray-50 rounded-lg">
+        <p className="text-gray-700 mb-4">No articles found with the current filters.</p>
         {onClearFilters && (
           <Button 
-            variant="outline" 
-            className="mt-4"
             onClick={onClearFilters}
+            variant="outline"
+            size="sm"
           >
-            Clear filters
+            Clear Filters
           </Button>
         )}
       </div>
     );
   }
-  
+
   return (
-    <>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mb-8">
-        {displayPosts.map(post => (
+    <div>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {posts.map((post) => (
           <BlogPostCard 
             key={post.id} 
             post={post} 
-            onClick={onPostClick}
+            onClick={() => onPostClick(post.id)} 
             simplified={simplifiedCards}
           />
         ))}
       </div>
       
-      {/* Pagination - Only show if we have page navigation functionality */}
-      {onPageChange && totalPages > 1 && (
-        <Pagination className="mt-8">
-          <PaginationContent>
-            <PaginationItem>
-              <PaginationPrevious 
-                onClick={() => onPageChange(Math.max(1, currentPage - 1))}
-                className={currentPage <= 1 ? 'pointer-events-none opacity-50' : ''}
-              />
-            </PaginationItem>
+      {/* Load More / Pagination Controls */}
+      {totalPages > 1 && isLightboxView && (
+        <nav className="mt-8">
+          <ul className="flex flex-wrap justify-center gap-2">
+            {/* Previous Page Button */}
+            <li>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => onPageChange(currentPage - 1)}
+                disabled={currentPage === 1}
+                className="px-3"
+              >
+                &laquo;
+              </Button>
+            </li>
             
-            {Array.from({ length: Math.min(5, totalPages) }).map((_, i) => {
-              // Calculate which page numbers to show
-              let pageNum = i + 1;
-              if (totalPages > 5) {
-                if (currentPage <= 3) {
-                  pageNum = i + 1;
-                } else if (currentPage >= totalPages - 2) {
-                  pageNum = totalPages - 4 + i;
-                } else {
-                  pageNum = currentPage - 2 + i;
-                }
-              }
-              
-              return (
-                <PaginationItem key={pageNum}>
-                  <PaginationLink 
-                    isActive={pageNum === currentPage}
-                    onClick={() => onPageChange(pageNum)}
-                  >
-                    {pageNum}
-                  </PaginationLink>
-                </PaginationItem>
-              );
-            })}
+            {/* Page Numbers */}
+            {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+              <li key={page}>
+                <Button
+                  variant={currentPage === page ? "default" : "outline"}
+                  size="sm"
+                  onClick={() => onPageChange(page)}
+                  className={`px-3 ${
+                    currentPage === page 
+                      ? "bg-gradient-to-r from-[#2C5AAE] to-[#40E0D0] text-white" 
+                      : ""
+                  }`}
+                >
+                  {page}
+                </Button>
+              </li>
+            ))}
             
-            <PaginationItem>
-              <PaginationNext 
-                onClick={() => onPageChange(Math.min(totalPages, currentPage + 1))}
-                className={currentPage >= totalPages ? 'pointer-events-none opacity-50' : ''}
-              />
-            </PaginationItem>
-          </PaginationContent>
-        </Pagination>
+            {/* Next Page Button */}
+            <li>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => onPageChange(currentPage + 1)}
+                disabled={currentPage === totalPages}
+                className="px-3"
+              >
+                &raquo;
+              </Button>
+            </li>
+          </ul>
+        </nav>
       )}
       
-      {/* Load More Button - Only show when using infinite loading */}
-      {hasMorePosts && !onPageChange && (
+      {/* "Load More" Button - only show this in non-lightbox views if needed */}
+      {!isLightboxView && hasMorePosts && onLoadMore && (
         <div className="flex justify-center mt-8">
-          <Button 
+          <Button
             onClick={onLoadMore}
             disabled={isLoadingMore}
             className="bg-gradient-to-r from-[#2C5AAE] to-[#40E0D0] text-white hover:opacity-90"
           >
-            {isLoadingMore ? 'Loading...' : 'Load More'}
-            {isLoadingMore ? <ChevronRight className="ml-2 animate-bounce" /> : <ChevronRight className="ml-2" />}
+            {isLoadingMore ? (
+              <>
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                Loading...
+              </>
+            ) : (
+              'Load More Articles'
+            )}
           </Button>
         </div>
       )}
-    </>
+    </div>
   );
 };
 
