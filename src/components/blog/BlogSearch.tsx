@@ -1,10 +1,12 @@
 
-import React from 'react';
-import { Search, X } from 'lucide-react';
+import React, { useRef } from 'react';
+import { Search, X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { WordPressCategory } from '@/services/postsService';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 interface BlogSearchProps {
   searchTerm: string;
@@ -28,6 +30,19 @@ const BlogSearch = ({
   totalCount
 }: BlogSearchProps) => {
   const isMobile = useIsMobile();
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  
+  const scrollLeft = () => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollBy({ left: -200, behavior: 'smooth' });
+    }
+  };
+  
+  const scrollRight = () => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollBy({ left: 200, behavior: 'smooth' });
+    }
+  };
   
   return (
     <div className="flex flex-col gap-3 mb-6">
@@ -52,41 +67,70 @@ const BlogSearch = ({
         )}
       </div>
       
-      <div className="flex flex-wrap gap-1.5 mt-1">
-        <Badge 
-          variant={selectedCategory === 'all' ? "default" : "outline"}
-          className={`cursor-pointer transition-all duration-200 ${selectedCategory === 'all' ? 'bg-[#2C5AAE] hover:bg-[#40E0D0]' : 'hover:bg-gray-100'} ${isMobile ? 'px-2 py-1 text-xs' : 'px-3 py-1'} rounded-full shadow-sm hover:shadow`}
-          onClick={() => onCategoryChange('all')}
+      <div className="relative">
+        <Button
+          variant="ghost"
+          size="icon"
+          className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white/80 rounded-full shadow-sm h-7 w-7"
+          onClick={scrollLeft}
         >
-          All ({totalCount})
-        </Badge>
+          <ChevronLeft size={18} />
+        </Button>
         
-        {categoriesLoading ? (
-          <div className="flex gap-1.5">
-            {[1, 2, 3].map(i => (
-              <Badge key={i} variant="outline" className="bg-gray-100 animate-pulse px-2 py-1 rounded-full text-xs">
-                Loading...
-              </Badge>
-            ))}
-          </div>
-        ) : (
-          categories?.map(category => (
+        <ScrollArea 
+          className="w-full px-8"
+          orientation="horizontal"
+        >
+          <div 
+            ref={scrollContainerRef}
+            className="flex gap-1.5 py-2 px-2 overflow-x-auto scrollbar-hide whitespace-nowrap"
+            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+          >
             <Badge 
-              key={category.id} 
-              variant={selectedCategory === category.id.toString() ? "default" : "outline"}
-              className={`cursor-pointer transition-all duration-200 ${selectedCategory === category.id.toString() ? 'bg-[#2C5AAE] hover:bg-[#40E0D0]' : 'hover:bg-gray-100'} ${isMobile ? 'px-2 py-1 text-xs' : 'px-3 py-1'} rounded-full flex items-center shadow-sm hover:shadow`}
-              onClick={() => onCategoryChange(category.id.toString())}
+              variant={selectedCategory === 'all' ? "default" : "outline"}
+              className={`cursor-pointer transition-all duration-200 flex-shrink-0 ${selectedCategory === 'all' ? 'bg-[#2C5AAE] hover:bg-[#40E0D0]' : 'hover:bg-gray-100'} ${isMobile ? 'px-2 py-1 text-xs' : 'px-3 py-1'} rounded-full shadow-sm hover:shadow`}
+              onClick={() => onCategoryChange('all')}
             >
-              {category.name} ({category.count})
-              {selectedCategory === category.id.toString() && (
-                <X className="ml-1 w-3 h-3" onClick={(e) => {
-                  e.stopPropagation();
-                  onCategoryChange('all');
-                }} />
-              )}
+              All ({totalCount})
             </Badge>
-          ))
-        )}
+            
+            {categoriesLoading ? (
+              <div className="flex gap-1.5">
+                {[1, 2, 3].map(i => (
+                  <Badge key={i} variant="outline" className="bg-gray-100 animate-pulse px-2 py-1 rounded-full text-xs flex-shrink-0">
+                    Loading...
+                  </Badge>
+                ))}
+              </div>
+            ) : (
+              categories?.map(category => (
+                <Badge 
+                  key={category.id} 
+                  variant={selectedCategory === category.id.toString() ? "default" : "outline"}
+                  className={`cursor-pointer transition-all duration-200 flex-shrink-0 ${selectedCategory === category.id.toString() ? 'bg-[#2C5AAE] hover:bg-[#40E0D0]' : 'hover:bg-gray-100'} ${isMobile ? 'px-2 py-1 text-xs' : 'px-3 py-1'} rounded-full flex items-center shadow-sm hover:shadow`}
+                  onClick={() => onCategoryChange(category.id.toString())}
+                >
+                  {category.name} ({category.count})
+                  {selectedCategory === category.id.toString() && (
+                    <X className="ml-1 w-3 h-3" onClick={(e) => {
+                      e.stopPropagation();
+                      onCategoryChange('all');
+                    }} />
+                  )}
+                </Badge>
+              ))
+            )}
+          </div>
+        </ScrollArea>
+        
+        <Button
+          variant="ghost"
+          size="icon"
+          className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white/80 rounded-full shadow-sm h-7 w-7"
+          onClick={scrollRight}
+        >
+          <ChevronRight size={18} />
+        </Button>
       </div>
     </div>
   );

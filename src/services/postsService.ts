@@ -1,4 +1,3 @@
-
 import { useQuery, useInfiniteQuery } from '@tanstack/react-query';
 
 export interface WordPressPost {
@@ -39,7 +38,8 @@ export const usePosts = () => {
   return useInfiniteQuery<WordPressPost[]>({
     queryKey: ['posts'],
     queryFn: async ({ pageParam }) => {
-      const response = await fetch(`https://app.ocean-il.co.il/wp-json/wp/v2/posts?_embed&status=publish&page=${pageParam}&per_page=6`);
+      const perPage = 20; // Increased from 6 to fetch more posts at once
+      const response = await fetch(`https://app.ocean-il.co.il/wp-json/wp/v2/posts?_embed&status=publish&page=${pageParam}&per_page=${perPage}`);
       
       if (!response.ok) {
         throw new Error('Failed to fetch posts');
@@ -50,7 +50,7 @@ export const usePosts = () => {
     initialPageParam: 1,
     getNextPageParam: (lastPage, allPages) => {
       // If we got fewer results than requested, we've reached the end
-      return lastPage.length < 6 ? undefined : allPages.length + 1;
+      return lastPage.length < 20 ? undefined : allPages.length + 1;
     }
   });
 };

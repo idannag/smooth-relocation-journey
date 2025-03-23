@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import BlogSearch from './BlogSearch';
@@ -65,6 +64,14 @@ const BlogPosts = ({
     }
   }, [data]);
   
+  // Load more posts when needed
+  useEffect(() => {
+    // If we're at the end of the current posts and there are more to fetch
+    if (hasNextPage && !isFetchingNextPage && allPosts.length < 100) {
+      fetchNextPage();
+    }
+  }, [hasNextPage, isFetchingNextPage, allPosts.length, fetchNextPage]);
+  
   // Filter posts based on search term and selected category
   const filteredPosts = allPosts.filter(post => {
     const matchesSearch = searchTerm === '' || 
@@ -112,6 +119,12 @@ const BlogPosts = ({
   // Handle page change
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
+    
+    // Fetch more posts if we're near the end and more are available
+    if (page > totalPages - 2 && hasNextPage && !isFetchingNextPage) {
+      fetchNextPage();
+    }
+    
     window.scrollTo(0, 0);
   };
   
@@ -204,14 +217,14 @@ const BlogPosts = ({
         {/* Posts Grid with pagination */}
         <BlogPostGrid
           posts={limitPosts ? filteredPosts.slice(0, limitPosts) : currentPosts}
-          hasMorePosts={false} // Always use pagination now
-          isLoadingMore={false}
+          hasMorePosts={hasNextPage}
+          isLoadingMore={isFetchingNextPage}
           onPostClick={handlePostClick}
-          onLoadMore={() => {}} // No longer used
+          onLoadMore={() => fetchNextPage()}
           onClearFilters={searchTerm || selectedCategory !== 'all' ? handleClearFilters : undefined}
           totalPages={totalPages}
           currentPage={currentPage}
-          onPageChange={handlePageChange} // Always use pagination
+          onPageChange={handlePageChange}
           simplifiedCards={simplifiedCards}
         />
         
