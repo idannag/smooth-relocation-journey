@@ -43,6 +43,13 @@ const DestinationCard = ({ destination, onClick }: DestinationCardProps) => {
       ) : (
         <div className="absolute inset-0 bg-gray-600" />
       )}
+
+      {/* Big City Title Overlay */}
+      <div className="absolute inset-0 flex items-center justify-center z-20">
+        <h2 className="text-4xl font-bold text-white text-center drop-shadow-lg transform transition-transform duration-300 hover:scale-110">
+          {destination.city}
+        </h2>
+      </div>
       
       {/* Content */}
       <div className="absolute bottom-0 left-0 right-0 p-4 text-white z-20">
