@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState, useRef } from 'react';
 import { Clock, Globe, ArrowRightLeft } from 'lucide-react';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
@@ -11,27 +10,69 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
+const locations = [
+  { city: "New York", country: "USA", timezone: "America/New_York" },
+  { city: "London", country: "UK", timezone: "Europe/London" },
+  { city: "Tokyo", country: "Japan", timezone: "Asia/Tokyo" },
+  { city: "Sydney", country: "Australia", timezone: "Australia/Sydney" },
+  { city: "Tel Aviv", country: "Israel", timezone: "Asia/Jerusalem" },
+  { city: "Dubai", country: "UAE", timezone: "Asia/Dubai" },
+  { city: "Paris", country: "France", timezone: "Europe/Paris" },
+  { city: "Berlin", country: "Germany", timezone: "Europe/Berlin" },
+  { city: "Toronto", country: "Canada", timezone: "America/Toronto" },
+  { city: "Singapore", country: "Singapore", timezone: "Asia/Singapore" },
+  { city: "Hong Kong", country: "China", timezone: "Asia/Hong_Kong" },
+  { city: "Mexico City", country: "Mexico", timezone: "America/Mexico_City" },
+  { city: "Rio de Janeiro", country: "Brazil", timezone: "America/Sao_Paulo" },
+  { city: "Cape Town", country: "South Africa", timezone: "Africa/Johannesburg" },
+  { city: "Auckland", country: "New Zealand", timezone: "Pacific/Auckland" },
+  { city: "Moscow", country: "Russia", timezone: "Europe/Moscow" },
+  { city: "Bangkok", country: "Thailand", timezone: "Asia/Bangkok" },
+  { city: "Los Angeles", country: "USA", timezone: "America/Los_Angeles" },
+  { city: "Chicago", country: "USA", timezone: "America/Chicago" },
+  { city: "Mumbai", country: "India", timezone: "Asia/Kolkata" }
+];
+
 const TimeAndCurrencyContent = () => {
-  // Time-related state
-  const [cityTimes, setCityTimes] = useState({
-    nyTime: '-',
-    londonTime: '-',
-    tokyoTime: '-',
-    sydneyTime: '-'
-  });
+  const [cityTimes, setCityTimes] = useState<{[key: string]: string}>({});
+  const [currentTime, setCurrentTime] = useState('');
+  const [displayLocations, setDisplayLocations] = useState(locations.slice(0, 8));
+  const [searchLocation, setSearchLocation] = useState('');
   
-  const activeTabRef = useRef<string>("currency");
+  const activeTabRef = useRef<string>("time");
   
   useEffect(() => {
-    // Update city times on component mount
     updateCityTimes();
     
-    // Set up interval to update times every minute
-    const intervalId = setInterval(updateCityTimes, 60000);
+    const secondsInterval = setInterval(() => {
+      const now = new Date();
+      setCurrentTime(now.toLocaleTimeString('en-US', {
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: true
+      }));
+    }, 1000);
     
-    // Clean up interval on unmount
-    return () => clearInterval(intervalId);
+    const minuteInterval = setInterval(updateCityTimes, 60000);
+    
+    return () => {
+      clearInterval(secondsInterval);
+      clearInterval(minuteInterval);
+    };
   }, []);
+  
+  useEffect(() => {
+    if (searchLocation.trim() === '') {
+      setDisplayLocations(locations.slice(0, 8));
+    } else {
+      const filtered = locations.filter(
+        loc => loc.city.toLowerCase().includes(searchLocation.toLowerCase()) || 
+              loc.country.toLowerCase().includes(searchLocation.toLowerCase())
+      );
+      setDisplayLocations(filtered.slice(0, 8));
+    }
+  }, [searchLocation]);
   
   const updateCityTimes = () => {
     const formatTime = (date: Date) => {
@@ -42,30 +83,22 @@ const TimeAndCurrencyContent = () => {
       });
     };
     
-    // Get current time
     const now = new Date();
+    const times: {[key: string]: string} = {};
     
-    // New York (UTC-5/UTC-4)
-    const nyTime = new Date(now.toLocaleString('en-US', { timeZone: 'America/New_York' }));
-    
-    // London (UTC+0/UTC+1)
-    const londonTime = new Date(now.toLocaleString('en-US', { timeZone: 'Europe/London' }));
-    
-    // Tokyo (UTC+9)
-    const tokyoTime = new Date(now.toLocaleString('en-US', { timeZone: 'Asia/Tokyo' }));
-    
-    // Sydney (UTC+10/UTC+11)
-    const sydneyTime = new Date(now.toLocaleString('en-US', { timeZone: 'Australia/Sydney' }));
-    
-    setCityTimes({
-      nyTime: formatTime(nyTime),
-      londonTime: formatTime(londonTime),
-      tokyoTime: formatTime(tokyoTime),
-      sydneyTime: formatTime(sydneyTime)
+    locations.forEach(location => {
+      try {
+        const localTime = new Date(now.toLocaleString('en-US', { timeZone: location.timezone }));
+        times[location.city] = formatTime(localTime);
+      } catch (error) {
+        console.error(`Error getting time for ${location.city}:`, error);
+        times[location.city] = 'Error';
+      }
     });
+    
+    setCityTimes(times);
   };
 
-  // Currency converter state and functions
   const [amount, setAmount] = useState<string>("2");
   const [fromCurrency, setFromCurrency] = useState<string>("USD");
   const [toCurrency, setToCurrency] = useState<string>("EUR");
@@ -83,16 +116,25 @@ const TimeAndCurrencyContent = () => {
     { code: "CHF", name: "Swiss Franc" },
     { code: "CNY", name: "Chinese Yuan" },
     { code: "ILS", name: "Israeli Shekel" },
+    { code: "INR", name: "Indian Rupee" },
+    { code: "SGD", name: "Singapore Dollar" },
+    { code: "AED", name: "UAE Dirham" },
+    { code: "HKD", name: "Hong Kong Dollar" },
+    { code: "NZD", name: "New Zealand Dollar" },
+    { code: "ZAR", name: "South African Rand" },
+    { code: "BRL", name: "Brazilian Real" },
+    { code: "MXN", name: "Mexican Peso" },
+    { code: "THB", name: "Thai Baht" },
+    { code: "RUB", name: "Russian Ruble" },
   ];
 
   useEffect(() => {
-    // Fetch exchange rates on component mount
     fetchExchangeRates();
   }, []);
 
   const fetchExchangeRates = async () => {
     try {
-      const response = await fetch('https://open.er-api.com/v6/latest/USD');
+      const response = await fetch('https://api.exchangerate.host/latest?base=USD');
       const data = await response.json();
       if (data && data.rates) {
         setExchangeRates(data.rates);
@@ -111,6 +153,16 @@ const TimeAndCurrencyContent = () => {
         CHF: 0.91,
         CNY: 7.24,
         ILS: 3.67,
+        INR: 83.12,
+        SGD: 1.35,
+        AED: 3.67,
+        HKD: 7.81,
+        NZD: 1.64,
+        ZAR: 18.53,
+        BRL: 5.05,
+        MXN: 16.75,
+        THB: 35.61,
+        RUB: 91.23,
       };
       setExchangeRates(mockRates);
     }
@@ -129,7 +181,6 @@ const TimeAndCurrencyContent = () => {
       const numericAmount = parseFloat(amount);
       
       if (exchangeRates[fromCurrency] && exchangeRates[toCurrency]) {
-        // Convert to USD first (base currency), then to target currency
         const amountInUSD = fromCurrency === "USD" 
           ? numericAmount 
           : numericAmount / exchangeRates[fromCurrency];
@@ -151,10 +202,10 @@ const TimeAndCurrencyContent = () => {
   };
 
   return (
-    <div className="p-4 md:p-6 flex flex-col items-center">
-      <div className="w-full max-w-md">
+    <div className="p-4 md:p-6 flex flex-col items-center animate-fade-in">
+      <div className="w-full max-w-4xl">
         <Tabs 
-          defaultValue="currency" 
+          defaultValue="time" 
           className="w-full"
           onValueChange={(value) => {
             activeTabRef.current = value;
@@ -174,43 +225,38 @@ const TimeAndCurrencyContent = () => {
             </TabsTrigger>
           </TabsList>
           
-          {/* World Time Tab Content */}
-          <TabsContent value="time" className="mt-4">
+          <TabsContent value="time" className="mt-4 animate-fade-in">
             <div className="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden">
               <div className="flex justify-center mb-6 pt-6">
-                <iframe 
-                  src="https://free.timeanddate.com/clock/i8v1bmgo/n110/szw180/szh180/hoc000/hbw6/cf100/hgr0" 
-                  frameBorder="0" 
-                  width="180" 
-                  height="180"
-                  className="mx-auto"
-                  title="World Clock"
-                ></iframe>
+                <div className="text-center">
+                  <div className="text-3xl font-bold text-primary mb-2">{currentTime}</div>
+                  <p className="text-gray-500">Current Local Time</p>
+                </div>
               </div>
               
-              <div className="grid grid-cols-2 gap-4 p-6 bg-gray-50 rounded-b-lg">
-                <div className="flex flex-col">
-                  <span className="font-medium text-[#2C5AAE]">New York:</span>
-                  <span className="text-gray-700">{cityTimes.nyTime}</span>
-                </div>
-                <div className="flex flex-col">
-                  <span className="font-medium text-[#2C5AAE]">London:</span>
-                  <span className="text-gray-700">{cityTimes.londonTime}</span>
-                </div>
-                <div className="flex flex-col">
-                  <span className="font-medium text-[#2C5AAE]">Tokyo:</span>
-                  <span className="text-gray-700">{cityTimes.tokyoTime}</span>
-                </div>
-                <div className="flex flex-col">
-                  <span className="font-medium text-[#2C5AAE]">Sydney:</span>
-                  <span className="text-gray-700">{cityTimes.sydneyTime}</span>
-                </div>
+              <div className="px-6 mb-4">
+                <Input
+                  type="text"
+                  placeholder="Search for a city or country..."
+                  value={searchLocation}
+                  onChange={(e) => setSearchLocation(e.target.value)}
+                  className="w-full"
+                />
+              </div>
+              
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 p-6 bg-gray-50 rounded-b-lg">
+                {displayLocations.map((location) => (
+                  <div key={location.city} className="flex flex-col bg-white p-3 rounded-md shadow-sm">
+                    <span className="font-medium text-[#2C5AAE]">{location.city}</span>
+                    <span className="text-xs text-gray-500">{location.country}</span>
+                    <span className="text-gray-700 mt-1">{cityTimes[location.city] || '--:--'}</span>
+                  </div>
+                ))}
               </div>
             </div>
           </TabsContent>
           
-          {/* Currency Converter Tab Content */}
-          <TabsContent value="currency" className="mt-4">
+          <TabsContent value="currency" className="mt-4 animate-fade-in">
             <div className="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden p-6">
               <h3 className="text-xl font-semibold mb-6 text-center bg-gradient-to-r from-[#2C5AAE] to-[#40E0D0] bg-clip-text text-transparent">
                 Global Tools
