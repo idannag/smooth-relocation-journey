@@ -21,6 +21,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/post/:id" element={<SinglePost />} />
           <Route path="/blog" element={<Lightbox url="news" onClose={() => window.history.back()} />} />
+          <Route path="/services" element={<Lightbox url="services" onClose={() => window.history.back()} />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
