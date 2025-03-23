@@ -42,7 +42,15 @@ export const useDestinations = () => {
             else if (key === 'description') destination.description = values[i] || '';
             else if (key === 'video' || key === 'videoUrl') destination.video = values[i] || '';
             else if (key === 'image' || key === 'imageUrl') destination.image = values[i] || '';
-            else if (key === 'mapUrl') destination.mapUrl = values[i] || '';
+            else if (key === 'mapUrl') {
+              // Ensure map URL is valid
+              let mapUrl = values[i] || '';
+              // If it's a Google Maps URL but not an embed URL, convert it
+              if (mapUrl.includes('google.com/maps') && !mapUrl.includes('google.com/maps/embed')) {
+                mapUrl = `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d50000!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2z${encodeURIComponent(destination.city || '')}%2C${encodeURIComponent(destination.country || '')}&key=`;
+              }
+              destination.mapUrl = mapUrl;
+            }
             else if (key === 'population') destination.population = values[i] || '';
             else if (key === 'language') destination.language = values[i] || '';
             else if (key === 'timeZone') destination.timeZone = values[i] || '';
@@ -55,6 +63,12 @@ export const useDestinations = () => {
               (destination as any)[key] = values[i] || '';
             }
           });
+          
+          // Make sure city doesn't include country
+          if (destination.city && destination.city.includes(',')) {
+            const parts = destination.city.split(',');
+            destination.city = parts[0].trim();
+          }
           
           return destination as Destination;
         });

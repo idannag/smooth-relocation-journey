@@ -25,7 +25,7 @@ const PopularDestinationsLightbox = () => {
   }
 
   // Show loading skeleton
-  if (loading) {
+  if (loading || !activeDestination) {
     return <DestinationSkeleton />;
   }
 
@@ -37,7 +37,7 @@ const PopularDestinationsLightbox = () => {
 
       <div className="relative">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {/* Left side: Video/Image and navigation */}
+          {/* Left side: Map display and navigation */}
           <DestinationMedia
             activeDestination={activeDestination}
             handlePrev={handlePrev}
