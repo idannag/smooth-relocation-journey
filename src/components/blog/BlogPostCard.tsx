@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { 
   WordPressPost, 
   getFeaturedImageUrl,
@@ -28,6 +29,10 @@ interface BlogPostCardProps {
 const BlogPostCard = ({ post, onClick, simplified = false }: BlogPostCardProps) => {
   const featuredImage = getFeaturedImageUrl(post);
   const postCategories = getPostCategories(post);
+  const location = useLocation();
+  
+  // Check if we're in the blog lightbox view
+  const isLightboxView = location.pathname === '/blog' || location.pathname.startsWith('/post/');
   
   // Format the date
   const formattedDate = format(parseISO(post.date), 'MMM d, yyyy');
@@ -50,19 +55,23 @@ const BlogPostCard = ({ post, onClick, simplified = false }: BlogPostCardProps) 
           <CardTitle className="text-base font-semibold line-clamp-2">
             <div dangerouslySetInnerHTML={createMarkup(post.title.rendered)} />
           </CardTitle>
-          <div className="flex flex-wrap gap-1 mt-2">
-            {postCategories.slice(0, 2).map(cat => (
-              <Badge key={cat.id} variant="outline" className="text-xs bg-blue-50 text-blue-700 hover:bg-blue-100">
-                <Tag className="w-3 h-3 mr-1" />
-                {cat.name}
-              </Badge>
-            ))}
-            {postCategories.length > 2 && (
-              <Badge variant="outline" className="text-xs bg-gray-50 text-gray-700">
-                +{postCategories.length - 2}
-              </Badge>
-            )}
-          </div>
+          
+          {/* Only show categories in lightbox view or when not simplified */}
+          {(isLightboxView || !simplified) && (
+            <div className="flex flex-wrap gap-1 mt-2">
+              {postCategories.slice(0, 2).map(cat => (
+                <Badge key={cat.id} variant="outline" className="text-xs bg-blue-50 text-blue-700 hover:bg-blue-100">
+                  <Tag className="w-3 h-3 mr-1" />
+                  {cat.name}
+                </Badge>
+              ))}
+              {postCategories.length > 2 && (
+                <Badge variant="outline" className="text-xs bg-gray-50 text-gray-700">
+                  +{postCategories.length - 2}
+                </Badge>
+              )}
+            </div>
+          )}
         </CardHeader>
         
         {/* Only show description in full card mode (not simplified) */}
