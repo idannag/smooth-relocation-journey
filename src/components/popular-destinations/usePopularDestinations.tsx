@@ -98,8 +98,23 @@ export const usePopularDestinations = () => {
             destination[key] = values[i] || '';
           });
           
+          // Make sure video URL is not empty and properly formatted
+          if (destination.video) {
+            destination.video = destination.video.trim();
+            
+            // If it's a YouTube URL but not in embed format, convert it
+            if (destination.video.includes('youtube.com/watch') && !destination.video.includes('youtube.com/embed')) {
+              const videoId = destination.video.split('v=')[1]?.split('&')[0];
+              if (videoId) {
+                destination.video = `https://www.youtube.com/embed/${videoId}`;
+              }
+            }
+          }
+          
           return destination as Destination;
         });
+        
+        console.log('Parsed destinations with videos:', parsedDestinations);
         
         if (parsedDestinations.length > 0) {
           setDestinations(parsedDestinations);

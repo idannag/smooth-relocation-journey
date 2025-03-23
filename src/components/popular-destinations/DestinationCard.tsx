@@ -19,11 +19,20 @@ const DestinationCard = ({ destination, onClick }: DestinationCardProps) => {
           allow="autoplay; encrypted-media" 
           frameBorder="0" 
           loading="lazy" 
+          title={`Video of ${destination.city}`}
         />
       ) : destination.video ? (
         <video autoPlay muted loop playsInline className="absolute inset-0 w-full h-full object-cover">
           <source src={destination.video} type="video/mp4" />
+          Your browser does not support the video tag.
         </video>
+      ) : destination.image ? (
+        <img 
+          src={destination.image} 
+          alt={destination.city} 
+          className="absolute inset-0 w-full h-full object-cover"
+          loading="lazy"
+        />
       ) : (
         <div className="absolute inset-0 w-full h-full bg-gray-200 flex items-center justify-center">
           <span className="text-gray-500">No image</span>
