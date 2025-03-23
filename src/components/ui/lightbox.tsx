@@ -46,12 +46,12 @@ const Lightbox = ({ url, onClose }: LightboxProps) => {
 
   // Get subtitle based on content
   const getSubtitle = () => {
-    if (url === 'news') return 'Latest information to help your relocation journey';
-    if (url === 'services') return 'Comprehensive relocation assistance';
-    if (url === 'chatbot') return 'Get instant answers to your questions';
-    if (url === 'time-currency') return 'Stay informed about global times and currencies';
-    if (url === 'destinations') return 'Explore popular locations around the world';
-    if (url.startsWith('post:')) return 'Detailed information about this topic';
+    if (url === 'news') return 'Latest information';
+    if (url === 'services') return 'Relocation assistance';
+    if (url === 'chatbot') return 'Get instant answers';
+    if (url === 'time-currency') return 'Global info';
+    if (url === 'destinations') return 'Explore locations';
+    if (url.startsWith('post:')) return 'Detailed information';
     return '';
   };
 
@@ -61,24 +61,22 @@ const Lightbox = ({ url, onClose }: LightboxProps) => {
   return (
     <Sheet open={true} onOpenChange={() => onClose()}>
       <SheetContent className="w-full sm:max-w-none p-0 h-screen overflow-y-auto" side="top">
-        <SheetHeader className="px-4 pt-4 pb-2 sticky top-0 bg-white z-10 border-b">
-          <div className="flex justify-between items-center">
-            <div>
-              <SheetTitle className="text-xl md:text-2xl font-bold bg-gradient-to-r from-[#2C5AAE] to-[#40E0D0] bg-clip-text text-transparent">
-                {getTitle()}
-              </SheetTitle>
-              {getSubtitle() && (
-                <p className="text-sm text-gray-600 mt-1">{getSubtitle()}</p>
-              )}
-            </div>
-            <button 
-              onClick={onClose}
-              className="rounded-full p-2 hover:bg-gray-100 transition-colors"
-              aria-label="Close"
-            >
-              <X className="h-5 w-5" />
-            </button>
+        <SheetHeader className="px-4 pt-3 pb-2 sticky top-0 bg-white z-10 border-b flex-row justify-between items-center">
+          <div className="flex-1">
+            <SheetTitle className="text-lg md:text-2xl font-bold bg-gradient-to-r from-[#2C5AAE] to-[#40E0D0] bg-clip-text text-transparent text-left">
+              {getTitle()}
+            </SheetTitle>
+            {getSubtitle() && (
+              <p className="text-xs md:text-sm text-gray-600 mt-0.5 text-left">{getSubtitle()}</p>
+            )}
           </div>
+          <button 
+            onClick={onClose}
+            className="rounded-full p-1.5 hover:bg-gray-100 transition-colors flex-shrink-0"
+            aria-label="Close"
+          >
+            <X className="h-5 w-5" />
+          </button>
         </SheetHeader>
         
         <div className="p-0 overflow-auto">
@@ -125,26 +123,27 @@ const Lightbox = ({ url, onClose }: LightboxProps) => {
           )}
           
           {url === 'time-currency' && (
-            <div className="p-6 flex flex-col items-center">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-4xl">
+            <div className="p-4 md:p-6 flex flex-col items-center">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 w-full max-w-4xl">
                 {/* World Time Section */}
-                <div className="bg-white rounded-lg shadow-md p-6 border border-gray-100">
-                  <div className="flex items-center gap-3 mb-4">
-                    <Clock className="h-6 w-6 text-[#2C5AAE]" />
-                    <h3 className="text-xl font-semibold bg-gradient-to-r from-[#2C5AAE] to-[#40E0D0] bg-clip-text text-transparent">World Time</h3>
+                <div className="bg-white rounded-lg shadow-md p-4 md:p-6 border border-gray-100 hover:shadow-lg transition-all duration-300">
+                  <div className="flex items-center gap-2 mb-4">
+                    <Clock className="h-5 w-5 text-[#2C5AAE]" />
+                    <h3 className="text-lg md:text-xl font-semibold bg-gradient-to-r from-[#2C5AAE] to-[#40E0D0] bg-clip-text text-transparent">World Time</h3>
                   </div>
                   
-                  <div className="flex justify-center mb-6">
+                  <div className="flex justify-center mb-4">
                     <iframe 
-                      src="https://free.timeanddate.com/clock/i8v1bmgo/n110/szw210/szh210/hoc000/hbw6/cf100/hgr0" 
+                      src="https://free.timeanddate.com/clock/i8v1bmgo/n110/szw180/szh180/hoc000/hbw6/cf100/hgr0" 
                       frameBorder="0" 
-                      width="210" 
-                      height="210"
+                      width="180" 
+                      height="180"
                       className="mx-auto"
+                      title="World Clock"
                     ></iframe>
                   </div>
                   
-                  <div className="grid grid-cols-2 gap-4 text-sm bg-gray-50 p-4 rounded-lg">
+                  <div className="grid grid-cols-2 gap-3 text-sm bg-gray-50 p-3 rounded-lg">
                     <div className="flex flex-col">
                       <span className="font-medium text-[#2C5AAE]">New York:</span>
                       <span id="ny-time" className="text-gray-700">-</span>
@@ -165,18 +164,19 @@ const Lightbox = ({ url, onClose }: LightboxProps) => {
                 </div>
                 
                 {/* Currency Converter Section */}
-                <div className="bg-white rounded-lg shadow-md p-6 border border-gray-100">
-                  <div className="flex items-center gap-3 mb-4">
-                    <CreditCard className="h-6 w-6 text-[#2C5AAE]" />
-                    <h3 className="text-xl font-semibold bg-gradient-to-r from-[#2C5AAE] to-[#40E0D0] bg-clip-text text-transparent">Currency Converter</h3>
+                <div className="bg-white rounded-lg shadow-md p-4 md:p-6 border border-gray-100 hover:shadow-lg transition-all duration-300">
+                  <div className="flex items-center gap-2 mb-4">
+                    <CreditCard className="h-5 w-5 text-[#2C5AAE]" />
+                    <h3 className="text-lg md:text-xl font-semibold bg-gradient-to-r from-[#2C5AAE] to-[#40E0D0] bg-clip-text text-transparent">Currency Converter</h3>
                   </div>
                   
                   <iframe 
                     src="https://themoneyconverter.com/MoneyConverter?from=USD&to=EUR&amount=1" 
                     frameBorder="0"
                     width="100%"
-                    height="300"
+                    height="280"
                     className="mx-auto rounded-lg overflow-hidden border border-gray-200"
+                    title="Currency Converter"
                   ></iframe>
                 </div>
               </div>

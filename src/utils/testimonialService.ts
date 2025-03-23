@@ -68,26 +68,34 @@ export const fetchGoogleReviews = async (): Promise<{
 }> => {
   try {
     // Try to fetch from Supabase function
-    try {
-      const { data, error } = await supabase.functions.invoke('getGoogleReviews');
-      
-      if (error) throw error;
-      
-      if (data?.result?.reviews) {
-        console.log("Fetched reviews:", data.result.reviews);
-        const highRatedReviews = data.result.reviews.filter((review: Review) => review.rating >= 4);
-        return { reviews: highRatedReviews, error: null };
-      } else {
-        console.error("No reviews found in the response");
-        throw new Error("No reviews found");
+    const { data, error } = await supabase.functions.invoke('getGoogleReviews');
+    
+    if (error) {
+      console.error('Error from Supabase function:', error);
+      throw error;
+    }
+    
+    if (data?.result?.reviews && Array.isArray(data.result.reviews)) {
+      console.log("Successfully fetched reviews:", data.result.reviews);
+      const highRatedReviews = data.result.reviews
+        .filter((review: Review) => review.rating >= 4)
+        .map((review: Review) => ({
+          ...review,
+          profile_photo_url: review.profile_photo_url || "https://ui-avatars.com/api/?name=" + encodeURIComponent(review.author_name)
+        }));
+        
+      if (highRatedReviews.length === 0) {
+        console.warn("No high-rated reviews found, using fallback");
+        throw new Error("No high-rated reviews found");
       }
-    } catch (apiError) {
-      console.error('Error fetching reviews:', apiError);
-      throw apiError; // Re-throw to trigger fallback
+      
+      return { reviews: highRatedReviews, error: null };
+    } else {
+      console.error("Invalid response format:", data);
+      throw new Error("Invalid response format");
     }
   } catch (err) {
     console.error('Using fallback reviews due to error:', err);
-    // Always use mock data for now until the API is fixed
     return { 
       reviews: getDummyReviews(), 
       error: "Could not load reviews. Using sample data instead." 

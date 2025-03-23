@@ -10,7 +10,7 @@ import {
   WordPressPost
 } from '@/services/postsService';
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, ChevronRight } from 'lucide-react';
+import { ArrowLeft } from 'lucide-react';
 
 interface BlogPostsProps {
   limitPosts?: number;
@@ -77,7 +77,7 @@ const BlogPosts = ({
     return matchesSearch && matchesCategory;
   });
   
-  // Calculate total pages
+  // Calculate total pages - ALWAYS use pagination now instead of "load more"
   const totalPages = Math.ceil(filteredPosts.length / postsPerPage);
   
   // Get current posts for pagination
@@ -107,11 +107,6 @@ const BlogPosts = ({
     setSearchTerm('');
     setSelectedCategory('all');
     setCurrentPage(1);
-  };
-  
-  // Go back to all posts
-  const handleBackToArticles = () => {
-    navigate('/blog');
   };
   
   // Handle page change
@@ -206,17 +201,17 @@ const BlogPosts = ({
           />
         )}
         
-        {/* Posts Grid */}
+        {/* Posts Grid with pagination */}
         <BlogPostGrid
           posts={limitPosts ? filteredPosts.slice(0, limitPosts) : currentPosts}
-          hasMorePosts={!!hasNextPage}
-          isLoadingMore={isFetchingNextPage}
+          hasMorePosts={false} // Always use pagination now
+          isLoadingMore={false}
           onPostClick={handlePostClick}
-          onLoadMore={() => fetchNextPage()}
+          onLoadMore={() => {}} // No longer used
           onClearFilters={searchTerm || selectedCategory !== 'all' ? handleClearFilters : undefined}
           totalPages={totalPages}
           currentPage={currentPage}
-          onPageChange={isLightboxView ? handlePageChange : undefined}
+          onPageChange={handlePageChange} // Always use pagination
           simplifiedCards={simplifiedCards}
         />
         
@@ -227,16 +222,8 @@ const BlogPosts = ({
               onClick={handleShowAllPosts}
               className="bg-gradient-to-r from-[#2C5AAE] to-[#40E0D0] text-white hover:opacity-90"
             >
-              Show All
-              <ChevronRight className="ml-2" />
+              View All Articles
             </Button>
-          </div>
-        )}
-        
-        {/* Loading more posts indicator */}
-        {isFetchingNextPage && (
-          <div className="mt-8">
-            <BlogPostsSkeleton />
           </div>
         )}
       </div>
