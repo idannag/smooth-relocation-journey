@@ -53,7 +53,7 @@ const Lightbox = ({ url, onClose }: LightboxProps) => {
   return (
     <Sheet open={true} onOpenChange={() => onClose()}>
       <SheetContent 
-        className="w-full sm:max-w-none p-0 mt-16 mb-16 h-[calc(100vh-8rem)] overflow-y-auto bg-white animate-fade-in" 
+        className="w-full sm:max-w-none p-0 h-screen overflow-y-auto bg-gradient-to-b from-[#D3E4FD] to-white animate-fade-in" 
         side="top"
       >
         <LightboxHeader 
@@ -63,7 +63,7 @@ const Lightbox = ({ url, onClose }: LightboxProps) => {
           shouldDisplay={shouldDisplayHeader}
         />
         
-        <div className={`p-0 overflow-auto animate-fade-in ${!shouldDisplayHeader ? 'h-full' : ''}`}>
+        <div className={`p-0 overflow-auto animate-fade-in ${!shouldDisplayHeader ? 'h-screen' : ''}`}>
           {isLoading ? (
             <LoadingSpinner />
           ) : (

@@ -8,7 +8,7 @@ interface DestinationCardProps {
 
 const DestinationCard = ({ destination, onClick }: DestinationCardProps) => {
   // Extract proper video URL
-  const videoUrl = destination.video;
+  const videoUrl = destination.video || destination.destinationVideo;
   
   return (
     <div 
@@ -48,7 +48,7 @@ const DestinationCard = ({ destination, onClick }: DestinationCardProps) => {
         <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
           <h3 className="text-2xl font-bold mb-1">{destination.city}</h3>
           <p className="text-sm mb-2">{destination.country}</p>
-          <p className="text-sm opacity-90">{destination.description}</p>
+          <p className="text-sm opacity-90">{destination.shortDescription || destination.description}</p>
         </div>
       </div>
     </div>
