@@ -1,5 +1,6 @@
+
 import React, { useEffect, useState, useRef } from 'react';
-import { Clock, Globe, ArrowRightLeft } from 'lucide-react';
+import { Clock, Globe, ArrowRightLeft, Cloud } from 'lucide-react';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Input } from "@/components/ui/input";
 import {
@@ -10,6 +11,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
+// Expanded list of 50+ locations
 const locations = [
   { city: "New York", country: "USA", timezone: "America/New_York" },
   { city: "London", country: "UK", timezone: "Europe/London" },
@@ -30,13 +32,104 @@ const locations = [
   { city: "Bangkok", country: "Thailand", timezone: "Asia/Bangkok" },
   { city: "Los Angeles", country: "USA", timezone: "America/Los_Angeles" },
   { city: "Chicago", country: "USA", timezone: "America/Chicago" },
-  { city: "Mumbai", country: "India", timezone: "Asia/Kolkata" }
+  { city: "Mumbai", country: "India", timezone: "Asia/Kolkata" },
+  { city: "Madrid", country: "Spain", timezone: "Europe/Madrid" },
+  { city: "Rome", country: "Italy", timezone: "Europe/Rome" },
+  { city: "Amsterdam", country: "Netherlands", timezone: "Europe/Amsterdam" },
+  { city: "Brussels", country: "Belgium", timezone: "Europe/Brussels" },
+  { city: "Vienna", country: "Austria", timezone: "Europe/Vienna" },
+  { city: "Budapest", country: "Hungary", timezone: "Europe/Budapest" },
+  { city: "Prague", country: "Czech Republic", timezone: "Europe/Prague" },
+  { city: "Warsaw", country: "Poland", timezone: "Europe/Warsaw" },
+  { city: "Stockholm", country: "Sweden", timezone: "Europe/Stockholm" },
+  { city: "Oslo", country: "Norway", timezone: "Europe/Oslo" },
+  { city: "Helsinki", country: "Finland", timezone: "Europe/Helsinki" },
+  { city: "Copenhagen", country: "Denmark", timezone: "Europe/Copenhagen" },
+  { city: "Athens", country: "Greece", timezone: "Europe/Athens" },
+  { city: "Istanbul", country: "Turkey", timezone: "Europe/Istanbul" },
+  { city: "Cairo", country: "Egypt", timezone: "Africa/Cairo" },
+  { city: "Nairobi", country: "Kenya", timezone: "Africa/Nairobi" },
+  { city: "Lagos", country: "Nigeria", timezone: "Africa/Lagos" },
+  { city: "Casablanca", country: "Morocco", timezone: "Africa/Casablanca" },
+  { city: "Tunis", country: "Tunisia", timezone: "Africa/Tunis" },
+  { city: "Buenos Aires", country: "Argentina", timezone: "America/Argentina/Buenos_Aires" },
+  { city: "Lima", country: "Peru", timezone: "America/Lima" },
+  { city: "Bogota", country: "Colombia", timezone: "America/Bogota" },
+  { city: "Santiago", country: "Chile", timezone: "America/Santiago" },
+  { city: "Caracas", country: "Venezuela", timezone: "America/Caracas" },
+  { city: "Manila", country: "Philippines", timezone: "Asia/Manila" },
+  { city: "Jakarta", country: "Indonesia", timezone: "Asia/Jakarta" },
+  { city: "Seoul", country: "South Korea", timezone: "Asia/Seoul" },
+  { city: "Beijing", country: "China", timezone: "Asia/Shanghai" },
+  { city: "Shanghai", country: "China", timezone: "Asia/Shanghai" },
+  { city: "Taipei", country: "Taiwan", timezone: "Asia/Taipei" },
+  { city: "Kuala Lumpur", country: "Malaysia", timezone: "Asia/Kuala_Lumpur" },
+  { city: "Ho Chi Minh City", country: "Vietnam", timezone: "Asia/Ho_Chi_Minh" },
+  { city: "Hanoi", country: "Vietnam", timezone: "Asia/Ho_Chi_Minh" },
+  { city: "Brisbane", country: "Australia", timezone: "Australia/Brisbane" },
+  { city: "Melbourne", country: "Australia", timezone: "Australia/Melbourne" },
+  { city: "Perth", country: "Australia", timezone: "Australia/Perth" },
+];
+
+// Expanded list of 50+ currencies
+const currencies = [
+  { code: "USD", name: "US Dollar" },
+  { code: "EUR", name: "Euro" },
+  { code: "GBP", name: "British Pound" },
+  { code: "JPY", name: "Japanese Yen" },
+  { code: "AUD", name: "Australian Dollar" },
+  { code: "CAD", name: "Canadian Dollar" },
+  { code: "CHF", name: "Swiss Franc" },
+  { code: "CNY", name: "Chinese Yuan" },
+  { code: "ILS", name: "Israeli Shekel" },
+  { code: "INR", name: "Indian Rupee" },
+  { code: "SGD", name: "Singapore Dollar" },
+  { code: "AED", name: "UAE Dirham" },
+  { code: "HKD", name: "Hong Kong Dollar" },
+  { code: "NZD", name: "New Zealand Dollar" },
+  { code: "ZAR", name: "South African Rand" },
+  { code: "BRL", name: "Brazilian Real" },
+  { code: "MXN", name: "Mexican Peso" },
+  { code: "THB", name: "Thai Baht" },
+  { code: "RUB", name: "Russian Ruble" },
+  { code: "SEK", name: "Swedish Krona" },
+  { code: "NOK", name: "Norwegian Krone" },
+  { code: "DKK", name: "Danish Krone" },
+  { code: "PLN", name: "Polish Zloty" },
+  { code: "CZK", name: "Czech Koruna" },
+  { code: "HUF", name: "Hungarian Forint" },
+  { code: "TRY", name: "Turkish Lira" },
+  { code: "RON", name: "Romanian Leu" },
+  { code: "BGN", name: "Bulgarian Lev" },
+  { code: "HRK", name: "Croatian Kuna" },
+  { code: "ISK", name: "Icelandic Krona" },
+  { code: "PHP", name: "Philippine Peso" },
+  { code: "IDR", name: "Indonesian Rupiah" },
+  { code: "MYR", name: "Malaysian Ringgit" },
+  { code: "VND", name: "Vietnamese Dong" },
+  { code: "KRW", name: "South Korean Won" },
+  { code: "EGP", name: "Egyptian Pound" },
+  { code: "CLP", name: "Chilean Peso" },
+  { code: "COP", name: "Colombian Peso" },
+  { code: "ARS", name: "Argentine Peso" },
+  { code: "PEN", name: "Peruvian Sol" },
+  { code: "UYU", name: "Uruguayan Peso" },
+  { code: "DOP", name: "Dominican Peso" },
+  { code: "CRC", name: "Costa Rican Colón" },
+  { code: "QAR", name: "Qatari Riyal" },
+  { code: "KWD", name: "Kuwaiti Dinar" },
+  { code: "SAR", name: "Saudi Riyal" },
+  { code: "JOD", name: "Jordanian Dinar" },
+  { code: "BHD", name: "Bahraini Dinar" },
+  { code: "OMR", name: "Omani Rial" },
+  { code: "MAD", name: "Moroccan Dirham" },
+  { code: "TWD", name: "Taiwan Dollar" },
 ];
 
 const TimeAndCurrencyContent = () => {
   const [cityTimes, setCityTimes] = useState<{[key: string]: string}>({});
   const [currentTime, setCurrentTime] = useState('');
-  const [displayLocations, setDisplayLocations] = useState(locations.slice(0, 8));
+  const [displayLocations, setDisplayLocations] = useState(locations.slice(0, 16));
   const [searchLocation, setSearchLocation] = useState('');
   
   const activeTabRef = useRef<string>("time");
@@ -64,13 +157,13 @@ const TimeAndCurrencyContent = () => {
   
   useEffect(() => {
     if (searchLocation.trim() === '') {
-      setDisplayLocations(locations.slice(0, 8));
+      setDisplayLocations(locations.slice(0, 16));
     } else {
       const filtered = locations.filter(
         loc => loc.city.toLowerCase().includes(searchLocation.toLowerCase()) || 
               loc.country.toLowerCase().includes(searchLocation.toLowerCase())
       );
-      setDisplayLocations(filtered.slice(0, 8));
+      setDisplayLocations(filtered.slice(0, 16));
     }
   }, [searchLocation]);
   
@@ -99,41 +192,41 @@ const TimeAndCurrencyContent = () => {
     setCityTimes(times);
   };
 
+  // Currency converter state
   const [amount, setAmount] = useState<string>("2");
   const [fromCurrency, setFromCurrency] = useState<string>("USD");
   const [toCurrency, setToCurrency] = useState<string>("EUR");
   const [result, setResult] = useState<string>("");
   const [exchangeRates, setExchangeRates] = useState<{[key: string]: number}>({});
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isLoadingCurrency, setIsLoadingCurrency] = useState<boolean>(false);
+  const [currencySearch, setCurrencySearch] = useState<string>("");
+  const [filteredCurrencies, setFilteredCurrencies] = useState(currencies);
 
-  const currencies = [
-    { code: "USD", name: "US Dollar" },
-    { code: "EUR", name: "Euro" },
-    { code: "GBP", name: "British Pound" },
-    { code: "JPY", name: "Japanese Yen" },
-    { code: "AUD", name: "Australian Dollar" },
-    { code: "CAD", name: "Canadian Dollar" },
-    { code: "CHF", name: "Swiss Franc" },
-    { code: "CNY", name: "Chinese Yuan" },
-    { code: "ILS", name: "Israeli Shekel" },
-    { code: "INR", name: "Indian Rupee" },
-    { code: "SGD", name: "Singapore Dollar" },
-    { code: "AED", name: "UAE Dirham" },
-    { code: "HKD", name: "Hong Kong Dollar" },
-    { code: "NZD", name: "New Zealand Dollar" },
-    { code: "ZAR", name: "South African Rand" },
-    { code: "BRL", name: "Brazilian Real" },
-    { code: "MXN", name: "Mexican Peso" },
-    { code: "THB", name: "Thai Baht" },
-    { code: "RUB", name: "Russian Ruble" },
-  ];
+  // Weather state
+  const [city, setCity] = useState<string>("New York");
+  const [weatherData, setWeatherData] = useState<any>(null);
+  const [isLoadingWeather, setIsLoadingWeather] = useState<boolean>(false);
+  const [weatherError, setWeatherError] = useState<string | null>(null);
 
   useEffect(() => {
     fetchExchangeRates();
   }, []);
 
+  useEffect(() => {
+    if (currencySearch.trim() === '') {
+      setFilteredCurrencies(currencies);
+    } else {
+      const filtered = currencies.filter(
+        curr => curr.code.toLowerCase().includes(currencySearch.toLowerCase()) || 
+               curr.name.toLowerCase().includes(currencySearch.toLowerCase())
+      );
+      setFilteredCurrencies(filtered);
+    }
+  }, [currencySearch]);
+
   const fetchExchangeRates = async () => {
     try {
+      setIsLoadingCurrency(true);
       const response = await fetch('https://api.exchangerate.host/latest?base=USD');
       const data = await response.json();
       if (data && data.rates) {
@@ -165,15 +258,17 @@ const TimeAndCurrencyContent = () => {
         RUB: 91.23,
       };
       setExchangeRates(mockRates);
+    } finally {
+      setIsLoadingCurrency(false);
     }
   };
 
   const convertCurrency = () => {
-    setIsLoading(true);
+    setIsLoadingCurrency(true);
     
     if (!amount || isNaN(Number(amount))) {
       setResult("Please enter a valid amount");
-      setIsLoading(false);
+      setIsLoadingCurrency(false);
       return;
     }
 
@@ -198,8 +293,38 @@ const TimeAndCurrencyContent = () => {
       setResult("Currency conversion failed");
     }
     
-    setIsLoading(false);
+    setIsLoadingCurrency(false);
   };
+
+  const fetchWeatherData = async () => {
+    if (!city) return;
+    
+    setIsLoadingWeather(true);
+    setWeatherError(null);
+    
+    try {
+      const response = await fetch(
+        `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=8c392034a39f5ebcdcad3a78ae2783c3`
+      );
+      
+      if (!response.ok) {
+        throw new Error('City not found or weather data unavailable');
+      }
+      
+      const data = await response.json();
+      setWeatherData(data);
+    } catch (error) {
+      console.error('Error fetching weather:', error);
+      setWeatherError('Unable to fetch weather data. Please try another city.');
+    } finally {
+      setIsLoadingWeather(false);
+    }
+  };
+
+  useEffect(() => {
+    // Fetch weather for default city
+    fetchWeatherData();
+  }, []);
 
   return (
     <div className="p-4 md:p-6 flex flex-col items-center animate-fade-in">
@@ -214,7 +339,7 @@ const TimeAndCurrencyContent = () => {
             }
           }}
         >
-          <TabsList className="grid grid-cols-2 mb-6 w-full">
+          <TabsList className="grid grid-cols-3 mb-6 w-full">
             <TabsTrigger value="time" className="flex items-center justify-center gap-2">
               <Clock className="h-4 w-4" />
               <span>World Time</span>
@@ -222,6 +347,10 @@ const TimeAndCurrencyContent = () => {
             <TabsTrigger value="currency" className="flex items-center justify-center gap-2">
               <Globe className="h-4 w-4" />
               <span>Currency Converter</span>
+            </TabsTrigger>
+            <TabsTrigger value="weather" className="flex items-center justify-center gap-2">
+              <Cloud className="h-4 w-4" />
+              <span>Weather</span>
             </TabsTrigger>
           </TabsList>
           
@@ -259,7 +388,7 @@ const TimeAndCurrencyContent = () => {
           <TabsContent value="currency" className="mt-4 animate-fade-in">
             <div className="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden p-6">
               <h3 className="text-xl font-semibold mb-6 text-center bg-gradient-to-r from-[#2C5AAE] to-[#40E0D0] bg-clip-text text-transparent">
-                Global Tools
+                Currency Converter
               </h3>
               
               <div className="space-y-4">
@@ -278,6 +407,22 @@ const TimeAndCurrencyContent = () => {
                 
                 <div className="grid grid-cols-2 gap-4">
                   <div>
+                    <label htmlFor="currency-search" className="block text-sm font-medium text-gray-700 mb-1">
+                      Search Currency
+                    </label>
+                    <Input
+                      id="currency-search"
+                      type="text"
+                      value={currencySearch}
+                      onChange={(e) => setCurrencySearch(e.target.value)}
+                      placeholder="Search currency by name or code"
+                      className="w-full mb-4"
+                    />
+                  </div>
+                </div>
+                
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
                     <label htmlFor="from-currency" className="block text-sm font-medium text-gray-700 mb-1">
                       From
                     </label>
@@ -289,7 +434,7 @@ const TimeAndCurrencyContent = () => {
                         <SelectValue placeholder="Select currency" />
                       </SelectTrigger>
                       <SelectContent>
-                        {currencies.map((currency) => (
+                        {filteredCurrencies.map((currency) => (
                           <SelectItem key={currency.code} value={currency.code}>
                             {currency.code} - {currency.name}
                           </SelectItem>
@@ -310,7 +455,7 @@ const TimeAndCurrencyContent = () => {
                         <SelectValue placeholder="Select currency" />
                       </SelectTrigger>
                       <SelectContent>
-                        {currencies.map((currency) => (
+                        {filteredCurrencies.map((currency) => (
                           <SelectItem key={currency.code} value={currency.code}>
                             {currency.code} - {currency.name}
                           </SelectItem>
@@ -322,10 +467,10 @@ const TimeAndCurrencyContent = () => {
                 
                 <button
                   onClick={convertCurrency}
-                  disabled={isLoading}
+                  disabled={isLoadingCurrency}
                   className="w-full py-2 px-4 rounded-md bg-gradient-to-r from-[#2C5AAE] to-[#40E0D0] text-white font-medium hover:opacity-90 transition-opacity flex items-center justify-center"
                 >
-                  {isLoading ? (
+                  {isLoadingCurrency ? (
                     <div className="animate-spin h-5 w-5 border-2 border-white border-t-transparent rounded-full mr-2"></div>
                   ) : (
                     <ArrowRightLeft className="w-5 h-5 mr-2" />
@@ -339,6 +484,83 @@ const TimeAndCurrencyContent = () => {
                     <p className="text-xl font-semibold text-[#2C5AAE]">{result}</p>
                   </div>
                 )}
+              </div>
+            </div>
+          </TabsContent>
+          
+          <TabsContent value="weather" className="mt-4 animate-fade-in">
+            <div className="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden p-6">
+              <h3 className="text-xl font-semibold mb-6 text-center bg-gradient-to-r from-[#2C5AAE] to-[#40E0D0] bg-clip-text text-transparent">
+                Weather Forecast
+              </h3>
+              
+              <div className="space-y-4">
+                <div className="flex gap-4">
+                  <div className="flex-grow">
+                    <Input
+                      type="text"
+                      value={city}
+                      onChange={(e) => setCity(e.target.value)}
+                      placeholder="Enter a city name"
+                      className="w-full"
+                    />
+                  </div>
+                  <button
+                    onClick={fetchWeatherData}
+                    disabled={isLoadingWeather}
+                    className="py-2 px-4 rounded-md bg-gradient-to-r from-[#2C5AAE] to-[#40E0D0] text-white font-medium hover:opacity-90 transition-opacity"
+                  >
+                    {isLoadingWeather ? 'Loading...' : 'Search'}
+                  </button>
+                </div>
+                
+                {weatherError && (
+                  <div className="p-4 text-red-500 bg-red-50 rounded-md">
+                    {weatherError}
+                  </div>
+                )}
+                
+                {weatherData && !weatherError && (
+                  <div className="mt-6 text-center">
+                    <div className="flex flex-col items-center justify-center p-6 bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg">
+                      <h4 className="text-2xl font-bold text-[#2C5AAE]">{weatherData.name}, {weatherData.sys.country}</h4>
+                      
+                      <div className="flex items-center mt-4">
+                        <img 
+                          src={`https://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`}
+                          alt={weatherData.weather[0].description}
+                          className="w-16 h-16"
+                        />
+                        <div className="text-4xl font-bold ml-2">{Math.round(weatherData.main.temp)}°C</div>
+                      </div>
+                      
+                      <p className="text-lg capitalize mt-2">{weatherData.weather[0].description}</p>
+                      
+                      <div className="grid grid-cols-2 gap-x-10 gap-y-2 mt-6 text-sm">
+                        <div className="flex items-center justify-between">
+                          <span>Feels like:</span>
+                          <span className="font-semibold">{Math.round(weatherData.main.feels_like)}°C</span>
+                        </div>
+                        <div className="flex items-center justify-between">
+                          <span>Humidity:</span>
+                          <span className="font-semibold">{weatherData.main.humidity}%</span>
+                        </div>
+                        <div className="flex items-center justify-between">
+                          <span>Wind:</span>
+                          <span className="font-semibold">{Math.round(weatherData.wind.speed * 3.6)} km/h</span>
+                        </div>
+                        <div className="flex items-center justify-between">
+                          <span>Pressure:</span>
+                          <span className="font-semibold">{weatherData.main.pressure} hPa</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+                
+                <div className="mt-4 text-center text-sm text-gray-500">
+                  <p>Data provided by OpenWeatherMap</p>
+                </div>
               </div>
             </div>
           </TabsContent>
