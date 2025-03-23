@@ -60,54 +60,57 @@ const SplashScreen = () => {
             </video>
           </motion.div>
           <div className="absolute inset-0 flex flex-col items-center justify-center">
-            {/* Logo is temporarily hidden per client request */}
-            {/* <div className="relative">
-              <motion.div
-                className="absolute inset-0 flex items-center justify-center"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                style={{ zIndex: 0 }}
-              >
-                <motion.div
-                  className="absolute rounded-2xl"
-                  style={{ 
-                    width: "100%",
-                    height: "100%",
-                    top: "0",
-                    left: "0",
-                    background: "transparent",
-                    boxShadow: "0 0 0 6px rgba(44, 90, 174, 0.95)",
-                  }}
-                  animate={{
-                    boxShadow: [
-                      "0 0 0 6px rgba(44, 90, 174, 1), 0 0 20px 6px rgba(44, 90, 174, 0.95)",
-                      "0 0 0 6px rgba(51, 195, 240, 1), 0 0 20px 6px rgba(51, 195, 240, 0.95)",
-                      "0 0 0 6px rgba(139, 92, 246, 1), 0 0 20px 6px rgba(139, 92, 246, 0.95)",
-                      "0 0 0 6px rgba(44, 90, 174, 1), 0 0 20px 6px rgba(44, 90, 174, 0.95)",
-                    ]
-                  }}
-                  transition={{
-                    duration: 3,
-                    repeat: Infinity,
-                    ease: "linear",
+            <div className="relative z-10">
+              <div className="flex flex-col items-center">
+                <motion.div 
+                  className="w-20 h-20 rounded-full border-4 border-t-transparent border-white animate-spin"
+                  animate={{ rotate: 360 }}
+                  transition={{ 
+                    repeat: Infinity, 
+                    duration: 1.5,
+                    ease: "linear" 
                   }}
                 />
-              </motion.div>
-              <img 
-                src="https://www.app.ocean-il.co.il/wp-content/uploads/2022/04/cropped-logo.jpg"
-                alt="Ocean IL Logo"
-                className="w-32 h-32 object-contain rounded-2xl relative z-10"
-                style={{ border: "none", background: "white" }}
-              />
-            </div> */}
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="text-white text-xl font-semibold mt-4"
-              style={{ textShadow: '2px 2px 4px rgba(0, 0, 0, 0.9)' }}
-            >
-              Loading...
-            </motion.p>
+                <motion.p
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ 
+                    opacity: 1, 
+                    y: 0,
+                    transition: {
+                      delay: 0.3,
+                      duration: 0.5
+                    }
+                  }}
+                  className="text-white text-xl font-semibold mt-6"
+                  style={{ textShadow: '2px 2px 4px rgba(0, 0, 0, 0.9)' }}
+                >
+                  Loading Ocean
+                </motion.p>
+                <motion.div
+                  className="flex gap-1.5 mt-4"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.8 }}
+                >
+                  {[0, 1, 2].map((i) => (
+                    <motion.div
+                      key={i}
+                      className="w-3 h-3 bg-white rounded-full"
+                      animate={{
+                        y: [0, -10, 0],
+                        opacity: [1, 0.5, 1]
+                      }}
+                      transition={{
+                        duration: 1,
+                        repeat: Infinity,
+                        delay: i * 0.2,
+                        ease: "easeInOut"
+                      }}
+                    />
+                  ))}
+                </motion.div>
+              </div>
+            </div>
           </div>
         </motion.div>
       )}

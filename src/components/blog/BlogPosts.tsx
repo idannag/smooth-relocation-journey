@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import BlogSearch from './BlogSearch';
@@ -55,6 +56,22 @@ const BlogPosts = ({
     data: categories, 
     isLoading: categoriesLoading 
   } = useCategories();
+  
+  // Parse HTML entities in category names
+  const parseHtmlEntities = (str: string) => {
+    return str
+      .replace(/&amp;/g, '&')
+      .replace(/&lt;/g, '<')
+      .replace(/&gt;/g, '>')
+      .replace(/&quot;/g, '"')
+      .replace(/&#039;/g, "'");
+  };
+  
+  // Process categories to fix HTML entities like &amp;
+  const processedCategories = categories ? categories.map(cat => ({
+    ...cat,
+    name: parseHtmlEntities(cat.name)
+  })) : [];
   
   // Update all posts when new data arrives
   useEffect(() => {
@@ -205,7 +222,7 @@ const BlogPosts = ({
           <BlogSearch
             searchTerm={searchTerm}
             selectedCategory={selectedCategory}
-            categories={categories}
+            categories={processedCategories}
             categoriesLoading={categoriesLoading}
             onSearchChange={handleSearchChange}
             onCategoryChange={handleCategoryChange}
