@@ -96,7 +96,12 @@ const PopularDestinations = () => {
           const destination: any = {};
           
           headers.forEach((header, i) => {
-            let key = header.toLowerCase().replace(/\s+/g, '');
+            // Convert header to camelCase for better property mapping
+            let key = header.toLowerCase()
+              .replace(/\s+(.)/g, (_, char) => char.toUpperCase())
+              .replace(/\s+/g, '')
+              .replace(/&/g, 'And');
+            
             destination[key] = values[i] || '';
           });
           
@@ -184,17 +189,17 @@ const PopularDestinations = () => {
                   {destination.video && destination.video.includes('youtube.com') ? (
                     <iframe 
                       src={`${destination.video}?autoplay=1&mute=1&loop=1&playlist=${destination.video.split('/').pop()}&controls=0&modestbranding=1&showinfo=0&rel=0&enablejsapi=1&playsinline=1`} 
-                      className="w-[120%] h-[120%] absolute -top-[10%] -left-[10%] pointer-events-none" 
+                      className="absolute inset-0 w-full h-full object-cover pointer-events-none" 
                       allow="autoplay; encrypted-media" 
                       frameBorder="0" 
                       loading="lazy" 
                     />
                   ) : destination.video ? (
-                    <video autoPlay muted loop playsInline className="w-full h-full object-cover">
+                    <video autoPlay muted loop playsInline className="absolute inset-0 w-full h-full object-cover">
                       <source src={destination.video} type="video/mp4" />
                     </video>
                   ) : (
-                    <div className="w-full h-full bg-gray-200 flex items-center justify-center">
+                    <div className="absolute inset-0 w-full h-full bg-gray-200 flex items-center justify-center">
                       <span className="text-gray-500">No image</span>
                     </div>
                   )}
