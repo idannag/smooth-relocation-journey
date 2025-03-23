@@ -67,7 +67,7 @@ const Lightbox = ({ url, onClose }: LightboxProps) => {
           {isLoading ? (
             <LoadingSpinner />
           ) : (
-            contentInfo.component
+            React.cloneElement(contentInfo.component as React.ReactElement, { onClose })
           )}
         </div>
       </SheetContent>

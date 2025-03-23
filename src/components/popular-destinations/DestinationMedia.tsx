@@ -95,20 +95,6 @@ const DestinationMedia = ({
           )}
         </>
       )}
-      
-      {/* Dots navigation */}
-      <div className="absolute bottom-0 left-0 right-0 flex justify-center pb-2 z-10">
-        <div className="flex space-x-2 p-2 bg-white/20 backdrop-blur-sm rounded-full">
-          {destinations.map((_, index) => (
-            <button 
-              key={index} 
-              onClick={() => handleDotClick(index)} 
-              className={`w-2 h-2 rounded-full transition-colors ${index === activeIndex ? 'bg-white' : 'bg-white/40 hover:bg-white/60'}`} 
-              aria-label={`Go to destination ${index + 1}`} 
-            />
-          ))}
-        </div>
-      </div>
     </div>
   );
 };

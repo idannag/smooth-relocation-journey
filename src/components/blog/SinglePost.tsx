@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { ArrowLeft, Calendar, Tag } from 'lucide-react';
+import { ArrowLeft, Calendar, Tag, X } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import SinglePostSkeleton from './SinglePostSkeleton';
@@ -14,9 +14,10 @@ import {
 
 interface SinglePostProps {
   postId?: number;  // Optional prop to support both route and prop-based usage
+  onClose?: () => void; // Added close handler for lightbox mode
 }
 
-const SinglePost = ({ postId: propPostId }: SinglePostProps = {}) => {
+const SinglePost = ({ postId: propPostId, onClose }: SinglePostProps = {}) => {
   const { id: routeId } = useParams<{ id: string }>();
   const navigate = useNavigate();
   
@@ -30,11 +31,12 @@ const SinglePost = ({ postId: propPostId }: SinglePostProps = {}) => {
   } = usePost(id);
   
   const handleBackClick = () => {
-    if (routeId) {
+    if (onClose) {
+      // In lightbox mode, use the provided onClose handler
+      onClose();
+    } else if (routeId) {
+      // In standalone page mode, navigate back to blog list
       navigate('/blog');
-    } else {
-      // Use browser history to go back when in lightbox mode
-      window.history.back();
     }
   };
   
@@ -51,16 +53,26 @@ const SinglePost = ({ postId: propPostId }: SinglePostProps = {}) => {
   if (isLoading) {
     return (
       <div className="container mx-auto px-4 py-8">
-        <div className="sticky top-0 z-10 bg-white py-2 mb-4 border-b">
-          {routeId && (
-            <Button 
-              variant="outline" 
-              size="sm"
-              onClick={handleBackClick}
-              className="flex items-center gap-2"
+        <div className="sticky top-0 z-10 bg-white py-2 mb-4 border-b flex justify-between items-center">
+          <Button 
+            variant="outline" 
+            size="sm"
+            onClick={handleBackClick}
+            className="flex items-center gap-2"
+          >
+            <ArrowLeft size={16} />
+            Back to Articles
+          </Button>
+          
+          {onClose && (
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={onClose}
+              className="rounded-full"
+              aria-label="Close"
             >
-              <ArrowLeft size={16} />
-              Back to Articles
+              <X size={20} />
             </Button>
           )}
         </div>
@@ -72,30 +84,38 @@ const SinglePost = ({ postId: propPostId }: SinglePostProps = {}) => {
   if (isError || !post) {
     return (
       <div className="container mx-auto px-4 py-8">
-        <div className="sticky top-0 z-10 bg-white py-2 mb-4 border-b">
-          {routeId && (
-            <Button 
-              variant="outline" 
-              size="sm"
-              onClick={handleBackClick}
-              className="flex items-center gap-2"
+        <div className="sticky top-0 z-10 bg-white py-2 mb-4 border-b flex justify-between items-center">
+          <Button 
+            variant="outline" 
+            size="sm"
+            onClick={handleBackClick}
+            className="flex items-center gap-2"
+          >
+            <ArrowLeft size={16} />
+            Back to Articles
+          </Button>
+          
+          {onClose && (
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={onClose}
+              className="rounded-full"
+              aria-label="Close"
             >
-              <ArrowLeft size={16} />
-              Back to Articles
+              <X size={20} />
             </Button>
           )}
         </div>
         <div className="bg-red-50 text-red-700 p-4 rounded-lg text-center">
           <p>Error loading blog post. The post may not exist or there was a problem fetching it.</p>
-          {routeId && (
-            <Button 
-              variant="outline" 
-              className="mt-4"
-              onClick={handleBackClick}
-            >
-              Go back to all articles
-            </Button>
-          )}
+          <Button 
+            variant="outline" 
+            className="mt-4"
+            onClick={handleBackClick}
+          >
+            Go back to all articles
+          </Button>
         </div>
       </div>
     );
@@ -106,7 +126,7 @@ const SinglePost = ({ postId: propPostId }: SinglePostProps = {}) => {
   
   return (
     <div className="container mx-auto px-4 py-8">
-      <div className="sticky top-0 z-10 bg-white py-2 mb-4 border-b">
+      <div className="sticky top-0 z-10 bg-white py-2 mb-4 border-b flex justify-between items-center">
         <Button 
           variant="outline" 
           size="sm"
@@ -116,6 +136,18 @@ const SinglePost = ({ postId: propPostId }: SinglePostProps = {}) => {
           <ArrowLeft size={16} />
           Back to Articles
         </Button>
+        
+        {onClose && (
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={onClose}
+            className="rounded-full"
+            aria-label="Close"
+          >
+            <X size={20} />
+          </Button>
+        )}
       </div>
       
       <article className="max-w-4xl mx-auto bg-white rounded-lg shadow-md overflow-hidden">

@@ -62,8 +62,9 @@ export const getLightboxContent = (url: string, postId: number | null): Lightbox
   
   // Specific destination content
   if (url.startsWith('destination:')) {
+    const cityName = url.split(':')[1];
     return {
-      title: url.split(':')[1],
+      title: cityName,
       subtitle: 'Destination details',
       component: <PopularDestinationsContent />
     };

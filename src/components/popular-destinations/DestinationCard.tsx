@@ -20,7 +20,7 @@ const DestinationCard = ({ destination, onClick }: DestinationCardProps) => {
   return (
     <div 
       onClick={handleClick}
-      className="relative min-w-[280px] w-[280px] h-[280px] rounded-lg overflow-hidden shadow-md cursor-pointer snap-start transition-transform duration-300 hover:scale-[1.01] flex-shrink-0"
+      className="relative min-w-[220px] w-[220px] h-[280px] rounded-lg overflow-hidden shadow-md cursor-pointer snap-start transition-transform duration-300 hover:scale-[1.01] flex-shrink-0"
     >
       {/* Video Background with Gradient Overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/40 to-black z-10" />

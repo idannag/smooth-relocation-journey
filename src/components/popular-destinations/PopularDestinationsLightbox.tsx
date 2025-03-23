@@ -34,7 +34,7 @@ const PopularDestinationsLightbox = () => {
   return (
     <div className={`p-1 md:p-6 max-w-6xl mx-auto relative`}>
       <h2 className="text-3xl font-bold text-center mb-4 md:mb-8 font-inter bg-gradient-to-r from-[#2C5AAE] to-[#40E0D0] bg-clip-text text-transparent">
-        Popular Destinations
+        {activeDestination.city}, {activeDestination.country}
       </h2>
 
       {/* Navigation buttons moved outside to the whole component */}
@@ -68,6 +68,20 @@ const PopularDestinationsLightbox = () => {
           
           {/* Right side: Destination information */}
           <DestinationInfo activeDestination={activeDestination} />
+        </div>
+      </div>
+      
+      {/* Dots pagination moved outside the map */}
+      <div className="flex justify-center mt-4">
+        <div className="flex space-x-2 p-2 bg-white/90 rounded-full shadow-md">
+          {destinations.map((_, index) => (
+            <button 
+              key={index} 
+              onClick={() => handleDotClick(index)} 
+              className={`w-3 h-3 rounded-full transition-colors ${index === activeIndex ? 'bg-[#2C5AAE]' : 'bg-gray-300 hover:bg-gray-400'}`} 
+              aria-label={`Go to destination ${index + 1}`} 
+            />
+          ))}
         </div>
       </div>
     </div>

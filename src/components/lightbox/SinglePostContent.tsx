@@ -4,10 +4,11 @@ import SinglePost from '../blog/SinglePost';
 
 interface SinglePostContentProps {
   postId: number;
+  onClose?: () => void;
 }
 
-const SinglePostContent = ({ postId }: SinglePostContentProps) => {
-  return <SinglePost postId={postId} />;
+const SinglePostContent = ({ postId, onClose }: SinglePostContentProps) => {
+  return <SinglePost postId={postId} onClose={onClose} />;
 };
 
 export default SinglePostContent;
