@@ -67,6 +67,7 @@ export const fetchGoogleReviews = async (): Promise<{
   error: string | null;
 }> => {
   try {
+    console.log('Fetching Google reviews from Supabase function');
     // Try to fetch from Supabase function
     const { data, error } = await supabase.functions.invoke('getGoogleReviews');
     
