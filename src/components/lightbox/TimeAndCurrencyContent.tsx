@@ -57,7 +57,7 @@ const locations = [
 const TimeAndCurrencyContent = () => {
   const [cityTimes, setCityTimes] = useState<{[key: string]: string}>({});
   const [currentTime, setCurrentTime] = useState('');
-  const [displayLocations, setDisplayLocations] = useState(locations.slice(0, 8));
+  const [displayLocations, setDisplayLocations] = useState(locations);
   const [searchLocation, setSearchLocation] = useState('');
   
   const activeTabRef = useRef<string>("time");
@@ -85,13 +85,13 @@ const TimeAndCurrencyContent = () => {
   
   useEffect(() => {
     if (searchLocation.trim() === '') {
-      setDisplayLocations(locations.slice(0, 12));
+      setDisplayLocations(locations);
     } else {
       const filtered = locations.filter(
         loc => loc.city.toLowerCase().includes(searchLocation.toLowerCase()) || 
               loc.country.toLowerCase().includes(searchLocation.toLowerCase())
       );
-      setDisplayLocations(filtered.slice(0, 12));
+      setDisplayLocations(filtered);
     }
   }, [searchLocation]);
   
@@ -278,7 +278,7 @@ const TimeAndCurrencyContent = () => {
             }
           }}
         >
-          <TabsList className="grid grid-cols-2 mb-6 w-full">
+          <TabsList className="grid grid-cols-2 mb-6 w-full border border-gray-200">
             <TabsTrigger value="time" className="flex items-center justify-center gap-2">
               <Clock className="h-4 w-4" />
               <span>World Time</span>
@@ -308,7 +308,7 @@ const TimeAndCurrencyContent = () => {
                 />
               </div>
               
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 p-6 bg-gray-50 rounded-b-lg">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 p-6 bg-gray-50 rounded-b-lg max-h-[500px] overflow-y-auto">
                 {displayLocations.map((location) => (
                   <div key={location.city} className="flex flex-col bg-white p-3 rounded-md shadow-sm">
                     <span className="font-medium text-[#2C5AAE]">{location.city}</span>
@@ -352,7 +352,7 @@ const TimeAndCurrencyContent = () => {
                       <SelectTrigger id="from-currency" className="w-full">
                         <SelectValue placeholder="Select currency" />
                       </SelectTrigger>
-                      <SelectContent className="bg-white border border-gray-200 shadow-lg max-h-80">
+                      <SelectContent className="max-h-80">
                         {currencies.map((currency) => (
                           <SelectItem key={currency.code} value={currency.code}>
                             {currency.code} - {currency.name}
@@ -373,7 +373,7 @@ const TimeAndCurrencyContent = () => {
                       <SelectTrigger id="to-currency" className="w-full">
                         <SelectValue placeholder="Select currency" />
                       </SelectTrigger>
-                      <SelectContent className="bg-white border border-gray-200 shadow-lg max-h-80">
+                      <SelectContent className="max-h-80">
                         {currencies.map((currency) => (
                           <SelectItem key={currency.code} value={currency.code}>
                             {currency.code} - {currency.name}
