@@ -1,12 +1,20 @@
 
 import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { ArrowLeft, Calendar, Tag, X } from 'lucide-react';
+import { ArrowLeft, ChevronLeft, ChevronRight, Calendar, Tag, X } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { 
+  Pagination,
+  PaginationContent,
+  PaginationItem,
+  PaginationPrevious,
+  PaginationNext
+} from "@/components/ui/pagination";
 import SinglePostSkeleton from './SinglePostSkeleton';
 import { 
   usePost, 
+  usePosts,
   getFeaturedImageUrl, 
   getPostCategories,
   createMarkup
@@ -30,6 +38,17 @@ const SinglePost = ({ postId: propPostId, onClose }: SinglePostProps = {}) => {
     isError
   } = usePost(id);
   
+  // Fetch all posts to determine next and previous posts
+  const { data } = usePosts();
+  
+  // Find the current post index in the posts array
+  const allPosts = data?.pages.flat() || [];
+  const currentPostIndex = allPosts.findIndex(p => p.id.toString() === id);
+  
+  // Get previous and next post IDs
+  const previousPostId = currentPostIndex > 0 ? allPosts[currentPostIndex - 1]?.id : null;
+  const nextPostId = currentPostIndex < allPosts.length - 1 ? allPosts[currentPostIndex + 1]?.id : null;
+  
   const handleBackClick = () => {
     if (onClose) {
       // In lightbox mode, use the provided onClose handler
@@ -37,6 +56,30 @@ const SinglePost = ({ postId: propPostId, onClose }: SinglePostProps = {}) => {
     } else if (routeId) {
       // In standalone page mode, navigate back to blog list
       navigate('/blog');
+    }
+  };
+  
+  const handlePreviousClick = () => {
+    if (previousPostId) {
+      if (onClose) {
+        // For lightbox view, don't navigate, just update the current post
+        window.history.pushState({}, '', `/post/${previousPostId}`);
+        window.location.reload();
+      } else {
+        navigate(`/post/${previousPostId}`);
+      }
+    }
+  };
+  
+  const handleNextClick = () => {
+    if (nextPostId) {
+      if (onClose) {
+        // For lightbox view, don't navigate, just update the current post
+        window.history.pushState({}, '', `/post/${nextPostId}`);
+        window.location.reload();
+      } else {
+        navigate(`/post/${nextPostId}`);
+      }
     }
   };
   
@@ -69,10 +112,10 @@ const SinglePost = ({ postId: propPostId, onClose }: SinglePostProps = {}) => {
               variant="ghost"
               size="icon"
               onClick={onClose}
-              className="rounded-full"
+              className="rounded-full p-1.5 h-8 w-8"
               aria-label="Close"
             >
-              <X size={20} />
+              <X size={16} />
             </Button>
           )}
         </div>
@@ -100,10 +143,10 @@ const SinglePost = ({ postId: propPostId, onClose }: SinglePostProps = {}) => {
               variant="ghost"
               size="icon"
               onClick={onClose}
-              className="rounded-full"
+              className="rounded-full p-1.5 h-8 w-8"
               aria-label="Close"
             >
-              <X size={20} />
+              <X size={16} />
             </Button>
           )}
         </div>
@@ -142,15 +185,15 @@ const SinglePost = ({ postId: propPostId, onClose }: SinglePostProps = {}) => {
             variant="ghost"
             size="icon"
             onClick={onClose}
-            className="rounded-full"
+            className="rounded-full p-1.5 h-8 w-8"
             aria-label="Close"
           >
-            <X size={20} />
+            <X size={16} />
           </Button>
         )}
       </div>
       
-      <article className="max-w-4xl mx-auto bg-white rounded-lg shadow-md overflow-hidden">
+      <article className="max-w-4xl mx-auto bg-white rounded-lg shadow-md overflow-hidden relative">
         <header className="p-6 pb-0">
           <h1 className="text-3xl font-bold text-gray-900 mb-4" dangerouslySetInnerHTML={createMarkup(post.title.rendered)} />
           
@@ -182,6 +225,29 @@ const SinglePost = ({ postId: propPostId, onClose }: SinglePostProps = {}) => {
         )}
         
         <div className="p-6 prose prose-blue max-w-none" dangerouslySetInnerHTML={createMarkup(post.content.rendered)} />
+        
+        {/* Pagination Navigation */}
+        <div className="mt-8 pb-6">
+          <Pagination>
+            <PaginationContent>
+              <PaginationItem>
+                <PaginationPrevious 
+                  onClick={handlePreviousClick} 
+                  className={!previousPostId ? "opacity-50 cursor-not-allowed" : "hover:bg-blue-50"}
+                  disabled={!previousPostId}
+                />
+              </PaginationItem>
+              
+              <PaginationItem>
+                <PaginationNext 
+                  onClick={handleNextClick} 
+                  className={!nextPostId ? "opacity-50 cursor-not-allowed" : "hover:bg-blue-50"}
+                  disabled={!nextPostId}
+                />
+              </PaginationItem>
+            </PaginationContent>
+          </Pagination>
+        </div>
       </article>
     </div>
   );
