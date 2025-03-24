@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState, useRef } from 'react';
 import { Clock, Globe, ArrowRightLeft } from 'lucide-react';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
@@ -30,7 +31,27 @@ const locations = [
   { city: "Bangkok", country: "Thailand", timezone: "Asia/Bangkok" },
   { city: "Los Angeles", country: "USA", timezone: "America/Los_Angeles" },
   { city: "Chicago", country: "USA", timezone: "America/Chicago" },
-  { city: "Mumbai", country: "India", timezone: "Asia/Kolkata" }
+  { city: "Mumbai", country: "India", timezone: "Asia/Kolkata" },
+  { city: "Amsterdam", country: "Netherlands", timezone: "Europe/Amsterdam" },
+  { city: "Madrid", country: "Spain", timezone: "Europe/Madrid" },
+  { city: "Seoul", country: "South Korea", timezone: "Asia/Seoul" },
+  { city: "Stockholm", country: "Sweden", timezone: "Europe/Stockholm" },
+  { city: "Vienna", country: "Austria", timezone: "Europe/Vienna" },
+  { city: "Zurich", country: "Switzerland", timezone: "Europe/Zurich" },
+  { city: "Brussels", country: "Belgium", timezone: "Europe/Brussels" },
+  { city: "Dublin", country: "Ireland", timezone: "Europe/Dublin" },
+  { city: "Athens", country: "Greece", timezone: "Europe/Athens" },
+  { city: "Rome", country: "Italy", timezone: "Europe/Rome" },
+  { city: "Lisbon", country: "Portugal", timezone: "Europe/Lisbon" },
+  { city: "Warsaw", country: "Poland", timezone: "Europe/Warsaw" },
+  { city: "Johannesburg", country: "South Africa", timezone: "Africa/Johannesburg" },
+  { city: "Cairo", country: "Egypt", timezone: "Africa/Cairo" },
+  { city: "Istanbul", country: "Turkey", timezone: "Europe/Istanbul" },
+  { city: "Nairobi", country: "Kenya", timezone: "Africa/Nairobi" },
+  { city: "Manila", country: "Philippines", timezone: "Asia/Manila" },
+  { city: "Jakarta", country: "Indonesia", timezone: "Asia/Jakarta" },
+  { city: "Kuala Lumpur", country: "Malaysia", timezone: "Asia/Kuala_Lumpur" },
+  { city: "Shanghai", country: "China", timezone: "Asia/Shanghai" }
 ];
 
 const TimeAndCurrencyContent = () => {
@@ -64,13 +85,13 @@ const TimeAndCurrencyContent = () => {
   
   useEffect(() => {
     if (searchLocation.trim() === '') {
-      setDisplayLocations(locations.slice(0, 8));
+      setDisplayLocations(locations.slice(0, 12));
     } else {
       const filtered = locations.filter(
         loc => loc.city.toLowerCase().includes(searchLocation.toLowerCase()) || 
               loc.country.toLowerCase().includes(searchLocation.toLowerCase())
       );
-      setDisplayLocations(filtered.slice(0, 8));
+      setDisplayLocations(filtered.slice(0, 12));
     }
   }, [searchLocation]);
   
@@ -126,6 +147,27 @@ const TimeAndCurrencyContent = () => {
     { code: "MXN", name: "Mexican Peso" },
     { code: "THB", name: "Thai Baht" },
     { code: "RUB", name: "Russian Ruble" },
+    { code: "SEK", name: "Swedish Krona" },
+    { code: "NOK", name: "Norwegian Krone" },
+    { code: "DKK", name: "Danish Krone" },
+    { code: "PLN", name: "Polish Złoty" },
+    { code: "CZK", name: "Czech Koruna" },
+    { code: "HUF", name: "Hungarian Forint" },
+    { code: "RON", name: "Romanian Leu" },
+    { code: "TRY", name: "Turkish Lira" },
+    { code: "PHP", name: "Philippine Peso" },
+    { code: "IDR", name: "Indonesian Rupiah" },
+    { code: "MYR", name: "Malaysian Ringgit" },
+    { code: "KRW", name: "South Korean Won" },
+    { code: "EGP", name: "Egyptian Pound" },
+    { code: "NGN", name: "Nigerian Naira" },
+    { code: "KES", name: "Kenyan Shilling" },
+    { code: "SAR", name: "Saudi Riyal" },
+    { code: "QAR", name: "Qatari Riyal" },
+    { code: "KWD", name: "Kuwaiti Dinar" },
+    { code: "MAD", name: "Moroccan Dirham" },
+    { code: "VND", name: "Vietnamese Dong" },
+    { code: "COP", name: "Colombian Peso" }
   ];
 
   useEffect(() => {
@@ -143,6 +185,7 @@ const TimeAndCurrencyContent = () => {
       }
     } catch (error) {
       console.error('Error fetching rates, using mock data:', error);
+      // Extended mock rates for more currencies
       const mockRates = {
         USD: 1,
         EUR: 0.92,
@@ -163,6 +206,27 @@ const TimeAndCurrencyContent = () => {
         MXN: 16.75,
         THB: 35.61,
         RUB: 91.23,
+        SEK: 10.45,
+        NOK: 10.82,
+        DKK: 6.86,
+        PLN: 4.01,
+        CZK: 23.14,
+        HUF: 362.85,
+        RON: 4.57,
+        TRY: 32.54,
+        PHP: 57.32,
+        IDR: 15724.56,
+        MYR: 4.72,
+        KRW: 1367.89,
+        EGP: 30.92,
+        NGN: 1507.23,
+        KES: 130.47,
+        SAR: 3.75,
+        QAR: 3.64,
+        KWD: 0.31,
+        MAD: 10.02,
+        VND: 25347.62,
+        COP: 3957.83
       };
       setExchangeRates(mockRates);
     }
@@ -285,10 +349,10 @@ const TimeAndCurrencyContent = () => {
                       value={fromCurrency}
                       onValueChange={setFromCurrency}
                     >
-                      <SelectTrigger id="from-currency">
+                      <SelectTrigger id="from-currency" className="w-full">
                         <SelectValue placeholder="Select currency" />
                       </SelectTrigger>
-                      <SelectContent>
+                      <SelectContent className="bg-white border border-gray-200 shadow-lg max-h-80">
                         {currencies.map((currency) => (
                           <SelectItem key={currency.code} value={currency.code}>
                             {currency.code} - {currency.name}
@@ -306,10 +370,10 @@ const TimeAndCurrencyContent = () => {
                       value={toCurrency}
                       onValueChange={setToCurrency}
                     >
-                      <SelectTrigger id="to-currency">
+                      <SelectTrigger id="to-currency" className="w-full">
                         <SelectValue placeholder="Select currency" />
                       </SelectTrigger>
-                      <SelectContent>
+                      <SelectContent className="bg-white border border-gray-200 shadow-lg max-h-80">
                         {currencies.map((currency) => (
                           <SelectItem key={currency.code} value={currency.code}>
                             {currency.code} - {currency.name}
