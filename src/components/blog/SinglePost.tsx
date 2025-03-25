@@ -232,17 +232,17 @@ const SinglePost = ({ postId: propPostId, onClose }: SinglePostProps = {}) => {
             <PaginationContent>
               <PaginationItem>
                 <PaginationPrevious 
-                  onClick={handlePreviousClick} 
-                  className={!previousPostId ? "opacity-50 cursor-not-allowed" : "hover:bg-blue-50"}
-                  disabled={!previousPostId}
+                  onClick={previousPostId ? handlePreviousClick : undefined} 
+                  className={!previousPostId ? "opacity-50 pointer-events-none" : "hover:bg-blue-50"}
+                  aria-disabled={!previousPostId}
                 />
               </PaginationItem>
               
               <PaginationItem>
                 <PaginationNext 
-                  onClick={handleNextClick} 
-                  className={!nextPostId ? "opacity-50 cursor-not-allowed" : "hover:bg-blue-50"}
-                  disabled={!nextPostId}
+                  onClick={nextPostId ? handleNextClick : undefined} 
+                  className={!nextPostId ? "opacity-50 pointer-events-none" : "hover:bg-blue-50"}
+                  aria-disabled={!nextPostId}
                 />
               </PaginationItem>
             </PaginationContent>
