@@ -4,13 +4,6 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { ArrowLeft, ChevronLeft, ChevronRight, Calendar, Tag, X } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { 
-  Pagination,
-  PaginationContent,
-  PaginationItem,
-  PaginationPrevious,
-  PaginationNext
-} from "@/components/ui/pagination";
 import SinglePostSkeleton from './SinglePostSkeleton';
 import { 
   usePost, 
@@ -50,13 +43,8 @@ const SinglePost = ({ postId: propPostId, onClose }: SinglePostProps = {}) => {
   const nextPostId = currentPostIndex < allPosts.length - 1 ? allPosts[currentPostIndex + 1]?.id : null;
   
   const handleBackClick = () => {
-    if (onClose) {
-      // In lightbox mode, use the provided onClose handler
-      onClose();
-    } else if (routeId) {
-      // In standalone page mode, navigate back to blog list
-      navigate('/blog');
-    }
+    // In both modes, navigate back to blog list
+    navigate('/blog');
   };
   
   const handlePreviousClick = () => {
@@ -104,7 +92,7 @@ const SinglePost = ({ postId: propPostId, onClose }: SinglePostProps = {}) => {
             className="flex items-center gap-2"
           >
             <ArrowLeft size={16} />
-            Back to Articles
+            Back
           </Button>
           
           {onClose && (
@@ -135,7 +123,7 @@ const SinglePost = ({ postId: propPostId, onClose }: SinglePostProps = {}) => {
             className="flex items-center gap-2"
           >
             <ArrowLeft size={16} />
-            Back to Articles
+            Back
           </Button>
           
           {onClose && (
@@ -177,7 +165,7 @@ const SinglePost = ({ postId: propPostId, onClose }: SinglePostProps = {}) => {
           className="flex items-center gap-2"
         >
           <ArrowLeft size={16} />
-          Back to Articles
+          Back
         </Button>
         
         {onClose && (
@@ -234,10 +222,9 @@ const SinglePost = ({ postId: propPostId, onClose }: SinglePostProps = {}) => {
               size="sm"
               onClick={previousPostId ? handlePreviousClick : undefined}
               className={!previousPostId ? "opacity-50 pointer-events-none" : "hover:bg-blue-50"}
-              disabled={!previousPostId}
             >
               <ChevronLeft className="mr-2 h-4 w-4" />
-              Previous Article
+              Previous
             </Button>
             
             <Button
@@ -245,9 +232,8 @@ const SinglePost = ({ postId: propPostId, onClose }: SinglePostProps = {}) => {
               size="sm"
               onClick={nextPostId ? handleNextClick : undefined}
               className={!nextPostId ? "opacity-50 pointer-events-none" : "hover:bg-blue-50"}
-              disabled={!nextPostId}
             >
-              Next Article
+              Next
               <ChevronRight className="ml-2 h-4 w-4" />
             </Button>
           </div>
