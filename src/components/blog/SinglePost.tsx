@@ -227,26 +227,30 @@ const SinglePost = ({ postId: propPostId, onClose }: SinglePostProps = {}) => {
         <div className="p-6 prose prose-blue max-w-none" dangerouslySetInnerHTML={createMarkup(post.content.rendered)} />
         
         {/* Pagination Navigation */}
-        <div className="mt-8 pb-6">
-          <Pagination>
-            <PaginationContent>
-              <PaginationItem>
-                <PaginationPrevious 
-                  onClick={previousPostId ? handlePreviousClick : undefined} 
-                  className={!previousPostId ? "opacity-50 pointer-events-none" : "hover:bg-blue-50"}
-                  aria-disabled={!previousPostId}
-                />
-              </PaginationItem>
-              
-              <PaginationItem>
-                <PaginationNext 
-                  onClick={nextPostId ? handleNextClick : undefined} 
-                  className={!nextPostId ? "opacity-50 pointer-events-none" : "hover:bg-blue-50"}
-                  aria-disabled={!nextPostId}
-                />
-              </PaginationItem>
-            </PaginationContent>
-          </Pagination>
+        <div className="mt-8 border-t pt-6 pb-6">
+          <div className="flex justify-between items-center">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={previousPostId ? handlePreviousClick : undefined}
+              className={!previousPostId ? "opacity-50 pointer-events-none" : "hover:bg-blue-50"}
+              disabled={!previousPostId}
+            >
+              <ChevronLeft className="mr-2 h-4 w-4" />
+              Previous Article
+            </Button>
+            
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={nextPostId ? handleNextClick : undefined}
+              className={!nextPostId ? "opacity-50 pointer-events-none" : "hover:bg-blue-50"}
+              disabled={!nextPostId}
+            >
+              Next Article
+              <ChevronRight className="ml-2 h-4 w-4" />
+            </Button>
+          </div>
         </div>
       </article>
     </div>
