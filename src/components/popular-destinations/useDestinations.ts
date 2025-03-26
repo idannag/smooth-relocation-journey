@@ -44,7 +44,11 @@ export const useDestinations = (initialCity?: string) => {
             let key = header.toLowerCase()
               .replace(/\s+(.)/g, (_, char) => char.toUpperCase())
               .replace(/\s+/g, '')
-              .replace(/&/g, 'And');
+              .replace(/&/g, 'And')
+              .replace(/\(/g, '')
+              .replace(/\)/g, '')
+              .replace(/\//g, '')
+              .replace(/²/g, '2');
             
             // Map all fields from the dataset to our destination object
             if (key === 'city') destination.city = values[i] || '';
@@ -73,8 +77,8 @@ export const useDestinations = (initialCity?: string) => {
               destination.mapUrl = mapUrl;
             }
             else if (key === 'population') destination.population = values[i] || '';
-            else if (key === 'area' || key === 'areakm²') destination.area = values[i] || '';
-            else if (key === 'populationdensity' || key === 'populationdensitypeopleperkm²') destination.populationDensity = values[i] || '';
+            else if (key === 'area' || key === 'areakm2') destination.area = values[i] || '';
+            else if (key === 'populationdensity' || key === 'populationdensitypeopleperkm2') destination.populationDensity = values[i] || '';
             else if (key === 'gdppercapita' || key === 'gdppercapita$') destination.gdpPerCapita = values[i] || '';
             else if (key === 'language' || key === 'officiallanguages') destination.language = values[i] || '';
             else if (key === 'predominantlanguages' || key === 'predominantlanguagesofpopulation') destination.predominantLanguages = values[i] || '';
@@ -83,10 +87,13 @@ export const useDestinations = (initialCity?: string) => {
             else if (key === 'averagecost') destination.averageCost = values[i] || '';
             else if (key === 'besttimetovisit') destination.bestTimeToVisit = values[i] || '';
             else if (key === 'uniquerelocationfacts' || key === 'uniquerelocationlivingfacts') destination.uniqueRelocationFacts = values[i] || '';
-            else if (key === 'visaimmigrationconditions' || key === 'visaAndimmigrationconditions') destination.visaImmigrationConditions = values[i] || '';
-            else if (key === 'religiouscommunities' || key === 'religiouscommunities(jewishpresence)') destination.religiousCommunities = values[i] || '';
+            else if (key === 'visaimmigrationconditions' || key === 'visaandimmigrationconditions') destination.visaImmigrationConditions = values[i] || '';
+            else if (key === 'religiouscommunities' || key === 'religiouscommunitiesjewishpresence') destination.religiousCommunities = values[i] || '';
             else if (key === 'popularattractions') destination.popularAttractions = values[i] || '';
             else if (key === 'flagimg') destination.flagImg = values[i] || '';
+            else if (key === 'housingmarket') destination.housingMarket = values[i] || '';
+            else if (key === 'publictransport') destination.publicTransport = values[i] || '';
+            else if (key === 'cafeculture') destination.cafeCulture = values[i] || '';
             else {
               // For any other fields, add them to the destination object
               (destination as any)[key] = values[i] || '';

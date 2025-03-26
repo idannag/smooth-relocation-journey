@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { ArrowLeft, ChevronLeft, ChevronRight, Calendar, Tag, X } from 'lucide-react';
 import { Button } from "@/components/ui/button";
@@ -26,6 +26,11 @@ const SinglePost = ({ postId: propPostId, onClose }: SinglePostProps = {}) => {
   // Use either the prop postId or the route id (convert to number if it's from route)
   const id = propPostId?.toString() || routeId;
   
+  // Scroll to top when component mounts
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [id]);
+  
   const {
     data: post,
     isLoading,
@@ -44,7 +49,6 @@ const SinglePost = ({ postId: propPostId, onClose }: SinglePostProps = {}) => {
   const nextPostId = currentPostIndex < allPosts.length - 1 ? allPosts[currentPostIndex + 1]?.id : null;
   
   const handleBackClick = () => {
-    // Always navigate back to blog list
     navigate('/blog');
   };
   
@@ -53,7 +57,7 @@ const SinglePost = ({ postId: propPostId, onClose }: SinglePostProps = {}) => {
     if (onClose) {
       onClose();
     } else {
-      navigate('/blog');
+      navigate('/');
     }
   };
   

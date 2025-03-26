@@ -4,6 +4,7 @@ import Lightbox from './ui/lightbox';
 import DestinationCard from './popular-destinations/DestinationCard';
 import DestinationSkeleton from './popular-destinations/DestinationSkeleton';
 import { usePopularDestinations } from './popular-destinations/usePopularDestinations';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 const PopularDestinations = () => {
   const {
@@ -17,6 +18,8 @@ const PopularDestinations = () => {
     handleSectionTitleClick,
     setShowLightbox
   } = usePopularDestinations();
+  
+  const isMobile = useIsMobile();
 
   return (
     <section className="py-16 bg-white relative">
@@ -45,12 +48,12 @@ const PopularDestinations = () => {
           >
             {loading ? 
               Array(5).fill(0).map((_, index) => (
-                <div key={index} className="flex-shrink-0 w-[calc(100%/4.5)]">
+                <div key={index} className={`flex-shrink-0 ${isMobile ? 'w-full' : 'w-[calc(100%/4.5)] sm:w-[calc(100%/3.5)] md:w-[calc(100%/3.5)] lg:w-[calc(100%/4)]'}`}>
                   <DestinationSkeleton />
                 </div>
               )) : 
               destinations.map((destination, index) => (
-                <div key={index} className="flex-shrink-0 w-[calc(100%/4.5)] sm:w-[calc(100%/4.5)] md:w-[calc(100%/4.5)] lg:w-[calc(100%/5.5)]">
+                <div key={index} className={`flex-shrink-0 ${isMobile ? 'w-full' : 'w-[calc(100%/4.5)] sm:w-[calc(100%/3.5)] md:w-[calc(100%/3.5)] lg:w-[calc(100%/4)]'}`}>
                   <DestinationCard destination={destination} onClick={handleDestinationClick} />
                 </div>
               ))

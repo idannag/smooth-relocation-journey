@@ -32,6 +32,13 @@ const SinglePostContent = ({ postId: initialPostId, onClose }: SinglePostContent
     };
   }, []);
 
+  // Scroll to top when component mounts
+  useEffect(() => {
+    if (document.querySelector('.lightbox-content')) {
+      document.querySelector('.lightbox-content')?.scrollTo(0, 0);
+    }
+  }, [postId]);
+
   if (isLoading) {
     return <LoadingSpinner />;
   }
