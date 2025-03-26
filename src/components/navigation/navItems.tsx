@@ -1,4 +1,3 @@
-
 import { Home, Calculator, Newspaper, Building2, GraduationCap, UserRound, Route, Bot, Headphones, Globe, Play, ShoppingCart, MapPin } from "lucide-react";
 import { NavItem } from "@/types/navigation";
 
@@ -25,7 +24,7 @@ export const getMainNavItems = (handleSubmenuItemClick: (url: string) => void): 
       { 
         icon: <Calculator className="w-5 h-5 stroke-[1.5] text-[#517cc7]" />, 
         label: 'Cost-of-Living AI Calculator',
-        onClick: () => handleSubmenuItemClick('https://autodigital.agency/ai-personalized-cost-of-living-calculator/')
+        onClick: () => handleSubmenuItemClick('ocean-calculator.netlify.app')
       }
     ]
   },

@@ -1,4 +1,3 @@
-
 import { Home, Calculator, Newspaper, Building2, GraduationCap, UserRound, Route, Bot, BookText, Headphones, Globe, Play, ShoppingCart, MapPin } from 'lucide-react';
 import { useState, useEffect, useRef } from 'react';
 import Lightbox from './ui/lightbox';
@@ -26,7 +25,6 @@ const BottomNav = () => {
       return;
     }
     
-    // Handle AI Assistant link - updated URL
     if (url === 'chatbot' || url === 'https://chatgpt.com/g/g-67b6c40963908191b77e23c6fecc2e57-the-24-7-relocation-life-ai-assistant') {
       window.open('https://chatgpt.com/g/g-67b6c40963908191b77e23c6fecc2e57-the-24-7-relocation-life-ai-assistant', '_blank');
       return;
@@ -48,9 +46,7 @@ const BottomNav = () => {
       subItems: [
         { icon: <Newspaper className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, label: 'Relocation News', url: 'news' },
         { icon: <MapPin className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, label: 'Popular Destinations', url: 'destinations' },
-        // Hiding the cost of living calculator as requested
-        // { icon: <Calculator className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, label: 'Cost-of-Living Calculator', url: 'https://www.app.ocean-il.co.il/cost-of-living-comparison-calculator-copy/' },
-        { icon: <Calculator className="w-5 h-5 stroke-[1.5] text-[#517cc7]" />, label: 'Cost-of-Living AI Calculator', url: 'https://autodigital.agency/ai-personalized-cost-of-living-calculator/' }
+        { icon: <Calculator className="w-5 h-5 stroke-[1.5] text-[#517cc7]" />, label: 'Cost-of-Living AI Calculator', url: 'ocean-calculator.netlify.app' }
       ]
     },
     { 
