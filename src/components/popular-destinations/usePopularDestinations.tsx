@@ -20,55 +20,55 @@ export const usePopularDestinations = () => {
     {
       city: "Berlin",
       country: "Germany",
-      video: "https://www.youtube.com/embed/Oxh_NsBqR1M",
+      video: "https://www.app.ocean-il.co.il/wp-content/uploads/2023/03/Berlin.mp4",
       description: "Experience German culture"
     }, 
     {
       city: "Barcelona",
       country: "Spain",
-      video: "https://www.youtube.com/embed/kK3uDGtR45A",
+      video: "https://www.app.ocean-il.co.il/wp-content/uploads/2023/03/Barcelona.mp4",
       description: "Live the Mediterranean lifestyle"
     }, 
     {
       city: "Dubai",
       country: "UAE",
-      video: "https://www.youtube.com/embed/E_S4iZ7TCXo",
+      video: "https://www.app.ocean-il.co.il/wp-content/uploads/2023/03/Dubai.mp4",
       description: "Embrace luxury living"
     }, 
     {
       city: "Toronto",
       country: "Canada",
-      video: "https://www.youtube.com/embed/TP_hHMnyknk",
+      video: "https://www.app.ocean-il.co.il/wp-content/uploads/2023/03/Toronto.mp4",
       description: "Experience multicultural living"
     }, 
     {
       city: "Greece",
       country: "Greece",
-      video: "https://www.youtube.com/embed/AKXMkeib1zE",
+      video: "https://www.app.ocean-il.co.il/wp-content/uploads/2023/03/Greece.mp4",
       description: "Discover ancient history"
     }, 
     {
       city: "London",
       country: "UK",
-      video: "https://www.youtube.com/embed/YUdDkKnVZN4",
+      video: "https://www.app.ocean-il.co.il/wp-content/uploads/2023/03/London.mp4",
       description: "Global opportunities await"
     }, 
     {
       city: "Tel Aviv",
       country: "Israel",
-      video: "https://www.youtube.com/embed/9pb7paEMbmo",
+      video: "https://www.app.ocean-il.co.il/wp-content/uploads/2023/03/TelAviv.mp4",
       description: "Innovation meets tradition"
     }, 
     {
       city: "Paris",
       country: "France",
-      video: "https://www.youtube.com/embed/kpoGrDy_ss8",
+      video: "https://www.app.ocean-il.co.il/wp-content/uploads/2023/03/Paris.mp4",
       description: "Live the French lifestyle"
     }, 
     {
       city: "Larnaca",
       country: "Cyprus",
-      video: "https://www.youtube.com/embed/8m3g3SlYs3k",
+      video: "https://www.app.ocean-il.co.il/wp-content/uploads/2023/03/Larnaca.mp4",
       description: "Mediterranean paradise"
     }
   ];
@@ -108,15 +108,25 @@ export const usePopularDestinations = () => {
             destination[key] = values[i] || '';
           });
           
-          // Make sure video URL is not empty and properly formatted
+          // Make sure video URL is direct video file when possible
           if (destination.video) {
             destination.video = destination.video.trim();
             
-            // If it's a YouTube URL but not in embed format, convert it
-            if (destination.video.includes('youtube.com/watch') && !destination.video.includes('youtube.com/embed')) {
-              const videoId = destination.video.split('v=')[1]?.split('&')[0];
-              if (videoId) {
-                destination.video = `https://www.youtube.com/embed/${videoId}`;
+            // If it's a YouTube URL, try to replace with a direct video URL based on city name
+            if (destination.video.includes('youtube.com')) {
+              const cityName = destination.city || '';
+              const cityForUrl = cityName.replace(/\s+/g, '');
+              
+              // Try to find a matching video in our fallback collection
+              const fallbackDestination = fallbackDestinations.find(
+                fb => fb.city.toLowerCase() === cityName.toLowerCase()
+              );
+              
+              if (fallbackDestination && fallbackDestination.video) {
+                destination.video = fallbackDestination.video;
+              } else {
+                // Generic fallback based on city name
+                destination.video = `https://www.app.ocean-il.co.il/wp-content/uploads/2023/03/${cityForUrl}.mp4`;
               }
             }
           }

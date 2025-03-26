@@ -1,7 +1,8 @@
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { MapPin } from 'lucide-react';
 import { Destination } from './types';
+import { Skeleton } from "@/components/ui/skeleton";
 
 interface DestinationCardProps {
   destination: Destination;
@@ -9,12 +10,29 @@ interface DestinationCardProps {
 }
 
 const DestinationCard = ({ destination, onClick }: DestinationCardProps) => {
-  // Use video from the correct property
-  const videoBackground = destination.video || '';
+  const [videoReady, setVideoReady] = useState(false);
+  const [videoError, setVideoError] = useState(false);
+  
+  // Check if the video URL is a direct video URL or a YouTube URL
+  const isDirectVideo = destination.video && 
+    (destination.video.endsWith('.mp4') || 
+     destination.video.endsWith('.m4v') || 
+     destination.video.endsWith('.mov') ||
+     destination.video.includes('app.ocean-il.co.il'));
   
   // Handle click on the card
   const handleClick = () => {
     onClick(destination.city);
+  };
+  
+  // Handle video loading
+  const handleVideoLoad = () => {
+    setVideoReady(true);
+  };
+  
+  // Handle video error
+  const handleVideoError = () => {
+    setVideoError(true);
   };
   
   return (
@@ -25,15 +43,22 @@ const DestinationCard = ({ destination, onClick }: DestinationCardProps) => {
       {/* Video Background with Gradient Overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/40 to-black z-10" />
       
-      {videoBackground ? (
-        <video 
-          src={videoBackground} 
-          className="absolute inset-0 w-full h-full object-cover"
-          autoPlay
-          loop
-          muted
-          playsInline
-        />
+      {isDirectVideo && destination.video ? (
+        <>
+          {!videoReady && !videoError && (
+            <div className="absolute inset-0 bg-gray-200 animate-pulse"></div>
+          )}
+          <video 
+            src={destination.video} 
+            className={`absolute inset-0 w-full h-full object-cover ${videoReady ? 'opacity-100' : 'opacity-0'}`}
+            autoPlay
+            loop
+            muted
+            playsInline
+            onLoadedData={handleVideoLoad}
+            onError={handleVideoError}
+          />
+        </>
       ) : destination.image ? (
         <img 
           src={destination.image} 
@@ -41,7 +66,7 @@ const DestinationCard = ({ destination, onClick }: DestinationCardProps) => {
           className="absolute inset-0 w-full h-full object-cover"
         />
       ) : (
-        <div className="absolute inset-0 bg-gray-600" />
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-teal-500" />
       )}
       
       {/* Content */}
@@ -51,6 +76,7 @@ const DestinationCard = ({ destination, onClick }: DestinationCardProps) => {
           <span className="text-sm font-medium">{destination.country}</span>
         </div>
         
+        <h3 className="text-lg font-semibold mb-1">{destination.city}</h3>
         <p className="text-sm text-white/90 line-clamp-2">{destination.description}</p>
       </div>
     </div>

@@ -4,7 +4,7 @@ import { toast } from "sonner";
 import { Destination } from './types';
 import { useIsMobile } from '@/hooks/use-mobile';
 
-export const useDestinations = () => {
+export const useDestinations = (initialCity?: string) => {
   const [destinations, setDestinations] = useState<Destination[]>([]);
   const [loading, setLoading] = useState(true);
   const [activeIndex, setActiveIndex] = useState(0);
@@ -52,13 +52,14 @@ export const useDestinations = () => {
             else if (key === 'description' || key === 'shortdescription') destination.description = values[i] || '';
             else if (key === 'video' || key === 'destinationvideo' || key === 'videourl') {
               let videoUrl = values[i] || '';
-              // If it's a YouTube URL but not in embed format, convert it
-              if (videoUrl.includes('youtube.com/watch') && !videoUrl.includes('youtube.com/embed')) {
-                const videoId = videoUrl.split('v=')[1]?.split('&')[0];
-                if (videoId) {
-                  videoUrl = `https://www.youtube.com/embed/${videoId}`;
-                }
+              
+              // If it's a YouTube URL, try to use a direct video URL instead
+              if (videoUrl.includes('youtube.com')) {
+                const cityName = destination.city || '';
+                // Try to construct a direct video URL
+                videoUrl = `https://www.app.ocean-il.co.il/wp-content/uploads/2023/03/${cityName.replace(/\s+/g, '')}.mp4`;
               }
+              
               destination.video = videoUrl;
             }
             else if (key === 'image' || key === 'imageurl') destination.image = values[i] || '';
@@ -103,6 +104,16 @@ export const useDestinations = () => {
         
         console.log('Parsed destinations for lightbox:', parsedDestinations);
         setDestinations(parsedDestinations);
+        
+        // If initialCity is provided, find and set the active index
+        if (initialCity && parsedDestinations.length > 0) {
+          const index = parsedDestinations.findIndex(
+            dest => dest.city.toLowerCase() === initialCity.toLowerCase()
+          );
+          if (index !== -1) {
+            setActiveIndex(index);
+          }
+        }
       } catch (error) {
         console.error('Error fetching destinations for lightbox:', error);
         toast.error('Failed to load destinations. Please try again later.');
@@ -112,7 +123,7 @@ export const useDestinations = () => {
     };
 
     fetchDestinations();
-  }, []);
+  }, [initialCity]);
 
   const handleNext = () => {
     setActiveIndex(prev => (prev + 1) % destinations.length);

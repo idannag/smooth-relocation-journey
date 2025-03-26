@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { ArrowLeft, ChevronLeft, ChevronRight, Calendar, Tag, X } from 'lucide-react';
 import { Button } from "@/components/ui/button";
@@ -21,6 +21,7 @@ interface SinglePostProps {
 const SinglePost = ({ postId: propPostId, onClose }: SinglePostProps = {}) => {
   const { id: routeId } = useParams<{ id: string }>();
   const navigate = useNavigate();
+  const [isLoadingNavigation, setIsLoadingNavigation] = useState(false);
   
   // Use either the prop postId or the route id (convert to number if it's from route)
   const id = propPostId?.toString() || routeId;
@@ -49,6 +50,7 @@ const SinglePost = ({ postId: propPostId, onClose }: SinglePostProps = {}) => {
   
   const handlePreviousClick = () => {
     if (previousPostId) {
+      setIsLoadingNavigation(true);
       if (onClose) {
         // For lightbox view, don't navigate, just update the current post
         window.history.pushState({}, '', `/post/${previousPostId}`);
@@ -61,6 +63,7 @@ const SinglePost = ({ postId: propPostId, onClose }: SinglePostProps = {}) => {
   
   const handleNextClick = () => {
     if (nextPostId) {
+      setIsLoadingNavigation(true);
       if (onClose) {
         // For lightbox view, don't navigate, just update the current post
         window.history.pushState({}, '', `/post/${nextPostId}`);
@@ -81,7 +84,7 @@ const SinglePost = ({ postId: propPostId, onClose }: SinglePostProps = {}) => {
     });
   };
   
-  if (isLoading) {
+  if (isLoading || isLoadingNavigation) {
     return (
       <div className="container mx-auto px-4 py-8">
         <div className="sticky top-0 z-10 bg-white py-2 mb-4 border-b flex justify-between items-center">

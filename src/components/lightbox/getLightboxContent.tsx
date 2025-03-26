@@ -66,7 +66,7 @@ export const getLightboxContent = (url: string, postId: number | null): Lightbox
     return {
       title: cityName,
       subtitle: 'Destination details',
-      component: <PopularDestinationsContent />
+      component: <PopularDestinationsContent initialCity={cityName} />
     };
   }
   

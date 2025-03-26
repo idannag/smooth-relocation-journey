@@ -3,9 +3,15 @@ import DestinationSkeleton from './DestinationSkeleton';
 import DestinationMedia from './DestinationMedia';
 import DestinationInfo from './DestinationInfo';
 import { useDestinations } from './useDestinations';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight, X } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
-const PopularDestinationsLightbox = () => {
+interface PopularDestinationsLightboxProps {
+  initialCity?: string;
+  onClose?: () => void;
+}
+
+const PopularDestinationsLightbox = ({ initialCity, onClose }: PopularDestinationsLightboxProps) => {
   const {
     destinations,
     loading,
@@ -15,7 +21,7 @@ const PopularDestinationsLightbox = () => {
     handlePrev,
     handleDotClick,
     isMobile
-  } = useDestinations();
+  } = useDestinations(initialCity);
 
   // If there are no destinations and not loading, show message
   if (!loading && destinations.length === 0) {
@@ -33,9 +39,23 @@ const PopularDestinationsLightbox = () => {
 
   return (
     <div className={`p-1 md:p-6 max-w-6xl mx-auto relative`}>
-      <h2 className="text-3xl font-bold text-center mb-4 md:mb-8 font-inter bg-gradient-to-r from-[#2C5AAE] to-[#40E0D0] bg-clip-text text-transparent">
-        {activeDestination.city}, {activeDestination.country}
-      </h2>
+      <div className="flex justify-between items-center mb-4">
+        <h2 className="text-3xl font-bold md:mb-0 font-inter bg-gradient-to-r from-[#2C5AAE] to-[#40E0D0] bg-clip-text text-transparent">
+          {activeDestination.city}, {activeDestination.country}
+        </h2>
+        
+        {onClose && (
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={onClose}
+            className="rounded-full p-1.5 h-8 w-8"
+            aria-label="Close"
+          >
+            <X size={16} />
+          </Button>
+        )}
+      </div>
 
       {/* Navigation buttons moved outside to the whole component */}
       <button 

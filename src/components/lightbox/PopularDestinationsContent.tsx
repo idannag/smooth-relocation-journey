@@ -1,9 +1,14 @@
 
 import React from 'react';
-import PopularDestinationsLightbox from '../PopularDestinationsLightbox';
+import PopularDestinationsLightbox from '../popular-destinations/PopularDestinationsLightbox';
 
-const PopularDestinationsContent = () => {
-  return <PopularDestinationsLightbox />;
+interface PopularDestinationsContentProps {
+  initialCity?: string;
+  onClose?: () => void;
+}
+
+const PopularDestinationsContent = ({ initialCity, onClose }: PopularDestinationsContentProps) => {
+  return <PopularDestinationsLightbox initialCity={initialCity} onClose={onClose} />;
 };
 
 export default PopularDestinationsContent;

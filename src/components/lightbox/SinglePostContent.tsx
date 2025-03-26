@@ -1,6 +1,7 @@
 
 import React from 'react';
 import SinglePost from '../blog/SinglePost';
+import LoadingSpinner from './LoadingSpinner';
 
 interface SinglePostContentProps {
   postId: number;
