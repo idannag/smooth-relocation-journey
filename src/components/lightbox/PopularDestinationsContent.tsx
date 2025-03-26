@@ -8,7 +8,11 @@ interface PopularDestinationsContentProps {
 }
 
 const PopularDestinationsContent = ({ initialCity, onClose }: PopularDestinationsContentProps) => {
-  return <PopularDestinationsLightbox initialCity={initialCity} onClose={onClose} />;
+  return (
+    <div className="animate-fade-in">
+      <PopularDestinationsLightbox initialCity={initialCity} onClose={onClose} />
+    </div>
+  );
 };
 
 export default PopularDestinationsContent;

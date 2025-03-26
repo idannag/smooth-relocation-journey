@@ -105,39 +105,38 @@ export const usePopularDestinations = () => {
               .replace(/\s+/g, '')
               .replace(/&/g, 'And');
             
+            // Special case for video field - the TSV contains "city-video" 
+            if (key === 'cityVideo' || key === 'city-video') {
+              key = 'video';
+            }
+            
             destination[key] = values[i] || '';
           });
-          
-          // Make sure video URL is direct video file when possible
-          if (destination.video) {
-            destination.video = destination.video.trim();
-            
-            // If it's a YouTube URL, try to replace with a direct video URL based on city name
-            if (destination.video.includes('youtube.com')) {
-              const cityName = destination.city || '';
-              const cityForUrl = cityName.replace(/\s+/g, '');
-              
-              // Try to find a matching video in our fallback collection
-              const fallbackDestination = fallbackDestinations.find(
-                fb => fb.city.toLowerCase() === cityName.toLowerCase()
-              );
-              
-              if (fallbackDestination && fallbackDestination.video) {
-                destination.video = fallbackDestination.video;
-              } else {
-                // Generic fallback based on city name
-                destination.video = `https://www.app.ocean-il.co.il/wp-content/uploads/2023/03/${cityForUrl}.mp4`;
-              }
-            }
-          }
           
           return destination as Destination;
         });
         
         console.log('Parsed destinations with videos:', parsedDestinations);
         
-        if (parsedDestinations.length > 0) {
-          setDestinations(parsedDestinations);
+        // Make sure each destination has a valid video URL
+        const destinationsWithVideos = parsedDestinations.map(dest => {
+          // If no video or it's a YouTube URL, try to find a fallback
+          if (!dest.video || dest.video.includes('youtube.com')) {
+            // Try to find a matching video in our fallback collection
+            const fallbackDest = fallbackDestinations.find(
+              fb => fb.city.toLowerCase() === dest.city.toLowerCase()
+            );
+            
+            if (fallbackDest && fallbackDest.video) {
+              return { ...dest, video: fallbackDest.video };
+            }
+          }
+          
+          return dest;
+        });
+        
+        if (destinationsWithVideos.length > 0) {
+          setDestinations(destinationsWithVideos);
         } else {
           console.warn('No destinations found in spreadsheet, using fallback data');
           setDestinations(fallbackDestinations);

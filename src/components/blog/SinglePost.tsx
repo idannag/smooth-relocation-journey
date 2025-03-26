@@ -44,7 +44,7 @@ const SinglePost = ({ postId: propPostId, onClose }: SinglePostProps = {}) => {
   const nextPostId = currentPostIndex < allPosts.length - 1 ? allPosts[currentPostIndex + 1]?.id : null;
   
   const handleBackClick = () => {
-    // In both modes, navigate back to blog list
+    // Always navigate back to blog list
     navigate('/blog');
   };
   
@@ -52,9 +52,11 @@ const SinglePost = ({ postId: propPostId, onClose }: SinglePostProps = {}) => {
     if (previousPostId) {
       setIsLoadingNavigation(true);
       if (onClose) {
-        // For lightbox view, don't navigate, just update the current post
+        // For lightbox view, just update URL without full page reload
         window.history.pushState({}, '', `/post/${previousPostId}`);
-        window.location.reload();
+        // Use URL to reload the component without page refresh
+        window.dispatchEvent(new CustomEvent('postIdChanged', { detail: previousPostId }));
+        setIsLoadingNavigation(false);
       } else {
         navigate(`/post/${previousPostId}`);
       }
@@ -65,12 +67,23 @@ const SinglePost = ({ postId: propPostId, onClose }: SinglePostProps = {}) => {
     if (nextPostId) {
       setIsLoadingNavigation(true);
       if (onClose) {
-        // For lightbox view, don't navigate, just update the current post
+        // For lightbox view, just update URL without full page reload
         window.history.pushState({}, '', `/post/${nextPostId}`);
-        window.location.reload();
+        // Use URL to reload the component without page refresh
+        window.dispatchEvent(new CustomEvent('postIdChanged', { detail: nextPostId }));
+        setIsLoadingNavigation(false);
       } else {
         navigate(`/post/${nextPostId}`);
       }
+    }
+  };
+  
+  const handleCloseClick = () => {
+    // Always close without any other behavior
+    if (onClose) {
+      onClose();
+    } else {
+      navigate('/blog');
     }
   };
   
@@ -98,17 +111,15 @@ const SinglePost = ({ postId: propPostId, onClose }: SinglePostProps = {}) => {
             Back
           </Button>
           
-          {onClose && (
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={onClose}
-              className="rounded-full p-1.5 h-8 w-8"
-              aria-label="Close"
-            >
-              <X size={16} />
-            </Button>
-          )}
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={handleCloseClick}
+            className="rounded-full p-1.5 h-8 w-8"
+            aria-label="Close"
+          >
+            <X size={16} />
+          </Button>
         </div>
         <SinglePostSkeleton />
       </div>
@@ -129,17 +140,15 @@ const SinglePost = ({ postId: propPostId, onClose }: SinglePostProps = {}) => {
             Back
           </Button>
           
-          {onClose && (
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={onClose}
-              className="rounded-full p-1.5 h-8 w-8"
-              aria-label="Close"
-            >
-              <X size={16} />
-            </Button>
-          )}
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={handleCloseClick}
+            className="rounded-full p-1.5 h-8 w-8"
+            aria-label="Close"
+          >
+            <X size={16} />
+          </Button>
         </div>
         <div className="bg-red-50 text-red-700 p-4 rounded-lg text-center">
           <p>Error loading blog post. The post may not exist or there was a problem fetching it.</p>
@@ -171,17 +180,15 @@ const SinglePost = ({ postId: propPostId, onClose }: SinglePostProps = {}) => {
           Back
         </Button>
         
-        {onClose && (
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={onClose}
-            className="rounded-full p-1.5 h-8 w-8"
-            aria-label="Close"
-          >
-            <X size={16} />
-          </Button>
-        )}
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={handleCloseClick}
+          className="rounded-full p-1.5 h-8 w-8"
+          aria-label="Close"
+        >
+          <X size={16} />
+        </Button>
       </div>
       
       <article className="max-w-4xl mx-auto bg-white rounded-lg shadow-md overflow-hidden relative">
@@ -211,6 +218,7 @@ const SinglePost = ({ postId: propPostId, onClose }: SinglePostProps = {}) => {
               src={featuredImage}
               alt={post.title.rendered}
               className="w-full h-auto rounded-lg object-cover max-h-[500px]"
+              loading="lazy"
             />
           </div>
         )}
