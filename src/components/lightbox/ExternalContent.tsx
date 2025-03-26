@@ -15,8 +15,11 @@ const ExternalContent = ({ url }: ExternalContentProps) => {
       className="w-full h-screen" 
       frameBorder="0"
       title="External content"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      sandbox="allow-same-origin allow-scripts allow-popups allow-forms"
     />
   );
 };
 
 export default ExternalContent;
+
