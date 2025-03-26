@@ -2,7 +2,6 @@
 import React, { useState, useEffect } from 'react';
 import { MapPin } from 'lucide-react';
 import { Destination } from './types';
-import { Skeleton } from "@/components/ui/skeleton";
 
 interface DestinationCardProps {
   destination: Destination;
@@ -13,7 +12,7 @@ const DestinationCard = ({ destination, onClick }: DestinationCardProps) => {
   const [videoReady, setVideoReady] = useState(false);
   const [videoError, setVideoError] = useState(false);
   
-  // Check if the video URL is a direct video URL or a YouTube URL
+  // Always prioritize direct video files
   const isDirectVideo = destination.video && 
     (destination.video.endsWith('.mp4') || 
      destination.video.endsWith('.m4v') || 
@@ -32,13 +31,14 @@ const DestinationCard = ({ destination, onClick }: DestinationCardProps) => {
   
   // Handle video error
   const handleVideoError = () => {
+    console.error('Video error for', destination.city, destination.video);
     setVideoError(true);
   };
   
   return (
     <div 
       onClick={handleClick}
-      className="relative min-w-[220px] w-[220px] h-[200px] rounded-lg overflow-hidden shadow-md cursor-pointer snap-start transition-transform duration-300 hover:scale-[1.01] flex-shrink-0"
+      className="relative w-full h-[200px] rounded-lg overflow-hidden shadow-md cursor-pointer snap-start transition-transform duration-300 hover:scale-[1.01] flex-shrink-0"
     >
       {/* Video Background with Gradient Overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/40 to-black z-10" />

@@ -48,6 +48,15 @@ const SinglePost = ({ postId: propPostId, onClose }: SinglePostProps = {}) => {
     navigate('/blog');
   };
   
+  const handleCloseClick = () => {
+    // Always close the lightbox if onClose is provided
+    if (onClose) {
+      onClose();
+    } else {
+      navigate('/blog');
+    }
+  };
+  
   const handlePreviousClick = () => {
     if (previousPostId) {
       setIsLoadingNavigation(true);
@@ -75,15 +84,6 @@ const SinglePost = ({ postId: propPostId, onClose }: SinglePostProps = {}) => {
       } else {
         navigate(`/post/${nextPostId}`);
       }
-    }
-  };
-  
-  const handleCloseClick = () => {
-    // Always close without any other behavior
-    if (onClose) {
-      onClose();
-    } else {
-      navigate('/blog');
     }
   };
   
