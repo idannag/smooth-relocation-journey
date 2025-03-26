@@ -24,7 +24,7 @@ export const getMainNavItems = (handleSubmenuItemClick: (url: string) => void): 
       { 
         icon: <Calculator className="w-5 h-5 stroke-[1.5] text-[#517cc7]" />, 
         label: 'Cost-of-Living AI Calculator',
-        onClick: () => handleSubmenuItemClick('ocean-calculator.netlify.app')
+        onClick: () => handleSubmenuItemClick('https://ocean-calculator.netlify.app')
       }
     ]
   },
@@ -56,7 +56,7 @@ export const getMainNavItems = (handleSubmenuItemClick: (url: string) => void): 
       { 
         icon: <Route className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, 
         label: 'My Relocation Planner',
-        onClick: () => handleSubmenuItemClick('https://preview--ocean-journey-61.lovable.app/')
+        onClick: () => handleSubmenuItemClick('https://ocean-pm.netlify.app')
       },
       { 
         icon: <ShoppingCart className="w-5 h-5 stroke-[1.5] text-[#517cc7]" />, 

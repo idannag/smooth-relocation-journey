@@ -46,7 +46,7 @@ const BottomNav = () => {
       subItems: [
         { icon: <Newspaper className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, label: 'Relocation News', url: 'news' },
         { icon: <MapPin className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, label: 'Popular Destinations', url: 'destinations' },
-        { icon: <Calculator className="w-5 h-5 stroke-[1.5] text-[#517cc7]" />, label: 'Cost-of-Living AI Calculator', url: 'ocean-calculator.netlify.app' }
+        { icon: <Calculator className="w-5 h-5 stroke-[1.5] text-[#517cc7]" />, label: 'Cost-of-Living AI Calculator', url: 'https://ocean-calculator.netlify.app' }
       ]
     },
     { 

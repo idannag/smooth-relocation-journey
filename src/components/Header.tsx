@@ -130,7 +130,7 @@ const Header = () => {
               </a>
               <div className="hidden md:block">
                 <h1 className="text-lg font-semibold text-[#2C5AAE]">Ocean Relocation App</h1>
-                <p className="text-xs text-gray-600">Your complete relocation companion</p>
+                <p className="text-xs text-gray-600">Your relocation partner</p>
               </div>
             </div>
 
