@@ -5,6 +5,7 @@ export interface SubMenuItem {
   icon: JSX.Element;
   label: string;
   onClick?: () => void;
+  forceExternal?: boolean;
 }
 
 export interface NavItem {

@@ -1,3 +1,4 @@
+
 import { Home, Calculator, Newspaper, Building2, GraduationCap, UserRound, Route, Bot, BookText, Headphones, Globe, Play, ShoppingCart, MapPin } from 'lucide-react';
 import { useState, useEffect, useRef } from 'react';
 import Lightbox from './ui/lightbox';
@@ -19,14 +20,26 @@ const BottomNav = () => {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  const handleItemClick = (url: string) => {
-    if (url === 'My Ocean Community' || url === 'https://chat.whatsapp.com/LODS9mJleJU9e1Y27ml2TB') {
-      window.open('https://chat.whatsapp.com/LODS9mJleJU9e1Y27ml2TB', '_blank');
-      return;
-    }
-    
-    if (url === 'chatbot' || url === 'https://chatgpt.com/g/g-67b6c40963908191b77e23c6fecc2e57-the-24-7-relocation-life-ai-assistant') {
-      window.open('https://chatgpt.com/g/g-67b6c40963908191b77e23c6fecc2e57-the-24-7-relocation-life-ai-assistant', '_blank');
+  const handleItemClick = (url: string, forceExternal?: boolean) => {
+    // Handle external links that should open in the device browser
+    if (forceExternal || 
+        url === 'My Ocean Community' || 
+        url === 'https://chat.whatsapp.com/LODS9mJleJU9e1Y27ml2TB' ||
+        url === 'chatbot' || 
+        url === 'https://chatgpt.com/g/g-67b6c40963908191b77e23c6fecc2e57-the-24-7-relocation-life-ai-assistant') {
+      
+      const finalUrl = url === 'My Ocean Community' ? 'https://chat.whatsapp.com/LODS9mJleJU9e1Y27ml2TB' : 
+                       url === 'chatbot' ? 'https://chatgpt.com/g/g-67b6c40963908191b77e23c6fecc2e57-the-24-7-relocation-life-ai-assistant' : url;
+      
+      // Use target="_system" for WebView apps to open in the device's browser
+      const link = document.createElement('a');
+      link.href = finalUrl;
+      link.target = "_system"; // Special target recognized by mobile WebViews
+      link.rel = "noopener noreferrer";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      
       return;
     }
     
@@ -64,8 +77,8 @@ const BottomNav = () => {
       subItems: [
         { icon: <Route className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, label: 'My Relocation Planner', url: 'https://preview--ocean-journey-61.lovable.app/' },
         { icon: <ShoppingCart className="w-5 h-5 stroke-[1.5] text-[#517cc7]" />, label: 'My Services', url: 'services' },
-        { icon: <UserRound className="w-5 h-5 stroke-[1.5] text-[#517cc7]" />, label: 'My Ocean Community', url: 'https://chat.whatsapp.com/LODS9mJleJU9e1Y27ml2TB' },
-        { icon: <Bot className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, label: 'My 24/7 AI Assistant', url: 'https://chatgpt.com/g/g-67b6c40963908191b77e23c6fecc2e57-the-24-7-relocation-life-ai-assistant' }
+        { icon: <UserRound className="w-5 h-5 stroke-[1.5] text-[#517cc7]" />, label: 'My Ocean Community', url: 'https://chat.whatsapp.com/LODS9mJleJU9e1Y27ml2TB', forceExternal: true },
+        { icon: <Bot className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, label: 'My 24/7 AI Assistant', url: 'https://chatgpt.com/g/g-67b6c40963908191b77e23c6fecc2e57-the-24-7-relocation-life-ai-assistant', forceExternal: true }
       ]
     }
   ];
@@ -92,7 +105,7 @@ const BottomNav = () => {
                     {item.subItems.map((subItem, subIndex) => (
                       <button
                         key={subIndex}
-                        onClick={() => subItem.url && handleItemClick(subItem.url)}
+                        onClick={() => subItem.url && handleItemClick(subItem.url, subItem.forceExternal)}
                         className="flex items-center gap-2 px-4 py-2.5 hover:bg-gray-50 transition-colors duration-200 w-full text-left"
                       >
                         {subItem.icon}

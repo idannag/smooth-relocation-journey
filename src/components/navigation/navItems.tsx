@@ -1,7 +1,8 @@
+
 import { Home, Calculator, Newspaper, Building2, GraduationCap, UserRound, Route, Bot, Headphones, Globe, Play, ShoppingCart, MapPin } from "lucide-react";
 import { NavItem } from "@/types/navigation";
 
-export const getMainNavItems = (handleSubmenuItemClick: (url: string) => void): NavItem[] => [
+export const getMainNavItems = (handleSubmenuItemClick: (url: string, forceExternal?: boolean) => void): NavItem[] => [
   { 
     icon: <Home className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, 
     label: 'Home',
@@ -66,14 +67,12 @@ export const getMainNavItems = (handleSubmenuItemClick: (url: string) => void): 
       { 
         icon: <UserRound className="w-5 h-5 stroke-[1.5] text-[#517cc7]" />, 
         label: 'My Ocean Community',
-        onClick: () => handleSubmenuItemClick('My Ocean Community')
+        onClick: () => handleSubmenuItemClick('My Ocean Community', true)
       },
       { 
         icon: <Bot className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, 
         label: 'My 24/7 AI Assistant',
-        onClick: () => {
-          window.open('https://chatgpt.com/g/g-67b6c40963908191b77e23c6fecc2e57-the-24-7-relocation-life-ai-assistant', '_blank');
-        }
+        onClick: () => handleSubmenuItemClick('https://chatgpt.com/g/g-67b6c40963908191b77e23c6fecc2e57-the-24-7-relocation-life-ai-assistant', true)
       }
     ]
   }

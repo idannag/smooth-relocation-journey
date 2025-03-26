@@ -1,3 +1,4 @@
+
 import { useState, useEffect, useRef } from "react";
 import { Menu, X } from "lucide-react";
 import TimeStrip from "./TimeStrip";
@@ -75,18 +76,23 @@ const Header = () => {
     );
   };
 
-  const handleSubmenuItemClick = (url: string) => {
-    console.log("Submenu item clicked:", url);
+  const handleSubmenuItemClick = (url: string, forceExternal?: boolean) => {
+    console.log("Submenu item clicked:", url, "forceExternal:", forceExternal);
     
-    if (url === 'chatbot') {
-      console.log("Opening AI Assistant in new tab");
-      window.open('https://chat.widget.autodigital.agency/', '_blank');
-      setIsOpen(false);
-      return;
-    }
-    
-    if (url === 'My Ocean Community') {
-      window.open('https://chat.whatsapp.com/LODS9mJleJU9e1Y27ml2TB', '_blank');
+    // For the specific external links or when forceExternal is true, open in the device browser
+    if (forceExternal || url === 'chatbot' || url === 'My Ocean Community' || 
+        url === 'https://chatgpt.com/g/g-67b6c40963908191b77e23c6fecc2e57-the-24-7-relocation-life-ai-assistant') {
+      // Use target="_system" for WebView apps, which is interpreted correctly by mobile WebViews
+      // This opens the link in the device's default browser instead of the WebView
+      const link = document.createElement('a');
+      link.href = url === 'My Ocean Community' ? 'https://chat.whatsapp.com/LODS9mJleJU9e1Y27ml2TB' : 
+                  url === 'chatbot' ? 'https://chat.widget.autodigital.agency/' : url;
+      link.target = "_system"; // This special target is recognized by Cordova/Capacitor WebViews
+      link.rel = "noopener noreferrer";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      
       setIsOpen(false);
       return;
     }
