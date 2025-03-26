@@ -22,4 +22,7 @@ export interface Destination {
   populationDensity?: string;
   gdpPerCapita?: string;
   flagImg?: string;
+  housingMarket?: string;
+  publicTransport?: string;
+  cafeCulture?: string;
 }
