@@ -30,6 +30,14 @@ const PopularDestinationsLightbox = ({
   if (!loading && destinations.length === 0) {
     return <div className="p-2 text-center">
         <p>No destinations found. Please try again later.</p>
+        {onClose && (
+          <Button 
+            onClick={onClose} 
+            className="mt-4 bg-gradient-to-r from-[#2C5AAE] to-[#40E0D0] hover:opacity-90"
+          >
+            Back to Home
+          </Button>
+        )}
       </div>;
   }
 
@@ -68,6 +76,7 @@ const PopularDestinationsLightbox = ({
         <ChevronRight className="w-6 h-6 text-[#2C5AAE]" />
       </button>
 
+      {/* Content */}
       <div className={`relative ${isMobile ? 'px-1' : 'px-10'}`}>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-8">
           {/* Left side: Map/video display */}

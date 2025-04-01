@@ -16,12 +16,7 @@ export const handleNavigation = (
   // External application mappings
   const externalAppMappings: Record<string, string> = {
     'My Ocean Community': 'https://chat.whatsapp.com/LODS9mJleJU9e1Y27ml2TB',
-    'https://ocean-calculator.netlify.app': 'https://ocean-calculator.netlify.app',
-    'https://ocean-calculator.netlify.app': 'https://ocean-calculator.netlify.app',
-    'https://www.app.ocean-il.co.il/form/relocation-journey/9/': 'https://www.app.ocean-il.co.il/form/relocation-journey/9/',
-    'https://www.app.ocean-il.co.il/education-copy/': 'https://www.app.ocean-il.co.il/education-copy/',
-    'https://www.app.ocean-il.co.il/real-estate-copy/': 'https://www.app.ocean-il.co.il/real-estate-copy/',
-    'https://chatgpt.com/g/g-67b6c40963908191b77e23c6fecc2e57-the-24-7-relocation-life-ai-assistant': 'https://chatgpt.com/g/g-67b6c40963908191b77e23c6fecc2e57-the-24-7-relocation-life-ai-assistant'
+    'https://ocean-calculator.netlify.app': 'https://ocean-calculator.netlify.app'
   };
   
   // For internal navigation - map to appropriate routes
@@ -63,7 +58,8 @@ export const handleNavigation = (
       // Check if it's an external URL that needs to be opened in a new tab
       if (externalAppMappings[url] || forceExternal || url.startsWith('http')) {
         const externalUrl = externalAppMappings[url] || url;
-        window.open(externalUrl, '_blank');
+        // For external URLs, use the lightbox approach
+        navigate(`/?external=${encodeURIComponent(externalUrl)}`);
       } else {
         // Fall back to standard navigation
         navigate(url);

@@ -57,8 +57,8 @@ const Lightbox = ({ url, onClose }: LightboxProps) => {
   const contentInfo = getLightboxContent(url, postId);
   
   // Determine if header should be displayed
-  // Only hide header for external content and destination details
-  const shouldDisplayHeader = !url.startsWith('http');
+  // We'll always show header to ensure consistent closing behavior
+  const shouldDisplayHeader = true;
 
   return (
     <Sheet open={true} onOpenChange={handleClose}>

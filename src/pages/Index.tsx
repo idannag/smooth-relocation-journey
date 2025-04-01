@@ -1,6 +1,6 @@
 
-import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import Header from '../components/Header';
 import VideoHero from '../components/VideoHero';
 import IntroSection from '../components/IntroSection';
@@ -22,14 +22,26 @@ interface IndexProps {
 
 const Index = ({ initialSection }: IndexProps = {}) => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const [externalUrl, setExternalUrl] = useState<string | null>(null);
   
   useEffect(() => {
-    // If an initial section is specified, show the appropriate lightbox
+    // Check for external URL in query params
+    const searchParams = new URLSearchParams(location.search);
+    const external = searchParams.get('external');
+    
+    if (external) {
+      setExternalUrl(decodeURIComponent(external));
+    } else {
+      setExternalUrl(null);
+    }
+    
+    // If an initial section is specified, prepare the URL
     if (initialSection) {
       const url = initialSectionToUrl(initialSection);
-      // We don't need to manually create a lightbox - the component below will handle it
+      console.log("Initial section URL:", url);
     }
-  }, [initialSection, navigate]);
+  }, [initialSection, location.search, navigate]);
   
   // Convert section name to lightbox URL
   const initialSectionToUrl = (section: string): string => {
@@ -50,7 +62,7 @@ const Index = ({ initialSection }: IndexProps = {}) => {
       case 'community':
         return 'My Ocean Community';
       case 'planner':
-        return 'https://ocean-pm.netlify.app';
+        return 'https://ocean-calculator.netlify.app';
       case 'consult-relocation':
         return 'https://www.app.ocean-il.co.il/form/relocation-journey/9/';
       case 'consult-education':
@@ -64,6 +76,7 @@ const Index = ({ initialSection }: IndexProps = {}) => {
 
   // Handle closing the lightbox
   const handleCloseLightbox = () => {
+    // Clear any query parameters
     navigate('/');
   };
 
@@ -81,10 +94,10 @@ const Index = ({ initialSection }: IndexProps = {}) => {
       <FooterVideo />
       <BottomNav />
       
-      {/* Conditionally render the lightbox if initialSection is provided */}
-      {initialSection && (
+      {/* Conditionally render the lightbox if initialSection is provided or external URL exists */}
+      {(initialSection || externalUrl) && (
         <Lightbox 
-          url={initialSectionToUrl(initialSection)} 
+          url={externalUrl || initialSectionToUrl(initialSection || '')} 
           onClose={handleCloseLightbox} 
         />
       )}
