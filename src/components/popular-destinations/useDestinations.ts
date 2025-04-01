@@ -94,6 +94,14 @@ export const useDestinations = (initialCity?: string) => {
             else if (key === 'housingmarket') destination.housingMarket = values[i] || '';
             else if (key === 'publictransport') destination.publicTransport = values[i] || '';
             else if (key === 'cafeculture') destination.cafeCulture = values[i] || '';
+            else if (key === 'internetconnectivity') destination.internetConnectivity = values[i] || '';
+            else if (key === 'healthcaresystem') destination.healthcareSystem = values[i] || '';
+            else if (key === 'educationsystem') destination.educationSystem = values[i] || '';
+            else if (key === 'jobmarket') destination.jobMarket = values[i] || '';
+            else if (key === 'qualityoflife') destination.qualityOfLife = values[i] || '';
+            else if (key === 'climate') destination.climate = values[i] || '';
+            else if (key === 'naturalenvironment') destination.naturalEnvironment = values[i] || '';
+            else if (key === 'safety') destination.safety = values[i] || '';
             else {
               // For any other fields, add them to the destination object
               (destination as any)[key] = values[i] || '';

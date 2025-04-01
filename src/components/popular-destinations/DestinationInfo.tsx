@@ -1,5 +1,5 @@
 
-import { Globe, Banknote, Calendar, MapPin, Languages, Users, FileText, FileCheck, Home, Bus, Coffee } from 'lucide-react';
+import { Globe, Banknote, Calendar, MapPin, Languages, Users, FileText, FileCheck, Home, Bus, Coffee, Phone, Wifi, Mountain, Smile, Briefcase, School, Heart, Sun, Umbrella } from 'lucide-react';
 import { Destination } from './types';
 
 interface DestinationInfoProps {
@@ -141,6 +141,94 @@ const DestinationInfo = ({
             <div>
               <h4 className="font-semibold">Unique Relocation Facts:</h4>
               <p className="text-sm text-gray-600">{activeDestination.uniqueRelocationFacts}</p>
+            </div>
+          </div>
+        )}
+        
+        {/* Internet Connectivity */}
+        {activeDestination.internetConnectivity && (
+          <div className="flex items-start gap-2">
+            <Wifi className="w-5 h-5 text-[#2C5AAE] mt-0.5 flex-shrink-0" />
+            <div>
+              <h4 className="font-semibold">Internet:</h4>
+              <p className="text-sm text-gray-600">{activeDestination.internetConnectivity}</p>
+            </div>
+          </div>
+        )}
+        
+        {/* Healthcare System */}
+        {activeDestination.healthcareSystem && (
+          <div className="flex items-start gap-2">
+            <Heart className="w-5 h-5 text-[#2C5AAE] mt-0.5 flex-shrink-0" />
+            <div>
+              <h4 className="font-semibold">Healthcare:</h4>
+              <p className="text-sm text-gray-600">{activeDestination.healthcareSystem}</p>
+            </div>
+          </div>
+        )}
+        
+        {/* Education System */}
+        {activeDestination.educationSystem && (
+          <div className="flex items-start gap-2">
+            <School className="w-5 h-5 text-[#2C5AAE] mt-0.5 flex-shrink-0" />
+            <div>
+              <h4 className="font-semibold">Education:</h4>
+              <p className="text-sm text-gray-600">{activeDestination.educationSystem}</p>
+            </div>
+          </div>
+        )}
+        
+        {/* Job Market */}
+        {activeDestination.jobMarket && (
+          <div className="flex items-start gap-2">
+            <Briefcase className="w-5 h-5 text-[#2C5AAE] mt-0.5 flex-shrink-0" />
+            <div>
+              <h4 className="font-semibold">Job Market:</h4>
+              <p className="text-sm text-gray-600">{activeDestination.jobMarket}</p>
+            </div>
+          </div>
+        )}
+        
+        {/* Quality of Life */}
+        {activeDestination.qualityOfLife && (
+          <div className="flex items-start gap-2">
+            <Smile className="w-5 h-5 text-[#2C5AAE] mt-0.5 flex-shrink-0" />
+            <div>
+              <h4 className="font-semibold">Quality of Life:</h4>
+              <p className="text-sm text-gray-600">{activeDestination.qualityOfLife}</p>
+            </div>
+          </div>
+        )}
+        
+        {/* Climate */}
+        {activeDestination.climate && (
+          <div className="flex items-start gap-2">
+            <Sun className="w-5 h-5 text-[#2C5AAE] mt-0.5 flex-shrink-0" />
+            <div>
+              <h4 className="font-semibold">Climate:</h4>
+              <p className="text-sm text-gray-600">{activeDestination.climate}</p>
+            </div>
+          </div>
+        )}
+        
+        {/* Natural Environment */}
+        {activeDestination.naturalEnvironment && (
+          <div className="flex items-start gap-2">
+            <Mountain className="w-5 h-5 text-[#2C5AAE] mt-0.5 flex-shrink-0" />
+            <div>
+              <h4 className="font-semibold">Natural Environment:</h4>
+              <p className="text-sm text-gray-600">{activeDestination.naturalEnvironment}</p>
+            </div>
+          </div>
+        )}
+        
+        {/* Safety */}
+        {activeDestination.safety && (
+          <div className="flex items-start gap-2">
+            <FileCheck className="w-5 h-5 text-[#2C5AAE] mt-0.5 flex-shrink-0" />
+            <div>
+              <h4 className="font-semibold">Safety:</h4>
+              <p className="text-sm text-gray-600">{activeDestination.safety}</p>
             </div>
           </div>
         )}

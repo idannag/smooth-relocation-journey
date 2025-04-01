@@ -25,4 +25,12 @@ export interface Destination {
   housingMarket?: string;
   publicTransport?: string;
   cafeCulture?: string;
+  internetConnectivity?: string;
+  healthcareSystem?: string;
+  educationSystem?: string;
+  jobMarket?: string;
+  qualityOfLife?: string;
+  climate?: string;
+  naturalEnvironment?: string;
+  safety?: string;
 }
