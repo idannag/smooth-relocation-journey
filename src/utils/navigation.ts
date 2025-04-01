@@ -17,7 +17,7 @@ export const handleNavigation = (
   const externalAppMappings: Record<string, string> = {
     'My Ocean Community': 'https://chat.whatsapp.com/LODS9mJleJU9e1Y27ml2TB',
     'https://ocean-calculator.netlify.app': 'https://ocean-calculator.netlify.app',
-    'https://preview--ocean-journey-61.lovable.app/': 'https://preview--ocean-journey-61.lovable.app/',
+    'https://ocean-calculator.netlify.app': 'https://ocean-calculator.netlify.app',
     'https://www.app.ocean-il.co.il/form/relocation-journey/9/': 'https://www.app.ocean-il.co.il/form/relocation-journey/9/',
     'https://www.app.ocean-il.co.il/education-copy/': 'https://www.app.ocean-il.co.il/education-copy/',
     'https://www.app.ocean-il.co.il/real-estate-copy/': 'https://www.app.ocean-il.co.il/real-estate-copy/',
