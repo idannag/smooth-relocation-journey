@@ -7,16 +7,18 @@ import {
 import LightboxHeader from '../lightbox/LightboxHeader';
 import { getLightboxContent } from '../lightbox/getLightboxContent';
 import LoadingSpinner from '../lightbox/LoadingSpinner';
+import { useNavigate } from 'react-router-dom';
 
 interface LightboxProps {
   url: string;
-  onClose: () => void;
+  onClose?: () => void;
 }
 
 const Lightbox = ({ url, onClose }: LightboxProps) => {
   const [isClient, setIsClient] = useState(false);
   const [postId, setPostId] = useState<number | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const navigate = useNavigate();
   
   useEffect(() => {
     setIsClient(true);
@@ -38,6 +40,16 @@ const Lightbox = ({ url, onClose }: LightboxProps) => {
     return () => clearTimeout(timer);
   }, [url]);
 
+  // Handle closing the lightbox
+  const handleClose = () => {
+    if (onClose) {
+      onClose();
+    } else {
+      // Default behavior - navigate to home page
+      navigate('/');
+    }
+  };
+
   // If on server-side, return null to prevent hydration mismatch
   if (!isClient) return null;
 
@@ -49,7 +61,7 @@ const Lightbox = ({ url, onClose }: LightboxProps) => {
   const shouldDisplayHeader = !url.startsWith('http');
 
   return (
-    <Sheet open={true} onOpenChange={() => onClose()}>
+    <Sheet open={true} onOpenChange={handleClose}>
       <SheetContent 
         className="w-full sm:max-w-none p-0 h-screen overflow-y-auto bg-gradient-to-b from-[#D3E4FD] to-white animate-fade-in" 
         side="top"
@@ -57,7 +69,7 @@ const Lightbox = ({ url, onClose }: LightboxProps) => {
         <LightboxHeader 
           title={contentInfo.title}
           subtitle={contentInfo.subtitle}
-          onClose={onClose}
+          onClose={handleClose}
           shouldDisplay={shouldDisplayHeader}
         />
         
@@ -65,7 +77,7 @@ const Lightbox = ({ url, onClose }: LightboxProps) => {
           {isLoading ? (
             <LoadingSpinner />
           ) : (
-            React.cloneElement(contentInfo.component as React.ReactElement, { onClose })
+            React.cloneElement(contentInfo.component as React.ReactElement, { onClose: handleClose })
           )}
         </div>
       </SheetContent>

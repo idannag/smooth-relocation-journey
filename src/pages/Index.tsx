@@ -1,5 +1,6 @@
 
 import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
 import VideoHero from '../components/VideoHero';
 import IntroSection from '../components/IntroSection';
@@ -20,41 +21,15 @@ interface IndexProps {
 }
 
 const Index = ({ initialSection }: IndexProps = {}) => {
+  const navigate = useNavigate();
+  
   useEffect(() => {
-    // If an initial section is specified, open the appropriate lightbox
+    // If an initial section is specified, show the appropriate lightbox
     if (initialSection) {
-      // Small timeout to ensure the page has loaded
-      const timer = setTimeout(() => {
-        const url = initialSectionToUrl(initialSection);
-        if (url) {
-          // Show the appropriate lightbox content
-          const lightboxElement = document.createElement('div');
-          lightboxElement.id = 'dynamic-lightbox';
-          document.body.appendChild(lightboxElement);
-          
-          const root = document.getElementById('root');
-          if (root) {
-            root.style.overflow = 'hidden';
-          }
-          
-          const handleClose = () => {
-            document.body.removeChild(lightboxElement);
-            if (root) {
-              root.style.overflow = '';
-            }
-            window.history.pushState({}, '', '/');
-          };
-          
-          // Create and render the lightbox
-          const lightbox = <Lightbox url={url} onClose={handleClose} />;
-          // We'd typically use ReactDOM.render here, but since we're in a React component,
-          // we'll need a different approach in a real implementation
-        }
-      }, 100);
-      
-      return () => clearTimeout(timer);
+      const url = initialSectionToUrl(initialSection);
+      // We don't need to manually create a lightbox - the component below will handle it
     }
-  }, [initialSection]);
+  }, [initialSection, navigate]);
   
   // Convert section name to lightbox URL
   const initialSectionToUrl = (section: string): string => {
@@ -73,7 +48,7 @@ const Index = ({ initialSection }: IndexProps = {}) => {
       case 'cost-calculator':
         return 'https://ocean-calculator.netlify.app';
       case 'community':
-        return 'https://chat.whatsapp.com/LODS9mJleJU9e1Y27ml2TB';
+        return 'My Ocean Community';
       case 'planner':
         return 'https://preview--ocean-journey-61.lovable.app/';
       case 'consult-relocation':
@@ -85,6 +60,11 @@ const Index = ({ initialSection }: IndexProps = {}) => {
       default:
         return '';
     }
+  };
+
+  // Handle closing the lightbox
+  const handleCloseLightbox = () => {
+    navigate('/');
   };
 
   return (
@@ -105,7 +85,7 @@ const Index = ({ initialSection }: IndexProps = {}) => {
       {initialSection && (
         <Lightbox 
           url={initialSectionToUrl(initialSection)} 
-          onClose={() => window.history.pushState({}, '', '/')} 
+          onClose={handleCloseLightbox} 
         />
       )}
     </div>

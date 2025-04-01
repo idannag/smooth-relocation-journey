@@ -31,7 +31,7 @@ const LightboxHeader = ({
         aria-label="Close" 
         className="rounded-full p-2.5 hover:bg-gray-100 transition-colors flex-shrink-0 border border-gray-200 shadow-sm"
       >
-        <X className="h-7 w-7 text-gray-600" />
+        <X className="h-8 w-8 text-gray-600" />
       </button>
     </SheetHeader>
   );

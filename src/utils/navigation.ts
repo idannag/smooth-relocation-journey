@@ -24,19 +24,6 @@ export const handleNavigation = (
     'https://chatgpt.com/g/g-67b6c40963908191b77e23c6fecc2e57-the-24-7-relocation-life-ai-assistant': 'https://chatgpt.com/g/g-67b6c40963908191b77e23c6fecc2e57-the-24-7-relocation-life-ai-assistant'
   };
   
-  // Check if we have a special mapping for this URL
-  if (externalAppMappings[url] || forceExternal) {
-    const externalUrl = externalAppMappings[url] || url;
-    window.open(externalUrl, '_blank');
-    return;
-  }
-  
-  // Check if the URL is external
-  if (url.startsWith('http')) {
-    window.open(url, '_blank');
-    return;
-  }
-  
   // For internal navigation - map to appropriate routes
   switch (url) {
     case 'news':
@@ -69,8 +56,18 @@ export const handleNavigation = (
     case 'Real-Estate':
       navigate('/consult/real-estate');
       break;
+    case 'My Ocean Community':
+      navigate('/community');
+      break;
     default:
-      navigate(url);
+      // Check if it's an external URL that needs to be opened in a new tab
+      if (externalAppMappings[url] || forceExternal || url.startsWith('http')) {
+        const externalUrl = externalAppMappings[url] || url;
+        window.open(externalUrl, '_blank');
+      } else {
+        // Fall back to standard navigation
+        navigate(url);
+      }
       break;
   }
 };
