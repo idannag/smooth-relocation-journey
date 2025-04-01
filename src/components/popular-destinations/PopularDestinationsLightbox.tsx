@@ -38,11 +38,11 @@ const PopularDestinationsLightbox = ({
       
 
       {/* Navigation buttons moved outside to the whole component */}
-      <button onClick={handlePrev} aria-label="Previous destination" className="absolute left-0 top-1/2 -translate-y-1/2 bg-white/90 rounded-full p-2 shadow-lg transition-all duration-300 hover:bg-white hover:scale-110 z-10">
+      <button onClick={handlePrev} aria-label="Previous destination" className="absolute left-0 top-1/4 -translate-y-1/4 bg-white/90 rounded-full p-2 shadow-lg transition-all duration-300 hover:bg-white hover:scale-110 z-10">
         <ChevronLeft className="w-6 h-6 text-[#2C5AAE]" />
       </button>
       
-      <button onClick={handleNext} aria-label="Next destination" className="absolute right-0 top-1/2 -translate-y-1/2 bg-white/90 rounded-full p-2 shadow-lg transition-all duration-300 hover:bg-white hover:scale-110 z-10">
+      <button onClick={handleNext} aria-label="Next destination" className="absolute right-0 top-1/4 -translate-y-1/4 bg-white/90 rounded-full p-2 shadow-lg transition-all duration-300 hover:bg-white hover:scale-110 z-10">
         <ChevronRight className="w-6 h-6 text-[#2C5AAE]" />
       </button>
 
