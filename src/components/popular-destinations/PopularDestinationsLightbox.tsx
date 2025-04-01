@@ -49,10 +49,10 @@ const PopularDestinationsLightbox = ({ initialCity, onClose }: PopularDestinatio
             variant="ghost"
             size="icon"
             onClick={onClose}
-            className="rounded-full p-1.5 h-8 w-8"
+            className="rounded-full p-2.5 h-10 w-10 hover:bg-gray-100 border border-gray-200 shadow-sm"
             aria-label="Close"
           >
-            <X size={16} />
+            <X size={20} className="text-gray-600" />
           </Button>
         )}
       </div>

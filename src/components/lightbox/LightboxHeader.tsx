@@ -28,10 +28,10 @@ const LightboxHeader = ({ title, subtitle, onClose, shouldDisplay = true }: Ligh
       </div>
       <button 
         onClick={onClose}
-        className="rounded-full p-1.5 hover:bg-gray-100 transition-colors flex-shrink-0"
+        className="rounded-full p-2.5 hover:bg-gray-100 transition-colors flex-shrink-0 border border-gray-200 shadow-sm"
         aria-label="Close"
       >
-        <X className="h-5 w-5" />
+        <X className="h-6 w-6 text-gray-600" />
       </button>
     </SheetHeader>
   );
