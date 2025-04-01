@@ -1,13 +1,16 @@
 
 import { Home, Calculator, Newspaper, Building2, GraduationCap, UserRound, Route, Bot, BookText, Headphones, Globe, Play, ShoppingCart, MapPin } from 'lucide-react';
 import { useState, useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Lightbox from './ui/lightbox';
+import { handleNavigation } from '../utils/navigation';
 
 const BottomNav = () => {
   const [activeSection, setActiveSection] = useState<string | null>(null);
   const [showLightbox, setShowLightbox] = useState(false);
   const [lightboxUrl, setLightboxUrl] = useState("");
   const navRef = useRef<HTMLDivElement>(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -21,30 +24,9 @@ const BottomNav = () => {
   }, []);
 
   const handleItemClick = (url: string, forceExternal?: boolean) => {
-    // Handle external links that should open in the device browser
-    if (forceExternal || 
-        url === 'My Ocean Community' || 
-        url === 'https://chat.whatsapp.com/LODS9mJleJU9e1Y27ml2TB' ||
-        url === 'chatbot' || 
-        url === 'https://chatgpt.com/g/g-67b6c40963908191b77e23c6fecc2e57-the-24-7-relocation-life-ai-assistant') {
-      
-      const finalUrl = url === 'My Ocean Community' ? 'https://chat.whatsapp.com/LODS9mJleJU9e1Y27ml2TB' : 
-                       url === 'chatbot' ? 'https://chatgpt.com/g/g-67b6c40963908191b77e23c6fecc2e57-the-24-7-relocation-life-ai-assistant' : url;
-      
-      // Use target="_system" for WebView apps to open in the device's browser
-      const link = document.createElement('a');
-      link.href = finalUrl;
-      link.target = "_system"; // Special target recognized by mobile WebViews
-      link.rel = "noopener noreferrer";
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      
-      return;
-    }
-    
-    setLightboxUrl(url);
-    setShowLightbox(true);
+    // Use our centralized navigation handler
+    handleNavigation(url, navigate, forceExternal);
+    setActiveSection(null);
   };
 
   const mainNavItems = [
@@ -57,27 +39,27 @@ const BottomNav = () => {
       icon: <Calculator className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, 
       label: 'Useful Info',
       subItems: [
-        { icon: <Newspaper className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, label: 'Relocation News', url: 'news' },
-        { icon: <MapPin className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, label: 'Popular Destinations', url: 'destinations' },
-        { icon: <Calculator className="w-5 h-5 stroke-[1.5] text-[#517cc7]" />, label: 'Cost-of-Living AI Calculator', url: 'https://ocean-calculator.netlify.app' }
+        { icon: <Newspaper className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, label: 'Relocation News', url: '/news' },
+        { icon: <MapPin className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, label: 'Popular Destinations', url: '/destinations' },
+        { icon: <Calculator className="w-5 h-5 stroke-[1.5] text-[#517cc7]" />, label: 'Cost-of-Living AI Calculator', url: 'https://ocean-calculator.netlify.app', forceExternal: true }
       ]
     },
     { 
       icon: <Headphones className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, 
       label: 'Consult',
       subItems: [
-        { icon: <Home className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, label: 'Relocation', url: 'https://www.app.ocean-il.co.il/form/relocation-journey/9/' },
-        { icon: <GraduationCap className="w-5 h-5 stroke-[1.5] text-[#517cc7]" />, label: 'Education', url: 'https://www.app.ocean-il.co.il/education-copy/' },
-        { icon: <Building2 className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, label: 'Real-Estate', url: 'https://www.app.ocean-il.co.il/real-estate-copy/' }
+        { icon: <Home className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, label: 'Relocation', url: 'https://www.app.ocean-il.co.il/form/relocation-journey/9/', forceExternal: true },
+        { icon: <GraduationCap className="w-5 h-5 stroke-[1.5] text-[#517cc7]" />, label: 'Education', url: 'https://www.app.ocean-il.co.il/education-copy/', forceExternal: true },
+        { icon: <Building2 className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, label: 'Real-Estate', url: 'https://www.app.ocean-il.co.il/real-estate-copy/', forceExternal: true }
       ]
     },
     { 
       icon: <UserRound className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, 
       label: 'Client Area',
       subItems: [
-        { icon: <Route className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, label: 'My Relocation Planner', url: 'https://preview--ocean-journey-61.lovable.app/' },
-        { icon: <ShoppingCart className="w-5 h-5 stroke-[1.5] text-[#517cc7]" />, label: 'My Services', url: 'services' },
-        { icon: <UserRound className="w-5 h-5 stroke-[1.5] text-[#517cc7]" />, label: 'My Ocean Community', url: 'https://chat.whatsapp.com/LODS9mJleJU9e1Y27ml2TB', forceExternal: true },
+        { icon: <Route className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, label: 'My Relocation Planner', url: 'https://preview--ocean-journey-61.lovable.app/', forceExternal: true },
+        { icon: <ShoppingCart className="w-5 h-5 stroke-[1.5] text-[#517cc7]" />, label: 'My Services', url: '/services' },
+        { icon: <UserRound className="w-5 h-5 stroke-[1.5] text-[#517cc7]" />, label: 'My Ocean Community', url: 'My Ocean Community', forceExternal: true },
         { icon: <Bot className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, label: 'My 24/7 AI Assistant', url: 'https://chatgpt.com/g/g-67b6c40963908191b77e23c6fecc2e57-the-24-7-relocation-life-ai-assistant', forceExternal: true }
       ]
     }
@@ -119,13 +101,6 @@ const BottomNav = () => {
           </div>
         </div>
       </nav>
-
-      {showLightbox && (
-        <Lightbox 
-          url={lightboxUrl}
-          onClose={() => setShowLightbox(false)}
-        />
-      )}
     </>
   );
 };

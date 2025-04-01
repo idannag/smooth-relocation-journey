@@ -35,6 +35,16 @@ const App = () => (
           <Route path="/chatbot" element={<Index initialSection="chatbot" />} />
           <Route path="/time-currency" element={<Index initialSection="time-currency" />} />
           
+          {/* External application routes */}
+          <Route path="/cost-calculator" element={<Index initialSection="cost-calculator" />} />
+          <Route path="/community" element={<Index initialSection="community" />} />
+          <Route path="/planner" element={<Index initialSection="planner" />} />
+          
+          {/* Consultation routes */}
+          <Route path="/consult/relocation" element={<Index initialSection="consult-relocation" />} />
+          <Route path="/consult/education" element={<Index initialSection="consult-education" />} />
+          <Route path="/consult/real-estate" element={<Index initialSection="consult-real-estate" />} />
+          
           {/* Legacy lightbox routes - we'll maintain these for backward compatibility */}
           <Route path="/blog-lightbox" element={<Lightbox url="news" onClose={() => window.history.back()} />} />
           <Route path="/services-lightbox" element={<Lightbox url="services" onClose={() => window.history.back()} />} />

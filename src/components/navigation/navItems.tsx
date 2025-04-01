@@ -25,7 +25,7 @@ export const getMainNavItems = (handleSubmenuItemClick: (url: string, forceExter
       { 
         icon: <Calculator className="w-5 h-5 stroke-[1.5] text-[#517cc7]" />, 
         label: 'Cost-of-Living AI Calculator',
-        onClick: () => handleSubmenuItemClick('https://ocean-calculator.netlify.app')
+        onClick: () => handleSubmenuItemClick('https://ocean-calculator.netlify.app', true)
       }
     ]
   },
@@ -36,17 +36,17 @@ export const getMainNavItems = (handleSubmenuItemClick: (url: string, forceExter
       { 
         icon: <Home className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, 
         label: 'Relocation',
-        onClick: () => handleSubmenuItemClick('https://www.app.ocean-il.co.il/form/relocation-journey/9/')
+        onClick: () => handleSubmenuItemClick('https://www.app.ocean-il.co.il/form/relocation-journey/9/', true)
       },
       { 
         icon: <GraduationCap className="w-5 h-5 stroke-[1.5] text-[#517cc7]" />, 
         label: 'Education',
-        onClick: () => handleSubmenuItemClick('https://www.app.ocean-il.co.il/education-copy/')
+        onClick: () => handleSubmenuItemClick('https://www.app.ocean-il.co.il/education-copy/', true)
       },
       { 
         icon: <Building2 className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, 
         label: 'Real-Estate',
-        onClick: () => handleSubmenuItemClick('https://www.app.ocean-il.co.il/real-estate-copy/')
+        onClick: () => handleSubmenuItemClick('https://www.app.ocean-il.co.il/real-estate-copy/', true)
       }
     ]
   },
@@ -57,7 +57,7 @@ export const getMainNavItems = (handleSubmenuItemClick: (url: string, forceExter
       { 
         icon: <Route className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, 
         label: 'My Relocation Planner',
-        onClick: () => handleSubmenuItemClick('https://ocean-pm.netlify.app')
+        onClick: () => handleSubmenuItemClick('https://preview--ocean-journey-61.lovable.app/', true)
       },
       { 
         icon: <ShoppingCart className="w-5 h-5 stroke-[1.5] text-[#517cc7]" />, 
@@ -72,7 +72,7 @@ export const getMainNavItems = (handleSubmenuItemClick: (url: string, forceExter
       { 
         icon: <Bot className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, 
         label: 'My 24/7 AI Assistant',
-        onClick: () => handleSubmenuItemClick('/chatbot')
+        onClick: () => handleSubmenuItemClick('https://chatgpt.com/g/g-67b6c40963908191b77e23c6fecc2e57-the-24-7-relocation-life-ai-assistant', true)
       }
     ]
   }

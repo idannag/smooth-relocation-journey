@@ -1,23 +1,22 @@
 
 import { useState, useEffect, useRef } from "react";
 import { Menu, X } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import TimeStrip from "./TimeStrip";
 import CurrencyStrip from "./CurrencyStrip";
 import { useIsMobile } from '../hooks/use-mobile';
 import DesktopNav from "./navigation/DesktopNav";
 import MobileNav from "./navigation/MobileNav";
-import Lightbox from "./ui/lightbox";
 import { getMainNavItems } from "./navigation/navItems";
 import Chatbot from "./Chatbot";
+import { handleNavigation } from "../utils/navigation";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [expandedItems, setExpandedItems] = useState<string[]>([]);
-  const [showLightbox, setShowLightbox] = useState(false);
-  const [lightboxContent, setLightboxContent] = useState<string>('');
-  const [showChatbot, setShowChatbot] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const isMobile = useIsMobile();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const preloadResources = () => {
@@ -79,45 +78,19 @@ const Header = () => {
   const handleSubmenuItemClick = (url: string, forceExternal?: boolean) => {
     console.log("Submenu item clicked:", url, "forceExternal:", forceExternal);
     
-    // For the specific external links or when forceExternal is true, open in the device browser
-    if (forceExternal || url === 'chatbot' || url === 'My Ocean Community' || 
-        url === 'https://chatgpt.com/g/g-67b6c40963908191b77e23c6fecc2e57-the-24-7-relocation-life-ai-assistant') {
-      // Use target="_system" for WebView apps, which is interpreted correctly by mobile WebViews
-      // This opens the link in the device's default browser instead of the WebView
-      const link = document.createElement('a');
-      link.href = url === 'My Ocean Community' ? 'https://chat.whatsapp.com/LODS9mJleJU9e1Y27ml2TB' : 
-                  url === 'chatbot' ? 'https://chat.widget.autodigital.agency/' : url;
-      link.target = "_system"; // This special target is recognized by Cordova/Capacitor WebViews
-      link.rel = "noopener noreferrer";
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      
-      setIsOpen(false);
-      return;
-    }
-    
-    if (url.startsWith('http')) {
-      setLightboxContent(url);
-      setShowLightbox(true);
-      setIsOpen(false);
-      return;
-    }
-    
-    setLightboxContent(url);
-    setShowLightbox(true);
+    // Use our centralized navigation handler
+    handleNavigation(url, navigate, forceExternal);
     setIsOpen(false);
   };
 
   const handleTimeOrCurrencyClick = () => {
     console.log("Opening time-currency lightbox");
-    setLightboxContent('time-currency');
-    setShowLightbox(true);
+    navigate('/time-currency');
   };
 
-  const mainNavItems = getMainNavItems((url) => {
+  const mainNavItems = getMainNavItems((url, forceExternal) => {
     console.log("Main nav item handler with URL:", url);
-    handleSubmenuItemClick(url);
+    handleSubmenuItemClick(url, forceExternal);
   });
 
   return (
@@ -175,17 +148,6 @@ const Header = () => {
           menuRef={menuRef}
         />
       </header>
-
-      {showLightbox && (
-        <Lightbox 
-          url={lightboxContent}
-          onClose={() => setShowLightbox(false)}
-        />
-      )}
-
-      {showChatbot && (
-        <Chatbot onClose={() => setShowChatbot(false)} />
-      )}
     </>
   );
 };
