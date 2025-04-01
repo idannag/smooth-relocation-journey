@@ -57,7 +57,7 @@ export const getMainNavItems = (handleSubmenuItemClick: (url: string, forceExter
       { 
         icon: <Route className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, 
         label: 'My Relocation Planner',
-        onClick: () => handleSubmenuItemClick('https://preview--ocean-journey-61.lovable.app/', true)
+        onClick: () => handleSubmenuItemClick('https://ocean-calculator.netlify.app', true)
       },
       { 
         icon: <ShoppingCart className="w-5 h-5 stroke-[1.5] text-[#517cc7]" />, 
