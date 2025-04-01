@@ -15,12 +15,12 @@ export const getMainNavItems = (handleSubmenuItemClick: (url: string, forceExter
       { 
         icon: <Newspaper className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, 
         label: 'Relocation News',
-        onClick: () => handleSubmenuItemClick('news')
+        onClick: () => handleSubmenuItemClick('/news')
       },
       { 
         icon: <MapPin className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, 
         label: 'Popular Destinations',
-        onClick: () => handleSubmenuItemClick('destinations')
+        onClick: () => handleSubmenuItemClick('/destinations')
       },
       { 
         icon: <Calculator className="w-5 h-5 stroke-[1.5] text-[#517cc7]" />, 
@@ -62,7 +62,7 @@ export const getMainNavItems = (handleSubmenuItemClick: (url: string, forceExter
       { 
         icon: <ShoppingCart className="w-5 h-5 stroke-[1.5] text-[#517cc7]" />, 
         label: 'My Services',
-        onClick: () => handleSubmenuItemClick('services')
+        onClick: () => handleSubmenuItemClick('/services')
       },
       { 
         icon: <UserRound className="w-5 h-5 stroke-[1.5] text-[#517cc7]" />, 
@@ -72,7 +72,7 @@ export const getMainNavItems = (handleSubmenuItemClick: (url: string, forceExter
       { 
         icon: <Bot className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, 
         label: 'My 24/7 AI Assistant',
-        onClick: () => handleSubmenuItemClick('https://chatgpt.com/g/g-67b6c40963908191b77e23c6fecc2e57-the-24-7-relocation-life-ai-assistant', true)
+        onClick: () => handleSubmenuItemClick('/chatbot')
       }
     ]
   }
