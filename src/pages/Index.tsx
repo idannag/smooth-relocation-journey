@@ -62,7 +62,7 @@ const Index = ({ initialSection }: IndexProps = {}) => {
       case 'community':
         return 'My Ocean Community';
       case 'planner':
-        return 'https://ocean-calculator.netlify.app';
+        return 'https://ocean-pm.netlify.app';
       case 'consult-relocation':
         return 'https://www.app.ocean-il.co.il/form/relocation-journey/9/';
       case 'consult-education':
