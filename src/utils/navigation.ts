@@ -16,7 +16,8 @@ export const handleNavigation = (
   // External application mappings
   const externalAppMappings: Record<string, string> = {
     'My Ocean Community': 'https://chat.whatsapp.com/LODS9mJleJU9e1Y27ml2TB',
-    'https://ocean-calculator.netlify.app': 'https://ocean-calculator.netlify.app'
+    'https://ocean-calculator.netlify.app': 'https://ocean-calculator.netlify.app',
+    'https://ocean-pm.netlify.app': 'https://ocean-pm.netlify.app'
   };
   
   // For internal navigation - map to appropriate routes

@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import Header from '../components/Header';
@@ -54,7 +53,7 @@ const Index = ({ initialSection }: IndexProps = {}) => {
       case 'destinations':
         return 'destinations';
       case 'chatbot':
-        return 'https://chatgpt.com/g/g-67b6c40963908191b77e23c6fecc2e57-the-24-7-relocation-life-ai-assistant';
+        return 'chatbot';
       case 'time-currency':
         return 'time-currency';
       case 'cost-calculator':
