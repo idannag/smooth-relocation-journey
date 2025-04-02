@@ -17,30 +17,55 @@ const ChatbotContent = ({ onClose }: ChatbotContentProps = {}) => {
         
         <div className="space-y-6">
           <div className="bg-blue-50 p-4 rounded-lg border border-blue-100">
-            <h3 className="text-lg font-semibold text-[#2C5AAE] mb-2">Instant Relocation Support</h3>
             <p className="text-gray-700">
-              Get immediate answers to your relocation questions anytime, day or night. Our AI assistant is trained on comprehensive relocation information specific to your needs.
+              Your 24/7 AI-powered assistant for expat life: Get personalized, practical answers on your daily needs, local services, transportation, community, and family life—wherever you are. Live like a local from day one.
             </p>
           </div>
           
           <div className="bg-blue-50 p-4 rounded-lg border border-blue-100">
-            <h3 className="text-lg font-semibold text-[#2C5AAE] mb-2">What You Can Ask About</h3>
-            <ul className="list-disc pl-5 text-gray-700 space-y-1">
-              <li>Visa and immigration procedures</li>
-              <li>Housing options and neighborhood information</li>
-              <li>Cost of living estimates</li>
-              <li>Local transportation systems</li>
-              <li>Healthcare and education systems</li>
-              <li>Cultural adaptation tips</li>
-              <li>Essential documentation</li>
+            <h3 className="text-lg font-semibold text-[#2C5AAE] mb-2">Example Questions You Can Ask:</h3>
+            <ul className="grid grid-cols-1 md:grid-cols-2 gap-3 text-gray-700">
+              <li className="flex items-start gap-2">
+                <span>🔧</span> 
+                <span>Where can I find a reliable plumber or electrician in my area?</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span>🛒</span> 
+                <span>What's the best way to get groceries delivered to my home?</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span>🧑‍🤝‍🧑</span> 
+                <span>How can I meet other expats or locals in my area?</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span>🛝</span> 
+                <span>Are there any good playgrounds or parks for kids nearby?</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span>🚗</span> 
+                <span>What's the best way to avoid rush hour traffic in my city?</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span>🥬</span> 
+                <span>Where can I find specialty grocery stores (e.g., kosher, Asian, organic)?</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span>🏥</span> 
+                <span>Are there any English-speaking doctors or clinics near me?</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span>🌿</span> 
+                <span>What are some hidden gems or local non-touristy spots worth visiting?</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span>🚌</span> 
+                <span>How do I get a monthly public transport pass?</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span>🎡</span> 
+                <span>Are there any family-friendly weekend activities happening soon?</span>
+              </li>
             </ul>
-          </div>
-          
-          <div className="bg-blue-50 p-4 rounded-lg border border-blue-100">
-            <h3 className="text-lg font-semibold text-[#2C5AAE] mb-2">How It Helps</h3>
-            <p className="text-gray-700">
-              Our AI assistant provides factual information, guides you through processes step-by-step, and can help you prepare checklists for your relocation journey.
-            </p>
           </div>
         </div>
         
