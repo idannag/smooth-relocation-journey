@@ -55,6 +55,9 @@ export const handleNavigation = (
     case 'My Ocean Community':
       navigate('/community');
       break;
+    case 'community':
+      navigate('/community');
+      break;
     default:
       // Check if it's an external URL that needs to be opened in a new tab
       if (externalAppMappings[url] || forceExternal || url.startsWith('http')) {

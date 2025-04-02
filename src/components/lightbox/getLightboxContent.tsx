@@ -7,6 +7,7 @@ import TimeAndCurrencyContent from './TimeAndCurrencyContent';
 import PopularDestinationsContent from './PopularDestinationsContent';
 import SinglePostContent from './SinglePostContent';
 import ExternalContent from './ExternalContent';
+import CommunityContent from './CommunityContent';
 
 export interface LightboxContentInfo {
   title: string;
@@ -57,6 +58,15 @@ export const getLightboxContent = (url: string, postId: number | null): Lightbox
       title: 'Popular Destinations',
       subtitle: 'Explore locations',
       component: <PopularDestinationsContent />
+    };
+  }
+  
+  // Community content
+  if (url === 'community') {
+    return {
+      title: 'Ocean Community',
+      subtitle: 'Connect with others',
+      component: <CommunityContent />
     };
   }
   
