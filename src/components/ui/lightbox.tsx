@@ -57,8 +57,9 @@ const Lightbox = ({ url, onClose }: LightboxProps) => {
   const contentInfo = getLightboxContent(url, postId);
   
   // Determine if header should be displayed
-  // We'll always show header to ensure consistent closing behavior
-  const shouldDisplayHeader = true;
+  // Only show full header for non-iframe content
+  const isIframeContent = url.startsWith('http') || url === 'planner';
+  const shouldDisplayHeader = !isIframeContent;
 
   return (
     <Sheet open={true} onOpenChange={handleClose}>
@@ -71,6 +72,7 @@ const Lightbox = ({ url, onClose }: LightboxProps) => {
           subtitle={contentInfo.subtitle}
           onClose={handleClose}
           shouldDisplay={shouldDisplayHeader}
+          showOnlyCloseButton={isIframeContent}
         />
         
         <div className={`p-0 overflow-auto animate-fade-in ${!shouldDisplayHeader ? 'h-screen' : ''}`}>
