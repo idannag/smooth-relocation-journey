@@ -79,10 +79,10 @@ export const getLightboxContent = (url: string, postId: number | null): Lightbox
     };
   }
   
-  // External content (iframe)
+  // External content (iframe) - removed the title
   if (url.startsWith('http')) {
     return {
-      title: 'External Content',
+      title: '',
       subtitle: '',
       component: <ExternalContent url={url} />
     };
