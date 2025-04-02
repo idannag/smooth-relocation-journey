@@ -13,12 +13,11 @@ const ChatbotContent = ({
         
         <div className="space-y-6">
           <div className="bg-blue-50 p-4 rounded-lg border border-blue-100">
-            <p className="text-gray-700">Your 24/7 AI-powered assistant for expat life: 
-Get personalized, practical answers on your daily needs, local services, transportation, community, and family life—wherever you are. Live like a local from day one.</p>
+            <p className="text-gray-700">Your 24/7 AI-powered assistant for expat life:  Get personalized, practical answers on your daily needs, local services, transportation, community, and family life—wherever you are. Live like a local from day one.</p>
           </div>
           
           <div className="bg-blue-50 p-4 rounded-lg border border-blue-100">
-            <h3 className="text-lg font-semibold text-[#2C5AAE] mb-2">Example Daily Questions You Can Ask:</h3>
+            <h3 className="font-semibold text-[#2C5AAE] mb-2 text-base">Example Daily Questions You Can Ask:</h3>
             <ul className="grid grid-cols-1 md:grid-cols-2 gap-3 text-gray-700">
               <li className="flex items-start gap-2">
                 <span>🔧</span> 
