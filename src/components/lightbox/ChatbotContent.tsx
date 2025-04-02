@@ -21,19 +21,19 @@ const ChatbotContent = ({
             <ul className="grid grid-cols-1 md:grid-cols-2 gap-3 text-gray-700">
               <li className="flex items-start gap-2">
                 <span>🔧</span> 
-                <span>Where can I find a reliable plumber or electrician in my area?</span>
+                <span className="text-sm">Where can I find a reliable plumber or electrician in my area?</span>
               </li>
               <li className="flex items-start gap-2">
                 <span>🛒</span> 
-                <span>What's the best way to get groceries delivered to my home?</span>
+                <span className="text-sm">What's the best way to get groceries delivered to my home?</span>
               </li>
               <li className="flex items-start gap-2">
                 <span>🧑‍🤝‍🧑</span> 
-                <span>How can I meet other expats or locals in my area?</span>
+                <span className="text-sm">How can I meet other expats or locals in my area?</span>
               </li>
               <li className="flex items-start gap-2">
                 <span>🛝</span> 
-                <span>Are there any good playgrounds or parks for kids nearby?</span>
+                <span className="text-sm">Are there any good playgrounds or parks for kids nearby?</span>
               </li>
               <li className="flex items-start gap-2">
                 <span>🚗</span> 
@@ -41,23 +41,23 @@ const ChatbotContent = ({
               </li>
               <li className="flex items-start gap-2">
                 <span>🥬</span> 
-                <span>Where can I find specialty grocery stores (e.g., kosher, Asian, organic)?</span>
+                <span className="text-sm">Where can I find specialty grocery stores (e.g., kosher, Asian, organic)?</span>
               </li>
               <li className="flex items-start gap-2">
                 <span>🏥</span> 
-                <span>Are there any English-speaking doctors or clinics near me?</span>
+                <span className="text-sm">Are there any English-speaking doctors or clinics near me?</span>
               </li>
               <li className="flex items-start gap-2">
                 <span>🌿</span> 
-                <span>What are some hidden gems or local non-touristy spots worth visiting?</span>
+                <span className="text-sm">What are some hidden gems or local non-touristy spots worth visiting?</span>
               </li>
               <li className="flex items-start gap-2">
                 <span>🚌</span> 
-                <span>How do I get a monthly public transport pass?</span>
+                <span className="text-sm">How do I get a monthly public transport pass?</span>
               </li>
               <li className="flex items-start gap-2">
                 <span>🎡</span> 
-                <span>Are there any family-friendly weekend activities happening soon?</span>
+                <span className="text-sm">Are there any family-friendly weekend activities happening soon?</span>
               </li>
             </ul>
           </div>
