@@ -7,8 +7,8 @@ interface ChatbotContentProps {
 const ChatbotContent = ({
   onClose
 }: ChatbotContentProps = {}) => {
-  return <div className="p-8 max-w-4xl mx-auto">
-      <div className="bg-white rounded-xl shadow-lg p-6 mb-8">
+  return <div className="p-8 max-w-4xl mx-auto px-[14px] py-[14px]">
+      <div className="bg-white rounded-xl shadow-lg p-6 mb-8 py-[10px] px-[10px]">
         
         
         <div className="space-y-6">
