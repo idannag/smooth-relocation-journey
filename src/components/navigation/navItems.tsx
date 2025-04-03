@@ -67,7 +67,7 @@ export const getMainNavItems = (handleSubmenuItemClick: (url: string, forceExter
       { 
         icon: <UserRound className="w-5 h-5 stroke-[1.5] text-[#517cc7]" />, 
         label: 'My Ocean Community',
-        onClick: () => handleSubmenuItemClick('My Ocean Community', true)
+        onClick: () => handleSubmenuItemClick('/community')
       },
       { 
         icon: <Bot className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, 

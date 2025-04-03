@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import Header from '../components/Header';
@@ -59,7 +60,7 @@ const Index = ({ initialSection }: IndexProps = {}) => {
       case 'cost-calculator':
         return 'https://ocean-calculator.netlify.app';
       case 'community':
-        return 'My Ocean Community';
+        return 'community';
       case 'planner':
         return 'https://ocean-pm.netlify.app';
       case 'consult-relocation':
