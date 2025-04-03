@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Button } from "@/components/ui/button";
 import { ExternalLink } from "lucide-react";
@@ -10,12 +11,17 @@ const ChatbotContent = ({
   return <div className="p-8 max-w-4xl mx-auto px-[14px] py-[14px]">
       <div className="bg-white rounded-xl shadow-lg p-6 mb-8 py-[10px] px-[10px]">
         
+        <div className="bg-blue-50 p-4 rounded-lg border border-blue-100 mb-6">
+          <p className="text-gray-700"><span className="font-bold text-[#2C5AAE]">Your 24/7 AI-powered assistant for expat life:</span> Get personalized, practical answers on your daily needs, local services, transportation, community, and family life—wherever you are. Live like a local from day one.</p>
+        </div>
+        
+        <div className="flex justify-center gap-4 mb-8">
+          <Button onClick={() => window.open('https://chatgpt.com/g/g-67b6c40963908191b77e23c6fecc2e57-the-24-7-relocation-life-ai-assistant', '_blank')} className="bg-gradient-to-r from-[#2C5AAE] to-[#40E0D0] hover:opacity-90 gap-2">
+            Open AI Assistant <ExternalLink size={16} />
+          </Button>
+        </div>
         
         <div className="space-y-6">
-          <div className="bg-blue-50 p-4 rounded-lg border border-blue-100">
-            <p className="text-gray-700">Your 24/7 AI-powered assistant for expat life:  Get personalized, practical answers on your daily needs, local services, transportation, community, and family life—wherever you are. Live like a local from day one.</p>
-          </div>
-          
           <div className="bg-blue-50 p-4 rounded-lg border border-blue-100">
             <h3 className="font-semibold text-[#2C5AAE] mb-2 text-base">Example Daily Questions You Can Ask:</h3>
             <ul className="grid grid-cols-1 md:grid-cols-2 gap-3 text-gray-700">
@@ -61,14 +67,6 @@ const ChatbotContent = ({
               </li>
             </ul>
           </div>
-        </div>
-        
-        <div className="flex justify-center gap-4 mt-8">
-          <Button onClick={() => window.open('https://chatgpt.com/g/g-67b6c40963908191b77e23c6fecc2e57-the-24-7-relocation-life-ai-assistant', '_blank')} className="bg-gradient-to-r from-[#2C5AAE] to-[#40E0D0] hover:opacity-90 gap-2">
-            Open AI Assistant <ExternalLink size={16} />
-          </Button>
-          
-          {onClose && <Button onClick={onClose} variant="outline">Back</Button>}
         </div>
       </div>
     </div>;
