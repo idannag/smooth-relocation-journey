@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { Clock, Globe, ArrowRightLeft, Cloud } from 'lucide-react';
+import { Clock, Globe, ArrowRightLeft, Cloud, Droplets, Wind, Sun } from 'lucide-react';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -177,6 +177,7 @@ const TimeAndCurrencyContent = () => {
 
   const [weatherCity, setWeatherCity] = useState('London');
   const [weatherData, setWeatherData] = useState<any>(null);
+  const [forecastData, setForecastData] = useState<any>(null);
   const [weatherLoading, setWeatherLoading] = useState(false);
   const [weatherError, setWeatherError] = useState<string | null>(null);
 
@@ -226,14 +227,25 @@ const TimeAndCurrencyContent = () => {
     setWeatherError(null);
     
     try {
-      const response = await fetch(`https://api.weatherapi.com/v1/current.json?key=74af2ebb879a48ed9ee111314250804&q=${weatherCity}&aqi=no`);
+      // Fetch current weather
+      const currentResponse = await fetch(`https://api.weatherapi.com/v1/current.json?key=74af2ebb879a48ed9ee111314250804&q=${weatherCity}&aqi=no`);
       
-      if (!response.ok) {
+      if (!currentResponse.ok) {
         throw new Error('Failed to fetch weather data');
       }
       
-      const data = await response.json();
-      setWeatherData(data);
+      const currentData = await currentResponse.json();
+      setWeatherData(currentData);
+      
+      // Fetch forecast
+      const forecastResponse = await fetch(`https://api.weatherapi.com/v1/forecast.json?key=74af2ebb879a48ed9ee111314250804&q=${weatherCity}&days=5&aqi=no&alerts=no`);
+      
+      if (!forecastResponse.ok) {
+        throw new Error('Failed to fetch forecast data');
+      }
+      
+      const forecastData = await forecastResponse.json();
+      setForecastData(forecastData);
     } catch (error) {
       console.error('Error fetching weather data:', error);
       setWeatherError('Failed to fetch weather data. Please try again.');
@@ -483,6 +495,12 @@ const TimeAndCurrencyContent = () => {
     setIsLoading(false);
   };
 
+  // Format date from YYYY-MM-DD to readable format (e.g., "Mon, Apr 8")
+  const formatDate = (dateStr: string) => {
+    const date = new Date(dateStr);
+    return date.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
+  };
+
   return <div className="p-4 md:p-6 flex flex-col items-center animate-fade-in">
       <div className="w-full max-w-4xl">
         <Tabs defaultValue="time" className="w-full" onValueChange={value => {
@@ -509,6 +527,7 @@ const TimeAndCurrencyContent = () => {
             </TabsTrigger>
           </TabsList>
           
+          
           <TabsContent value="time" className="mt-4 animate-fade-in">
             <div className="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden">
               <div className="flex justify-center mb-6 pt-6">
@@ -531,6 +550,7 @@ const TimeAndCurrencyContent = () => {
               </div>
             </div>
           </TabsContent>
+          
           
           <TabsContent value="currency" className="mt-4 animate-fade-in">
             <div className="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden p-6">
@@ -591,6 +611,7 @@ const TimeAndCurrencyContent = () => {
             </div>
           </TabsContent>
           
+          
           <TabsContent value="weather" className="mt-4 animate-fade-in">
             <div className="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden p-6">
               <div className="mb-6">
@@ -627,8 +648,9 @@ const TimeAndCurrencyContent = () => {
               )}
               
               {!weatherLoading && weatherData && (
-                <div className="flex flex-col md:flex-row gap-6">
-                  <div className="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-xl p-6 flex-1 shadow-sm">
+                <div className="flex flex-col gap-6">
+                  
+                  <div className="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-xl p-6 shadow-sm">
                     <div className="flex items-center justify-between">
                       <div>
                         <h2 className="text-xl font-semibold text-[#2C5AAE]">{weatherData.location.name}</h2>
@@ -673,14 +695,55 @@ const TimeAndCurrencyContent = () => {
                     </div>
                   </div>
                   
+                  
+                  {forecastData && (
+                    <div className="bg-white rounded-xl p-6 border border-gray-100 shadow-sm">
+                      <h3 className="font-semibold text-[#2C5AAE] mb-4">5-Day Forecast</h3>
+                      <div className="grid grid-cols-1 sm:grid-cols-5 gap-3">
+                        {forecastData.forecast.forecastday.map((day: any) => (
+                          <div 
+                            key={day.date}
+                            className="bg-gray-50 rounded-lg p-3 text-center"
+                          >
+                            <p className="font-medium text-gray-700">{formatDate(day.date)}</p>
+                            <img 
+                              src={day.day.condition.icon} 
+                              alt={day.day.condition.text}
+                              className="mx-auto my-2 w-12 h-12" 
+                            />
+                            <div className="flex justify-between items-center px-2">
+                              <span className="text-blue-600 font-medium">{Math.round(day.day.mintemp_c)}°</span>
+                              <span className="text-gray-400">|</span>
+                              <span className="text-red-500 font-medium">{Math.round(day.day.maxtemp_c)}°</span>
+                            </div>
+                            <p className="text-xs text-gray-500 mt-1 truncate" title={day.day.condition.text}>
+                              {day.day.condition.text}
+                            </p>
+                            <div className="grid grid-cols-2 gap-1 mt-2 text-xs">
+                              <div className="flex items-center justify-center gap-1">
+                                <Droplets className="h-3 w-3 text-blue-400" />
+                                <span>{day.day.daily_chance_of_rain}%</span>
+                              </div>
+                              <div className="flex items-center justify-center gap-1">
+                                <Wind className="h-3 w-3 text-gray-400" />
+                                <span>{Math.round(day.day.maxwind_kph)} km/h</span>
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                  
+                  
                   <div className="bg-white rounded-xl p-6 flex-1 border border-gray-100">
                     <h3 className="font-semibold text-[#2C5AAE] mb-4">Popular Cities</h3>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                       {['London', 'New York', 'Tokyo', 'Paris', 'Sydney', 'Dubai', 'Tel Aviv', 'Berlin'].map(city => (
                         <button 
                           key={city}
                           onClick={() => setWeatherCity(city)}
-                          className={`p-3 rounded-md text-left transition-colors ${weatherCity === city ? 'bg-blue-50 text-[#2C5AAE] font-medium' : 'hover:bg-gray-50'}`}
+                          className={`p-3 rounded-md text-center transition-colors ${weatherCity === city ? 'bg-blue-50 text-[#2C5AAE] font-medium' : 'hover:bg-gray-50'}`}
                         >
                           {city}
                         </button>
