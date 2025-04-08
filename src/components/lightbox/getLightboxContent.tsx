@@ -46,8 +46,8 @@ export const getLightboxContent = (url: string, postId: number | null): Lightbox
   // Time and currency content
   if (url === 'time-currency') {
     return {
-      title: 'World Time & Currency',
-      subtitle: 'Global info',
+      title: 'Global Information Hub',
+      subtitle: 'Time, Currency & Weather',
       component: <TimeAndCurrencyContent />
     };
   }
