@@ -3,7 +3,6 @@ import { Clock, Globe, ArrowRightLeft, Cloud, Droplets, Wind, Sun } from 'lucide
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-
 const locations = [{
   city: "New York",
   country: "USA",
@@ -165,7 +164,6 @@ const locations = [{
   country: "China",
   timezone: "Asia/Shanghai"
 }];
-
 const TimeAndCurrencyContent = () => {
   const [cityTimes, setCityTimes] = useState<{
     [key: string]: string;
@@ -174,13 +172,11 @@ const TimeAndCurrencyContent = () => {
   const [displayLocations, setDisplayLocations] = useState(locations);
   const [searchLocation, setSearchLocation] = useState('');
   const activeTabRef = useRef<string>("time");
-
   const [weatherCity, setWeatherCity] = useState('London');
   const [weatherData, setWeatherData] = useState<any>(null);
   const [forecastData, setForecastData] = useState<any>(null);
   const [weatherLoading, setWeatherLoading] = useState(false);
   const [weatherError, setWeatherError] = useState<string | null>(null);
-
   useEffect(() => {
     updateCityTimes();
     const secondsInterval = setInterval(() => {
@@ -198,7 +194,6 @@ const TimeAndCurrencyContent = () => {
       clearInterval(minuteInterval);
     };
   }, []);
-
   useEffect(() => {
     if (searchLocation.trim() === '') {
       setDisplayLocations(locations);
@@ -207,43 +202,34 @@ const TimeAndCurrencyContent = () => {
       setDisplayLocations(filtered);
     }
   }, [searchLocation]);
-
   useEffect(() => {
     if (activeTabRef.current === "weather") {
       fetchWeatherData();
     }
   }, [weatherCity]);
-
   useEffect(() => {
     if (activeTabRef.current === "weather" && !weatherData) {
       fetchWeatherData();
     }
   }, [activeTabRef.current]);
-
   const fetchWeatherData = async () => {
     if (!weatherCity) return;
-    
     setWeatherLoading(true);
     setWeatherError(null);
-    
     try {
       // Fetch current weather
       const currentResponse = await fetch(`https://api.weatherapi.com/v1/current.json?key=74af2ebb879a48ed9ee111314250804&q=${weatherCity}&aqi=no`);
-      
       if (!currentResponse.ok) {
         throw new Error('Failed to fetch weather data');
       }
-      
       const currentData = await currentResponse.json();
       setWeatherData(currentData);
-      
+
       // Fetch forecast
       const forecastResponse = await fetch(`https://api.weatherapi.com/v1/forecast.json?key=74af2ebb879a48ed9ee111314250804&q=${weatherCity}&days=5&aqi=no&alerts=no`);
-      
       if (!forecastResponse.ok) {
         throw new Error('Failed to fetch forecast data');
       }
-      
       const forecastData = await forecastResponse.json();
       setForecastData(forecastData);
     } catch (error) {
@@ -253,7 +239,6 @@ const TimeAndCurrencyContent = () => {
       setWeatherLoading(false);
     }
   };
-
   const updateCityTimes = () => {
     const formatTime = (date: Date) => {
       return date.toLocaleTimeString('en-US', {
@@ -279,7 +264,6 @@ const TimeAndCurrencyContent = () => {
     });
     setCityTimes(times);
   };
-
   const [amount, setAmount] = useState<string>("2");
   const [fromCurrency, setFromCurrency] = useState<string>("USD");
   const [toCurrency, setToCurrency] = useState<string>("EUR");
@@ -288,7 +272,6 @@ const TimeAndCurrencyContent = () => {
     [key: string]: number;
   }>({});
   const [isLoading, setIsLoading] = useState<boolean>(false);
-
   const currencies = [{
     code: "USD",
     name: "US Dollar"
@@ -410,11 +393,9 @@ const TimeAndCurrencyContent = () => {
     code: "COP",
     name: "Colombian Peso"
   }];
-
   useEffect(() => {
     fetchExchangeRates();
   }, []);
-
   const fetchExchangeRates = async () => {
     try {
       const response = await fetch('https://api.exchangerate.host/latest?base=USD');
@@ -471,7 +452,6 @@ const TimeAndCurrencyContent = () => {
       setExchangeRates(mockRates);
     }
   };
-
   const convertCurrency = () => {
     setIsLoading(true);
     if (!amount || isNaN(Number(amount))) {
@@ -498,9 +478,12 @@ const TimeAndCurrencyContent = () => {
   // Format date from YYYY-MM-DD to readable format (e.g., "Mon, Apr 8")
   const formatDate = (dateStr: string) => {
     const date = new Date(dateStr);
-    return date.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
+    return date.toLocaleDateString('en-US', {
+      weekday: 'short',
+      month: 'short',
+      day: 'numeric'
+    });
   };
-
   return <div className="p-4 md:p-6 flex flex-col items-center animate-fade-in">
       <div className="w-full max-w-4xl">
         <Tabs defaultValue="time" className="w-full" onValueChange={value => {
@@ -519,7 +502,7 @@ const TimeAndCurrencyContent = () => {
             </TabsTrigger>
             <TabsTrigger value="currency" className="flex items-center justify-center gap-2">
               <Globe className="h-4 w-4" />
-              <span>Currency Converter</span>
+              <span>Currency </span>
             </TabsTrigger>
             <TabsTrigger value="weather" className="flex items-center justify-center gap-2">
               <Cloud className="h-4 w-4" />
@@ -619,36 +602,22 @@ const TimeAndCurrencyContent = () => {
                   Search City
                 </label>
                 <div className="flex gap-2">
-                  <Input 
-                    id="weather-city" 
-                    value={weatherCity} 
-                    onChange={e => setWeatherCity(e.target.value)} 
-                    placeholder="Enter city name..." 
-                    className="w-full"
-                  />
-                  <button 
-                    onClick={fetchWeatherData}
-                    className="px-4 py-2 bg-gradient-to-r from-[#2C5AAE] to-[#40E0D0] text-white rounded-md hover:opacity-90 transition-opacity"
-                  >
+                  <Input id="weather-city" value={weatherCity} onChange={e => setWeatherCity(e.target.value)} placeholder="Enter city name..." className="w-full" />
+                  <button onClick={fetchWeatherData} className="px-4 py-2 bg-gradient-to-r from-[#2C5AAE] to-[#40E0D0] text-white rounded-md hover:opacity-90 transition-opacity">
                     Search
                   </button>
                 </div>
               </div>
               
-              {weatherLoading && (
-                <div className="flex justify-center items-center py-10">
+              {weatherLoading && <div className="flex justify-center items-center py-10">
                   <div className="animate-spin h-8 w-8 border-4 border-[#2C5AAE] border-t-transparent rounded-full"></div>
-                </div>
-              )}
+                </div>}
               
-              {weatherError && (
-                <div className="bg-red-50 border border-red-200 rounded-md p-4 text-red-700">
+              {weatherError && <div className="bg-red-50 border border-red-200 rounded-md p-4 text-red-700">
                   {weatherError}
-                </div>
-              )}
+                </div>}
               
-              {!weatherLoading && weatherData && (
-                <div className="flex flex-col gap-6">
+              {!weatherLoading && weatherData && <div className="flex flex-col gap-6">
                   
                   <div className="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-xl p-6 shadow-sm">
                     <div className="flex items-center justify-between">
@@ -663,11 +632,7 @@ const TimeAndCurrencyContent = () => {
                     </div>
                     
                     <div className="flex items-center justify-center my-4">
-                      <img 
-                        src={weatherData.current.condition.icon.replace('64x64', '128x128')} 
-                        alt={weatherData.current.condition.text} 
-                        className="h-24 w-24"
-                      />
+                      <img src={weatherData.current.condition.icon.replace('64x64', '128x128')} alt={weatherData.current.condition.text} className="h-24 w-24" />
                     </div>
                     
                     <div className="text-center mb-4">
@@ -696,21 +661,12 @@ const TimeAndCurrencyContent = () => {
                   </div>
                   
                   
-                  {forecastData && (
-                    <div className="bg-white rounded-xl p-6 border border-gray-100 shadow-sm">
+                  {forecastData && <div className="bg-white rounded-xl p-6 border border-gray-100 shadow-sm">
                       <h3 className="font-semibold text-[#2C5AAE] mb-4">5-Day Forecast</h3>
                       <div className="grid grid-cols-1 sm:grid-cols-5 gap-3">
-                        {forecastData.forecast.forecastday.map((day: any) => (
-                          <div 
-                            key={day.date}
-                            className="bg-gray-50 rounded-lg p-3 text-center"
-                          >
+                        {forecastData.forecast.forecastday.map((day: any) => <div key={day.date} className="bg-gray-50 rounded-lg p-3 text-center">
                             <p className="font-medium text-gray-700">{formatDate(day.date)}</p>
-                            <img 
-                              src={day.day.condition.icon} 
-                              alt={day.day.condition.text}
-                              className="mx-auto my-2 w-12 h-12" 
-                            />
+                            <img src={day.day.condition.icon} alt={day.day.condition.text} className="mx-auto my-2 w-12 h-12" />
                             <div className="flex justify-between items-center px-2">
                               <span className="text-blue-600 font-medium">{Math.round(day.day.mintemp_c)}°</span>
                               <span className="text-gray-400">|</span>
@@ -729,34 +685,24 @@ const TimeAndCurrencyContent = () => {
                                 <span>{Math.round(day.day.maxwind_kph)} km/h</span>
                               </div>
                             </div>
-                          </div>
-                        ))}
+                          </div>)}
                       </div>
-                    </div>
-                  )}
+                    </div>}
                   
                   
                   <div className="bg-white rounded-xl p-6 flex-1 border border-gray-100">
                     <h3 className="font-semibold text-[#2C5AAE] mb-4">Popular Cities</h3>
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                      {['London', 'New York', 'Tokyo', 'Paris', 'Sydney', 'Dubai', 'Tel Aviv', 'Berlin'].map(city => (
-                        <button 
-                          key={city}
-                          onClick={() => setWeatherCity(city)}
-                          className={`p-3 rounded-md text-center transition-colors ${weatherCity === city ? 'bg-blue-50 text-[#2C5AAE] font-medium' : 'hover:bg-gray-50'}`}
-                        >
+                      {['London', 'New York', 'Tokyo', 'Paris', 'Sydney', 'Dubai', 'Tel Aviv', 'Berlin'].map(city => <button key={city} onClick={() => setWeatherCity(city)} className={`p-3 rounded-md text-center transition-colors ${weatherCity === city ? 'bg-blue-50 text-[#2C5AAE] font-medium' : 'hover:bg-gray-50'}`}>
                           {city}
-                        </button>
-                      ))}
+                        </button>)}
                     </div>
                   </div>
-                </div>
-              )}
+                </div>}
             </div>
           </TabsContent>
         </Tabs>
       </div>
     </div>;
 };
-
 export default TimeAndCurrencyContent;
