@@ -23,6 +23,11 @@ export const getMainNavItems = (handleSubmenuItemClick: (url: string, forceExter
         onClick: () => handleSubmenuItemClick('/destinations')
       },
       { 
+        icon: <Globe className="w-5 h-5 stroke-[1.5] text-[#517cc7]" />, 
+        label: 'Worldwide Time, Currency & Weather',
+        onClick: () => handleSubmenuItemClick('time-currency')
+      },
+      { 
         icon: <Calculator className="w-5 h-5 stroke-[1.5] text-[#517cc7]" />, 
         label: 'Cost-of-Living AI Calculator',
         onClick: () => handleSubmenuItemClick('https://ocean-calculator.netlify.app', true)

@@ -37,6 +37,9 @@ export const handleNavigation = (
     case 'time-currency':
       navigate('/time-currency');
       break;
+    case 'Worldwide Time, Currency & Weather':
+      navigate('/time-currency');
+      break;
     case 'Cost-of-Living AI Calculator':
       navigate('/cost-calculator');
       break;
