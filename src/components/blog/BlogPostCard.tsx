@@ -38,7 +38,7 @@ const BlogPostCard = ({ post, onClick, simplified = false }: BlogPostCardProps) 
   const formattedDate = format(parseISO(post.date), 'MMM d, yyyy');
   
   return (
-    <Card className="flex flex-col h-full hover:shadow-lg transition-shadow duration-300 rounded-xl overflow-hidden group cursor-pointer" onClick={() => onClick(post.id)}>
+    <Card className="flex flex-col h-full hover:shadow-lg transition-shadow duration-300 rounded-xl overflow-hidden group cursor-pointer bg-white" onClick={() => onClick(post.id)}>
       <Link to={`/post/${post.id}`} className="h-full flex flex-col">
         <div className="h-36 overflow-hidden">
           <img 
