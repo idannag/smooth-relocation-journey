@@ -1,4 +1,3 @@
-
 import { NavigateFunction } from 'react-router-dom';
 
 /**
@@ -35,6 +34,9 @@ export const handleNavigation = (
       navigate('/chatbot');
       break;
     case 'time-currency':
+      navigate('/time-currency');
+      break;
+    case 'Time, Currency & Weather':
       navigate('/time-currency');
       break;
     case 'Worldwide Time, Currency & Weather':

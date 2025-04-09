@@ -24,7 +24,7 @@ export const getMainNavItems = (handleSubmenuItemClick: (url: string, forceExter
       },
       { 
         icon: <Globe className="w-5 h-5 stroke-[1.5] text-[#517cc7]" />, 
-        label: 'Worldwide Time, Currency & Weather',
+        label: 'Time, Currency & Weather',
         onClick: () => handleSubmenuItemClick('time-currency')
       },
       { 
