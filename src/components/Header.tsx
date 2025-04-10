@@ -4,7 +4,6 @@ import { Menu, X } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import TimeStrip from "./TimeStrip";
 import CurrencyStrip from "./CurrencyStrip";
-import WeatherStrip from "./WeatherStrip";
 import { useIsMobile } from '../hooks/use-mobile';
 import DesktopNav from "./navigation/DesktopNav";
 import MobileNav from "./navigation/MobileNav";
@@ -116,7 +115,6 @@ const Header = () => {
 
             <div className="flex items-center space-x-1">
               <TimeStrip onClick={handleTimeOrCurrencyClick} />
-              <WeatherStrip onClick={handleTimeOrCurrencyClick} />
               <CurrencyStrip onClick={handleTimeOrCurrencyClick} />
             </div>
 

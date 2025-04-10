@@ -21,7 +21,7 @@ const LightboxHeader = ({
   if (!shouldDisplay && !showOnlyCloseButton) return null;
   
   return (
-    <SheetHeader className={`px-4 pt-3 pb-2 sticky top-0 ${showOnlyCloseButton ? 'bg-transparent' : 'bg-white/90 backdrop-blur-sm'} z-10 ${!showOnlyCloseButton ? 'border-b' : ''} flex-row justify-between items-center`}>
+    <SheetHeader className={`px-4 pt-3 pb-2 sticky top-0 ${showOnlyCloseButton ? 'bg-transparent' : 'bg-white'} z-10 ${!showOnlyCloseButton ? 'border-b' : ''} flex-row justify-between items-center`}>
       {!showOnlyCloseButton && (
         <div className="flex-1">
           <SheetTitle className="text-lg md:text-2xl font-bold bg-gradient-to-r from-[#2C5AAE] to-[#40E0D0] bg-clip-text text-transparent text-left">
