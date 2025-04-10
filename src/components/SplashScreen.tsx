@@ -2,14 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const SplashScreen = () => {
+  // Set isVisible to false by default to ensure it doesn't show at all
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsVisible(false);
-    }, 5000);
-
-    return () => clearTimeout(timer);
+    // No need for a timeout since we're not showing the splash screen
+    return () => {};
   }, []);
 
   return (

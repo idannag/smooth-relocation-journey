@@ -11,6 +11,11 @@
     <meta http-equiv="Expires" content="0">
     <title>Ocean International - Expert Relocation Services</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Preload key resources -->
+    <link rel="preload" as="video" href="https://ocean.autodigital.agency/splash.mp4" fetchpriority="high" />
+    <link rel="preload" as="image" href="https://www.app.ocean-il.co.il/wp-content/uploads/2022/04/cropped-logo.jpg" />
+    
     <style>
       /* Preload iframe styles to avoid layout shifts */
       iframe {
@@ -19,7 +24,30 @@
         height: 100%;
         display: block;
       }
+      
+      /* Add styles to ensure video loads without delay */
+      video {
+        will-change: transform;
+      }
+      
+      /* Hide any potential flash of unstyled content */
+      body {
+        opacity: 1;
+        transition: opacity 0.1s ease-in-out;
+      }
+      
+      /* Add placeholder for video */
+      .video-placeholder {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background: linear-gradient(to right, #2C5AAE, #40E0D0);
+        z-index: -1;
+      }
     </style>
+    
     <!-- Microsoft Clarity Analytics -->
     <script type="text/javascript">
       (function(c,l,a,r,i,t,y){
@@ -38,8 +66,32 @@
     </script>
   </head>
   <body>
+    <!-- Video placeholder to avoid layout shift -->
+    <div class="video-placeholder"></div>
+    
     <div id="root"></div>
     <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
     <script type="module" src="/src/main.tsx"></script>
+    
+    <!-- Inline script to preload video -->
+    <script>
+      (function() {
+        // Create and preload video
+        const videoPreload = document.createElement('video');
+        videoPreload.preload = 'auto';
+        videoPreload.muted = true;
+        videoPreload.src = 'https://ocean.autodigital.agency/splash.mp4';
+        videoPreload.style.display = 'none';
+        videoPreload.load();
+        document.body.appendChild(videoPreload);
+        
+        // Remove video after it's buffered enough
+        setTimeout(() => {
+          if (document.body.contains(videoPreload)) {
+            document.body.removeChild(videoPreload);
+          }
+        }, 1000);
+      })();
+    </script>
   </body>
 </html>

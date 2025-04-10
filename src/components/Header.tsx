@@ -1,4 +1,3 @@
-
 import { useState, useEffect, useRef } from "react";
 import { Menu, X } from "lucide-react";
 import { useNavigate } from "react-router-dom";
@@ -19,11 +18,30 @@ const Header = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const preloadResources = () => {
+    const preloadVideoResource = () => {
+      // Preload the hero video with high priority
+      const videoElement = document.createElement('video');
+      videoElement.preload = 'auto';
+      videoElement.muted = true;
+      videoElement.autoplay = true;
+      videoElement.src = 'https://ocean.autodigital.agency/splash.mp4';
+      videoElement.style.display = 'none';
+      document.body.appendChild(videoElement);
+      
+      // Force load and then remove from DOM
+      videoElement.load();
+      setTimeout(() => {
+        if (document.body.contains(videoElement)) {
+          document.body.removeChild(videoElement);
+        }
+      }, 1000);
+      
+      // Also add the traditional preload link
       const linkVideo = document.createElement('link');
       linkVideo.rel = 'preload';
       linkVideo.as = 'video';
       linkVideo.href = 'https://ocean.autodigital.agency/splash.mp4';
+      linkVideo.importance = 'high';
       document.head.appendChild(linkVideo);
       
       const imagesToPreload = [
@@ -50,7 +68,7 @@ const Header = () => {
       });
     };
     
-    preloadResources();
+    preloadVideoResource();
   }, []);
 
   useEffect(() => {
