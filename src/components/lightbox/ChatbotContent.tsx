@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Button } from "@/components/ui/button";
 import { ExternalLink } from "lucide-react";
@@ -43,7 +42,7 @@ const ChatbotContent = ({
               </li>
               <li className="flex items-start gap-2">
                 <span>🚗</span> 
-                <span>What's the best way to avoid rush hour traffic in my city?</span>
+                <span className="text-sm">What's the best way to avoid rush hour traffic in my city?</span>
               </li>
               <li className="flex items-start gap-2">
                 <span>🥬</span> 
