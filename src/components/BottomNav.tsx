@@ -1,4 +1,3 @@
-
 import { Home, Calculator, Newspaper, Building2, GraduationCap, UserRound, Route, Bot, BookText, Headphones, Globe, Play, ShoppingCart, MapPin } from 'lucide-react';
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -58,7 +57,7 @@ const BottomNav = () => {
       icon: <UserRound className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, 
       label: 'Client Area',
       subItems: [
-        { icon: <Route className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, label: 'My Relocation Planner', url: 'https://ocean-pm.netlify.app', forceExternal: true },
+        { icon: <Route className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, label: 'My Relocation Planner', url: 'https://www.app.ocean-il.co.il/pm', forceExternal: true },
         { icon: <ShoppingCart className="w-5 h-5 stroke-[1.5] text-[#517cc7]" />, label: 'My Services', url: '/services' },
         { icon: <UserRound className="w-5 h-5 stroke-[1.5] text-[#517cc7]" />, label: 'My Ocean Community', url: '/community' },
         { icon: <Bot className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, label: 'My 24/7 AI Assistant', url: '/chatbot' }

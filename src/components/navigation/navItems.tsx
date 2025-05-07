@@ -1,4 +1,5 @@
 
+
 import { Home, Calculator, Newspaper, Building2, GraduationCap, UserRound, Route, Bot, Headphones, Globe, Play, ShoppingCart, MapPin } from "lucide-react";
 import { NavItem } from "@/types/navigation";
 
@@ -62,7 +63,7 @@ export const getMainNavItems = (handleSubmenuItemClick: (url: string, forceExter
       { 
         icon: <Route className="w-5 h-5 stroke-[1.5] text-[#2C5AAE]" />, 
         label: 'My Relocation Planner',
-        onClick: () => handleSubmenuItemClick('https://ocean-pm.netlify.app', true)
+        onClick: () => handleSubmenuItemClick('https://www.app.ocean-il.co.il/pm', true)
       },
       { 
         icon: <ShoppingCart className="w-5 h-5 stroke-[1.5] text-[#517cc7]" />, 
@@ -82,3 +83,4 @@ export const getMainNavItems = (handleSubmenuItemClick: (url: string, forceExter
     ]
   }
 ];
+
