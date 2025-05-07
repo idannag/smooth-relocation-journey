@@ -1,3 +1,4 @@
+
 import { useState, useEffect, useRef } from "react";
 import { Menu, X } from "lucide-react";
 import { useNavigate } from "react-router-dom";
@@ -41,7 +42,7 @@ const Header = () => {
       linkVideo.rel = 'preload';
       linkVideo.as = 'video';
       linkVideo.href = 'https://ocean.autodigital.agency/splash.mp4';
-      linkVideo.importance = 'high';
+      // Remove invalid 'importance' attribute
       document.head.appendChild(linkVideo);
       
       const imagesToPreload = [

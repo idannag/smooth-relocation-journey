@@ -37,7 +37,7 @@ const VideoHero = () => {
         className="absolute inset-0 w-full h-full object-cover pointer-events-none"
         style={{ opacity: 1 }} // Ensure it's visible immediately
       >
-        <source src={videoUrl} type="video/mp4" priority="high" />
+        <source src={videoUrl} type="video/mp4" />
       </video>
       <div className="absolute inset-0 bg-black/5" />
       <div className="absolute inset-0 bg-gradient-to-r from-[#2C5AAE]/10 to-[#40E0D0]/10" />
