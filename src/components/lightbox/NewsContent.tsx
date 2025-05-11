@@ -4,7 +4,7 @@ import BlogPosts from '../blog/BlogPosts';
 
 const NewsContent = () => {
   return (
-    <div className="p-4">
+    <div className="p-4 bg-white">
       <BlogPosts 
         showHeading={false}
         showSearch={true}

@@ -172,7 +172,7 @@ const SinglePost = ({ postId: propPostId, onClose }: SinglePostProps = {}) => {
   const postCategories = getPostCategories(post);
   
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container mx-auto px-4 py-8 bg-white">
       <div className="sticky top-0 z-10 bg-white py-2 mb-4 border-b flex justify-between items-center">
         <Button 
           variant="outline" 
@@ -237,6 +237,7 @@ const SinglePost = ({ postId: propPostId, onClose }: SinglePostProps = {}) => {
               size="sm"
               onClick={previousPostId ? handlePreviousClick : undefined}
               className={!previousPostId ? "opacity-50 pointer-events-none" : "hover:bg-blue-50"}
+              disabled={!previousPostId}
             >
               <ChevronLeft className="mr-2 h-4 w-4" />
               Previous
@@ -247,6 +248,7 @@ const SinglePost = ({ postId: propPostId, onClose }: SinglePostProps = {}) => {
               size="sm"
               onClick={nextPostId ? handleNextClick : undefined}
               className={!nextPostId ? "opacity-50 pointer-events-none" : "hover:bg-blue-50"}
+              disabled={!nextPostId}
             >
               Next
               <ChevronRight className="ml-2 h-4 w-4" />
