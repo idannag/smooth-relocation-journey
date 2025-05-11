@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Tag, Calendar } from 'lucide-react';
-import { format, parseISO } from 'date-fns';
+import { format, parseISO } from 'date-fns'; // Fixed import statement
 import { 
   Card, 
   CardContent, 
