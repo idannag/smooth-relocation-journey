@@ -20,6 +20,12 @@ export const handleNavigation = (
     'https://www.app.ocean-il.co.il/pm': 'https://www.app.ocean-il.co.il/pm'
   };
   
+  // Special case for "My Relocation Planner" - open in new tab
+  if (url === 'https://www.app.ocean-il.co.il/pm' || url === 'My Relocation Planner') {
+    window.open('https://www.app.ocean-il.co.il/pm', '_blank');
+    return;
+  }
+  
   // For internal navigation - map to appropriate routes
   switch (url) {
     case 'news':
@@ -45,9 +51,6 @@ export const handleNavigation = (
       break;
     case 'Cost-of-Living AI Calculator':
       navigate('/cost-calculator');
-      break;
-    case 'My Relocation Planner':
-      navigate('/planner');
       break;
     case 'Relocation':
       navigate('/consult/relocation');
