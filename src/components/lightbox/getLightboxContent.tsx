@@ -1,107 +1,45 @@
-
 import React from 'react';
 import NewsContent from './NewsContent';
 import ServicesContent from './ServicesContent';
-import ChatbotContent from './ChatbotContent';
-import TimeAndCurrencyContent from './TimeAndCurrencyContent';
 import PopularDestinationsContent from './PopularDestinationsContent';
-import SinglePostContent from './SinglePostContent';
 import ExternalContent from './ExternalContent';
+import SinglePostContent from './SinglePostContent';
+import TimeAndCurrencyContent from './TimeAndCurrencyContent';
+import ChatbotContent from './ChatbotContent';
 import CommunityContent from './CommunityContent';
+import AssistantContent from './AssistantContent';
 
-export interface LightboxContentInfo {
-  title: string;
-  subtitle: string;
-  component: React.ReactNode;
-}
+const getLightboxContent = (url: string) => {
+  // If the URL is a number, it's a post ID
+  if (/^\d+$/.test(url)) {
+    return <SinglePostContent postId={parseInt(url)} />;
+  }
 
-export const getLightboxContent = (url: string, postId: number | null): LightboxContentInfo => {
-  // News content
-  if (url === 'news') {
-    return {
-      title: 'Relocation News',
-      subtitle: 'Latest information',
-      component: <NewsContent />
-    };
+  // Otherwise, it's a path
+  switch (url) {
+    case 'news':
+      return <NewsContent />;
+    case 'services':
+      return <ServicesContent />;
+    case 'destinations':
+      return <PopularDestinationsContent />;
+    case 'time-currency':
+      return <TimeAndCurrencyContent />;
+    case 'chatbot':
+      return <ChatbotContent />;
+    case 'community':
+      return <CommunityContent />;
+    case 'assistant':
+      return <AssistantContent />;
+    default:
+      // If it starts with http, it's an external URL
+      if (url.startsWith('http')) {
+        return <ExternalContent url={url} />;
+      }
+      
+      // Default to news if not found
+      return <NewsContent />;
   }
-  
-  // Services content
-  if (url === 'services') {
-    return {
-      title: 'My Services',
-      subtitle: 'Relocation assistance',
-      component: <ServicesContent />
-    };
-  }
-  
-  // Chatbot content
-  if (url === 'chatbot') {
-    return {
-      title: 'My 24/7 AI Assistant',
-      subtitle: 'Get instant answers',
-      component: <ChatbotContent />
-    };
-  }
-  
-  // Time and currency content
-  if (url === 'time-currency') {
-    return {
-      title: 'Global Information Hub',
-      subtitle: 'Time, Currency & Weather',
-      component: <TimeAndCurrencyContent />
-    };
-  }
-  
-  // Popular destinations content
-  if (url === 'destinations') {
-    return {
-      title: 'Popular Destinations',
-      subtitle: 'Explore locations',
-      component: <PopularDestinationsContent />
-    };
-  }
-  
-  // Community content
-  if (url === 'community') {
-    return {
-      title: 'Ocean Community',
-      subtitle: 'Connect with others',
-      component: <CommunityContent />
-    };
-  }
-  
-  // Specific destination content
-  if (url.startsWith('destination:')) {
-    const cityName = url.split(':')[1];
-    return {
-      title: cityName,
-      subtitle: 'Destination details',
-      component: <PopularDestinationsContent initialCity={cityName} />
-    };
-  }
-  
-  // Single post content
-  if (url.startsWith('post:') && postId) {
-    return {
-      title: 'Article',
-      subtitle: 'Detailed information',
-      component: <SinglePostContent postId={postId} />
-    };
-  }
-  
-  // External content (iframe) - removed the title
-  if (url.startsWith('http')) {
-    return {
-      title: '',
-      subtitle: '',
-      component: <ExternalContent url={url} />
-    };
-  }
-  
-  // Default fallback
-  return {
-    title: 'Content',
-    subtitle: '',
-    component: <div className="p-4">No content available</div>
-  };
 };
+
+export default getLightboxContent;
