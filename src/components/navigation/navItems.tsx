@@ -1,3 +1,4 @@
+
 import { Home, Calculator, Newspaper, Building2, GraduationCap, UserRound, Route, Bot, Headphones, Globe, Play, ShoppingCart, MapPin, Info, Briefcase, Map, MessageCircle, Clock } from "lucide-react";
 import { NavItem } from "@/types/navigation";
 
@@ -8,6 +9,7 @@ export const getMainNavItems = (
     {
       label: "Info",
       icon: <Info size={16} />,
+      subItems: [],
       children: [
         {
           label: "News & Blog",
@@ -31,7 +33,8 @@ export const getMainNavItems = (
     },
     {
       label: "Client Area",
-      icon: <UserCircle size={16} />,
+      icon: <UserRound size={16} />,
+      subItems: [],
       children: [
         {
           label: "Live Chat Assistant",

@@ -5,7 +5,7 @@ import {
   SheetContent,
 } from "@/components/ui/sheet";
 import LightboxHeader from '../lightbox/LightboxHeader';
-import { getLightboxContent } from '../lightbox/getLightboxContent';
+import getLightboxContent from '../lightbox/getLightboxContent';
 import LoadingSpinner from '../lightbox/LoadingSpinner';
 import { useNavigate } from 'react-router-dom';
 

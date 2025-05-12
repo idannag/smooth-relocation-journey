@@ -12,4 +12,5 @@ export interface NavItem {
   icon: JSX.Element;
   label: string;
   subItems: SubMenuItem[];
+  children?: SubMenuItem[]; // Added to support the children property
 }

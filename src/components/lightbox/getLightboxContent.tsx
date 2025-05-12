@@ -9,36 +9,84 @@ import ChatbotContent from './ChatbotContent';
 import CommunityContent from './CommunityContent';
 import AssistantContent from './AssistantContent';
 
-const getLightboxContent = (url: string) => {
-  // If the URL is a number, it's a post ID
-  if (/^\d+$/.test(url)) {
-    return <SinglePostContent postId={parseInt(url)} />;
+// Define return type for content info
+interface ContentInfo {
+  title: string;
+  subtitle: string;
+  component: React.ReactNode;
+}
+
+export const getLightboxContent = (url: string, postId?: number | null): ContentInfo => {
+  // If the URL is a number or postId is provided, it's a post ID
+  if (/^\d+$/.test(url) || postId) {
+    const id = postId || parseInt(url);
+    return {
+      title: 'Blog Post',
+      subtitle: 'Reading article',
+      component: <SinglePostContent postId={id} />
+    };
   }
 
   // Otherwise, it's a path
   switch (url) {
     case 'news':
-      return <NewsContent />;
+      return {
+        title: 'Latest News',
+        subtitle: 'Stay updated with our blog',
+        component: <NewsContent />
+      };
     case 'services':
-      return <ServicesContent />;
+      return {
+        title: 'Our Services',
+        subtitle: 'How we can help you',
+        component: <ServicesContent />
+      };
     case 'destinations':
-      return <PopularDestinationsContent />;
+      return {
+        title: 'Popular Destinations',
+        subtitle: 'Explore top relocation cities',
+        component: <PopularDestinationsContent />
+      };
     case 'time-currency':
-      return <TimeAndCurrencyContent />;
+      return {
+        title: 'Time & Currency',
+        subtitle: 'Global time zones and currency converter',
+        component: <TimeAndCurrencyContent />
+      };
     case 'chatbot':
-      return <ChatbotContent />;
+      return {
+        title: 'AI Assistant',
+        subtitle: 'Get help from our AI assistant',
+        component: <ChatbotContent />
+      };
     case 'community':
-      return <CommunityContent />;
+      return {
+        title: 'Ocean Community',
+        subtitle: 'Connect with other expats',
+        component: <CommunityContent />
+      };
     case 'assistant':
-      return <AssistantContent />;
+      return {
+        title: 'Relocation Assistant',
+        subtitle: '24/7 personalized help',
+        component: <AssistantContent />
+      };
     default:
       // If it starts with http, it's an external URL
       if (url.startsWith('http')) {
-        return <ExternalContent url={url} />;
+        return {
+          title: 'External Content',
+          subtitle: '',
+          component: <ExternalContent url={url} />
+        };
       }
       
       // Default to news if not found
-      return <NewsContent />;
+      return {
+        title: 'Latest News',
+        subtitle: 'Stay updated with our blog',
+        component: <NewsContent />
+      };
   }
 };
 
