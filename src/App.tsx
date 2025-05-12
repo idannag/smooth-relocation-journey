@@ -34,7 +34,6 @@ const App = () => (
           {/* Client area routes */}
           <Route path="/chatbot" element={<Index initialSection="chatbot" />} />
           <Route path="/time-currency" element={<Index initialSection="time-currency" />} />
-          <Route path="/assistant" element={<Index initialSection="news" />} /> {/* Changed from "assistant" to "news" as temporary fix */}
           
           {/* External application routes */}
           <Route path="/cost-calculator" element={<Index initialSection="cost-calculator" />} />
