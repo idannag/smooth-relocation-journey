@@ -18,12 +18,15 @@ const ChatbotContent = ({
           </p>
         </div>
         
-        <iframe
-          src="https://www.chatbase.co/chatbot-iframe/_IP9FBCx0xbBH4Tafpfpq"
-          width="100%"
-          style={{ height: '100%', minHeight: '700px' }}
-          frameBorder="0"
-        ></iframe>
+        <div className="chatbot-iframe-container" style={{ height: '700px', overflow: 'hidden' }}>
+          <iframe
+            src="https://www.chatbase.co/chatbot-iframe/_IP9FBCx0xbBH4Tafpfpq"
+            width="100%"
+            height="100%"
+            style={{ minHeight: '700px', border: 'none' }}
+            title="Chatbot Assistant"
+          ></iframe>
+        </div>
       </div>
     </div>
   );

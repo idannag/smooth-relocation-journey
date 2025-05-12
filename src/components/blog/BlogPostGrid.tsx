@@ -59,8 +59,9 @@ const BlogPostGrid = ({
           <BlogPostCard 
             key={post.id} 
             post={post} 
-            onClick={() => onPostClick(post.id)} 
-            simplified={simplifiedCards}
+            onPostClick={onPostClick} 
+            showExcerpt={!simplifiedCards}
+            showCategory={!simplifiedCards}
           />
         ))}
       </div>
@@ -115,8 +116,6 @@ const BlogPostGrid = ({
           </ul>
         </nav>
       )}
-      
-      {/* "Load More" Button removed completely */}
     </div>
   );
 };

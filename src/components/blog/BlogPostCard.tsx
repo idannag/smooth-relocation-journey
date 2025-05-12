@@ -1,19 +1,22 @@
+
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { format as dateFormat, parseISO } from 'date-fns';
+import { format, parseISO } from 'date-fns';
 import { Card, CardContent } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 
 // Import types from your services
-import { Post } from '@/services/postsService';
+import { WordPressPost } from '@/services/postsService';
 
 interface BlogPostCardProps {
-  post: Post;
+  post: WordPressPost;
   view?: 'grid' | 'list';
   showExcerpt?: boolean;
   showDate?: boolean;
   showCategory?: boolean;
   showReadMore?: boolean;
+  onPostClick?: (postId: number) => void;
+  simplified?: boolean;
 }
 
 const BlogPostCard: React.FC<BlogPostCardProps> = ({
@@ -22,7 +25,8 @@ const BlogPostCard: React.FC<BlogPostCardProps> = ({
   showExcerpt = true,
   showDate = true,
   showCategory = true,
-  showReadMore = true
+  showReadMore = true,
+  onPostClick
 }) => {
   if (!post) {
     return (
@@ -52,15 +56,21 @@ const BlogPostCard: React.FC<BlogPostCardProps> = ({
   const formatDate = (dateString: string) => {
     try {
       const date = parseISO(dateString);
-      return dateFormat(date, 'MMM dd, yyyy');
+      return format(date, 'MMM dd, yyyy');
     } catch (error) {
       console.error('Error formatting date:', error);
       return dateString;
     }
   };
 
+  const handleClick = () => {
+    if (onPostClick) {
+      onPostClick(post.id);
+    }
+  };
+
   return (
-    <Card className={cardClasses}>
+    <Card className={cardClasses} onClick={handleClick} style={{ cursor: onPostClick ? 'pointer' : 'default' }}>
       {post.image && (
         <div style={imageStyle} className="rounded-md mb-4"></div>
       )}
@@ -68,9 +78,12 @@ const BlogPostCard: React.FC<BlogPostCardProps> = ({
         {showCategory && post.category && (
           <div className="text-sm text-gray-500 mb-1">{post.category}</div>
         )}
-        <h3 className="text-lg font-semibold mb-2 line-clamp-1">{post.title}</h3>
+        <h3 className="text-lg font-semibold mb-2 line-clamp-1">
+          {/* Fix for object with 'rendered' key - use the rendered property instead of the object */}
+          {post.title.rendered}
+        </h3>
         {showExcerpt && (
-          <p className="text-sm text-gray-700 line-clamp-2">{post.excerpt}</p>
+          <p className="text-sm text-gray-700 line-clamp-2" dangerouslySetInnerHTML={{ __html: post.excerpt.rendered }}></p>
         )}
       </CardContent>
       <div className="flex justify-between items-center mt-4">
