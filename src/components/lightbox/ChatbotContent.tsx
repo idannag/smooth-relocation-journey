@@ -16,18 +16,18 @@ interface ChatbotContentProps {
 const ChatbotContent = ({
   onClose
 }: ChatbotContentProps = {}) => {
-  // Example questions from the screenshot
+  // Example questions from the screenshot with emojis
   const exampleQuestions = [
-    "Where can I find a reliable plumber or electrician in my area?",
-    "What's the best way to get groceries delivered to my home?",
-    "How can I meet other expats or locals in my area?",
-    "Are there any good playgrounds or parks for kids nearby?",
-    "What's the best way to avoid rush hour traffic in my city?",
-    "Where can I find specialty grocery stores (e.g., kosher, Asian, organic)?",
-    "Are there any English-speaking doctors or clinics near me?",
-    "What are some hidden gems or local non-touristy spots worth visiting?",
-    "How do I get a monthly public transport pass?",
-    "Are there any family-friendly weekend activities happening soon?"
+    { text: "Where can I find a reliable plumber or electrician in my area?", emoji: "🔧" },
+    { text: "What's the best way to get groceries delivered to my home?", emoji: "🛒" },
+    { text: "How can I meet other expats or locals in my area?", emoji: "👋" },
+    { text: "Are there any good playgrounds or parks for kids nearby?", emoji: "🏞️" },
+    { text: "What's the best way to avoid rush hour traffic in my city?", emoji: "🚗" },
+    { text: "Where can I find specialty grocery stores (e.g., kosher, Asian, organic)?", emoji: "🥑" },
+    { text: "Are there any English-speaking doctors or clinics near me?", emoji: "🏥" },
+    { text: "What are some hidden gems or local non-touristy spots worth visiting?", emoji: "💎" },
+    { text: "How do I get a monthly public transport pass?", emoji: "🚇" },
+    { text: "Are there any family-friendly weekend activities happening soon?", emoji: "👨‍👩‍👧‍👦" }
   ];
 
   return <div className="p-8 max-w-4xl mx-auto px-[14px] py-[14px]">
@@ -54,18 +54,19 @@ const ChatbotContent = ({
                 </Button>
               </TooltipTrigger>
               <TooltipContent 
-                className="w-72 p-3 bg-white shadow-lg border border-gray-100"
+                className="w-96 p-3 bg-white shadow-lg border border-gray-100"
                 sideOffset={5}
               >
                 <div className="space-y-2">
                   <p className="text-sm font-medium text-blue-600 mb-2">Try asking about:</p>
                   <div className="flex flex-col gap-2 max-h-[300px] overflow-y-auto">
-                    {exampleQuestions.map((question, index) => (
+                    {exampleQuestions.map((item, index) => (
                       <div 
                         key={index} 
-                        className="text-xs p-2 bg-blue-50 rounded-md border border-blue-100"
+                        className="text-xs p-2 bg-blue-50 rounded-md border border-blue-100 flex items-start"
                       >
-                        {question}
+                        <span className="mr-2 text-base">{item.emoji}</span>
+                        <span>{item.text}</span>
                       </div>
                     ))}
                   </div>
