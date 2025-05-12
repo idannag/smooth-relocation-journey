@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { format, parseISO } from 'date-fns';
+import { format as dateFormat, parseISO as parseDateISO } from 'date-fns';
 import { Card, CardContent } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 
@@ -58,8 +58,8 @@ const BlogPostCard: React.FC<BlogPostCardProps> = ({
 
   const formatDate = (dateString: string) => {
     try {
-      const date = parseISO(dateString);
-      return format(date, 'MMM dd, yyyy');
+      const date = parseDateISO(dateString);
+      return dateFormat(date, 'MMM dd, yyyy');
     } catch (error) {
       console.error('Error formatting date:', error);
       return dateString;

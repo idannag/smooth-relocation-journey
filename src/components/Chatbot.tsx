@@ -27,6 +27,7 @@ const Chatbot = ({ onClose, inLightbox = false }: ChatbotProps) => {
   ]);
   const [input, setInput] = useState('');
   const [isTyping, setIsTyping] = useState(false);
+  const [useIframe, setUseIframe] = useState(true);
 
   const handleSendMessage = (text: string) => {
     if (!text.trim()) return;
@@ -67,6 +68,42 @@ const Chatbot = ({ onClose, inLightbox = false }: ChatbotProps) => {
       handleSendMessage(input);
     }
   };
+
+  // Detect if running in iOS WebView
+  const isIOSWebView = () => {
+    const userAgent = navigator.userAgent.toLowerCase();
+    return /(iphone|ipod|ipad).*applewebkit(?!.*safari)/i.test(userAgent);
+  };
+
+  // If running in iOS WebView, switch to fallback chat
+  if (isIOSWebView() && useIframe && inLightbox) {
+    return (
+      <div className="p-8 max-w-4xl mx-auto">
+        <div className="bg-white rounded-xl shadow-lg p-6">
+          <div className="text-center">
+            <h3 className="text-lg font-medium mb-3 text-[#2C5AAE]">Chatbot Access</h3>
+            <p className="mb-4">For the best experience with our chatbot on this device:</p>
+            
+            <button
+              onClick={() => window.open('https://www.chatbase.co/chatbot-iframe/_IP9FBCx0xbBH4Tafpfpq', '_blank')}
+              className="px-4 py-2 bg-gradient-to-r from-[#2C5AAE] to-[#40E0D0] text-white rounded-md mb-3"
+            >
+              Open Chatbot in Browser
+            </button>
+            
+            <p className="text-sm text-gray-600 mb-4">or</p>
+            
+            <button
+              onClick={() => setUseIframe(false)}
+              className="px-4 py-2 bg-gray-100 text-gray-700 rounded-md border border-gray-300"
+            >
+              Use Simple Chat Interface
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className={`${inLightbox ? '' : 'fixed bottom-20 right-4 md:right-10 z-50'} w-full max-w-3xl mx-auto h-[500px] bg-white rounded-xl shadow-2xl border border-gray-200 flex flex-col overflow-hidden ${!inLightbox && 'animate-fade-in'}`}>

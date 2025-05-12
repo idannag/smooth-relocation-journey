@@ -1,3 +1,4 @@
+
 import React from 'react';
 interface ChatbotContentProps {
   onClose?: () => void;
@@ -15,13 +16,23 @@ const ChatbotContent = ({
         </div>
         
         <div className="chatbot-iframe-container" style={{
-        height: '700px',
-        overflow: 'hidden'
-      }}>
-          <iframe src="https://www.chatbase.co/chatbot-iframe/_IP9FBCx0xbBH4Tafpfpq" width="100%" height="100%" style={{
-          minHeight: '700px',
-          border: 'none'
-        }} title="Chatbot Assistant"></iframe>
+          height: '700px',
+          overflow: 'hidden'
+        }}>
+          <iframe 
+            src="https://www.chatbase.co/chatbot-iframe/_IP9FBCx0xbBH4Tafpfpq" 
+            width="100%" 
+            height="100%" 
+            style={{
+              minHeight: '700px',
+              border: 'none'
+            }} 
+            title="Chatbot Assistant"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen={true}
+            referrerPolicy="origin"
+            importance="high"
+          />
         </div>
       </div>
     </div>;
