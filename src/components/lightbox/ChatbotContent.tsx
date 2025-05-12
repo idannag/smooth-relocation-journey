@@ -58,7 +58,7 @@ const ChatbotContent = ({
                 sideOffset={5}
               >
                 <div className="space-y-2">
-                  <p className="text-sm font-medium text-blue-600 mb-2">Try asking about:</p>
+                  <p className="text-sm font-medium text-blue-600 mb-2">You can ask about...</p>
                   <div className="flex flex-col gap-2 max-h-[300px] overflow-y-auto">
                     {exampleQuestions.map((item, index) => (
                       <div 
