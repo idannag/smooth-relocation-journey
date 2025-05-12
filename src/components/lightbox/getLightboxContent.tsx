@@ -38,7 +38,7 @@ export const getLightboxContent = (url: string, postId: number | null): Lightbox
   if (url === 'chatbot') {
     return {
       title: 'My 24/7 AI Assistant',
-      subtitle: 'Get instant answers',
+      subtitle: 'Get instant answers for your daily needs',
       component: <ChatbotContent />
     };
   }
