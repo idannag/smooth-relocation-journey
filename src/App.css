@@ -1,3 +1,4 @@
+
 #root {
   max-width: 1280px;
   margin: 0 auto;
@@ -40,3 +41,14 @@
 .read-the-docs {
   color: #888;
 }
+
+/* Chatbase widget positioning fixes */
+.chatbase-bubble {
+  z-index: 9999 !important; /* Ensure higher z-index than bottom nav */
+  bottom: 80px !important; /* Position above bottom navbar */
+}
+
+.chatbase-bubble-button {
+  margin-bottom: 70px !important; /* Add margin to avoid navbar */
+}
+
