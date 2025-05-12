@@ -1,8 +1,7 @@
-
 import React from 'react';
 import { Tag, Calendar } from 'lucide-react';
-import { format } from 'date-fns/format';
-import { parseISO } from 'date-fns/parseISO';
+import { format } from 'date-fns';
+import { parseISO } from 'date-fns';
 import { 
   Card, 
   CardContent, 
