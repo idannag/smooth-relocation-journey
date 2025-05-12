@@ -20,7 +20,7 @@ const Statistics = () => {
   const isMobile = useIsMobile();
   return <section className="py-6 sm:py-12 bg-gradient-to-br from-white via-blue-50 to-white">
       <div className="container mx-auto px-4">
-        <h2 className="text-2xl font-bold text-center mb-3 md:mb-8 font-inter bg-gradient-to-r from-[#2C5AAE] to-[#40E0D0] bg-clip-text text-transparent sm:text-5xl">
+        <h2 className="text-5xl font-bold text-center mb-3 md:mb-8 font-inter bg-gradient-to-r from-[#2C5AAE] to-[#40E0D0] bg-clip-text text-transparent sm:text-5xl">
           We Are
         </h2>
         
