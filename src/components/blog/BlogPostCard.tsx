@@ -46,8 +46,11 @@ const BlogPostCard: React.FC<BlogPostCardProps> = ({
     view === 'grid' ? 'h-64' : 'h-auto'
   }`;
 
+  // Use getFeaturedImageUrl instead of directly accessing post.image
+  const imageUrl = post._embedded?.['wp:featuredmedia']?.[0]?.source_url || '/placeholder.svg';
+  
   const imageStyle = {
-    backgroundImage: `url(${post.image})`,
+    backgroundImage: `url(${imageUrl})`,
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     height: view === 'grid' ? '120px' : '200px',
@@ -69,18 +72,21 @@ const BlogPostCard: React.FC<BlogPostCardProps> = ({
     }
   };
 
+  // Get category from _embedded terms if available
+  const category = post._embedded?.['wp:term']?.[0]?.[0]?.name || '';
+
   return (
     <Card className={cardClasses} onClick={handleClick} style={{ cursor: onPostClick ? 'pointer' : 'default' }}>
-      {post.image && (
+      {imageUrl && (
         <div style={imageStyle} className="rounded-md mb-4"></div>
       )}
       <CardContent className="p-0">
-        {showCategory && post.category && (
-          <div className="text-sm text-gray-500 mb-1">{post.category}</div>
+        {showCategory && category && (
+          <div className="text-sm text-gray-500 mb-1">{category}</div>
         )}
         <h3 className="text-lg font-semibold mb-2 line-clamp-1">
-          {/* Fix for object with 'rendered' key - use the rendered property instead of the object */}
-          {post.title.rendered}
+          {/* Use dangerouslySetInnerHTML for rendered HTML content */}
+          <span dangerouslySetInnerHTML={{ __html: post.title.rendered }} />
         </h3>
         {showExcerpt && (
           <p className="text-sm text-gray-700 line-clamp-2" dangerouslySetInnerHTML={{ __html: post.excerpt.rendered }}></p>
